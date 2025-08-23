@@ -9,76 +9,15 @@
         <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger">Logout</a>
     </div>
 
-    <!-- Statistics Cards -->
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card bg-primary text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4>{{ total_users }}</h4>
-                            <p class="mb-0">Total Users</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-users fa-2x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card bg-success text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4>{{ total_categories }}</h4>
-                            <p class="mb-0">Categories</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-tags fa-2x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card bg-info text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4>{{ total_products }}</h4>
-                            <p class="mb-0">Products</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-box fa-2x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card bg-warning text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4>{{ total_quotes }}</h4>
-                            <p class="mb-0">Quote Requests</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-quote-left fa-2x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Navigation Links -->
+    <!-- Combined Statistics and Navigation Cards -->
     <div class="row mb-4">
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body text-center">
-                    <i class="fas fa-tags fa-3x text-primary mb-3"></i>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge bg-primary fs-5">{{ total_categories }}</span>
+                        <i class="fas fa-tags fa-3x text-primary"></i>
+                    </div>
                     <h5>Manage Categories</h5>
                     <p class="text-muted">Add, edit, and organize product categories</p>
                     <a href="{{ url_for('admin_categories') }}" class="btn btn-primary">Manage Categories</a>
@@ -88,7 +27,10 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body text-center">
-                    <i class="fas fa-box fa-3x text-success mb-3"></i>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge bg-success fs-5">{{ total_products }}</span>
+                        <i class="fas fa-box fa-3x text-success"></i>
+                    </div>
                     <h5>Manage Products</h5>
                     <p class="text-muted">Add, edit, and manage product inventory</p>
                     <a href="{{ url_for('admin_products') }}" class="btn btn-success">Manage Products</a>
@@ -98,7 +40,10 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body text-center">
-                    <i class="fas fa-quote-left fa-3x text-warning mb-3"></i>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge bg-warning fs-5">{{ total_quotes }}</span>
+                        <i class="fas fa-quote-left fa-3x text-warning"></i>
+                    </div>
                     <h5>Quote Requests</h5>
                     <p class="text-muted">View and manage customer quote requests</p>
                     <a href="{{ url_for('admin_quotes') }}" class="btn btn-warning">View Quotes</a>
@@ -108,7 +53,10 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body text-center">
-                    <i class="fas fa-users fa-3x text-info mb-3"></i>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge bg-info fs-5">{{ total_users }}</span>
+                        <i class="fas fa-users fa-3x text-info"></i>
+                    </div>
                     <h5>Manage Users</h5>
                     <p class="text-muted">Edit user accounts and permissions</p>
                     <a href="{{ url_for('admin_users') }}" class="btn btn-info">Manage Users</a>
