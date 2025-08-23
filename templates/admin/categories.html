@@ -76,8 +76,25 @@ $(document).ready(function() {
         "order": [[ 5, "asc" ], [ 0, "asc" ]],
         "columnDefs": [
             { "orderable": false, "targets": 6 }
-        ]
+        ],
+        "drawCallback": function() {
+            // Force fix pagination styles after draw
+            $('.dataTables_wrapper .dataTables_paginate .paginate_button.current').css({
+                'background-color': '#0d6efd',
+                'color': '#ffffff',
+                'border-color': '#0d6efd'
+            });
+        }
     });
+    
+    // Additional fallback - force styles after a short delay
+    setTimeout(function() {
+        $('.dataTables_wrapper .dataTables_paginate .paginate_button.current').css({
+            'background-color': '#0d6efd',
+            'color': '#ffffff',
+            'border-color': '#0d6efd'
+        });
+    }, 100);
 });
 </script>
 {% endblock %}

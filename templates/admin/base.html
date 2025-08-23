@@ -16,15 +16,28 @@
     
     <!-- Fix DataTables Pagination CSS -->
     <style>
-        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-            background: #0d6efd !important;
-            color: white !important;
-            border-color: #0d6efd !important;
+        /* Force white text on active pagination button */
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:focus,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:active,
+        table.dataTable.table-striped.dataTable-table .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background-color: #0d6efd !important;
+            color: #ffffff !important;
+            border: 1px solid #0d6efd !important;
+            background-image: none !important;
         }
-        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-            background: #0b5ed7 !important;
-            color: white !important;
+        
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:focus:hover {
+            background-color: #0b5ed7 !important;
+            color: #ffffff !important;
             border-color: #0a58ca !important;
+            background-image: none !important;
+        }
+        
+        /* Override any Bootstrap pagination styles that might conflict */
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current a {
+            color: #ffffff !important;
         }
     </style>
     
