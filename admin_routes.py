@@ -6,9 +6,31 @@ from forms import AdminLoginForm, CategoryForm, ProductForm, UserForm
 from flask_login import current_user
 from datetime import datetime
 import os
+import uuid
+from werkzeug.utils import secure_filename
 
 # Admin password (in production, this should be an environment variable)
 ADMIN_PASSWORD = "admin123"
+
+def save_uploaded_image(file, folder):
+    """Save uploaded image and return the URL path"""
+    if file and file.filename:
+        # Generate unique filename
+        filename = secure_filename(file.filename)
+        name, ext = os.path.splitext(filename)
+        unique_filename = f"{name}_{uuid.uuid4().hex[:8]}{ext}"
+        
+        # Create the directory if it doesn't exist
+        upload_path = os.path.join('static', 'images', folder)
+        os.makedirs(upload_path, exist_ok=True)
+        
+        # Save the file
+        file_path = os.path.join(upload_path, unique_filename)
+        file.save(file_path)
+        
+        # Return the URL path
+        return f"/static/images/{folder}/{unique_filename}"
+    return None
 
 def admin_required(f):
     """Decorator to require admin authentication"""
@@ -78,7 +100,14 @@ def admin_add_category():
         category.slug = form.slug.data
         category.description = form.description.data
         category.parent_id = form.parent_id.data if form.parent_id.data != 0 else None
-        category.image_url = form.image_url.data
+        
+        # Handle image upload
+        if form.image_file.data:
+            image_url = save_uploaded_image(form.image_file.data, 'categories')
+            category.image_url = image_url
+        else:
+            category.image_url = form.image_url.data
+            
         category.is_featured = form.is_featured.data
         category.sort_order = form.sort_order.data or 0
         
@@ -104,7 +133,14 @@ def admin_edit_category(category_id):
         category.slug = form.slug.data
         category.description = form.description.data
         category.parent_id = form.parent_id.data if form.parent_id.data != 0 else None
-        category.image_url = form.image_url.data
+        
+        # Handle image upload
+        if form.image_file.data:
+            image_url = save_uploaded_image(form.image_file.data, 'categories')
+            category.image_url = image_url
+        elif form.image_url.data != category.image_url:
+            category.image_url = form.image_url.data
+            
         category.is_featured = form.is_featured.data
         category.sort_order = form.sort_order.data or 0
         
@@ -158,7 +194,14 @@ def admin_add_product():
         product.description = form.description.data
         product.price = form.price.data
         product.cost = form.cost.data
-        product.image_url = form.image_url.data
+        
+        # Handle image upload
+        if form.image_file.data:
+            image_url = save_uploaded_image(form.image_file.data, 'products')
+            product.image_url = image_url
+        else:
+            product.image_url = form.image_url.data
+            
         product.weight = form.weight.data
         product.dimensions = form.dimensions.data
         product.in_stock = form.in_stock.data
@@ -194,7 +237,14 @@ def admin_edit_product(product_id):
         product.description = form.description.data
         product.price = form.price.data
         product.cost = form.cost.data
-        product.image_url = form.image_url.data
+        
+        # Handle image upload
+        if form.image_file.data:
+            image_url = save_uploaded_image(form.image_file.data, 'products')
+            product.image_url = image_url
+        elif form.image_url.data != product.image_url:
+            product.image_url = form.image_url.data
+            
         product.weight = form.weight.data
         product.dimensions = form.dimensions.data
         product.in_stock = form.in_stock.data

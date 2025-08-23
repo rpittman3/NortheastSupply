@@ -13,7 +13,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data">
                         {{ form.hidden_tag() }}
                         
                         <div class="row">
@@ -83,9 +83,23 @@
                         <div class="mb-3">
                             {{ form.image_url.label(class="form-label") }}
                             {{ form.image_url(class="form-control") }}
+                            <small class="form-text text-muted">Or use the upload option below</small>
                             {% if form.image_url.errors %}
                                 <div class="text-danger">
                                     {% for error in form.image_url.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.image_file.label(class="form-label") }}
+                            {{ form.image_file(class="form-control") }}
+                            <small class="form-text text-muted">Upload a new image (JPG, PNG, GIF). This will override the URL above.</small>
+                            {% if form.image_file.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.image_file.errors %}
                                         <small>{{ error }}</small>
                                     {% endfor %}
                                 </div>
