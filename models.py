@@ -1,8 +1,16 @@
 from datetime import datetime
+from pytz import timezone
 from app import db
 from flask_dance.consumer.storage.sqla import OAuthConsumerMixin
 from flask_login import UserMixin
 from sqlalchemy import UniqueConstraint
+
+# Define Eastern Timezone
+eastern_timezone = timezone('US/Eastern')
+
+# Helper function to get current time in Eastern Time
+def eastern_now():
+    return datetime.now(eastern_timezone)
 
 # (IMPORTANT) This table is mandatory for Replit Auth, don't drop it.
 class User(UserMixin, db.Model):
@@ -15,10 +23,10 @@ class User(UserMixin, db.Model):
     company_name = db.Column(db.String, nullable=True)
     phone = db.Column(db.String, nullable=True)
     is_admin = db.Column(db.Boolean, default=False)
-    
-    created_at = db.Column(db.DateTime, default=datetime.now)
-    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
-    
+
+    created_at = db.Column(db.DateTime, default=eastern_now)
+    updated_at = db.Column(db.DateTime, default=eastern_now, onupdate=eastern_now)
+
     # Relationships
     cart_items = db.relationship('CartItem', backref='user', lazy=True)
     quote_requests = db.relationship('QuoteRequest', backref='user', lazy=True)
@@ -46,9 +54,9 @@ class Category(db.Model):
     image_url = db.Column(db.String(500))
     is_featured = db.Column(db.Boolean, default=False)
     sort_order = db.Column(db.Integer, default=0)
-    
-    created_at = db.Column(db.DateTime, default=datetime.now)
-    
+
+    created_at = db.Column(db.DateTime, default=eastern_now)
+
     # Self-referential relationship for subcategories
     children = db.relationship('Category', backref=db.backref('parent', remote_side=[id]))
     primary_products = db.relationship('Product', backref='category', foreign_keys='Product.primary_category_id', lazy=True)
@@ -79,10 +87,10 @@ class Product(db.Model):
     stock_quantity = db.Column(db.Integer, default=0)
     is_featured = db.Column(db.Boolean, default=False)
     requires_quote = db.Column(db.Boolean, default=False)
-    
-    created_at = db.Column(db.DateTime, default=datetime.now)
-    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
-    
+
+    created_at = db.Column(db.DateTime, default=eastern_now)
+    updated_at = db.Column(db.DateTime, default=eastern_now, onupdate=eastern_now)
+
     # Relationships
     primary_category = db.relationship('Category', foreign_keys=[primary_category_id])
     categories = db.relationship('Category', secondary=product_categories, backref='products')
@@ -95,9 +103,9 @@ class CartItem(db.Model):
     user_id = db.Column(db.String, db.ForeignKey('users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=1)
-    
-    created_at = db.Column(db.DateTime, default=datetime.now)
-    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+
+    created_at = db.Column(db.DateTime, default=eastern_now)
+    updated_at = db.Column(db.DateTime, default=eastern_now, onupdate=eastern_now)
 
 class QuoteRequest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -107,10 +115,10 @@ class QuoteRequest(db.Model):
     notes = db.Column(db.Text)
     special_requirements = db.Column(db.Text)
     delivery_date_needed = db.Column(db.Date)
-    
-    created_at = db.Column(db.DateTime, default=datetime.now)
-    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
-    
+
+    created_at = db.Column(db.DateTime, default=eastern_now)
+    updated_at = db.Column(db.DateTime, default=eastern_now, onupdate=eastern_now)
+
     # Relationships
     items = db.relationship('QuoteItem', backref='quote_request', lazy=True)
 
@@ -120,8 +128,8 @@ class QuoteItem(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=1)
     quoted_price = db.Column(db.Numeric(10, 2))
-    
-    created_at = db.Column(db.DateTime, default=datetime.now)
+
+    created_at = db.Column(db.DateTime, default=eastern_now)
 
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -132,7 +140,7 @@ class Order(db.Model):
     tax_amount = db.Column(db.Numeric(10, 2), default=0)
     shipping_amount = db.Column(db.Numeric(10, 2), default=0)
     total_amount = db.Column(db.Numeric(10, 2), nullable=False)
-    
+
     # Shipping Information
     shipping_name = db.Column(db.String(100))
     shipping_company = db.Column(db.String(100))
@@ -141,10 +149,10 @@ class Order(db.Model):
     shipping_state = db.Column(db.String(50))
     shipping_zip = db.Column(db.String(20))
     shipping_phone = db.Column(db.String(20))
-    
-    created_at = db.Column(db.DateTime, default=datetime.now)
-    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
-    
+
+    created_at = db.Column(db.DateTime, default=eastern_now)
+    updated_at = db.Column(db.DateTime, default=eastern_now, onupdate=eastern_now)
+
     # Relationships
     items = db.relationship('OrderItem', backref='order', lazy=True)
 
@@ -155,5 +163,5 @@ class OrderItem(db.Model):
     quantity = db.Column(db.Integer, nullable=False, default=1)
     unit_price = db.Column(db.Numeric(10, 2), nullable=False)
     total_price = db.Column(db.Numeric(10, 2), nullable=False)
-    
-    created_at = db.Column(db.DateTime, default=datetime.now)
+
+    created_at = db.Column(db.DateTime, default=eastern_now)
