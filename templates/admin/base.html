@@ -16,11 +16,25 @@
     
     <!-- Fix DataTables Pagination CSS -->
     <style>
-        /* Force white text on active pagination button */
+        /* DataTables pagination - normal buttons */
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            background-color: #ffffff !important;
+            color: #0d6efd !important;
+            border: 1px solid #dee2e6 !important;
+            background-image: none !important;
+        }
+        
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background-color: #e9ecef !important;
+            color: #0a58ca !important;
+            border-color: #dee2e6 !important;
+            background-image: none !important;
+        }
+        
+        /* DataTables pagination - active (current) button */
         .dataTables_wrapper .dataTables_paginate .paginate_button.current,
         .dataTables_wrapper .dataTables_paginate .paginate_button.current:focus,
-        .dataTables_wrapper .dataTables_paginate .paginate_button.current:active,
-        table.dataTable.table-striped.dataTable-table .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:active {
             background-color: #0d6efd !important;
             color: #ffffff !important;
             border: 1px solid #0d6efd !important;
@@ -35,9 +49,25 @@
             background-image: none !important;
         }
         
-        /* Override any Bootstrap pagination styles that might conflict */
-        .dataTables_wrapper .dataTables_paginate .paginate_button.current a {
-            color: #ffffff !important;
+        /* DataTables pagination - disabled buttons */
+        .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
+            background-color: #ffffff !important;
+            color: #6c757d !important;
+            border-color: #dee2e6 !important;
+            background-image: none !important;
+            cursor: not-allowed !important;
+        }
+        
+        /* Ensure text inside buttons is visible */
+        .dataTables_wrapper .dataTables_paginate .paginate_button a {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        
+        /* Fix any Bootstrap pagination conflicts */
+        .dataTables_wrapper .dataTables_paginate .page-link {
+            color: inherit !important;
         }
     </style>
     
