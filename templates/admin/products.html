@@ -14,9 +14,9 @@
 
     <div class="card">
         <div class="card-body">
-            {% if products.items %}
+            {% if products %}
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table id="productsTable" class="table table-hover">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -29,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for product in products.items %}
+                            {% for product in products %}
                             <tr>
                                 <td>{{ product.name }}</td>
                                 <td><code>{{ product.sku }}</code></td>
@@ -69,47 +69,24 @@
                         </tbody>
                     </table>
                 </div>
-
-                <!-- Pagination -->
-                {% if products.pages > 1 %}
-                <nav aria-label="Product pagination">
-                    <ul class="pagination justify-content-center">
-                        {% if products.has_prev %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ url_for('admin_products', page=products.prev_num) }}">Previous</a>
-                            </li>
-                        {% endif %}
-                        
-                        {% for page_num in products.iter_pages() %}
-                            {% if page_num %}
-                                {% if page_num != products.page %}
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ url_for('admin_products', page=page_num) }}">{{ page_num }}</a>
-                                    </li>
-                                {% else %}
-                                    <li class="page-item active">
-                                        <span class="page-link">{{ page_num }}</span>
-                                    </li>
-                                {% endif %}
-                            {% else %}
-                                <li class="page-item disabled">
-                                    <span class="page-link">…</span>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                        
-                        {% if products.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ url_for('admin_products', page=products.next_num) }}">Next</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-                {% endif %}
             {% else %}
                 <p class="text-muted">No products found. <a href="{{ url_for('admin_add_product') }}">Add your first product</a></p>
             {% endif %}
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    $('#productsTable').DataTable({
+        "pageLength": 25,
+        "order": [[ 0, "asc" ]],
+        "columnDefs": [
+            { "orderable": false, "targets": 6 }
+        ]
+    });
+});
+</script>
 {% endblock %}

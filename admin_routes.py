@@ -169,8 +169,7 @@ def admin_delete_category(category_id):
 @app.route('/admin/products')
 @admin_required
 def admin_products():
-    page = request.args.get('page', 1, type=int)
-    products = Product.query.paginate(page=page, per_page=20, error_out=False)
+    products = Product.query.all()
     return render_template('admin/products.html', products=products)
 
 @app.route('/admin/products/add', methods=['GET', 'POST'])
@@ -272,8 +271,7 @@ def admin_delete_product(product_id):
 @app.route('/admin/quotes')
 @admin_required
 def admin_quotes():
-    page = request.args.get('page', 1, type=int)
-    quotes = QuoteRequest.query.order_by(QuoteRequest.created_at.desc()).paginate(page=page, per_page=20, error_out=False)
+    quotes = QuoteRequest.query.order_by(QuoteRequest.created_at.desc()).all()
     return render_template('admin/quotes.html', quotes=quotes)
 
 @app.route('/admin/quotes/<int:quote_id>')
@@ -295,8 +293,7 @@ def admin_delete_quote(quote_id):
 @app.route('/admin/users')
 @admin_required
 def admin_users():
-    page = request.args.get('page', 1, type=int)
-    users = User.query.paginate(page=page, per_page=20, error_out=False)
+    users = User.query.all()
     return render_template('admin/users.html', users=users)
 
 @app.route('/admin/users/<user_id>/edit', methods=['GET', 'POST'])
