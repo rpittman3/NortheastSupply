@@ -14,6 +14,20 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     
+    <!-- Fix DataTables Pagination CSS -->
+    <style>
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: #0d6efd !important;
+            color: white !important;
+            border-color: #0d6efd !important;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+            background: #0b5ed7 !important;
+            color: white !important;
+            border-color: #0a58ca !important;
+        }
+    </style>
+    
     {% block extra_head %}{% endblock %}
 </head>
 <body>
