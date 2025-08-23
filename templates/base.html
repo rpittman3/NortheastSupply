@@ -91,12 +91,12 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav">
                         {% for category in main_categories %}
+                        {% if category.children %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle py-3" href="{{ url_for('category_view', slug=category.slug) }}" 
                                id="cat{{ category.id }}" role="button" data-bs-toggle="dropdown">
                                 {{ category.name }}
                             </a>
-                            {% if category.children %}
                             <ul class="dropdown-menu">
                                 {% for subcategory in category.children %}
                                 <li><a class="dropdown-item" href="{{ url_for('category_view', slug=subcategory.slug) }}">
@@ -104,8 +104,14 @@
                                 </a></li>
                                 {% endfor %}
                             </ul>
-                            {% endif %}
                         </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link py-3" href="{{ url_for('category_view', slug=category.slug) }}">
+                                {{ category.name }}
+                            </a>
+                        </li>
+                        {% endif %}
                         {% endfor %}
                     </ul>
                 </div>
