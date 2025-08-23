@@ -289,6 +289,27 @@ def admin_delete_quote(quote_id):
     flash(f'Quote request {quote.request_number} deleted successfully!', 'success')
     return redirect(url_for('admin_quotes'))
 
+# Category Sorting
+@app.route('/admin/categories/sort')
+@admin_required
+def admin_sort_categories():
+    # Get all parent categories
+    parent_categories = Category.query.filter_by(parent_id=None).order_by(Category.sort_order, Category.name).all()
+    return render_template('admin/category_sort.html', parent_categories=parent_categories)
+
+@app.route('/admin/categories/sort/update', methods=['POST'])
+@admin_required
+def admin_update_category_sort():
+    data = request.get_json()
+    
+    for item in data:
+        category = Category.query.get(item['id'])
+        if category:
+            category.sort_order = item['sort_order']
+    
+    db.session.commit()
+    return jsonify({'success': True})
+
 # User Management
 @app.route('/admin/users')
 @admin_required

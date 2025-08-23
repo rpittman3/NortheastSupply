@@ -1,0 +1,268 @@
+
+{% extends "admin/base.html" %}
+
+{% block title %}Sort Categories - Admin{% endblock %}
+
+{% block extra_css %}
+<style>
+.sortable-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sortable-item {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    padding: 12px 16px;
+    cursor: move;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.sortable-item:hover {
+    background: #e9ecef;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.sortable-item.dragging {
+    opacity: 0.6;
+    transform: rotate(2deg);
+}
+
+.sortable-item .drag-handle {
+    color: #6c757d;
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.parent-category {
+    background: #e3f2fd;
+    border-color: #90caf9;
+    font-weight: 600;
+}
+
+.child-categories {
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.category-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category-details {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.category-badge {
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.save-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    display: none;
+}
+
+.changes-indicator {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: none;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Sort Categories</h1>
+        <div>
+            <a href="{{ url_for('admin_categories') }}" class="btn btn-outline-secondary">Back to Categories</a>
+        </div>
+    </div>
+
+    <div class="changes-indicator" id="changesIndicator">
+        <i class="fas fa-info-circle"></i> You have unsaved changes. Don't forget to save!
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">
+                <i class="fas fa-sort"></i> Drag and Drop to Reorder Categories
+            </h5>
+            <small class="text-muted">Categories within each parent group can be reordered. Parent categories can also be reordered among themselves.</small>
+        </div>
+        <div class="card-body">
+            <div id="categoryContainer">
+                <!-- Parent Categories (No Parent) -->
+                <h6 class="text-muted mb-3">Parent Categories</h6>
+                <ul class="sortable-list" id="parentCategories" data-parent-id="0">
+                    {% for category in parent_categories %}
+                    <li class="sortable-item parent-category" data-id="{{ category.id }}" data-current-order="{{ category.sort_order }}">
+                        <div class="category-info">
+                            <div class="category-details">
+                                <i class="fas fa-grip-vertical drag-handle"></i>
+                                <strong>{{ category.name }}</strong>
+                                <span class="badge bg-primary category-badge">{{ category.products|length }} products</span>
+                            </div>
+                            <small class="text-muted">Order: {{ category.sort_order }}</small>
+                        </div>
+                        
+                        {% if category.children %}
+                        <div class="child-categories">
+                            <h6 class="text-muted mb-2 mt-3">Subcategories</h6>
+                            <ul class="sortable-list" data-parent-id="{{ category.id }}">
+                                {% for subcategory in category.children|sort(attribute='sort_order') %}
+                                <li class="sortable-item" data-id="{{ subcategory.id }}" data-current-order="{{ subcategory.sort_order }}">
+                                    <div class="category-info">
+                                        <div class="category-details">
+                                            <i class="fas fa-grip-vertical drag-handle"></i>
+                                            {{ subcategory.name }}
+                                            <span class="badge bg-secondary category-badge">{{ subcategory.products|length }} products</span>
+                                        </div>
+                                        <small class="text-muted">Order: {{ subcategory.sort_order }}</small>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-success btn-lg save-btn" id="saveChanges">
+        <i class="fas fa-save"></i> Save Changes
+    </button>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+<script>
+$(document).ready(function() {
+    let hasChanges = false;
+    
+    // Initialize sortable for all lists
+    $('.sortable-list').each(function() {
+        new Sortable(this, {
+            animation: 150,
+            ghostClass: 'dragging',
+            handle: '.drag-handle',
+            onEnd: function(evt) {
+                hasChanges = true;
+                updateOrderNumbers();
+                showChangesIndicator();
+            }
+        });
+    });
+    
+    function updateOrderNumbers() {
+        $('.sortable-list').each(function() {
+            $(this).find('.sortable-item').each(function(index) {
+                $(this).find('.text-muted').last().text('Order: ' + (index + 1));
+            });
+        });
+    }
+    
+    function showChangesIndicator() {
+        $('#changesIndicator').show();
+        $('#saveChanges').show();
+    }
+    
+    function hideChangesIndicator() {
+        $('#changesIndicator').hide();
+        $('#saveChanges').hide();
+        hasChanges = false;
+    }
+    
+    $('#saveChanges').click(function() {
+        const updates = [];
+        
+        $('.sortable-list').each(function() {
+            $(this).find('.sortable-item').each(function(index) {
+                const categoryId = $(this).data('id');
+                const newOrder = index + 1;
+                const currentOrder = $(this).data('current-order');
+                
+                if (newOrder !== currentOrder) {
+                    updates.push({
+                        id: categoryId,
+                        sort_order: newOrder
+                    });
+                }
+            });
+        });
+        
+        if (updates.length === 0) {
+            alert('No changes to save!');
+            return;
+        }
+        
+        // Show loading state
+        $(this).html('<i class="fas fa-spinner fa-spin"></i> Saving...').prop('disabled', true);
+        
+        $.ajax({
+            url: '{{ url_for("admin_update_category_sort") }}',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(updates),
+            success: function(response) {
+                if (response.success) {
+                    // Update current-order data attributes
+                    $('.sortable-item').each(function(index) {
+                        const newOrder = $(this).closest('.sortable-list').find('.sortable-item').index(this) + 1;
+                        $(this).data('current-order', newOrder);
+                    });
+                    
+                    hideChangesIndicator();
+                    
+                    // Show success message
+                    const alert = $('<div class="alert alert-success alert-dismissible fade show" role="alert">' +
+                        '<i class="fas fa-check-circle"></i> Category sort order updated successfully!' +
+                        '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+                        '</div>');
+                    $('.container').prepend(alert);
+                    
+                    // Auto-hide after 3 seconds
+                    setTimeout(() => alert.alert('close'), 3000);
+                } else {
+                    alert('Error saving changes. Please try again.');
+                }
+            },
+            error: function() {
+                alert('Error saving changes. Please try again.');
+            },
+            complete: function() {
+                $('#saveChanges').html('<i class="fas fa-save"></i> Save Changes').prop('disabled', false);
+            }
+        });
+    });
+    
+    // Warn before leaving if there are unsaved changes
+    window.addEventListener('beforeunload', function(e) {
+        if (hasChanges) {
+            e.preventDefault();
+            e.returnValue = '';
+        }
+    });
+});
+</script>
+{% endblock %}
