@@ -2,7 +2,7 @@ from flask import session, render_template, request, redirect, url_for, flash, j
 from app import app, db
 from replit_auth import require_login, make_replit_blueprint
 from flask_login import current_user
-from models import Category, Product, CartItem, QuoteRequest, QuoteItem, Order, OrderItem
+from models import Category, Product, CartItem, QuoteRequest, QuoteItem, Order, OrderItem, product_categories
 from forms import QuoteRequestForm, CheckoutForm, AccountUpdateForm
 from sqlalchemy import or_, func
 from datetime import datetime

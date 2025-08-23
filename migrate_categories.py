@@ -8,11 +8,15 @@ def migrate_product_categories():
         print("Starting migration...")
         
         # Get all products with their current category_id
-        products = db.session.execute(
-            db.text("SELECT id, category_id FROM product WHERE category_id IS NOT NULL")
-        ).fetchall()
-        
-        print(f"Found {len(products)} products to migrate")
+        try:
+            products = db.session.execute(
+                db.text("SELECT id, category_id FROM product WHERE category_id IS NOT NULL")
+            ).fetchall()
+            
+            print(f"Found {len(products)} products to migrate")
+        except Exception as e:
+            print(f"No existing products to migrate or table doesn't exist yet: {e}")
+            products = []
         
         # First, add primary_category_id column if it doesn't exist
         try:
@@ -32,9 +36,13 @@ def migrate_product_categories():
                 {"cat_id": category_id, "prod_id": product_id}
             )
             
-            # Also add to the many-to-many table
+            # Also add to the many-to-many table using PostgreSQL compatible syntax
             db.session.execute(
-                db.text("INSERT OR IGNORE INTO product_categories (product_id, category_id) VALUES (:prod_id, :cat_id)"),
+                db.text("""
+                    INSERT INTO product_categories (product_id, category_id) 
+                    VALUES (:prod_id, :cat_id)
+                    ON CONFLICT DO NOTHING
+                """),
                 {"prod_id": product_id, "cat_id": category_id}
             )
         
@@ -46,7 +54,7 @@ def migrate_product_categories():
             db.session.commit()
             print("Dropped old category_id column")
         except Exception as e:
-            print(f"Error dropping column: {e}")
+            print(f"Error dropping column (might not exist): {e}")
             db.session.rollback()
         
         print("Migration completed successfully!")
