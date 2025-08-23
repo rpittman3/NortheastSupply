@@ -44,9 +44,9 @@ def category_view(slug):
     # Get products in this category and its subcategories
     if subcategories:
         category_ids = [category.id] + [sub.id for sub in subcategories]
-        products = Product.query.filter(Product.category_id.in_(category_ids))
+        products = Product.query.join(product_categories).filter(product_categories.c.category_id.in_(category_ids))
     else:
-        products = Product.query.filter_by(category_id=category.id)
+        products = Product.query.join(product_categories).filter(product_categories.c.category_id == category.id)
     
     # Pagination
     page = request.args.get('page', 1, type=int)
@@ -62,9 +62,9 @@ def category_view(slug):
 def product_view(slug):
     product = Product.query.filter_by(slug=slug).first_or_404()
     
-    # Get related products from the same category
+    # Get related products from the same primary category
     related_products = Product.query.filter(
-        Product.category_id == product.category_id,
+        Product.primary_category_id == product.primary_category_id,
         Product.id != product.id
     ).limit(4).all()
     

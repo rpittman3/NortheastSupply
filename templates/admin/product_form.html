@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data">
                         {{ form.hidden_tag() }}
-                        
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 {{ form.name.label(class="form-label") }}
@@ -55,16 +55,28 @@
                                 {% endif %}
                             </div>
                             <div class="col-md-6 mb-3">
-                                {{ form.category_id.label(class="form-label") }}
-                                {{ form.category_id(class="form-select") }}
-                                {% if form.category_id.errors %}
+                                {{ form.primary_category_id.label(class="form-label") }}
+                                {{ form.primary_category_id(class="form-select") }}
+                                {% if form.primary_category_id.errors %}
                                     <div class="text-danger">
-                                        {% for error in form.category_id.errors %}
+                                        {% for error in form.primary_category_id.errors %}
                                             <small>{{ error }}</small>
                                         {% endfor %}
                                     </div>
                                 {% endif %}
                             </div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form.category_ids.label(class="form-label") }}
+                            {{ form.category_ids(class="form-select", multiple=True, size="5") }}
+                            <div class="form-text">Hold Ctrl/Cmd to select multiple categories</div>
+                            {% if form.category_ids.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.category_ids.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class="row">

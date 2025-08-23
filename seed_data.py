@@ -574,7 +574,7 @@ def create_products(categories):
             name=product_data['name'],
             slug=product_data['slug'],
             sku=product_data['sku'],
-            category_id=category.id,
+            primary_category_id=category.id,
             brand=product_data.get('brand'),
             model_number=product_data.get('model_number'),
             short_description=product_data['short_description'],

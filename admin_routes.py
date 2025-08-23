@@ -179,14 +179,15 @@ def admin_add_product():
     
     # Populate category choices
     categories = Category.query.order_by(Category.name).all()
-    form.category_id.choices = [(c.id, c.name) for c in categories]
+    form.primary_category_id.choices = [(c.id, c.name) for c in categories]
+    form.category_ids.choices = [(c.id, c.name) for c in categories]
     
     if form.validate_on_submit():
         product = Product()
         product.name = form.name.data
         product.slug = form.slug.data
         product.sku = form.sku.data
-        product.category_id = form.category_id.data
+        product.primary_category_id = form.primary_category_id.data
         product.brand = form.brand.data
         product.model_number = form.model_number.data
         product.short_description = form.short_description.data
@@ -209,6 +210,12 @@ def admin_add_product():
         product.requires_quote = form.requires_quote.data
         
         db.session.add(product)
+        db.session.flush()  # Get the product ID
+        
+        # Add selected categories
+        selected_categories = Category.query.filter(Category.id.in_(form.category_ids.data)).all()
+        product.categories.extend(selected_categories)
+        
         db.session.commit()
         flash(f'Product "{product.name}" added successfully!', 'success')
         return redirect(url_for('admin_products'))
@@ -223,13 +230,18 @@ def admin_edit_product(product_id):
     
     # Populate category choices
     categories = Category.query.order_by(Category.name).all()
-    form.category_id.choices = [(c.id, c.name) for c in categories]
+    form.primary_category_id.choices = [(c.id, c.name) for c in categories]
+    form.category_ids.choices = [(c.id, c.name) for c in categories]
+    
+    # Pre-populate form with current category assignments
+    if request.method == 'GET':
+        form.category_ids.data = [c.id for c in product.categories]
     
     if form.validate_on_submit():
         product.name = form.name.data
         product.slug = form.slug.data
         product.sku = form.sku.data
-        product.category_id = form.category_id.data
+        product.primary_category_id = form.primary_category_id.data
         product.brand = form.brand.data
         product.model_number = form.model_number.data
         product.short_description = form.short_description.data
@@ -251,6 +263,11 @@ def admin_edit_product(product_id):
         product.is_featured = form.is_featured.data
         product.requires_quote = form.requires_quote.data
         product.updated_at = datetime.now()
+        
+        # Update categories
+        product.categories.clear()
+        selected_categories = Category.query.filter(Category.id.in_(form.category_ids.data)).all()
+        product.categories.extend(selected_categories)
         
         db.session.commit()
         flash(f'Product "{product.name}" updated successfully!', 'success')

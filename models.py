@@ -51,7 +51,13 @@ class Category(db.Model):
     
     # Self-referential relationship for subcategories
     children = db.relationship('Category', backref=db.backref('parent', remote_side=[id]))
-    products = db.relationship('Product', backref='category', lazy=True)
+    primary_products = db.relationship('Product', backref='category', foreign_keys='Product.primary_category_id', lazy=True)
+
+# Association table for many-to-many relationship between products and categories
+product_categories = db.Table('product_categories',
+    db.Column('product_id', db.Integer, db.ForeignKey('product.id'), primary_key=True),
+    db.Column('category_id', db.Integer, db.ForeignKey('category.id'), primary_key=True)
+)
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -62,7 +68,7 @@ class Product(db.Model):
     description = db.Column(db.Text)
     price = db.Column(db.Numeric(10, 2), nullable=False)
     cost = db.Column(db.Numeric(10, 2))
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
+    primary_category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)  # Main category for display
     brand = db.Column(db.String(100))
     model_number = db.Column(db.String(100))
     image_url = db.Column(db.String(500))
@@ -78,6 +84,8 @@ class Product(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
     
     # Relationships
+    primary_category = db.relationship('Category', foreign_keys=[primary_category_id])
+    categories = db.relationship('Category', secondary=product_categories, backref='products')
     cart_items = db.relationship('CartItem', backref='product', lazy=True)
     quote_items = db.relationship('QuoteItem', backref='product', lazy=True)
     order_items = db.relationship('OrderItem', backref='product', lazy=True)
