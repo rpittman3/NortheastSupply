@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Northeast Restaurant Supply{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Admin Dashboard</h1>
+        <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger">Logout</a>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4>{{ total_users }}</h4>
+                            <p class="mb-0">Total Users</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-users fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4>{{ total_categories }}</h4>
+                            <p class="mb-0">Categories</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-tags fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4>{{ total_products }}</h4>
+                            <p class="mb-0">Products</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-box fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4>{{ total_quotes }}</h4>
+                            <p class="mb-0">Quote Requests</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-quote-left fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-tags fa-3x text-primary mb-3"></i>
+                    <h5>Manage Categories</h5>
+                    <p class="text-muted">Add, edit, and organize product categories</p>
+                    <a href="{{ url_for('admin_categories') }}" class="btn btn-primary">Manage Categories</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-box fa-3x text-success mb-3"></i>
+                    <h5>Manage Products</h5>
+                    <p class="text-muted">Add, edit, and manage product inventory</p>
+                    <a href="{{ url_for('admin_products') }}" class="btn btn-success">Manage Products</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-quote-left fa-3x text-warning mb-3"></i>
+                    <h5>Quote Requests</h5>
+                    <p class="text-muted">View and manage customer quote requests</p>
+                    <a href="{{ url_for('admin_quotes') }}" class="btn btn-warning">View Quotes</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-users fa-3x text-info mb-3"></i>
+                    <h5>Manage Users</h5>
+                    <p class="text-muted">Edit user accounts and permissions</p>
+                    <a href="{{ url_for('admin_users') }}" class="btn btn-info">Manage Users</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Quote Requests -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Recent Quote Requests</h5>
+        </div>
+        <div class="card-body">
+            {% if recent_quotes %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Request #</th>
+                                <th>User</th>
+                                <th>Items</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for quote in recent_quotes %}
+                            <tr>
+                                <td>{{ quote.request_number }}</td>
+                                <td>{{ quote.user.email or quote.user.id }}</td>
+                                <td>{{ quote.items|length }} items</td>
+                                <td>
+                                    <span class="badge bg-{{ 'warning' if quote.status == 'pending' else 'success' }}">
+                                        {{ quote.status.title() }}
+                                    </span>
+                                </td>
+                                <td>{{ quote.created_at.strftime('%m/%d/%Y') }}</td>
+                                <td>
+                                    <a href="{{ url_for('admin_quote_detail', quote_id=quote.id) }}" 
+                                       class="btn btn-sm btn-outline-primary">View</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-muted">No quote requests found.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

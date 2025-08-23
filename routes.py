@@ -8,6 +8,9 @@ from sqlalchemy import or_, func
 from datetime import datetime
 import uuid
 
+# Import admin routes
+import admin_routes
+
 app.register_blueprint(make_replit_blueprint(), url_prefix="/auth")
 
 # Make session permanent

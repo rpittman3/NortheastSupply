@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login - Northeast Restaurant Supply{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Admin Login</h2>
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            {{ form.admin_password.label(class="form-label") }}
+                            {{ form.admin_password(class="form-control", type="password") }}
+                            {% if form.admin_password.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.admin_password.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

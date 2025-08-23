@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Quote Requests - Admin{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Quote Requests</h1>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            {% if quotes.items %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Request #</th>
+                                <th>User</th>
+                                <th>Items</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for quote in quotes.items %}
+                            <tr>
+                                <td>{{ quote.request_number }}</td>
+                                <td>{{ quote.user.email or quote.user.id }}</td>
+                                <td>{{ quote.items|length }} items</td>
+                                <td>
+                                    <span class="badge bg-{{ 'warning' if quote.status == 'pending' else 'success' }}">
+                                        {{ quote.status.title() }}
+                                    </span>
+                                </td>
+                                <td>{{ quote.created_at.strftime('%m/%d/%Y %I:%M %p') }}</td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a href="{{ url_for('admin_quote_detail', quote_id=quote.id) }}" 
+                                           class="btn btn-sm btn-outline-primary">View</a>
+                                        <a href="{{ url_for('admin_quote_detail', quote_id=quote.id) }}?print=1" 
+                                           class="btn btn-sm btn-outline-secondary" target="_blank">Print</a>
+                                        <form method="POST" 
+                                              action="{{ url_for('admin_delete_quote', quote_id=quote.id) }}" 
+                                              style="display: inline;"
+                                              onsubmit="return confirm('Are you sure you want to delete this quote request?')">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                {% if quotes.pages > 1 %}
+                <nav aria-label="Quote pagination">
+                    <ul class="pagination justify-content-center">
+                        {% if quotes.has_prev %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('admin_quotes', page=quotes.prev_num) }}">Previous</a>
+                            </li>
+                        {% endif %}
+                        
+                        {% for page_num in quotes.iter_pages() %}
+                            {% if page_num %}
+                                {% if page_num != quotes.page %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ url_for('admin_quotes', page=page_num) }}">{{ page_num }}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item active">
+                                        <span class="page-link">{{ page_num }}</span>
+                                    </li>
+                                {% endif %}
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <span class="page-link">…</span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if quotes.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('admin_quotes', page=quotes.next_num) }}">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+            {% else %}
+                <p class="text-muted">No quote requests found.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

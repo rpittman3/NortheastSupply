@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
     profile_image_url = db.Column(db.String, nullable=True)
     company_name = db.Column(db.String, nullable=True)
     phone = db.Column(db.String, nullable=True)
+    is_admin = db.Column(db.Boolean, default=False)
     
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
