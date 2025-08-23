@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category.name }} - Northeast Restaurant Supply{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+            {% if category.parent %}
+            <li class="breadcrumb-item">
+                <a href="{{ url_for('category_view', slug=category.parent.slug) }}">{{ category.parent.name }}</a>
+            </li>
+            {% endif %}
+            <li class="breadcrumb-item active">{{ category.name }}</li>
+        </ol>
+    </nav>
+
+    <!-- Category Header -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <h1 class="fw-bold">{{ category.name }}</h1>
+            {% if category.description %}
+            <p class="text-muted">{{ category.description }}</p>
+            {% endif %}
+        </div>
+        <div class="col-lg-4 text-lg-end">
+            <div class="d-flex gap-2 justify-content-lg-end">
+                <button class="btn btn-outline-secondary" onclick="toggleView('grid')">
+                    <i class="fas fa-th"></i> Grid
+                </button>
+                <button class="btn btn-outline-secondary" onclick="toggleView('list')">
+                    <i class="fas fa-list"></i> List
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Subcategories -->
+    {% if subcategories %}
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="fw-bold mb-3">Subcategories</h3>
+            <div class="row g-3">
+                {% for subcategory in subcategories %}
+                <div class="col-lg-3 col-md-6">
+                    <a href="{{ url_for('category_view', slug=subcategory.slug) }}" class="text-decoration-none">
+                        <div class="card border-0 shadow-sm category-hover">
+                            <div class="card-img-top" style="height: 120px; overflow: hidden;">
+                                <img src="{{ subcategory.image_url or 'https://pixabay.com/get/ga08707e2d705b69f9abc3564f002408a64598d01603bc2c4651129f59063ad782edde966c7213a29996d5d21f6d709576c374a11af42b2e10d38412493c9c822_1280.jpg' }}" 
+                                     alt="{{ subcategory.name }}" class="w-100 h-100 object-fit-cover">
+                            </div>
+                            <div class="card-body text-center py-3">
+                                <h6 class="card-title text-dark mb-0">{{ subcategory.name }}</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <hr class="my-5">
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Products -->
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="fw-bold mb-0">Products</h3>
+                <div class="text-muted">
+                    Showing {{ products.items|length }} of {{ products.total }} products
+                </div>
+            </div>
+
+            {% if products.items %}
+            <div id="products-container" class="row g-4" data-view="grid">
+                {% for product in products.items %}
+                <div class="col-lg-3 col-md-6 product-item">
+                    <div class="card border-0 shadow-sm h-100 product-hover">
+                        <div class="position-relative">
+                            <img src="{{ product.image_url }}" alt="{{ product.name }}" 
+                                 class="card-img-top" style="height: 200px; object-fit: cover;">
+                            {% if product.requires_quote %}
+                            <span class="badge bg-warning position-absolute top-0 end-0 m-2">Quote Required</span>
+                            {% endif %}
+                            {% if not product.in_stock %}
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">Out of Stock</span>
+                            {% endif %}
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title">{{ product.name }}</h6>
+                            {% if product.brand %}
+                            <small class="text-muted">{{ product.brand }}</small>
+                            {% endif %}
+                            <p class="card-text text-muted small flex-grow-1">{{ product.short_description }}</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    {% if product.requires_quote %}
+                                    <span class="h6 text-primary mb-0">Call for Price</span>
+                                    {% else %}
+                                    <span class="h6 text-primary mb-0">${{ "%.2f"|format(product.price) }}</span>
+                                    {% endif %}
+                                    {% if product.in_stock %}
+                                    <small class="text-success"><i class="fas fa-check"></i> In Stock</small>
+                                    {% else %}
+                                    <small class="text-danger"><i class="fas fa-times"></i> Out of Stock</small>
+                                    {% endif %}
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <a href="{{ url_for('product_view', slug=product.slug) }}" 
+                                       class="btn btn-primary btn-sm">View Details</a>
+                                    {% if current_user.is_authenticated and product.in_stock %}
+                                    <form action="{{ url_for('add_to_cart') }}" method="POST" class="d-inline">
+                                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm w-100">
+                                            <i class="fas fa-cart-plus"></i> Add to Cart
+                                        </button>
+                                    </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if products.pages > 1 %}
+            <nav class="mt-5">
+                <ul class="pagination justify-content-center">
+                    {% if products.has_prev %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('category_view', slug=category.slug, page=products.prev_num) }}">Previous</a>
+                    </li>
+                    {% endif %}
+                    
+                    {% for page_num in products.iter_pages() %}
+                        {% if page_num %}
+                            {% if page_num != products.page %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('category_view', slug=category.slug, page=page_num) }}">{{ page_num }}</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ page_num }}</span>
+                            </li>
+                            {% endif %}
+                        {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if products.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('category_view', slug=category.slug, page=products.next_num) }}">Next</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+            {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                <h4>No Products Found</h4>
+                <p class="text-muted">We don't have any products in this category yet. Please check back soon!</p>
+                <a href="{{ url_for('index') }}" class="btn btn-primary">Browse All Categories</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleView(view) {
+    const container = document.getElementById('products-container');
+    const items = container.querySelectorAll('.product-item');
+    
+    if (view === 'list') {
+        container.className = 'row g-2';
+        items.forEach(item => {
+            item.className = 'col-12 product-item';
+        });
+    } else {
+        container.className = 'row g-4';
+        items.forEach(item => {
+            item.className = 'col-lg-3 col-md-6 product-item';
+        });
+    }
+    
+    // Update button states
+    document.querySelectorAll('[onclick^="toggleView"]').forEach(btn => {
+        btn.classList.remove('btn-secondary');
+        btn.classList.add('btn-outline-secondary');
+    });
+    event.target.classList.remove('btn-outline-secondary');
+    event.target.classList.add('btn-secondary');
+}
+</script>
+{% endblock %}

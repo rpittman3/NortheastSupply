@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section bg-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Professional Restaurant Equipment & Supplies</h1>
+                <p class="lead mb-4">Trusted by restaurants across the Northeast. Quality equipment, competitive prices, and exceptional service.</p>
+                <div class="d-flex gap-3">
+                    <a href="{{ url_for('category_view', slug='restaurant-equipment') }}" class="btn btn-light btn-lg">
+                        <i class="fas fa-store me-2"></i>Shop Equipment
+                    </a>
+                    <a href="{{ url_for('request_quote') }}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-quote-left me-2"></i>Request Quote
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="https://pixabay.com/get/gc9ff3afa396f9345e1af7a4b675b547642163ffdb3b99b3699d63d9c0b2135055ea7fe917986cfb0f182e3c89658d507c6eb8d31115ad0e524e76893289561f7_1280.jpg" 
+                     alt="Restaurant Kitchen Equipment" class="img-fluid rounded shadow-lg">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Trust Indicators -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3">
+                <div class="d-flex align-items-center justify-content-center">
+                    <i class="fas fa-shipping-fast text-primary me-2 fs-4"></i>
+                    <div>
+                        <strong>Free Shipping</strong><br>
+                        <small class="text-muted">Orders over $500</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="d-flex align-items-center justify-content-center">
+                    <i class="fas fa-shield-alt text-primary me-2 fs-4"></i>
+                    <div>
+                        <strong>Secure Payment</strong><br>
+                        <small class="text-muted">SSL Protected</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="d-flex align-items-center justify-content-center">
+                    <i class="fas fa-headset text-primary me-2 fs-4"></i>
+                    <div>
+                        <strong>Expert Support</strong><br>
+                        <small class="text-muted">Mon-Fri 8AM-6PM</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="d-flex align-items-center justify-content-center">
+                    <i class="fas fa-award text-primary me-2 fs-4"></i>
+                    <div>
+                        <strong>25+ Years</strong><br>
+                        <small class="text-muted">Industry Experience</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Categories -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Shop by Category</h2>
+            <p class="text-muted">Find exactly what you need for your restaurant</p>
+        </div>
+        
+        <div class="row g-4">
+            {% for category in featured_categories %}
+            <div class="col-lg-3 col-md-6">
+                <div class="category-card h-100">
+                    <a href="{{ url_for('category_view', slug=category.slug) }}" class="text-decoration-none">
+                        <div class="card border-0 shadow-sm h-100 category-hover">
+                            <div class="card-img-top position-relative" style="height: 200px; overflow: hidden;">
+                                <img src="{{ category.image_url or 'https://pixabay.com/get/gc00468883f7687522738492f7b9167fca5dcb35eba1623167aeba8e2ddf4edaa1d7ed2581acafa6df076bf847511e19c37214339c285106bc1e2b797f76f78d7_1280.jpg' }}" 
+                                     alt="{{ category.name }}" class="w-100 h-100 object-fit-cover">
+                                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25"></div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-dark">{{ category.name }}</h5>
+                                <p class="card-text text-muted small">{{ category.description[:100] }}...</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products -->
+{% if featured_products %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Featured Products</h2>
+            <p class="text-muted">Top picks from our equipment specialists</p>
+        </div>
+        
+        <div class="row g-4">
+            {% for product in featured_products %}
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 product-hover">
+                    <div class="position-relative">
+                        <img src="{{ product.image_url }}" alt="{{ product.name }}" 
+                             class="card-img-top" style="height: 200px; object-fit: cover;">
+                        {% if product.requires_quote %}
+                        <span class="badge bg-warning position-absolute top-0 end-0 m-2">Quote Required</span>
+                        {% endif %}
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title">{{ product.name }}</h6>
+                        <p class="card-text text-muted small flex-grow-1">{{ product.short_description }}</p>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="h5 text-primary mb-0">${{ "%.2f"|format(product.price) }}</span>
+                                {% if product.in_stock %}
+                                <small class="text-success"><i class="fas fa-check"></i> In Stock</small>
+                                {% else %}
+                                <small class="text-danger"><i class="fas fa-times"></i> Out of Stock</small>
+                                {% endif %}
+                            </div>
+                            <a href="{{ url_for('product_view', slug=product.slug) }}" 
+                               class="btn btn-primary btn-sm w-100">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Call to Action -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="fw-bold mb-4">Ready to Upgrade Your Restaurant?</h2>
+                <p class="lead mb-4">Get personalized recommendations and competitive quotes from our equipment specialists.</p>
+                <div class="d-flex gap-3 justify-content-center">
+                    <a href="tel:5551234567" class="btn btn-light btn-lg">
+                        <i class="fas fa-phone me-2"></i>Call (555) 123-4567
+                    </a>
+                    <a href="{{ url_for('request_quote') }}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Request Quote
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

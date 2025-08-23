@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout - Northeast Restaurant Supply{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h1 class="fw-bold mb-4">Checkout</h1>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <form action="{{ url_for('process_order') }}" method="POST">
+                {{ form.hidden_tag() }}
+                
+                <!-- Shipping Information -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-shipping-fast"></i> Shipping Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                {{ form.shipping_name.label(class="form-label") }}
+                                {{ form.shipping_name(class="form-control") }}
+                                {% if form.shipping_name.errors %}
+                                <div class="text-danger small">{{ form.shipping_name.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.shipping_company.label(class="form-label") }}
+                                {{ form.shipping_company(class="form-control") }}
+                                {% if form.shipping_company.errors %}
+                                <div class="text-danger small">{{ form.shipping_company.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-12">
+                                {{ form.shipping_address.label(class="form-label") }}
+                                {{ form.shipping_address(class="form-control") }}
+                                {% if form.shipping_address.errors %}
+                                <div class="text-danger small">{{ form.shipping_address.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.shipping_city.label(class="form-label") }}
+                                {{ form.shipping_city(class="form-control") }}
+                                {% if form.shipping_city.errors %}
+                                <div class="text-danger small">{{ form.shipping_city.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-3">
+                                {{ form.shipping_state.label(class="form-label") }}
+                                {{ form.shipping_state(class="form-select") }}
+                                {% if form.shipping_state.errors %}
+                                <div class="text-danger small">{{ form.shipping_state.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-3">
+                                {{ form.shipping_zip.label(class="form-label") }}
+                                {{ form.shipping_zip(class="form-control") }}
+                                {% if form.shipping_zip.errors %}
+                                <div class="text-danger small">{{ form.shipping_zip.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.shipping_phone.label(class="form-label") }}
+                                {{ form.shipping_phone(class="form-control") }}
+                                {% if form.shipping_phone.errors %}
+                                <div class="text-danger small">{{ form.shipping_phone.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Information -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-credit-card"></i> Payment Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> 
+                            <strong>Payment Processing:</strong> After placing your order, our team will contact you within 24 hours to process payment and arrange delivery. We accept all major credit cards, ACH transfers, and terms for qualified businesses.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-check"></i> Place Order
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Order Summary -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Order Summary</h5>
+                </div>
+                <div class="card-body">
+                    {% for item in cart_items %}
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="flex-grow-1">
+                            <small class="text-muted">{{ item.product.name }}</small>
+                            <br>
+                            <small class="text-muted">Qty: {{ item.quantity }}</small>
+                        </div>
+                        <div class="text-end">
+                            <small>${{ "%.2f"|format(item.product.price * item.quantity) }}</small>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span>${{ "%.2f"|format(total) }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Tax (8%):</span>
+                        <span>${{ "%.2f"|format(total * 0.08) }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Shipping:</span>
+                        <span>
+                            {% if total >= 500 %}
+                            <span class="text-success">FREE</span>
+                            {% else %}
+                            $25.00
+                            {% endif %}
+                        </span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-bold">Total:</span>
+                        <span class="fw-bold text-primary h5">
+                            ${{ "%.2f"|format(total + (total * 0.08) + (25.00 if total < 500 else 0)) }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Information -->
+            <div class="card mt-3">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold mb-3">Secure Checkout</h6>
+                    <div class="d-flex justify-content-around mb-3">
+                        <div class="text-center">
+                            <i class="fas fa-shield-alt text-success fs-4"></i>
+                            <small class="d-block text-muted">SSL Encrypted</small>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-lock text-primary fs-4"></i>
+                            <small class="d-block text-muted">Secure Payment</small>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-phone text-info fs-4"></i>
+                            <small class="d-block text-muted">24/7 Support</small>
+                        </div>
+                    </div>
+                    <small class="text-muted">
+                        Your information is protected with industry-standard encryption
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

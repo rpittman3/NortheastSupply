@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Shopping Cart - Northeast Restaurant Supply{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h1 class="fw-bold mb-4">Shopping Cart</h1>
+
+    {% if cart_items %}
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    {% for item in cart_items %}
+                    <div class="cart-item border-bottom py-3">
+                        <div class="row align-items-center">
+                            <div class="col-md-2">
+                                <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" 
+                                     class="img-fluid rounded" style="height: 80px; object-fit: cover;">
+                            </div>
+                            <div class="col-md-4">
+                                <h6 class="mb-1">
+                                    <a href="{{ url_for('product_view', slug=item.product.slug) }}" 
+                                       class="text-decoration-none text-dark">{{ item.product.name }}</a>
+                                </h6>
+                                {% if item.product.brand %}
+                                <small class="text-muted">{{ item.product.brand }}</small>
+                                {% endif %}
+                                <br>
+                                <small class="text-muted">SKU: {{ item.product.sku }}</small>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fw-bold text-primary">${{ "%.2f"|format(item.product.price) }}</span>
+                            </div>
+                            <div class="col-md-2">
+                                <form action="{{ url_for('update_cart') }}" method="POST" class="d-inline">
+                                    <input type="hidden" name="item_id" value="{{ item.id }}">
+                                    <div class="input-group input-group-sm">
+                                        <input type="number" name="quantity" class="form-control text-center" 
+                                               value="{{ item.quantity }}" min="1" max="99" 
+                                               onchange="this.form.submit()">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-1">
+                                <span class="fw-bold">${{ "%.2f"|format(item.product.price * item.quantity) }}</span>
+                            </div>
+                            <div class="col-md-1">
+                                <form action="{{ url_for('remove_from_cart') }}" method="POST" class="d-inline">
+                                    <input type="hidden" name="item_id" value="{{ item.id }}">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm" 
+                                            onclick="return confirm('Remove this item from cart?')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Order Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal ({{ cart_items|length }} items):</span>
+                        <span class="fw-bold">${{ "%.2f"|format(total) }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Estimated Tax:</span>
+                        <span>${{ "%.2f"|format(total * 0.08) }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Shipping:</span>
+                        <span>
+                            {% if total >= 500 %}
+                            <span class="text-success">FREE</span>
+                            {% else %}
+                            $25.00
+                            {% endif %}
+                        </span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="fw-bold">Total:</span>
+                        <span class="fw-bold text-primary h5">
+                            ${{ "%.2f"|format(total + (total * 0.08) + (25.00 if total < 500 else 0)) }}
+                        </span>
+                    </div>
+                    
+                    {% if total < 500 %}
+                    <div class="alert alert-info small">
+                        <i class="fas fa-truck"></i> 
+                        Add ${{ "%.2f"|format(500 - total) }} more for free shipping!
+                    </div>
+                    {% endif %}
+                    
+                    <div class="d-grid gap-2">
+                        <a href="{{ url_for('checkout') }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-credit-card"></i> Proceed to Checkout
+                        </a>
+                        <a href="{{ url_for('request_quote') }}" class="btn btn-outline-primary">
+                            <i class="fas fa-quote-left"></i> Request Quote Instead
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="card mt-3">
+                <div class="card-body text-center">
+                    <div class="d-flex justify-content-around">
+                        <div class="text-center">
+                            <i class="fas fa-shield-alt text-success fs-4"></i>
+                            <small class="d-block text-muted">Secure Payment</small>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-truck text-primary fs-4"></i>
+                            <small class="d-block text-muted">Fast Shipping</small>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-phone text-info fs-4"></i>
+                            <small class="d-block text-muted">Expert Support</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+        <h3>Your cart is empty</h3>
+        <p class="text-muted mb-4">Add some items to get started!</p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+            <i class="fas fa-store"></i> Start Shopping
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

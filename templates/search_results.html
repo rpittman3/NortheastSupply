@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results for "{{ query }}" - Northeast Restaurant Supply{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="fw-bold mb-2">Search Results</h1>
+            <p class="text-muted mb-4">
+                Showing {{ products.items|length }} of {{ products.total }} results for 
+                <strong>"{{ query }}"</strong>
+            </p>
+
+            {% if products.items %}
+            <div class="row g-4">
+                {% for product in products.items %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="card border-0 shadow-sm h-100 product-hover">
+                        <div class="position-relative">
+                            <img src="{{ product.image_url }}" alt="{{ product.name }}" 
+                                 class="card-img-top" style="height: 200px; object-fit: cover;">
+                            {% if product.requires_quote %}
+                            <span class="badge bg-warning position-absolute top-0 end-0 m-2">Quote Required</span>
+                            {% endif %}
+                            {% if not product.in_stock %}
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">Out of Stock</span>
+                            {% endif %}
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title">{{ product.name }}</h6>
+                            {% if product.brand %}
+                            <small class="text-muted">{{ product.brand }}</small>
+                            {% endif %}
+                            <p class="card-text text-muted small flex-grow-1">{{ product.short_description }}</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    {% if product.requires_quote %}
+                                    <span class="h6 text-primary mb-0">Call for Price</span>
+                                    {% else %}
+                                    <span class="h6 text-primary mb-0">${{ "%.2f"|format(product.price) }}</span>
+                                    {% endif %}
+                                    {% if product.in_stock %}
+                                    <small class="text-success"><i class="fas fa-check"></i> In Stock</small>
+                                    {% else %}
+                                    <small class="text-danger"><i class="fas fa-times"></i> Out of Stock</small>
+                                    {% endif %}
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <a href="{{ url_for('product_view', slug=product.slug) }}" 
+                                       class="btn btn-primary btn-sm">View Details</a>
+                                    {% if current_user.is_authenticated and product.in_stock %}
+                                    <form action="{{ url_for('add_to_cart') }}" method="POST" class="d-inline">
+                                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm w-100">
+                                            <i class="fas fa-cart-plus"></i> Add to Cart
+                                        </button>
+                                    </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if products.pages > 1 %}
+            <nav class="mt-5">
+                <ul class="pagination justify-content-center">
+                    {% if products.has_prev %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('search', q=query, page=products.prev_num) }}">Previous</a>
+                    </li>
+                    {% endif %}
+                    
+                    {% for page_num in products.iter_pages() %}
+                        {% if page_num %}
+                            {% if page_num != products.page %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('search', q=query, page=page_num) }}">{{ page_num }}</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ page_num }}</span>
+                            </li>
+                            {% endif %}
+                        {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if products.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('search', q=query, page=products.next_num) }}">Next</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+            {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                <h4>No Results Found</h4>
+                <p class="text-muted mb-4">
+                    We couldn't find any products matching "<strong>{{ query }}</strong>". 
+                    Try adjusting your search terms or browse our categories.
+                </p>
+                <div class="d-flex gap-2 justify-content-center">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">Browse Categories</a>
+                    <button class="btn btn-outline-primary" onclick="document.querySelector('input[name=q]').focus()">
+                        Try Another Search
+                    </button>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

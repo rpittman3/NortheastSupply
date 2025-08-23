@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+
+{% block title %}My Account - Northeast Restaurant Supply{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h1 class="fw-bold mb-4">My Account</h1>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <!-- Account Information -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-user"></i> Account Information</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('update_account') }}" method="POST">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            {{ form.first_name.label(class="form-label") }}
+                            {{ form.first_name(class="form-control", value=current_user.first_name or '') }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.last_name.label(class="form-label") }}
+                            {{ form.last_name(class="form-control", value=current_user.last_name or '') }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" value="{{ current_user.email or '' }}" readonly>
+                            <small class="text-muted">Email cannot be changed</small>
+                        </div>
+                        <div class="mb-3">
+                            {{ form.company_name.label(class="form-label") }}
+                            {{ form.company_name(class="form-control", value=current_user.company_name or '') }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.phone.label(class="form-label") }}
+                            {{ form.phone(class="form-control", value=current_user.phone or '') }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <!-- Orders -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-shopping-bag"></i> Recent Orders</h5>
+                </div>
+                <div class="card-body">
+                    {% if orders %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                <tr>
+                                    <td><strong>{{ order.order_number }}</strong></td>
+                                    <td>{{ order.created_at.strftime('%m/%d/%Y') }}</td>
+                                    <td>
+                                        {% if order.status == 'pending' %}
+                                        <span class="badge bg-warning">Pending</span>
+                                        {% elif order.status == 'processing' %}
+                                        <span class="badge bg-info">Processing</span>
+                                        {% elif order.status == 'shipped' %}
+                                        <span class="badge bg-primary">Shipped</span>
+                                        {% elif order.status == 'delivered' %}
+                                        <span class="badge bg-success">Delivered</span>
+                                        {% else %}
+                                        <span class="badge bg-secondary">{{ order.status|title }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td><strong>${{ "%.2f"|format(order.total_amount) }}</strong></td>
+                                    <td>
+                                        <button class="btn btn-outline-primary btn-sm" 
+                                                onclick="toggleOrderDetails({{ order.id }})">
+                                            View Details
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr id="order-details-{{ order.id }}" class="collapse">
+                                    <td colspan="5">
+                                        <div class="bg-light p-3 rounded">
+                                            <h6>Order Items:</h6>
+                                            {% for item in order.items %}
+                                            <div class="d-flex justify-content-between">
+                                                <span>{{ item.product.name }} (Qty: {{ item.quantity }})</span>
+                                                <span>${{ "%.2f"|format(item.total_price) }}</span>
+                                            </div>
+                                            {% endfor %}
+                                            <hr>
+                                            <div class="d-flex justify-content-between">
+                                                <span><strong>Shipping Address:</strong></span>
+                                            </div>
+                                            <div>
+                                                {{ order.shipping_name }}<br>
+                                                {% if order.shipping_company %}{{ order.shipping_company }}<br>{% endif %}
+                                                {{ order.shipping_address }}<br>
+                                                {{ order.shipping_city }}, {{ order.shipping_state }} {{ order.shipping_zip }}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-3">
+                        <i class="fas fa-shopping-bag fa-2x text-muted mb-2"></i>
+                        <p class="text-muted">No orders yet</p>
+                        <a href="{{ url_for('index') }}" class="btn btn-primary">Start Shopping</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Quote Requests -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-quote-left"></i> Quote Requests</h5>
+                </div>
+                <div class="card-body">
+                    {% if quote_requests %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Quote #</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Items</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for quote in quote_requests %}
+                                <tr>
+                                    <td><strong>{{ quote.request_number }}</strong></td>
+                                    <td>{{ quote.created_at.strftime('%m/%d/%Y') }}</td>
+                                    <td>
+                                        {% if quote.status == 'pending' %}
+                                        <span class="badge bg-warning">Pending</span>
+                                        {% elif quote.status == 'quoted' %}
+                                        <span class="badge bg-info">Quoted</span>
+                                        {% elif quote.status == 'converted' %}
+                                        <span class="badge bg-success">Converted</span>
+                                        {% else %}
+                                        <span class="badge bg-secondary">{{ quote.status|title }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ quote.items|length }} items</td>
+                                    <td>
+                                        <button class="btn btn-outline-primary btn-sm" 
+                                                onclick="toggleQuoteDetails({{ quote.id }})">
+                                            View Details
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr id="quote-details-{{ quote.id }}" class="collapse">
+                                    <td colspan="5">
+                                        <div class="bg-light p-3 rounded">
+                                            <h6>Requested Items:</h6>
+                                            {% for item in quote.items %}
+                                            <div class="d-flex justify-content-between">
+                                                <span>{{ item.product.name }} (Qty: {{ item.quantity }})</span>
+                                                {% if item.quoted_price %}
+                                                <span>${{ "%.2f"|format(item.quoted_price) }}</span>
+                                                {% else %}
+                                                <span class="text-muted">Pending Quote</span>
+                                                {% endif %}
+                                            </div>
+                                            {% endfor %}
+                                            {% if quote.special_requirements %}
+                                            <hr>
+                                            <div><strong>Special Requirements:</strong><br>{{ quote.special_requirements }}</div>
+                                            {% endif %}
+                                            {% if quote.notes %}
+                                            <hr>
+                                            <div><strong>Notes:</strong><br>{{ quote.notes }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-3">
+                        <i class="fas fa-quote-left fa-2x text-muted mb-2"></i>
+                        <p class="text-muted">No quote requests yet</p>
+                        <a href="{{ url_for('request_quote') }}" class="btn btn-primary">Request Quote</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleOrderDetails(orderId) {
+    const element = document.getElementById('order-details-' + orderId);
+    if (element.classList.contains('show')) {
+        element.classList.remove('show');
+    } else {
+        element.classList.add('show');
+    }
+}
+
+function toggleQuoteDetails(quoteId) {
+    const element = document.getElementById('quote-details-' + quoteId);
+    if (element.classList.contains('show')) {
+        element.classList.remove('show');
+    } else {
+        element.classList.add('show');
+    }
+}
+</script>
+{% endblock %}

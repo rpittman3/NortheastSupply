@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}Request Quote - Northeast Restaurant Supply{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h1 class="fw-bold mb-4">Request Quote</h1>
+    <p class="text-muted mb-4">Get personalized pricing for bulk orders or custom requirements. Our team will respond within 24 hours.</p>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <form action="{{ url_for('submit_quote') }}" method="POST">
+                {{ form.hidden_tag() }}
+                
+                <!-- Contact Information -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-user"></i> Contact Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                {{ form.contact_name.label(class="form-label") }}
+                                {{ form.contact_name(class="form-control") }}
+                                {% if form.contact_name.errors %}
+                                <div class="text-danger small">{{ form.contact_name.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.company_name.label(class="form-label") }}
+                                {{ form.company_name(class="form-control") }}
+                                {% if form.company_name.errors %}
+                                <div class="text-danger small">{{ form.company_name.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.email.label(class="form-label") }}
+                                {{ form.email(class="form-control") }}
+                                {% if form.email.errors %}
+                                <div class="text-danger small">{{ form.email.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.phone.label(class="form-label") }}
+                                {{ form.phone(class="form-control") }}
+                                {% if form.phone.errors %}
+                                <div class="text-danger small">{{ form.phone.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Details -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-clipboard-list"></i> Project Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                {{ form.delivery_date_needed.label(class="form-label") }}
+                                {{ form.delivery_date_needed(class="form-control") }}
+                                {% if form.delivery_date_needed.errors %}
+                                <div class="text-danger small">{{ form.delivery_date_needed.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-12">
+                                {{ form.special_requirements.label(class="form-label") }}
+                                {{ form.special_requirements(class="form-control", rows="3", placeholder="Any special requirements, installation needs, or customizations...") }}
+                                {% if form.special_requirements.errors %}
+                                <div class="text-danger small">{{ form.special_requirements.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-12">
+                                {{ form.notes.label(class="form-label") }}
+                                {{ form.notes(class="form-control", rows="3", placeholder="Additional notes or questions...") }}
+                                {% if form.notes.errors %}
+                                <div class="text-danger small">{{ form.notes.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-paper-plane"></i> Submit Quote Request
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Items for Quote -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Items for Quote</h5>
+                </div>
+                <div class="card-body">
+                    {% if cart_items %}
+                    {% for item in cart_items %}
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" 
+                             class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">{{ item.product.name }}</h6>
+                            <small class="text-muted">Quantity: {{ item.quantity }}</small>
+                            {% if item.product.brand %}
+                            <br><small class="text-muted">{{ item.product.brand }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="text-center py-3">
+                        <i class="fas fa-shopping-cart fa-2x text-muted mb-2"></i>
+                        <p class="text-muted">No items in cart</p>
+                        <a href="{{ url_for('index') }}" class="btn btn-sm btn-outline-primary">Browse Products</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Quote Benefits -->
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-3">Why Request a Quote?</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-percentage text-primary me-2"></i>
+                            <strong>Volume Discounts</strong><br>
+                            <small class="text-muted">Save more on bulk orders</small>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-tools text-primary me-2"></i>
+                            <strong>Installation Services</strong><br>
+                            <small class="text-muted">Professional setup available</small>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-handshake text-primary me-2"></i>
+                            <strong>Payment Terms</strong><br>
+                            <small class="text-muted">Flexible payment options</small>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-user-tie text-primary me-2"></i>
+                            <strong>Expert Consultation</strong><br>
+                            <small class="text-muted">Equipment recommendations</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="card mt-3">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold mb-3">Need Help?</h6>
+                    <p class="mb-3">
+                        <i class="fas fa-phone text-primary me-2"></i>
+                        <strong>(555) 123-4567</strong>
+                    </p>
+                    <p class="mb-3">
+                        <i class="fas fa-envelope text-primary me-2"></i>
+                        <strong>quotes@nerestaurantsupply.com</strong>
+                    </p>
+                    <small class="text-muted">Monday - Friday: 8:00 AM - 6:00 PM EST</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
