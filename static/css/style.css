@@ -1,7 +1,8 @@
 /* Professional Restaurant Supply - Custom Styles */
 
 :root {
-    --primary-color: #0d6efd;
+    --primary-color: #1e5891;
+    --navbar-color: #1e5891;
     --secondary-color: #6c757d;
     --success-color: #198754;
     --warning-color: #ffc107;
@@ -34,7 +35,29 @@ body {
 .navbar {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    min-height: 80px;
+    min-height: 120px;
+}
+
+/* Category Navigation Bar */
+.category-nav-bar {
+    background-color: #1e5891 !important;
+}
+
+.category-nav-bar .navbar {
+    min-height: 50px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.category-nav-bar .navbar-nav .nav-link {
+    color: #ffffff !important;
+    font-weight: 500;
+    transition: all 0.15s ease-in-out;
+}
+
+.category-nav-bar .navbar-nav .nav-link:hover {
+    color: #d4edda !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .navbar-brand {
@@ -66,7 +89,7 @@ body {
     background-color: var(--light-color);
 }
 
-/* Category Navigation */
+/* Main Navigation - White Background */
 .navbar-light .navbar-nav .nav-link {
     color: var(--dark-color);
     font-weight: 500;
@@ -78,11 +101,46 @@ body {
     background-color: var(--light-color);
 }
 
+/* Cart and User Icons - Dark on White */
+.navbar-light .navbar-nav .nav-link {
+    color: #333333 !important;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #1e5891 !important;
+}
+
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #0b5ed7 100%);
+    background-image: linear-gradient(135deg, rgb(117, 160, 223) 0%, rgb(217, 224, 235) 100%);
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
     position: relative;
     overflow: hidden;
+}
+
+/* Trust Indicators Section */
+.trust-indicators-section {
+    background-color: #1e5891;
+    color: #ffffff;
+}
+
+.trust-indicators-section .text-primary {
+    color: #ffffff !important;
+}
+
+.trust-indicators-section strong {
+    color: #ffffff;
+}
+
+.trust-indicators-section .text-muted {
+    color: #e8f4fd !important;
 }
 
 .hero-section::before {

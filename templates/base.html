@@ -16,10 +16,10 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom">
         <div class="container">
             <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Professional Restaurant Supply" style="height: 60px;">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Professional Restaurant Supply" style="height: 100px;">
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -31,7 +31,7 @@
                 <form class="d-flex mx-auto" action="{{ url_for('search') }}" method="GET" style="width: 400px;">
                     <input class="form-control me-2" type="search" name="q" placeholder="Search products..." 
                            value="{{ request.args.get('q', '') }}">
-                    <button class="btn btn-outline-light" type="submit">
+                    <button class="btn btn-outline-secondary" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
@@ -85,7 +85,7 @@
     </nav>
 
     <!-- Category Navigation -->
-    <div class="bg-light border-bottom">
+    <div class="category-nav-bar border-bottom">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <div class="collapse navbar-collapse">
