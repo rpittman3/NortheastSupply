@@ -87,6 +87,13 @@ class Product(db.Model):
     stock_quantity = db.Column(db.Integer, default=0)
     is_featured = db.Column(db.Boolean, default=False)
     requires_quote = db.Column(db.Boolean, default=False)
+    
+    # Document/Manual fields
+    manual_url = db.Column(db.String(500))  # Link to product manual
+    spec_sheet_url = db.Column(db.String(500))  # Link to specification sheet
+    brochure_url = db.Column(db.String(500))  # Link to product brochure
+    warranty_url = db.Column(db.String(500))  # Link to warranty document
+    documents = db.Column(db.Text)  # JSON string of additional document URLs and names
 
     created_at = db.Column(db.DateTime, default=eastern_now)
     updated_at = db.Column(db.DateTime, default=eastern_now, onupdate=eastern_now)
