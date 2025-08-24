@@ -1,0 +1,5471 @@
+{
+  "categories": [
+    {
+      "name": "Cooking",
+      "url": "https://www.kitchenall.com/commercial-cooking-equipment.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Commercial Ranges & StovesCommercial Gas RangesCommercial Electric RangesCommercial Hot PlatesStock Pot Ranges & BurnersInduction BurnersChinese Wok RangesPortable Gas RangesPilotless Ignition Gas Ran",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/cat-cook.jpg"
+    },
+    {
+      "name": "Commercial Ranges & Stoves",
+      "url": "https://www.kitchenall.com/commercial-ranges.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Commercial Gas RangesCommercial Electric RangesCommercial Hot PlatesStock Pot Ranges & BurnersInduction BurnersChinese Wok RangesPortable Gas RangesPilotless Ignition Gas Ranges",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/cat-cook.jpg"
+    },
+    {
+      "name": "Commercial Gas Ranges",
+      "url": "https://www.kitchenall.com/commercial-ranges-gas.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Electric Ranges",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Hot Plates",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Stock Pot Ranges & Burners",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Induction Burners",
+      "url": "https://www.kitchenall.com/countertop-induction-burners.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Chinese Wok Ranges",
+      "url": "https://www.kitchenall.com/wok-ranges.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Portable Gas Ranges",
+      "url": "https://www.kitchenall.com/portable-gas-ranges.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Pilotless Ignition Gas Ranges",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Chicken Rotisserie",
+      "url": "https://www.kitchenall.com/chicken-rotisserie-machines.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Chicken-Rotisserie-Ovens-catagory-updated.jpg"
+    },
+    {
+      "name": "Convection Ovens",
+      "url": "https://www.kitchenall.com/convection-ovens.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Convection-Oven-category.jpg"
+    },
+    {
+      "name": "Commercial Ovens",
+      "url": "https://www.kitchenall.com/commercial-ovens.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Convection OvensChicken Rotisserie OvensConveyor OvensCombination OvensCook & Hold OvensMicrowave OvensPizza Deck OvensBBQ Smoker OvensConvection MicrowavesChinese Smokehouse OvensTandoor OvensBakery ",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Convection-Oven-category_1.jpg"
+    },
+    {
+      "name": "Conveyor Ovens",
+      "url": "https://www.kitchenall.com/conveyor-ovens.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Combination Ovens",
+      "url": "https://www.kitchenall.com/combi-oven.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cook & Hold Ovens",
+      "url": "https://www.kitchenall.com/cook-hold-ovens.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Microwave Ovens",
+      "url": "https://www.kitchenall.com/commercial-microwave-ovens.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Pizza Deck Ovens",
+      "url": "https://www.kitchenall.com/pizza-deck-ovens.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "BBQ Smoker Ovens",
+      "url": "https://www.kitchenall.com/smoker-ovens.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Convection Microwaves",
+      "url": "https://www.kitchenall.com/convection-microwaves.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Chinese Smokehouse Ovens",
+      "url": "https://www.kitchenall.com/chinese-smoker-ovens.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Tandoor Ovens",
+      "url": "https://www.kitchenall.com/tandoor-ovens.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Bakery Deck Ovens",
+      "url": "https://www.kitchenall.com/bakery-deck-ovens.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Deep Fryers",
+      "url": "https://www.kitchenall.com/commercial-deep-fryers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Gas Floor FryersElectric Floor FryersCountertop Gas Deep FryersCountertop Electric Deep Fryers",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Floor-Fryers_1.jpg"
+    },
+    {
+      "name": "Gas Floor Fryers",
+      "url": "https://www.kitchenall.com/gas-floor-fryers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Electric Floor Fryers",
+      "url": "https://www.kitchenall.com/electric-floor-fryers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Countertop Gas Deep Fryers",
+      "url": "https://www.kitchenall.com/gas-countertop-fryers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Countertop Electric Deep Fryers",
+      "url": "https://www.kitchenall.com/countertop-electric-fryers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Grills",
+      "url": "https://www.kitchenall.com/commercial-griddles.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Commercial Char-BroilersGas Griddles & Flat Top GrillsElectric Griddles & Flat Top GrillsGriddle-Broiler CombosGriddle-Burners CombosPanini Grills & Sandwich MakersCommercial Crepe MakersOutdoor Grill",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Commercial-CharBroilers_1.jpg"
+    },
+    {
+      "name": "Commercial Char-Broilers",
+      "url": "https://www.kitchenall.com/charbroilers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Gas Griddles & Flat Top Grills",
+      "url": "https://www.kitchenall.com/gas-countertop-griddles.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Electric Griddles & Flat Top Grills",
+      "url": "https://www.kitchenall.com/electric-countertop-griddles.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Griddle-Broiler Combos",
+      "url": "https://www.kitchenall.com/commercial-countertop-griddle-broiler.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Griddle-Burners Combos",
+      "url": "https://www.kitchenall.com/commercial-griddle-burners.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Panini Grills & Sandwich Makers",
+      "url": "https://www.kitchenall.com/commercial-panini-grill.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Crepe Makers",
+      "url": "https://www.kitchenall.com/commercial-crepe-makers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Outdoor Grills",
+      "url": "https://www.kitchenall.com/commercial-outdoor-grills.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Pasta Cookers",
+      "url": "https://www.kitchenall.com/commercial-pasta-cookers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Pasta-Cookers_1.jpg"
+    },
+    {
+      "name": "Commercial Broilers",
+      "url": "https://www.kitchenall.com/broilers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Gyro Machines & Vertical BroilersSalamander Broilers & CheesemeltersOverfired Broilers",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Salamander-Broiler-Cheesemelters_1_1.jpg"
+    },
+    {
+      "name": "Gyro Machines & Vertical Broilers",
+      "url": "https://www.kitchenall.com/gyro-machines.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Salamander Broilers & Cheesemelters",
+      "url": "https://www.kitchenall.com/salamander-broilers-cheesemelters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Overfired Broilers",
+      "url": "https://www.kitchenall.com/overfired-broilers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Toasters",
+      "url": "https://www.kitchenall.com/commercial-toasters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Conveyor ToastersPop-Up Toasters",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Pop-Up-Toasters_1.jpg"
+    },
+    {
+      "name": "Conveyor Toasters",
+      "url": "https://www.kitchenall.com/conveyor-toasters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Pop-Up Toasters",
+      "url": "https://www.kitchenall.com/pop-up-toasters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Specialty Cooking Equip",
+      "url": "https://www.kitchenall.com/specialty-cooking-equipment.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Commercial SteamersCommercial Rice CookersSous Vide Water Bath CookersHot Dog EquipmentCommercial Tilt Skillets & Braising Pans",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Commercial-Rice-Cookers_1.jpg"
+    },
+    {
+      "name": "Commercial Steamers",
+      "url": "https://www.kitchenall.com/commercial-food-steamers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Rice Cookers",
+      "url": "https://www.kitchenall.com/commercial-rice-cookers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Sous Vide Water Bath Cookers",
+      "url": "https://www.kitchenall.com/commercial-sous-vide-machine.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Hot Dog Equipment",
+      "url": "https://www.kitchenall.com/hot-dog-equipment.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Tilt Skillets & Braising Pans",
+      "url": "https://www.kitchenall.com/tilt-skillets-braising-pans.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Exhaust Hoods",
+      "url": "https://www.kitchenall.com/commercial-exhaust-hoods.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Commercial Kitchen HoodsVent Hood FiltersStainless Steel Wall Panels",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Commercial-Kitchen-Hoods_1.jpg"
+    },
+    {
+      "name": "Commercial Kitchen Hoods",
+      "url": "https://www.kitchenall.com/commercial-kitchen-hoods.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Vent Hood Filters",
+      "url": "https://www.kitchenall.com/vent-hood-filters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Stainless Steel Wall Panels",
+      "url": "https://www.kitchenall.com/stainless-steel-wall-panels.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cooking Parts & Accessories",
+      "url": "https://www.kitchenall.com/commercial-cooking-parts-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Cooking Equipment PartsCooking Equipment CastersGas Connector HosesCommercial Range AccessoriesCommercial Oven AccessoriesRotisserie AccessoriesSmokehouse AccessoriesDeep Fryer AccessoriesGyro Shawarm",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Cooking-Parts-Accessories-_1.jpg"
+    },
+    {
+      "name": "Cooking Equipment Parts",
+      "url": "https://www.kitchenall.com/commercial-rotisserie-oven-parts.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cooking Equipment Casters",
+      "url": "https://www.kitchenall.com/casters-for-cooking-equipment.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Gas Connector Hoses",
+      "url": "https://www.kitchenall.com/gas-connectors-and-gas-hoses.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Range Accessories",
+      "url": "https://www.kitchenall.com/commercial-range-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Oven Accessories",
+      "url": "https://www.kitchenall.com/commercial-oven-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Rotisserie Accessories",
+      "url": "https://www.kitchenall.com/cooking-equipment-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Smokehouse Accessories",
+      "url": "https://www.kitchenall.com/smokehouse-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Deep Fryer Accessories",
+      "url": "https://www.kitchenall.com/deep-fryer-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Gyro Shawarma Broiler Accessories",
+      "url": "https://www.kitchenall.com/gyro-shawarma-broiler-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Salamander Accessories",
+      "url": "https://www.kitchenall.com/salamander-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Griddle Accessories",
+      "url": "https://www.kitchenall.com/griddle-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Char-Broiler Accessories",
+      "url": "https://www.kitchenall.com/char-broiler-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Refrigeration & Ice",
+      "url": "https://www.kitchenall.com/refrigeration-ice-machines.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Commercial RefrigeratorsBar RefrigerationReach-In RefrigeratorsGlass Door RefrigeratorsSandwich & Salad Prep TablesUndercounter & Worktop RefrigeratorsChef Base RefrigeratorsPizza Prep RefrigeratorsWa",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/cat-refrig.jpg"
+    },
+    {
+      "name": "Commercial Refrigerators",
+      "url": "https://www.kitchenall.com/commercial-refrigeration.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Bar RefrigerationReach-In RefrigeratorsGlass Door RefrigeratorsSandwich & Salad Prep TablesUndercounter & Worktop RefrigeratorsChef Base RefrigeratorsPizza Prep RefrigeratorsWalk In Coolers & Refriger",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/cat-refrig.jpg"
+    },
+    {
+      "name": "Bar Refrigeration",
+      "url": "https://www.kitchenall.com/bar-refrigeration.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Reach-In Refrigerators",
+      "url": "https://www.kitchenall.com/reach-in-refrigerators.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Glass Door Refrigerators",
+      "url": "https://www.kitchenall.com/glass-door-merchandiser-refrigerators.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Sandwich & Salad Prep Tables",
+      "url": "https://www.kitchenall.com/refrigerated-sandwich-and-salad-prep-tables.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Undercounter & Worktop Refrigerators",
+      "url": "https://www.kitchenall.com/undercounter-refrigerator.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Chef Base Refrigerators",
+      "url": "https://www.kitchenall.com/chef-base-refrigerator.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Pizza Prep Refrigerators",
+      "url": "https://www.kitchenall.com/pizza-prep-tables.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Walk In Coolers & Refrigerators",
+      "url": "https://www.kitchenall.com/walk-in-coolers-refrigerators.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Salad Bar Refrigerators",
+      "url": "https://www.kitchenall.com/refrigerated-salad-bar-buffet-tables.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "School Milk Coolers",
+      "url": "https://www.kitchenall.com/school-milk-coolers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Compact Refrigerators",
+      "url": "https://www.kitchenall.com/compact-refrigerators.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Medical Refrigerators",
+      "url": "https://www.kitchenall.com/scientific-refrigerators.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Floral Cooler & Refrigerator",
+      "url": "https://www.kitchenall.com/floral-cooler.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dry Aging and Thawing Refrigerators",
+      "url": "https://www.kitchenall.com/dry-aging-and-thawing-refrigerators.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Refrigerated Displays",
+      "url": "https://www.kitchenall.com/food-display-cases.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/cat_bakery_display_cases.jpg"
+    },
+    {
+      "name": "Commercial Reach-In Freezers",
+      "url": "https://www.kitchenall.com/reach-in-freezers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Reach-In-Refrigerators.jpg"
+    },
+    {
+      "name": "Glass Door Display Freezers",
+      "url": "https://www.kitchenall.com/merchandising-display-freezer.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Glass-Door-Display-Freezers_1.jpg"
+    },
+    {
+      "name": "Walk-In Freezers",
+      "url": "https://www.kitchenall.com/walk-in-freezers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/walk-in-category-freezer-image.jpg"
+    },
+    {
+      "name": "Commercial Freezers",
+      "url": "https://www.kitchenall.com/commercial-freezers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Commercial Reach-In FreezersGlass Door Display FreezersUndercounter & Worktop FreezersIce Cream Display FreezersWalk-In FreezersChest FreezersCompact FreezerChef Base FreezersBlast ChillersMedical Sci",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Ice-Cream-DisplayFreezers_1.jpg"
+    },
+    {
+      "name": "Undercounter & Worktop Freezers",
+      "url": "https://www.kitchenall.com/undercounter-freezer.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Ice Cream Display Freezers",
+      "url": "https://www.kitchenall.com/ice-cream-gelato-display.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Chest Freezers",
+      "url": "https://www.kitchenall.com/chest-freezer.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Compact Freezer",
+      "url": "https://www.kitchenall.com/compact-freezer.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Chef Base Freezers",
+      "url": "https://www.kitchenall.com/chef-base-freezers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Blast Chillers",
+      "url": "https://www.kitchenall.com/commercial-blaster-chillers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Medical Scientific Freezers",
+      "url": "https://www.kitchenall.com/medical-scientific-freezers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Ice Merchandiser",
+      "url": "https://www.kitchenall.com/ice-merchandiser.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Ice Machines",
+      "url": "https://www.kitchenall.com/commercial-ice-machines.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Ice Cube MakersIce DispensersIce Machine Bins",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Ice-Cube-Makers_1.jpg"
+    },
+    {
+      "name": "Ice Cube Makers",
+      "url": "https://www.kitchenall.com/ice-machines.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Ice Dispensers",
+      "url": "https://www.kitchenall.com/ice-dispensers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Ice Machine Bins",
+      "url": "https://www.kitchenall.com/commercial-ice-machine-storage-bins.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Ice Cream Makers",
+      "url": "https://www.kitchenall.com/commercial-ice-cream-maker.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Soft Serve Ice Cream Machines",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Ice-Cream-Makers_1.jpg"
+    },
+    {
+      "name": "Soft Serve Ice Cream Machines",
+      "url": "https://www.kitchenall.com/soft-serve-ice-cream-machines.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Refrigerator Freezer Combo Units",
+      "url": "https://www.kitchenall.com/refrigerator-freezer-combo.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Refrigerator-Freezer-Combo-Units_1.jpg"
+    },
+    {
+      "name": "Refrigeration Parts & Accessories",
+      "url": "https://www.kitchenall.com/commercial-refrigeration-parts.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Water Filters & CartridgesIce Machine Parts & AccessoriesIce Bin PartsRefrigeration CompressorsDraft Parts and Bar Refrigeration AccessoriesDigital ControllersWalk-In Refrigerator PartsPlastic Strip D",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Refrigeration-Parts-Accessories_1.jpg"
+    },
+    {
+      "name": "Ice Machine Parts & Accessories",
+      "url": "https://www.kitchenall.com/ice-machine-parts.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Ice Bin Parts",
+      "url": "https://www.kitchenall.com/ice-bin-parts.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Refrigeration Compressors",
+      "url": "https://www.kitchenall.com/refrigeration-compressors.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Draft Parts and Bar Refrigeration Accessories",
+      "url": "https://www.kitchenall.com/beer-tap-towers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Digital Controllers",
+      "url": "https://www.kitchenall.com/digital-controllers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Walk-In Refrigerator Parts",
+      "url": "https://www.kitchenall.com/walk-in-refrigerator-parts.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Plastic Strip Doors & Curtains",
+      "url": "https://www.kitchenall.com/strip-curtain-doors.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Refrigeration Doors",
+      "url": "https://www.kitchenall.com/refrigeration-doors.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Refrigeration Legs and Casters",
+      "url": "https://www.kitchenall.com/refrigeration-casters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Hinges and Hinge Hardware",
+      "url": "https://www.kitchenall.com/hinges-and-hinge-hardware.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Refrigeration Shelves",
+      "url": "https://www.kitchenall.com/refrigeration-shelves.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Refrigeration Gaskets",
+      "url": "https://www.kitchenall.com/refrigeration-gaskets.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Refrigeration Fan Motors",
+      "url": "https://www.kitchenall.com/refrigeration-fan-motor.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Slush Machine Parts",
+      "url": "https://www.kitchenall.com/slush-machine-parts.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Refrigeration Lighting",
+      "url": "https://www.kitchenall.com/refrigeration-lighting-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Bakery Display Cases",
+      "url": "https://www.kitchenall.com/bakery-display-case.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Bakery-DisplayCases_1.jpg"
+    },
+    {
+      "name": "Refrigerated Deli Display Cases",
+      "url": "https://www.kitchenall.com/deli-meat-display-case.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Deli-Display-Cases_-Refrigerated_1.jpg"
+    },
+    {
+      "name": "Open Air Merchandisers",
+      "url": "https://www.kitchenall.com/open-air-merchandisers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Open-Air-Merchandisers_1.jpg"
+    },
+    {
+      "name": "Countertop Display Refrigerators",
+      "url": "https://www.kitchenall.com/refrigerated-countertop-display-cases.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Countertop-Display-Refrigerators_1.jpg"
+    },
+    {
+      "name": "Countertop Bakery Cases Dry Glass",
+      "url": "https://www.kitchenall.com/dry-bakery-display-cases.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Countertop-Bakery-Cases-Dry-Glass_1.jpg"
+    },
+    {
+      "name": "Gelato Display Freezer",
+      "url": "https://www.kitchenall.com/ice-cream-gelato-dipping-cabinet.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Gelato-Display-Freezer_1.jpg"
+    },
+    {
+      "name": "Sneeze Guard Displays",
+      "url": "https://www.kitchenall.com/sneeze-guard-display-cases.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Sneeze-Guard-Displays_1.jpg"
+    },
+    {
+      "name": "Food Display Warmers",
+      "url": "https://www.kitchenall.com/hot-food-display-cases.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Food-Display-Warmers-marchia.jpg"
+    },
+    {
+      "name": "Fish and Sushi Display Cases",
+      "url": "https://www.kitchenall.com/fish-and-sushi-display-cases.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Sushi Display CasesFish & Seafood Display Cases",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Sushi-Fish-Display-Cases-Category_1_1.jpeg"
+    },
+    {
+      "name": "Sushi Display Cases",
+      "url": "https://www.kitchenall.com/sushi-display-cases.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Fish & Seafood Display Cases",
+      "url": "https://www.kitchenall.com/seafood-display-cases.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Display Parts & Accessories",
+      "url": "https://www.kitchenall.com/display-parts-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Display Case Glass DoorsDisplay Case Accessories",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Display-Part-Accessories_1.jpg"
+    },
+    {
+      "name": "Display Case Glass Doors",
+      "url": "https://www.kitchenall.com/display-case-parts.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Display Case Accessories",
+      "url": "https://www.kitchenall.com/display-case-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Beverage",
+      "url": "https://www.kitchenall.com/beverage-equipment.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Coffee EquipmentCommercial Coffee MakersEspresso MachinesCold Brew and Iced Coffee Machines / DispensersTea Brewers & DispensersHot Water DispensersAirpot Coffee BrewersSingle Cup Coffee MakerLiquid C",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Commercial-Coffee-Makers_1.jpg"
+    },
+    {
+      "name": "Coffee Equipment",
+      "url": "https://www.kitchenall.com/coffee-equipment.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Commercial Coffee MakersEspresso MachinesCold Brew and Iced Coffee Machines / DispensersTea Brewers & DispensersHot Water DispensersAirpot Coffee BrewersSingle Cup Coffee MakerLiquid Coffee Dispensers",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Commercial-Coffee-Makers_1.jpg"
+    },
+    {
+      "name": "Commercial Coffee Makers",
+      "url": "https://www.kitchenall.com/coffee-makers-brewers-commercial.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Espresso Machines",
+      "url": "https://www.kitchenall.com/coffee-espresso-machine.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cold Brew and Iced Coffee Machines / Dispensers",
+      "url": "https://www.kitchenall.com/cold-brew-and-iced-coffee-machines-dispensers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Tea Brewers & Dispensers",
+      "url": "https://www.kitchenall.com/tea-dispenser.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Hot Water Dispensers",
+      "url": "https://www.kitchenall.com/hot-water-dispensers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Airpot Coffee Brewers",
+      "url": "https://www.kitchenall.com/airpot-coffee-brewers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Single Cup Coffee Maker",
+      "url": "https://www.kitchenall.com/single-cup-coffee-maker.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Liquid Coffee Dispensers",
+      "url": "https://www.kitchenall.com/liquid-coffee-dispensers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Coffee Grinders",
+      "url": "https://www.kitchenall.com/coffee-grinders.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Coffee Service Equipment",
+      "url": "https://www.kitchenall.com/commercial-coffee-makers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Syrup Warmer Dispensers",
+      "url": "https://www.kitchenall.com/syrup-warmer-dispensers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Coffee Machine Accessories",
+      "url": "https://www.kitchenall.com/coffee-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Frozen Slush Machines",
+      "url": "https://www.kitchenall.com/slush-machines.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Frozen-SlushMachines_1.jpg"
+    },
+    {
+      "name": "Drink Dispensers",
+      "url": "https://www.kitchenall.com/refrigerated-beverage-dispensers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Drink-Dispensers_1.jpg"
+    },
+    {
+      "name": "Hot Chocolate & Cappuccino Dispensers",
+      "url": "https://www.kitchenall.com/hot-chocolate-machine-dispensers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Hot-Chocolate-Dispensers_1.jpg"
+    },
+    {
+      "name": "Beverage Service Supplies",
+      "url": "https://www.kitchenall.com/beverage-service-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Slush Machine Parts & AccessoriesStraw Organizers and DispensersCup Dispensers and Lid OrganizersReusable StrawsDrink Dispenser Parts & Accessories",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Beverage-Service-Supplies_1.jpg"
+    },
+    {
+      "name": "Slush Machine Parts & Accessories",
+      "url": "https://www.kitchenall.com/slush-machine-parts-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Straw Organizers and Dispensers",
+      "url": "https://www.kitchenall.com/straw-organizers-and-dispensers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cup Dispensers and Lid Organizers",
+      "url": "https://www.kitchenall.com/cup-dispensers-and-lid-organizers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Reusable Straws",
+      "url": "https://www.kitchenall.com/reusable-straws.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Drink Dispenser Parts & Accessories",
+      "url": "https://www.kitchenall.com/drink-dispenser-parts-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Food Prep",
+      "url": "https://www.kitchenall.com/food-preparation-equipment.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Commercial Food ScalesMeat Processing MachineryMeat SlicersMeat Grinders and ChoppersMeat & Bone SawsSausage Stuffers & MakersHamburger Patty PressesMeat Processing Parts & AccessoriesCommercial Mixer",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Commercial-Food-Scales_1.jpg"
+    },
+    {
+      "name": "Commercial Food Scales",
+      "url": "https://www.kitchenall.com/commercial-food-scales.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Commercial-Food-Scales_1.jpg"
+    },
+    {
+      "name": "Meat Processing Machinery",
+      "url": "https://www.kitchenall.com/meat-processing-equipment.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Meat SlicersMeat Grinders and ChoppersMeat & Bone SawsSausage Stuffers & MakersHamburger Patty PressesMeat Processing Parts & Accessories",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Meat-Slicers_1.jpg"
+    },
+    {
+      "name": "Meat Slicers",
+      "url": "https://www.kitchenall.com/commercial-meat-slicers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Meat Grinders and Choppers",
+      "url": "https://www.kitchenall.com/meat-grinders.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Meat & Bone Saws",
+      "url": "https://www.kitchenall.com/meat-saws.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Sausage Stuffers & Makers",
+      "url": "https://www.kitchenall.com/sausage-stuffers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Hamburger Patty Presses",
+      "url": "https://www.kitchenall.com/commercial-hamburger-press.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Meat Processing Parts & Accessories",
+      "url": "https://www.kitchenall.com/meat-equipment-parts-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Mixers",
+      "url": "https://www.kitchenall.com/commercial-mixers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Commercial-Mixers_1.jpg"
+    },
+    {
+      "name": "Milkshake Mixers",
+      "url": "https://www.kitchenall.com/commercial-milkshake-machines.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Milkshake-Mixers_1.jpg"
+    },
+    {
+      "name": "Food Processors",
+      "url": "https://www.kitchenall.com/commercial-food-processors.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Food-Processors_1.jpg"
+    },
+    {
+      "name": "Commercial Blenders",
+      "url": "https://www.kitchenall.com/commercial-blenders.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Commercial-Blenders_1.jpg"
+    },
+    {
+      "name": "Immersion Blenders",
+      "url": "https://www.kitchenall.com/commercial-immersion-blenders.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Immersion-Blenders_1.jpg"
+    },
+    {
+      "name": "Commercial Juicers",
+      "url": "https://www.kitchenall.com/commercial-juicers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Commercial-Juicers_1.jpg"
+    },
+    {
+      "name": "Dough Sheeters",
+      "url": "https://www.kitchenall.com/dough-sheeters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Dough-Sheeters_1.jpg"
+    },
+    {
+      "name": "Dough Divider",
+      "url": "https://www.kitchenall.com/dough-divider.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Dough-Divider_1.jpg"
+    },
+    {
+      "name": "Food Prep Tools",
+      "url": "https://www.kitchenall.com/food-prep-tools.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Electric Cheese GratersFruit & Vegetable SlicersCommercial PeelersFood MillsMandoline SlicersFilm and Shrink Wrap MachinesSalad Spinner & ContainerCutting Boards & WorktopsFood DehydratorsFood Vacuum ",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Food-Prep-Tools_1.jpg"
+    },
+    {
+      "name": "Electric Cheese Graters",
+      "url": "https://www.kitchenall.com/electric-cheese-graters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Fruit & Vegetable Slicers",
+      "url": "https://www.kitchenall.com/fruit-and-vegetable-slicers-cutters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Commercial Peelers",
+      "url": "https://www.kitchenall.com/commercial-peelers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Food Mills",
+      "url": "https://www.kitchenall.com/commercial-kitchen-food-mills.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Mandoline Slicers",
+      "url": "https://www.kitchenall.com/commercial-mandoline-food-slicers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Film and Shrink Wrap Machines",
+      "url": "https://www.kitchenall.com/film-and-shrink-wrap-machines.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Salad Spinner & Container",
+      "url": "https://www.kitchenall.com/commercial-salad-spinner.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cutting Boards & Worktops",
+      "url": "https://www.kitchenall.com/cutting-boards-and-worktops.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Food Dehydrators",
+      "url": "https://www.kitchenall.com/food-dehydrators.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Food Vacuum Sealer",
+      "url": "https://www.kitchenall.com/commercial-vacuum-sealers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Other Food Prep",
+      "url": "https://www.kitchenall.com/miscellaneous.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Food Prep Equipment Parts",
+      "url": "https://www.kitchenall.com/food-prep-equipment-parts.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Dough Mixer Parts & AccessoriesMixer Parts & AccessoriesBlender Parts & AccessoriesOther Food Prep Parts",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Food-Prep-Equipment-Parts_1.jpg"
+    },
+    {
+      "name": "Dough Mixer Parts & Accessories",
+      "url": "https://www.kitchenall.com/dough-mixer-parts-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Mixer Parts & Accessories",
+      "url": "https://www.kitchenall.com/commercial-mixer-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Blender Parts & Accessories",
+      "url": "https://www.kitchenall.com/blender-parts-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Other Food Prep Parts",
+      "url": "https://www.kitchenall.com/other-food-prep-parts.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Warming",
+      "url": "https://www.kitchenall.com/food-warming-holding.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Steam TablesGas Steam TablesElectric Steam TablesFood Warmer Proofer CabinetsCountertop Food WarmersDrawer WarmersDrop-In Hot Food WellsHeat Lamps & Strip WarmersHot Food DispensersPopcorn MachinesCot",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Gas-Steam-Tables_1.jpg"
+    },
+    {
+      "name": "Steam Tables",
+      "url": "https://www.kitchenall.com/steam-tables.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Gas Electric",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Gas-Steam-Tables_1.jpg"
+    },
+    {
+      "name": "Gas Steam Tables",
+      "url": "https://www.kitchenall.com/gas-steam-tables.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Electric Steam Tables",
+      "url": "https://www.kitchenall.com/electric-steam-tables.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Food Warmer Proofer Cabinets",
+      "url": "https://www.kitchenall.com/proofing-cabinets.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Food-Warmer-Proofer-Cabinets_1.jpg"
+    },
+    {
+      "name": "Countertop Food Warmers",
+      "url": "https://www.kitchenall.com/countertop-food-warmers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Countertop-Food-Warmers_1.jpg"
+    },
+    {
+      "name": "Drawer Warmers",
+      "url": "https://www.kitchenall.com/drawer-warmers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Drawer-Warmers_1.jpg"
+    },
+    {
+      "name": "Drop-In Hot Food Wells",
+      "url": "https://www.kitchenall.com/drop-in-hot-food-wells.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Drop-In-Hot-Food-Wells_1.jpg"
+    },
+    {
+      "name": "Heat Lamps & Strip Warmers",
+      "url": "https://www.kitchenall.com/heat-lamps.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Heat-Lamps_1.jpg"
+    },
+    {
+      "name": "Hot Food Dispensers",
+      "url": "https://www.kitchenall.com/hot-food-dispensers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Hot-Food-Dispensers_1.jpg"
+    },
+    {
+      "name": "Popcorn Machines",
+      "url": "https://www.kitchenall.com/popcorn-machines.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Popcorn-Machines_1.jpg"
+    },
+    {
+      "name": "Cotton Candy Machines",
+      "url": "https://www.kitchenall.com/cotton-candy-machines.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Cotton-Candy-Machines_1.jpg"
+    },
+    {
+      "name": "Soup Kettles & Warmers",
+      "url": "https://www.kitchenall.com/soup-kettles-and-commercial-soup-warmers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Soup-Kettles-_-Warmers_1.jpg"
+    },
+    {
+      "name": "Dishwashing",
+      "url": "https://www.kitchenall.com/dishwasher-sinks-and-faucets.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Commercial NSF Sinks1 Compartment Sinks2 Compartment Sinks3 Compartment Sinks4 Compartment SinksDrop in SinksMop SinksHand SinksCommercial DishwashersUndercounter DishwashersConveyor & Door Type Dishw",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/3-Compartment-Sinks_1.jpg"
+    },
+    {
+      "name": "Commercial NSF Sinks",
+      "url": "https://www.kitchenall.com/commercial-sinks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "1 Compartment Sinks2 Compartment Sinks3 Compartment Sinks4 Compartment SinksDrop in SinksMop Sinks",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/3-Compartment-Sinks_1.jpg"
+    },
+    {
+      "name": "1 Compartment Sinks",
+      "url": "https://www.kitchenall.com/1-compartment-sinks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "2 Compartment Sinks",
+      "url": "https://www.kitchenall.com/2-compartment-sinks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "3 Compartment Sinks",
+      "url": "https://www.kitchenall.com/3-compartment-sinks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "4 Compartment Sinks",
+      "url": "https://www.kitchenall.com/4-compartment-sinks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Drop in Sinks",
+      "url": "https://www.kitchenall.com/commercial-drop-in-undermount-sinks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Mop Sinks",
+      "url": "https://www.kitchenall.com/commercial-mop-sinks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Hand Sinks",
+      "url": "https://www.kitchenall.com/hand-sinks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Hand-Sinks_1.jpg"
+    },
+    {
+      "name": "Commercial Dishwashers",
+      "url": "https://www.kitchenall.com/commercial-dishwashers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Undercounter DishwashersConveyor & Door Type DishwashersDishwasher Parts & AccessoriesGlass Polishers",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Undercounter-Dishwashers_1.jpg"
+    },
+    {
+      "name": "Undercounter Dishwashers",
+      "url": "https://www.kitchenall.com/commercial-undercounter-dishwashers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Conveyor & Door Type Dishwashers",
+      "url": "https://www.kitchenall.com/high-temp-commercial-dishwasher-door-type-machine.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dishwasher Parts & Accessories",
+      "url": "https://www.kitchenall.com/dishwasher-parts-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Glass Polishers",
+      "url": "https://www.kitchenall.com/glass-polishers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Underbar Equipment & Accessories",
+      "url": "https://www.kitchenall.com/underbar-equipment-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Bar SinksUnderbar Ice BinsUnderbar Cocktail Stations & WorkstationsLiquor DisplaysUnderbar DrainboardsUnderbar Modular Add-On Components",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Underbar-Ice-Bins_1_1.jpg"
+    },
+    {
+      "name": "Bar Sinks",
+      "url": "https://www.kitchenall.com/bar-sinks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Underbar Ice Bins",
+      "url": "https://www.kitchenall.com/underbar-ice-bins.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Underbar Cocktail Stations & Workstations",
+      "url": "https://www.kitchenall.com/underbar-cocktail-stations-workstations.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Liquor Displays",
+      "url": "https://www.kitchenall.com/underbar-liquor-displays.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Underbar Drainboards",
+      "url": "https://www.kitchenall.com/underbar-drainboards.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Underbar Modular Add-On Components",
+      "url": "https://www.kitchenall.com/underbar-modular-add-on-components.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Glass & Dish Racks",
+      "url": "https://www.kitchenall.com/dishwashing-racks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Glass-Dish-Racks_1.jpg"
+    },
+    {
+      "name": "Dishtables",
+      "url": "https://www.kitchenall.com/dish-tables.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Dishtables_1.jpg"
+    },
+    {
+      "name": "Grease Traps",
+      "url": "https://www.kitchenall.com/grease-traps.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Grease-Traps_1.jpg"
+    },
+    {
+      "name": "Restaurant Sink Faucets",
+      "url": "https://www.kitchenall.com/faucets.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Restaurant-Sink-Faucets_1.jpg"
+    },
+    {
+      "name": "Sink Tables",
+      "url": "https://www.kitchenall.com/sink-tables.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Sink-Tables_1.jpg"
+    },
+    {
+      "name": "Sink and Faucet Parts",
+      "url": "https://www.kitchenall.com/sink-and-faucet-parts.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Sink-and-Faucet-Parts_1.jpg"
+    },
+    {
+      "name": "Storage",
+      "url": "https://www.kitchenall.com/worktables-equipment-stands.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "WorktablesStainless Steel WorktablesOpen Base WorktablesWood Top WorktablesEquipment Filler TablesWork Table Parts & AccessoriesEquipment StandsEnclosed CabinetsRestaurant ShelvingWire ShelvingWall Mo",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Stainless-Steel-Worktables_1.jpg"
+    },
+    {
+      "name": "Worktables",
+      "url": "https://www.kitchenall.com/commercial-kitchen-work-table.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Stainless Steel Open Base Wood Top Equipment Filler TablesWork Table Parts & Accessories",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Stainless-Steel-Worktables_1.jpg"
+    },
+    {
+      "name": "Stainless Steel Worktables",
+      "url": "https://www.kitchenall.com/stainless-steel-work-tables.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Open Base Worktables",
+      "url": "https://www.kitchenall.com/stainless-steel-open-base-work-tables.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Wood Top Worktables",
+      "url": "https://www.kitchenall.com/wood-top-work-tables.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Equipment Filler Tables",
+      "url": "https://www.kitchenall.com/equipment-filler-tables.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Work Table Parts & Accessories",
+      "url": "https://www.kitchenall.com/work-table-parts-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Equipment Stands",
+      "url": "https://www.kitchenall.com/equipment-stands.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Equipment-Stands_1.jpg"
+    },
+    {
+      "name": "Enclosed Cabinets",
+      "url": "https://www.kitchenall.com/stainless-steel-cabinets.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Enclosed-Cabinets_1.jpg"
+    },
+    {
+      "name": "Restaurant Shelving",
+      "url": "https://www.kitchenall.com/commercial-stainless-steel-shelving.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Wire ShelvingWall Mounted ShelvesDouble Over-ShelvesWorktable UndershelvesWall Cabinets",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Wire-ShelvingKits_1.jpg"
+    },
+    {
+      "name": "Wire Shelving",
+      "url": "https://www.kitchenall.com/wire-shelving.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Wall Mounted Shelves",
+      "url": "https://www.kitchenall.com/wall-mount-shelving.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Double Over-Shelves",
+      "url": "https://www.kitchenall.com/over-shelf.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Worktable Undershelves",
+      "url": "https://www.kitchenall.com/adjustable-work-table-undershelves.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Wall Cabinets",
+      "url": "https://www.kitchenall.com/wall-cabinets.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Stainless Countertops",
+      "url": "https://www.kitchenall.com/stainless-steel-countertops.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Stainless-Countertops_1.jpg"
+    },
+    {
+      "name": "Backsplashes",
+      "url": "https://www.kitchenall.com/backsplash.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Backsplashes_1.jpg"
+    },
+    {
+      "name": "Food Storage Supplies",
+      "url": "https://www.kitchenall.com/food-storage-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Food Pans and LidsIngredient Storage BinsInsulated Food Carriers and Beverage Dispensers",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Stainless-FoodPans_1.jpg"
+    },
+    {
+      "name": "Food Pans and Lids",
+      "url": "https://www.kitchenall.com/food-pans-and-lids.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Ingredient Storage Bins",
+      "url": "https://www.kitchenall.com/ingredient-storage-bins.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Insulated Food Carriers and Beverage Dispensers",
+      "url": "https://www.kitchenall.com/insulated-food-carriers-and-beverage-dispensers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dinnerware Storage and Transport",
+      "url": "https://www.kitchenall.com/dinnerware-storage-and-transport.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Dinnerware-Storage-and-Transport_1.jpg"
+    },
+    {
+      "name": "Storage Racks",
+      "url": "https://www.kitchenall.com/storage-racks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Bakery & Sheet Pan RacksCan RacksDunnage RacksPot Racks",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Bakery-_-Sheet-Pan-Racks_1.jpg"
+    },
+    {
+      "name": "Bakery & Sheet Pan Racks",
+      "url": "https://www.kitchenall.com/bakers-pan-racks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Can Racks",
+      "url": "https://www.kitchenall.com/can-racks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dunnage Racks",
+      "url": "https://www.kitchenall.com/dunnage-racks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Pot Racks",
+      "url": "https://www.kitchenall.com/pot-racks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Kitchen Traffic Doors",
+      "url": "https://www.kitchenall.com/doors.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Kitchen-Traffic-Doors_1.jpg"
+    },
+    {
+      "name": "Restaurant Furniture",
+      "url": "https://www.kitchenall.com/restaurant-furniture.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Restaurant SeatingRestaurant TablesOutdoor Youth Seating",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Restaurant-Chairs_1.jpg"
+    },
+    {
+      "name": "Restaurant Seating",
+      "url": "https://www.kitchenall.com/restaurant-seating.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Restaurant Tables",
+      "url": "https://www.kitchenall.com/restaurant-tables.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Outdoor Restaurant Furniture",
+      "url": "https://www.kitchenall.com/outdoor-restaurant-furniture.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Youth Seating",
+      "url": "https://www.kitchenall.com/youth-seating.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Janitorial Supplies",
+      "url": "https://www.kitchenall.com/janitorial-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Cleaning Tools & SuppliesRestroom SuppliesTrash Cans and Recycling BinsFloor Care SuppliesFaucet Sink & Drain AccessoriesHand Soap and SanitizerIndustrial Safety Products",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Cleaning-Tools-_-Supplies_1.jpg"
+    },
+    {
+      "name": "Cleaning Tools & Supplies",
+      "url": "https://www.kitchenall.com/cleaning-tools-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Restroom Supplies",
+      "url": "https://www.kitchenall.com/restroom-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Trash Cans and Recycling Bins",
+      "url": "https://www.kitchenall.com/trash-cans-and-recycling-bins.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Floor Care Supplies",
+      "url": "https://www.kitchenall.com/floor-care-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Faucet Sink & Drain Accessories",
+      "url": "https://www.kitchenall.com/faucet-sink-drain-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Hand Soap and Sanitizer",
+      "url": "https://www.kitchenall.com/hand-soap-and-sanitizer.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Industrial Safety Products",
+      "url": "https://www.kitchenall.com/industrial-safety-products.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Electric Forklift Stackers",
+      "url": "https://www.kitchenall.com/forklifts.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Electric-Forklift-Stackers_1.jpg"
+    },
+    {
+      "name": "Manual Pallet Jacks",
+      "url": "https://www.kitchenall.com/pallet-jacks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Manual-Pallet-Jacks_1.jpg"
+    },
+    {
+      "name": "Pallet Racks",
+      "url": "https://www.kitchenall.com/pallet-racks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/warehouse-teardrop-pallet-rack_1.jpg"
+    },
+    {
+      "name": "Smallwares",
+      "url": "https://www.kitchenall.com/smallwares.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "TabletopFlatwareDinnerwareServingware and Dinnerware AccessoriesBeveragewareTabletop Beverage ServiceCondiment Holders and DispensersTabletop AccessoriesFood StorageLug & Tote BoxesFood Storage Boxes ",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Tabletop_1.jpg"
+    },
+    {
+      "name": "Tabletop",
+      "url": "https://www.kitchenall.com/tabletop.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "FlatwareDinnerwareServingware and Dinnerware AccessoriesBeverageware Beverage ServiceCondiment Holders and Dispensers Accessories",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Tabletop_1.jpg"
+    },
+    {
+      "name": "Flatware",
+      "url": "https://www.kitchenall.com/flatware.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dinnerware",
+      "url": "https://www.kitchenall.com/dinnerware.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Servingware and Dinnerware Accessories",
+      "url": "https://www.kitchenall.com/servingware-and-dinnerware-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Beverageware",
+      "url": "https://www.kitchenall.com/beverageware.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Tabletop Beverage Service",
+      "url": "https://www.kitchenall.com/tabletop-beverage-service.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Condiment Holders and Dispensers",
+      "url": "https://www.kitchenall.com/condiment-holders-and-dispensers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Tabletop Accessories",
+      "url": "https://www.kitchenall.com/tabletop-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Food Storage",
+      "url": "https://www.kitchenall.com/food-storage.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Lug & Tote Boxes Boxes and CoversIce Cream Cone Dispensers and Holders",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Food-Storage_1.jpg"
+    },
+    {
+      "name": "Lug & Tote Boxes",
+      "url": "https://www.kitchenall.com/lug-tote-boxes.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Food Storage Boxes and Covers",
+      "url": "https://www.kitchenall.com/food-storage-boxes-and-covers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Ice Cream Cone Dispensers and Holders",
+      "url": "https://www.kitchenall.com/ice-cream-cone-dispensers-and-holders.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookware",
+      "url": "https://www.kitchenall.com/cookware.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Frying PansStock Pots & AccessoriesSauce PansSaute PansBain Marie Pots and Vegetable InsetsWok PansPaella PansBrazier PansCast Iron Double Boilers Accessories",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Smallwares_1.jpg"
+    },
+    {
+      "name": "Frying Pans",
+      "url": "https://www.kitchenall.com/frying-pans.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Stock Pots & Accessories",
+      "url": "https://www.kitchenall.com/stock-pots-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Sauce Pans",
+      "url": "https://www.kitchenall.com/sauce-pans.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Saute Pans",
+      "url": "https://www.kitchenall.com/saute-pans.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Bain Marie Pots and Vegetable Insets",
+      "url": "https://www.kitchenall.com/bain-marie-pots-and-vegetable-insets.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Wok Pans",
+      "url": "https://www.kitchenall.com/wok-pans.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Paella Pans",
+      "url": "https://www.kitchenall.com/paella-pans.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Brazier Pans",
+      "url": "https://www.kitchenall.com/braziers-braising-pots.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cast Iron Cookware",
+      "url": "https://www.kitchenall.com/cast-iron-cookware.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Double Boilers",
+      "url": "https://www.kitchenall.com/double-boilers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookware Accessories",
+      "url": "https://www.kitchenall.com/cookware-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Baking Supplies",
+      "url": "https://www.kitchenall.com/baking-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Bun & Sheet PansCake PansMeasuring Cups & SpoonsBasting & Pastry BrushesRolling Pins and AccessoriesCake Decorating SuppliesBaking Mats and Pan LinersCake & Pie Stands and CoversCake & Pie Server Kniv",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Baking-Supplies_1.jpg"
+    },
+    {
+      "name": "Bun & Sheet Pans",
+      "url": "https://www.kitchenall.com/bun-sheet-pans.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cake Pans",
+      "url": "https://www.kitchenall.com/cake-pans.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Measuring Cups & Spoons",
+      "url": "https://www.kitchenall.com/measuring-cups-spoons.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Basting & Pastry Brushes",
+      "url": "https://www.kitchenall.com/basting-pastry-brushes.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Rolling Pins and Accessories",
+      "url": "https://www.kitchenall.com/rolling-pins-and-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cake Decorating Supplies",
+      "url": "https://www.kitchenall.com/cake-decorating-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Baking Mats and Pan Liners",
+      "url": "https://www.kitchenall.com/baking-mats-and-pan-liners.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cake & Pie Stands and Covers",
+      "url": "https://www.kitchenall.com/cake-pie-cupcake-stands-and-covers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cake & Pie Server Knives",
+      "url": "https://www.kitchenall.com/pie-server-and-knives.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dough Cutters",
+      "url": "https://www.kitchenall.com/dough-cutters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Bread and Loaf Pans",
+      "url": "https://www.kitchenall.com/bread-and-loaf-pans.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Pastry Molds & Rings",
+      "url": "https://www.kitchenall.com/pastry-molds-rings.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Flour and Sugar Sifters",
+      "url": "https://www.kitchenall.com/flour-and-sugar-sifters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Kitchen Supplies",
+      "url": "https://www.kitchenall.com/kitchen-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "ColandersCooling RacksMexican Cooking & Serving SuppliesEquipment Cleaning Tools & SuppliesOther",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/kitchenSupplies_1.jpeg"
+    },
+    {
+      "name": "Colanders",
+      "url": "https://www.kitchenall.com/colanders.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cooling Racks",
+      "url": "https://www.kitchenall.com/cooling-racks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Mexican Cooking & Serving Supplies",
+      "url": "https://www.kitchenall.com/mexican-cooking-serving-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Equipment Cleaning Tools & Supplies",
+      "url": "https://www.kitchenall.com/equipment-cleaning-tools-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Other Kitchen Supplies",
+      "url": "https://www.kitchenall.com/other-kitchen-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Kitchen Hand Tools",
+      "url": "https://www.kitchenall.com/commercial-kitchen-utensils.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Mixing & Stirring PaddlesWhisks & Cooking WhipsKitchen LadlesSpatulas & Food TurnersSkimmers & Food StrainersCan OpenersKitchen ScoopsMetal SkewersEgg and Mushroom SlicersMeat Weights and PressesTherm",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Kitchen-Hand-Tools_1.jpg"
+    },
+    {
+      "name": "Mixing & Stirring Paddles",
+      "url": "https://www.kitchenall.com/large-mixing-paddles.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Whisks & Cooking Whips",
+      "url": "https://www.kitchenall.com/whisks-cooking-whips.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Kitchen Ladles",
+      "url": "https://www.kitchenall.com/commercial-kitchen-ladles.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Spatulas & Food Turners",
+      "url": "https://www.kitchenall.com/commercial-spatulas-food-turners.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Skimmers & Food Strainers",
+      "url": "https://www.kitchenall.com/commercial-skimmers-and-food-strainers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Can Openers",
+      "url": "https://www.kitchenall.com/commercial-can-openers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Kitchen Scoops",
+      "url": "https://www.kitchenall.com/kitchen-scoops.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Metal Skewers",
+      "url": "https://www.kitchenall.com/metal-skewers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Egg and Mushroom Slicers",
+      "url": "https://www.kitchenall.com/egg-and-mushroom-slicers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Meat Weights and Presses",
+      "url": "https://www.kitchenall.com/meat-weights-and-presses.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Thermometers",
+      "url": "https://www.kitchenall.com/thermometers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Box & Bag Cutters",
+      "url": "https://www.kitchenall.com/box-bag-cutters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Basters and Injectors",
+      "url": "https://www.kitchenall.com/basters-and-injectors.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Food Prep Brushes",
+      "url": "https://www.kitchenall.com/food-prep-brushes.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Other Kitchen Accessories",
+      "url": "https://www.kitchenall.com/other-kitchen-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Tongs",
+      "url": "https://www.kitchenall.com/tongs.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Graters",
+      "url": "https://www.kitchenall.com/graters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Kitchen Shears",
+      "url": "https://www.kitchenall.com/kitchen-shears.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Kitchen Cutlery",
+      "url": "https://www.kitchenall.com/kitchen-knives-and-cutlery.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "Pizza CuttersBread & Sandwich KnivesBakery Bread SlicersSandwich SpreadersProduce Knives & PeelersParing KnivesGarnishing Tools & KitsClam and Oyster KnivesCarving & Pot ForksKnife Racks & HoldersKnif",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Kitchen-Cutlery_1.jpg"
+    },
+    {
+      "name": "Pizza Cutters",
+      "url": "https://www.kitchenall.com/commercial-pizza-cutters.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Bread & Sandwich Knives",
+      "url": "https://www.kitchenall.com/bread-and-sandwich-knives.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Bakery Bread Slicers",
+      "url": "https://www.kitchenall.com/bread-bagel-baguette-slicers.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Sandwich Spreaders",
+      "url": "https://www.kitchenall.com/sandwich-spreaders.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Produce Knives & Peelers",
+      "url": "https://www.kitchenall.com/produce-knives.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Paring Knives",
+      "url": "https://www.kitchenall.com/paring-knives.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Garnishing Tools & Kits",
+      "url": "https://www.kitchenall.com/garnishing-tools-and-kits.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Clam and Oyster Knives",
+      "url": "https://www.kitchenall.com/clam-and-oyster-knives.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Carving & Pot Forks",
+      "url": "https://www.kitchenall.com/carving-forks-and-pot-forks.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Knife Racks & Holders",
+      "url": "https://www.kitchenall.com/knife-racks-holders.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Knife Sharperners",
+      "url": "https://www.kitchenall.com/knife-sharperners.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Salad Bar Equipment and Accessories",
+      "url": "https://www.kitchenall.com/salad-bar-equipment-and-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Salad-Bar-Equipment-and-Accessories_1_1.jpg"
+    },
+    {
+      "name": "Chafing Dishes & Accessories",
+      "url": "https://www.kitchenall.com/chafing-dishes-accessories.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Chafing-Dishes-Accessories_1.jpg"
+    },
+    {
+      "name": "Bartending Supplies",
+      "url": "https://www.kitchenall.com/bartending-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/BartendingSupplies_1.jpg"
+    },
+    {
+      "name": "Hotel and Restaurant Linens",
+      "url": "https://www.kitchenall.com/hotel-and-restaurant-linens.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Hotel-and-Restaurant-Linens_1.jpg"
+    },
+    {
+      "name": "Host & Server Supplies",
+      "url": "https://www.kitchenall.com/host-server-supplies.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": "https://www.kitchenall.com/media/catalog/category/Host-Server-Supplies_1.jpg"
+    },
+    {
+      "name": "Overstock",
+      "url": "https://www.kitchenall.com/overstock.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Financing",
+      "url": "https://www.kitchenall.com/financing.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Shipping information",
+      "url": "https://www.kitchenall.com/shipping.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Return Policies",
+      "url": "https://www.kitchenall.com/returns.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Services",
+      "url": "https://www.kitchenall.com/services.html",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Product Reviews",
+      "url": "https://www.shopperapproved.com/reviews/kitchenall.com",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Yelp",
+      "url": "https://www.yelp.com/biz/kitchenall-restaurant-equipment-and-supply-brooklyn-2",
+      "is_subcategory": false,
+      "parent_name": "",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Kitchenall Restaurant Equipment",
+      "url": "https://www.kitchenall.com/",
+      "is_subcategory": true,
+      "parent_name": "Cooking",
+      "description": "Go to Home Page",
+      "image_url": ""
+    },
+    {
+      "name": "Take 5% Off",
+      "url": "https://www.kitchenall.com/check_and_bank_transfer.html",
+      "is_subcategory": true,
+      "parent_name": "Cooking",
+      "description": "Easy FinancingRequest a Quote4000+ Reviews",
+      "image_url": ""
+    },
+    {
+      "name": "Request a Quote",
+      "url": "https://www.kitchenall.com/request-a-quote.html",
+      "is_subcategory": true,
+      "parent_name": "Cooking",
+      "description": "Take 5% OffEasy Financing4000+ Reviews",
+      "image_url": ""
+    },
+    {
+      "name": "Prepline Commercial Deep Fryer Cleaning Kit with Clean Out Rod, Crumb Scoop, and L-Tip Brush",
+      "url": "https://www.kitchenall.com/prepline-commercial-deep-fryer-cleaning-kit-with-clean-out-rod-crumb-scoop-and-l-tip-brush.html",
+      "is_subcategory": true,
+      "parent_name": "Cooking",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline CF75-LP Commercial 75 lb Liquid Propane Deep Fryer - 150,000 BTU",
+      "url": "https://www.kitchenall.com/cookline-cf-75-lp-21-inch-liquid-propane-tube-standing-75-pounds-commercial-deep-fryer-170000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Cooking",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline DOF-40 Commercial 40 lb. Gas Flat Bottom Countertop Donut Fryer - 81,000 BTU",
+      "url": "https://www.kitchenall.com/cookline-40-lb-gas-flat-bottom-countertop-funnel-cake-fryer-81-000-btu-27349.html",
+      "is_subcategory": true,
+      "parent_name": "Cooking",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline DOF-125 Commercial 125 lb. Gas Flat Bottom Donut Fryer - 90,000 BTU",
+      "url": "https://www.kitchenall.com/cookline-125-lb-flat-bottom-funnel-cake-fryer-90-000-btu-27350.html",
+      "is_subcategory": true,
+      "parent_name": "Cooking",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Southwood RG7-NG 35 Chicken Commercial Rotisserie Oven Machine - Natural Gas",
+      "url": "https://www.kitchenall.com/southwood-rg7-35-chicken-commercial-rotisserie-oven-machine-gas.html",
+      "is_subcategory": true,
+      "parent_name": "Cooking",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline CSM-24-WM 24\" Infra-Red Salamander Gas Broiler with Wall Mounting Kit",
+      "url": "https://www.kitchenall.com/cookline-24-infra-red-salamander-gas-broiler-with-wall-mounting-kit.html",
+      "is_subcategory": true,
+      "parent_name": "Cooking",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Standard Range SR-R36-36MG-NG 36\" Natural Gas Commercial Range with 36\" Griddle Top, 1 Ove...",
+      "url": "https://www.kitchenall.com/standard-range-sr-r36-36mg-36-commercial-gas-range-with-36-griddle-top-1-oven-123-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Ranges & Stoves",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline CR36-6-NG 36\" 6 Burner Commercial Gas Range with Oven - Natural Gas",
+      "url": "https://www.kitchenall.com/cr36-6-36-6-burner-gas-range-with-oven-211-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Ranges & Stoves",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Standard Range SR-R36-LP 36\" Liquid Propane Commercial Range with 6 Burners, 1 Oven - 213,000 B...",
+      "url": "https://www.kitchenall.com/standard-range-sr-r36-lp-36-liquid-propane-commercial-gas-range-with-6-burners-1-oven-213-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Ranges & Stoves",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Standard Range SR-R36-36MG-LP 36\" liquid Propane Commercial Range with 36\" Griddle Top, 1 ...",
+      "url": "https://www.kitchenall.com/standard-range-sr-r36-36mg-liquid-propane-commercial-gas-range-with-36-griddle-top-1-oven-123-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Ranges & Stoves",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline IC-3500 Portable Countertop Induction Range/Cooker - 208/240V, 3500W",
+      "url": "https://www.kitchenall.com/cookline-countertop-induction-range-cooker-240v-3500w.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Ranges & Stoves",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "SWR-5-NG Commercial 5 Ring Chinese Wok Range - Natural Gas",
+      "url": "https://www.kitchenall.com/swr-5-five-ring-chinese-wok-range.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Ranges & Stoves",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?shopbybrand=2084",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Standard Range",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?shopbybrand=2303",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Galaxy Group",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?shopbybrand=3108",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?shopbybrand=2019",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "24-35\"",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_length_range_filter=1713",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "36-47\"",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_length_range_filter=1714",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "48-59\"",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_length_range_filter=1715",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "60-71\"",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_length_range_filter=1716",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "72\" Plus",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_length_range_filter=1717",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "208v",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_voltage_type_filter=2558",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "240v",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_voltage_type_filter=2559",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "2 Burners",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_burner_num_filter=1725",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "4 Burners",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_burner_num_filter=1727",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "6 Burners",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_burner_num_filter=1729",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "8 Burners",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_burner_num_filter=1731",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "10 Burners",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_burner_num_filter=1733",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "12 Burners",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_burner_num_filter=1734",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Standard Oven",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_oven_type_filter=2533",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Convection Oven",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_oven_type_filter=2534",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cabinet Base",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_oven_type_filter=2563",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "None",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_oven_number_filter=2560",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Burners Only",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_cook_type_filter=1841",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Griddle Only",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_cook_type_filter=1838",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Burners & Griddle",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_cook_type_filter=1840",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Burners & Hot Top",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?univ_cook_type_filter=2409",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Standard Range SR-ER24-208 24\" Electric Range with 4 Burners and Standard Oven - 208V, 3 Phase",
+      "url": "https://www.kitchenall.com/standard-range-24-electric-range-with-4-burners-and-standard-oven-208v-3.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline ER24-240 24\" Electric Range with 4 Burners, 240V",
+      "url": "https://www.kitchenall.com/cookline-er24-240-24-electric-range-with-4-burners-240v-27312.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline ER24-208 24\" Electric Range with 4 Burners, 208V",
+      "url": "https://www.kitchenall.com/cookline-24-electric-range-with-4-burners-208v-3-phase.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Standard Range SR-ER36-208 36\" Electric Range with 6 Burners and Standard Oven - 208V, 3 Phase",
+      "url": "https://www.kitchenall.com/standard-range-sr-er36-208-36-electric-range-with-6-burners-and-standard-oven-208v-3-phase.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline ER36-240 36\" Electric Range with 6 Burners, 240V",
+      "url": "https://www.kitchenall.com/cookline-er36-240-36-electric-range-with-6-burners-240v-27313.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline ER36-208 36\" Electric Range with 6 Burners, 208V",
+      "url": "https://www.kitchenall.com/cookline-36-electric-range-with-6-burners-208v-3-phase.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Galaxy Group Pegasus R-24E 24\" Electric Range With 6 Stage Heat Controls - 208V",
+      "url": "https://www.kitchenall.com/galaxy-group-pegasus-r-24e-24-inches-electric-range-with-6-stage-heat-controls-208v.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Galaxy Group Pegasus R-36E 36\" Electric Range With 6 Stage Heat Controls - 208V",
+      "url": "https://www.kitchenall.com/galaxy-group-pegasus-r-36e-35-inches-electric-range-with-6-stage-heat-controls-208v.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IR-4-E 24\" 4 Round Element Electric Restaurant Range with Space Saver Oven - 240V",
+      "url": "https://www.kitchenall.com/imperial-ir4e-electric-commercial-range-240v.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IR-4-E 24\" 4 Round Element Electric Restaurant Range with Space Saver Oven - 208V",
+      "url": "https://www.kitchenall.com/imperial-ir4e-electric-commercial-range.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IR-6-E 36\" 6 Round Element Electric Restaurant Range w/ Standard Oven - 240V",
+      "url": "https://www.kitchenall.com/imperial-ir-6-e-36-inches-electric-6-round-elements-solid-top-with-standard-oven-1.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IR-6-E 36\" 6 Round Element Electric Restaurant Range w/ Standard Oven - 208V",
+      "url": "https://www.kitchenall.com/imperial-ir-6-e-36-inches-electric-6-round-elements-solid-top-with-standard-oven.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IR-4-E-XB 24\" 4 Round Element Electric Restaurant Range with Space Saver Oven - 240V",
+      "url": "https://www.kitchenall.com/imperial-ir4e-xb-electric-commercial-range-240v.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IR-4-E-XB 24\" 4 Round Element Electric Restaurant Range with Space Saver Oven - 208V",
+      "url": "https://www.kitchenall.com/imperial-ir4e-xb-electric-commercial-range.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IR-6-E-XB 36\" 6 Round Element Electric Restaurant Range w/ Open Cabinet Base - 240V",
+      "url": "https://www.kitchenall.com/imperial-ir-6-e-xb-36-electric-six-round-elements-solid-top-range-with-open-cabinet-base-1.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IR-6-E-XB 36\" 6 Round Element Electric Restaurant Range w/ Open Cabinet Base - 208V",
+      "url": "https://www.kitchenall.com/imperial-ir-6-e-xb-36-electric-six-round-elements-solid-top-range-with-open-cabinet-base.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IR‐G36T‐E-XB 36\" Griddle Electric Range w/ Open Cabinet Base & Thermostatic Co...",
+      "url": "https://www.kitchenall.com/imperial-ir-g36t-e-xb-electric-range-w-griddle-208v.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IR‐G36T‐E-XB 36\" Griddle Electric Range w/ Open Cabinet Base & Thermostatic Co...",
+      "url": "https://www.kitchenall.com/imperial-ir-g36t-e-xb-electric-range-w-griddle-240v.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IHR-6-E-XB 36\" Electric Six Round Elements Heavy Duty Range with Open Cabinet Base - 2...",
+      "url": "https://www.kitchenall.com/imperial-ihr-6-e-xb-36-electric-six-round-elements-range-with-open-cabinet-base-208v.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IHR-6-E-XB 36\" Electric Six Round Elements Heavy Duty Range with Open Cabinet Base - 2...",
+      "url": "https://www.kitchenall.com/imperial-ihr-6-e-xb-36-electric-six-round-elements-range-with-open-cabinet-base.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IHR-2HT-2-E-XB 36\" Electric 2 Round Elements & Two 12\" Hot Tops Heavy Duty Ra...",
+      "url": "https://www.kitchenall.com/imperial-ihr-2ht-2-e-xb-36-electric-two-round-elements-and-two-12-hot-tops-range-with-open-cabinet-base-240v.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IHR-2HT-2-E-XB 36\" Electric 2 Round Elements & Two 12\" Hot Tops Heavy Duty Ra...",
+      "url": "https://www.kitchenall.com/imperial-ihr-2ht-2-e-xb-36-electric-two-round-elements-and-two-12-hot-tops-range-with-open-cabinet-base.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IR-8-E-XB Pro Series 48\" Electric 8 Round Elements Restaurant Range with Standard Oven...",
+      "url": "https://www.kitchenall.com/imperial-ir-8-e-xb-48-inches-electric-8-round-elements-standard-oven-open-cabinet.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial IR-8-E-XB Pro Series 48\" Electric 8 Round Elements Restaurant Range with Standard Oven...",
+      "url": "https://www.kitchenall.com/imperial-ir-8-e-xb-48-inches-electric-8-round-elements-standard-oven-open-cabinet-240v.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page2",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?p=2",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page3",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?p=3",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page4",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?p=4",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page5",
+      "url": "https://www.kitchenall.com/commercial-ranges-electric.html?p=5",
+      "is_subcategory": true,
+      "parent_name": "Commercial Electric Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2084",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=1983",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Asber",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2373",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2118",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Blue Air",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2348",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cecilware Pro",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=1985",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dukers",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2297",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Globe",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=1989",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Ikon",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2125",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2019",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "LJ Mfg",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2010",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Migali",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2059",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Star",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=1997",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Therma-Tek",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2446",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Toastmaster",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=1996",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Town Food",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2088",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2210",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Vollrath",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2069",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Winco",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?shopbybrand=2025",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Natural Gas",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_power_type_filter=2527",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Liquid Propane Gas",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_power_type_filter=2528",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Electric",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_power_type_filter=1327",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "12-23\"",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_length_range_filter=1712",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "24-35\"",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_length_range_filter=1713",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "36-47\"",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_length_range_filter=1714",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "48-59\"",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_length_range_filter=1715",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "60-71\"",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_length_range_filter=1716",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "72\" Plus",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_length_range_filter=1717",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Manual",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_control_type_filter=1537",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Thermostatic",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_control_type_filter=1541",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "1 Burner",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_burner_num_filter=1724",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "2 Burners",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_burner_num_filter=1725",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "3 Burners",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_burner_num_filter=2149",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "4 Burners",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_burner_num_filter=1727",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "6 Burners",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_burner_num_filter=1729",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "8 Burners",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_burner_num_filter=1731",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "10 Burners",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_burner_num_filter=1733",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "12 Burners",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_burner_num_filter=1734",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "14 Burners",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_burner_num_filter=2243",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "25K-70K",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_btu_num_filter=1484",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "75K-90K",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_btu_num_filter=1485",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "100K-120K",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_btu_num_filter=1486",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "125K-135K",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_btu_num_filter=1487",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "140K +",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_btu_num_filter=1488",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Under 20\"",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_depth_range_filter=1567",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "20-25\"",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_depth_range_filter=1568",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "26-29\"",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_depth_range_filter=1569",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "30\" Plus",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?univ_depth_range_filter=1570",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline CHP-12-2 12\" Commercial Gas Hot Plate w. Two Burners - 50,000 BTU",
+      "url": "https://www.kitchenall.com/cookline-chp-12-2-12-commercial-gas-hot-plate-w-two-burners-50-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline CHP-24-4 24\" Commercial Gas Hot Plate w. Four Burners - 100,000 BTU",
+      "url": "https://www.kitchenall.com/cookline-chp-24-4-24-commercial-gas-hot-plate-w-four-burners-100-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline GS2 Countertop 2 Burner Electric Hot Plate - 5200W",
+      "url": "https://www.kitchenall.com/cookline-gs2-countertop-2-burner-electric-hot-plate-5200w.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline CHP-36-6 36\" Commercial Gas Hot Plate w. Six Burners - 150,000 BTU",
+      "url": "https://www.kitchenall.com/cookline-chp-36-6-36-commercial-gas-hot-plate-w-six-burners-150-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Blue Lava BLHP12 12\" Two Burner Countertop Heavy-Duty Gas Hot Plate - 56,000 BTU",
+      "url": "https://www.kitchenall.com/blue-lava-blhp12-12-two-burner-countertop-heavy-duty-gas-hot-plate-56000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Migali C-HP-2B-12 12\" Gas Countertop 2 Burner Hot Plate - 50,000 BTU",
+      "url": "https://www.kitchenall.com/migali-c-hp-2-12-12-gas-countertop-2-burner-hot-plate-50-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Blue Lava BLHP24 24\" Four Burner  Countertop Heavy-Duty Gas Hot Plate - 112,000 BTU",
+      "url": "https://www.kitchenall.com/blue-lava-blhp24-24-four-burner-countertop-heavy-duty-gas-hot-plate-112000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Blue Lava BLHP36 36\" Six Burner Countertop Heavy-Duty Gas Hot Plate - 168,000 BTU",
+      "url": "https://www.kitchenall.com/blue-lava-blhp36-36-six-burner-countertop-heavy-duty-gas-hot-plate-168000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Migali C-HP-4B-24 24\" Gas Countertop 4 Burner Hot Plate - 100,000 BTU",
+      "url": "https://www.kitchenall.com/migali-c-hp-4-24-24-gas-countertop-4-burner-hot-plate-100-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Migali C-HP-6B-36 36\" Gas Countertop 6 Burner Hot Plate - 140,000 BTU",
+      "url": "https://www.kitchenall.com/migali-c-hp-6-36-36-gas-countertop-6-burner-hot-plate-140-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dukers DCHPA12 12\" Gas Countertop Hot Plate with 2 Burner - 56,000 BTU",
+      "url": "https://www.kitchenall.com/dukers-dchpa12-hot-plate-with-2-burners.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa CookRite ACHP-2-LP 12\" Liquid Propane Gas 2 Burner Manual Control Hot Plate - 64,000 BTU",
+      "url": "https://www.kitchenall.com/atosa-achp-2-12-lp-liquid-propnae-gas-2-burner-manual-control-hotplate-64-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa CookRite ACHP-2-NG 12\" Natural Gas 2 Burner Manual Control Hot Plate - 64,000 BTU",
+      "url": "https://www.kitchenall.com/atosa-achp-2-12-gas-2-burner-manual-control-hotplate-64-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance TAHP-12-2-NG 12\" Natural Gas 2 Burner Manual Control Countertop Hot Plate - ...",
+      "url": "https://www.kitchenall.com/turbo-air-radiance-tahp-12-2-ng-12-natural-gas-2-burner-manual-control-countertop-hot-plate-64-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance TAHP-12-2-LP 12\" Liquid Propane Gas 2 Burner Manual Control Countertop Hot P...",
+      "url": "https://www.kitchenall.com/turbo-air-radiance-tahp-12-2-lp-12-liquid-propane-gas-2-burner-manual-control-countertop-hot-plate-64-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dukers DCHPA24 24\" Gas Countertop Hot Plate with 4 Burner - 112,000 BTU",
+      "url": "https://www.kitchenall.com/dukers-dchpa24-hot-plate-with-4-burners.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa CookRite ACHP-4 24-LP\" Liquid Propane Gas 4 Burner Manual Control Hot Plate - 128,000 BTU",
+      "url": "https://www.kitchenall.com/atosa-cookrite-achp-4-24-lp-liquid-propane-gas-4-burner-manual-control-hotplate-128-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa CookRite ACHP-4 24-NG\" Natural Gas 4 Burner Manual Control Hot Plate - 128,000 BTU",
+      "url": "https://www.kitchenall.com/atosa-cookrite-achp-4-24-gas-4-burner-manual-control-hotplate-128-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dukers DCHPA36 36\" Gas Countertop Hot Plate with 6 Burner - 168,000 BTU",
+      "url": "https://www.kitchenall.com/dukers-dchpa36-hot-plate-with-6-burners.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance TAHP-24-4-NG 24\" Natural Gas 4 Burner Manual Control Countertop Hot Plate - ...",
+      "url": "https://www.kitchenall.com/turbo-air-radiance-tahp-24-4-ng-24-natural-gas-4-burner-manual-control-countertop-hot-plate-128-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance TAHP-24-4-LP 24\" Liquid Propane Gas 4 Burner Manual Control Countertop Hot P...",
+      "url": "https://www.kitchenall.com/turbo-air-radiance-tahp-24-4-lp-24-liquid-propane-gas-4-burner-manual-control-countertop-hot-plate-128-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa CookRite ACHP-6-LP 36\" Liquid Propane Gas 6 Burner Manual Control Hot Plate - 192,000 BTU",
+      "url": "https://www.kitchenall.com/atosa-achp-6-36-lp-liquid-propane-gas-6-burner-manual-control-hotplate-192-000-btu-1.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa CookRite ACHP-6-NG 36\" Natural Gas 6 Burner Manual Control Hot Plate - 192,000 BTU",
+      "url": "https://www.kitchenall.com/atosa-achp-6-36-gas-6-burner-manual-control-hotplate-192-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance TAHP-36-6-NG 36\" Natural Gas 6 Burner Manual Control Countertop Hot Plate - ...",
+      "url": "https://www.kitchenall.com/turbo-air-radiance-tahp-36-6-ng-36-natural-gas-6-burner-manual-control-countertop-hot-plate-192-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page2",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?p=2",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page3",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?p=3",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page4",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?p=4",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page5",
+      "url": "https://www.kitchenall.com/commercial-hot-plates.html?p=5",
+      "is_subcategory": true,
+      "parent_name": "Commercial Hot Plates",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=2084",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=1983",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Asber",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=2373",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=2118",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Blue Air",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=2348",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dukers",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=2297",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Globe",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=1989",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Ikon",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=2125",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=2019",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "LJ Mfg",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=2010",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Migali",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=2059",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Therma-Tek",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=2446",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Town Food",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=2088",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=2210",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Winco",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?shopbybrand=2025",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Natural Gas",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?univ_power_type_filter=2527",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Liquid Propane Gas",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?univ_power_type_filter=2528",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "12-23\"",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?univ_length_range_filter=1712",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "36-47\"",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?univ_length_range_filter=1714",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "1 Burner",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?univ_burner_num_filter=1724",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "2 Burners",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?univ_burner_num_filter=1725",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "- 25K",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?univ_btu_num_filter=1483",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "75K-90K",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?univ_btu_num_filter=1485",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "100K-120K",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?univ_btu_num_filter=1486",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "125K-135K",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?univ_btu_num_filter=1487",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "140K +",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?univ_btu_num_filter=1488",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline CSP1 Single 18\" Burner Commercial Gas Stock Pot Range - 110,000 BTU",
+      "url": "https://www.kitchenall.com/csp1-18-single-burner-countertop-gas-stock-pot-range-110-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline CSP2 Double 18\" Burner Commercial Gas Stock Pot Range - 220,000 BTU",
+      "url": "https://www.kitchenall.com/csp2-18-double-burner-countertop-gas-stock-pot-range-220-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Blue Lava BLSP1 18\" Single Two Ring Burner Gas Stock Pot - 80,000 BTU",
+      "url": "https://www.kitchenall.com/blue-lava-blsp1-18-single-two-ring-burner-gas-stock-pot-80000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Migali C-SPS-1-18 18\" Gas Countertop Single Burner Stock Pot Stove Range - 80,000 BTU",
+      "url": "https://www.kitchenall.com/migali-c-sps-1-18-18-countertop-gas-stock-pot-stove-range.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Blue Lava BLSP2 18\" Two Lift-Off Burner Gas Stock Pot - 160,000 BTU",
+      "url": "https://www.kitchenall.com/blue-lava-blsp2-18-two-lift-off-burner-gas-stock-pot-160000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Migali C-SPS-2-18 18\" Gas Countertop Four Burner Stock Pot Stove Range - 160,000 BTU",
+      "url": "https://www.kitchenall.com/migali-c-sps-2-18-18-four-burner-countertop-gas-stock-pot-stove-range.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa CookRite ATSP-18-1-LP 18\" Liquid Propane Gas 2 Burner Stock Pot Stove - 80,000 BTU",
+      "url": "https://www.kitchenall.com/atosa-cookrite-atsp-18-1-18-gas-2-burner-single-stock-pot-stove-80-000-btu-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa CookRite ATSP-18-1L-LP 18\" 2 Burner Liquid Propane Gas Lower Height Stock Pot Stove - 80,...",
+      "url": "https://www.kitchenall.com/atosa-cookrite-atsp-18-1l-18-gas-2-burner-lower-height-single-stock-pot-stove-80-000-btu-1.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa CookRite ATSP-18-1L -NG 18\" Natural Gas 2 Burner Lower Height Stock Pot Stove - 80,000 BT...",
+      "url": "https://www.kitchenall.com/atosa-cookrite-atsp-18-1l-18-gas-2-burner-lower-height-single-stock-pot-stove-80-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dukers DCSP1-LP 18\" Liquid Propane Gas Two Burner Single Stock Pot Range - 80,000 BTU",
+      "url": "https://www.kitchenall.com/dukers-dcsp1-stock-pot-range-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dukers DCSP1-NG 18\" Natural Gas Two Burner Single Stock Pot Range - 80,000 BTU",
+      "url": "https://www.kitchenall.com/dukers-dcsp1-stock-pot-range.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance TASP-18S-NG 18\" Natural Gas Countertop Lower Height 1 Burner Stock Pot Range...",
+      "url": "https://www.kitchenall.com/turbo-air-radiance-tasp-18s-ng-18-natural-gas-countertop-lower-height-1-burner-stock-pot-range-79-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance TASP-18-NG 18\" Natural Gas Countertop Standard Height 1 Burner Stock Pot Ran...",
+      "url": "https://www.kitchenall.com/turbo-air-radiance-tasp-18-ng-18-natural-gas-countertop-standard-height-1-burner-stock-pot-range-79-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance TASP-18S-LP 18\" Liquid Propane Gas Countertop Lower Height 1 Burner Stock Po...",
+      "url": "https://www.kitchenall.com/turbo-air-radiance-tasp-18s-lp-18-liquid-propane-gas-countertop-lower-height-1-burner-stock-pot-range-79-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance TASP-18-LP 18\" Liquid Propane Gas Countertop Standard Height 1 Burner Stock ...",
+      "url": "https://www.kitchenall.com/turbo-air-radiance-tasp-18-lp-18-liquid-propane-gas-countertop-standard-height-1-burner-stock-pot-range-79-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dukers DCSP2-LP 18\" Liquid Propane Gas Four Burner Double Stock Pot Range - 160,000 BTU",
+      "url": "https://www.kitchenall.com/dukers-dcsp2-stock-pot-range-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Dukers DCSP2-NG 18\" Natural Gas Four Burner Double Stock Pot Range - 160,000 BTU",
+      "url": "https://www.kitchenall.com/dukers-dcsp2-stock-pot-range.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa CookRite ATSP-18-2L-LP 18\" Liquid Propane Gas 4 Burner Lower Height Stock Pot Stove - 160...",
+      "url": "https://www.kitchenall.com/atosa-cookrite-atsp-18-2l-18-gas-4-burner-lower-height-single-stock-pot-stove-160-000-btu-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa CookRite ATSP-18-2-LP 18\" Liquid Propane Gas 4 Burner Double Stock Pot Stove - 160,000 BT...",
+      "url": "https://www.kitchenall.com/atosa-cookrite-atsp-18-2-160-000-btu-gas-stock-pot-range-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa CookRite ATSP-18-2-NG 18\" Natural Gas 4 Burner Double Stock Pot Stove - 160,000 BTU",
+      "url": "https://www.kitchenall.com/atosa-cookrite-atsp-18-2-160-000-btu-gas-stock-pot-range.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Atosa CookRite ATSP-18-2L-NG 18\" Natural Gas 4 Burner Lower Height Stock Pot Stove - 160,000 BT...",
+      "url": "https://www.kitchenall.com/atosa-cookrite-atsp-18-2l-18-gas-4-burner-lower-height-single-stock-pot-stove-160-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance TASP-18S-D-NG 18\" Natural Gas Countertop Lower Height 2 Burner Stock Pot Ran...",
+      "url": "https://www.kitchenall.com/turbo-air-radiance-tasp-18s-d-ng-18-natural-gas-countertop-lower-height-1-burner-stock-pot-range-79-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance TASP-18-D-NG 18\" Natural Gas Countertop Standard Height 2 Burner Stock Pot R...",
+      "url": "https://www.kitchenall.com/turbo-air-radiance-tasp-18-d-ng-18-natural-gas-countertop-standard-height-2-burner-stock-pot-range-158-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance TASP-18S-D-LP 18\" Liquid Propane Gas Countertop Lower Height 2 Burner Stock ...",
+      "url": "https://www.kitchenall.com/turbo-air-radiance-tasp-18s-d-lp-18-liquid-propane-gas-countertop-lower-height-1-burner-stock-pot-range-79-000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page2",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?p=2",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page3",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?p=3",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page4",
+      "url": "https://www.kitchenall.com/stock-pot-ranges.html?p=4",
+      "is_subcategory": true,
+      "parent_name": "Stock Pot Ranges & Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline",
+      "url": "https://www.kitchenall.com/countertop-induction-burners.html?shopbybrand=2084",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Admiral Craft",
+      "url": "https://www.kitchenall.com/countertop-induction-burners.html?shopbybrand=2103",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cooktek",
+      "url": "https://www.kitchenall.com/countertop-induction-burners.html?shopbybrand=2016",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Eurodib",
+      "url": "https://www.kitchenall.com/countertop-induction-burners.html?shopbybrand=2014",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Globe",
+      "url": "https://www.kitchenall.com/countertop-induction-burners.html?shopbybrand=1989",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Winco",
+      "url": "https://www.kitchenall.com/countertop-induction-burners.html?shopbybrand=2025",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Undercounter",
+      "url": "https://www.kitchenall.com/countertop-induction-burners.html?univ_install_type_filter=2617",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Countertop",
+      "url": "https://www.kitchenall.com/countertop-induction-burners.html?univ_install_type_filter=2620",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Freestanding",
+      "url": "https://www.kitchenall.com/countertop-induction-burners.html?univ_install_type_filter=2621",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Drop-In",
+      "url": "https://www.kitchenall.com/countertop-induction-burners.html?univ_install_type_filter=2622",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline IC-1800 Portable Countertop Induction Range/Cooker - 120V, 1800W",
+      "url": "https://www.kitchenall.com/cookline-countertop-induction-range-cooker-120v-800w.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline IC-3600S Double Countertop Step-Up Induction Range / Cooker - 208-240V, 3600W",
+      "url": "https://www.kitchenall.com/cookline-double-countertop-step-up-induction-range-cooker-240v-3600w.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline IC-3600F Double Countertop Induction Range / Cooker - 208-240V, 3600W",
+      "url": "https://www.kitchenall.com/cookline-double-countertop-induction-range-cooker-240v-3600w.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Globe IR1800 Ceramic Countertop Induction Range with Digital Timer - 1800W",
+      "url": "https://www.kitchenall.com/globe-ir1800-ceramic-countertop-induction-range-with-digital-timer-1800w.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Globe GIR18 Ceramic Countertop Induction Range - 1800W",
+      "url": "https://www.kitchenall.com/globe-gir18-ceramic-countertop-induction-range-1800w.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Eurodib C1823 Countertop Induction Cooktop, 1 Burner, 120v, 1.8kW",
+      "url": "https://www.kitchenall.com/eurodib-c1823-15-inch-single-burner-countertop-induction-range-cooker.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Winco EIC-400E 11-3/4\" Commercial Electric Induction Cooker with Easy-Touch Controls - 120V, 18...",
+      "url": "https://www.kitchenall.com/winco-eic-400e-11-3-4-inches-commercial-electric-induction-cooker-easy-touch-controls-120v-1800w.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Eurodib CI1800 12\" Single Burner Countertop Electric Induction Range",
+      "url": "https://www.kitchenall.com/eurodib-ci1800-12inch-single-burner-countertop-electric-induction-range.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Winco EIDS-18 12-5/8\" Drop-In Commercial Electric Induction Cooker with Digital Controls - 120V...",
+      "url": "https://www.kitchenall.com/winco-eids-18-12-5-8-inches-drop-in-commercial-electric-induction-cooker-digital-controls-120v-1800w.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Winco EICS-18 14-3/16\" Commercial Electric Induction Cooker with Digital Controls - 120V, 1800W",
+      "url": "https://www.kitchenall.com/winco-eics-18-14-3-16-inches-commercial-electric-induction-cooker-digital-controls-120v-1800w.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Adcraft IND-DR120V Drop-In Commercial Induction Cooktop with Remote Control Box - 120V/1800W",
+      "url": "https://www.kitchenall.com/adcraft-ind-dr120v-drop-in-commercial-induction-cooktop-with-remote-control-box-120v-1800w.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Winco EIDS-18C 12-5/8\" Drop-In Commercial Induction Cooker Electric Ceramic Glass Surface - 120...",
+      "url": "https://www.kitchenall.com/winco-eids-18c-12-5-8-inches-spectrum-commercial-induction-cooker-electric-ceramic-glass-surface-120v-1800w.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Eurodib S2F2 14\" Countertop Double Burner Glass Cook Top Induction Range with Soft Touch Displa...",
+      "url": "https://www.kitchenall.com/eurodib-s2f2-14inch-countertop-double-burner-glass-cook-top-induction-range-soft-touch-display.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Winco EICS-34 14-13/16\" Commercial Electric Induction Cooker - 240V, 3400W",
+      "url": "https://www.kitchenall.com/winco-eics-34-14-13-16-inches-commercial-electric-induction-cooker-240v-3400w.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Winco EIDS-34 12-5/8\" Drop-In Commercial Electric Induction Cooker with Digital Controls - 240V...",
+      "url": "https://www.kitchenall.com/winco-eids-34-12-5-8-inches-drop-in-commercial-electric-induction-cooker-digital-controls-240v-3400w.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Winco EICS-18C 14\" Commercial Induction Cooker Electric Ceramic Glass Surface  - 120V, 1800W (C...",
+      "url": "https://www.kitchenall.com/winco-eics-18c-14-3-16-inches-commercial-induction-cooker-electric-ceramic-glass-surface-120v-1800w.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Eurodib SWI3500 18\" Super Wide Single Burner Countertop Electric Commercial Induction Range",
+      "url": "https://www.kitchenall.com/eurodib-swi3500-18inch-super-wide-single-burner-countertop-electric-commercial-induction-range.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cooktek MB061-S 12\" Single Burner Silenzio Drop-In Square Induction Buffet Warmer- 100-120V",
+      "url": "https://www.kitchenall.com/cooktek-mb061-s-12-inches-single-burner-silenzio-drop-in-square-induction-buffet-warmer-100-120v.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cooktek B651-D 15\" Single Burner Silenzio Drop-In Square Induction Buffet Warmer - 100-120V",
+      "url": "https://www.kitchenall.com/cooktek-b651-d-15-inches-single-burner-silenzio-drop-in-square-induction-buffet-warmer-100-120v.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cooktek B651-RD 12\" Single Burner Silenzio Drop-In Round Induction Buffet Warmer - 100-120V",
+      "url": "https://www.kitchenall.com/cooktek-b651-rd-12-inches-single-burner-silenzio-drop-in-round-induction-buffet-warmer-100-120v.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cooktek B652-RD 12\" Single Burner Silenzio Drop-In Round Induction Buffet Warmer - 220-240V",
+      "url": "https://www.kitchenall.com/cooktek-b652-rd-12-inches-single-burner-silenzio-drop-in-round-induction-buffet-warmer-220-240v.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cooktek B1002-D 15\" Single Burner Silenzio Drop-In Square Induction Buffet Warmer - 220-240V",
+      "url": "https://www.kitchenall.com/cooktek-b1002-d-15-inches-single-burner-silenzio-drop-in-square-induction-buffet-warmer-220-240v.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cooktek B652-D 15\" Single Burner Silenzio Drop-In Square Induction Buffet Warmer - 220-240V",
+      "url": "https://www.kitchenall.com/cooktek-b652-d-15-inches-single-burner-silenzio-drop-in-square-induction-buffet-warmer-220-240v.html",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page2",
+      "url": "https://www.kitchenall.com/countertop-induction-burners.html?p=2",
+      "is_subcategory": true,
+      "parent_name": "Induction Burners",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline",
+      "url": "https://www.kitchenall.com/wok-ranges.html?shopbybrand=2084",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Sino",
+      "url": "https://www.kitchenall.com/wok-ranges.html?shopbybrand=2121",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Sino",
+      "url": "https://www.kitchenall.com/wok-ranges.html?shopbybrand=3097",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range",
+      "url": "https://www.kitchenall.com/wok-ranges.html?shopbybrand=1983",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Imperial",
+      "url": "https://www.kitchenall.com/wok-ranges.html?shopbybrand=2019",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "LJ Mfg",
+      "url": "https://www.kitchenall.com/wok-ranges.html?shopbybrand=2010",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Town Food",
+      "url": "https://www.kitchenall.com/wok-ranges.html?shopbybrand=2088",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Turbo Air Radiance",
+      "url": "https://www.kitchenall.com/wok-ranges.html?shopbybrand=2210",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Natural Gas",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_power_type_filter=2527",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Liquid Propane Gas",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_power_type_filter=2528",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "12-23\"",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_length_range_filter=1712",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "24-35\"",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_length_range_filter=1713",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "36-47\"",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_length_range_filter=1714",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "60-71\"",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_length_range_filter=1716",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "72\" Plus",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_length_range_filter=1717",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Customizable",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_length_range_filter=1718",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "1 Burner",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_burner_num_filter=1724",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "2 Burners",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_burner_num_filter=1725",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "3 Burners",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_burner_num_filter=2149",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "4 Burners",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_burner_num_filter=1727",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "5 Burners",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_burner_num_filter=1728",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "6 Burners",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_burner_num_filter=1729",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "7 Burners",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_burner_num_filter=2242",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "8 Burners",
+      "url": "https://www.kitchenall.com/wok-ranges.html?univ_burner_num_filter=1731",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline SP-1W Commercial 13\" Natural Gas Wok Range - 95,000 BTU",
+      "url": "https://www.kitchenall.com/cookline-commercial-13-natural-gas-wok-range-95000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline SP-1W Commercial 13\" Liquid Propane Wok Range - 95,000 BTU",
+      "url": "https://www.kitchenall.com/cookline-commercial-13-liquid-propane-gas-wok-range-95000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline SP-1WS Commercial 13\" Liquid Propane Wok Range - 95,000 BTU",
+      "url": "https://www.kitchenall.com/cookline-commercial-13-liquid-propane-gas-adjustable-feet-wok-range-95000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Cookline SP-1WS Commercial 13\" Natural Gas Wok Range - 95,000 BTU",
+      "url": "https://www.kitchenall.com/cookline-commercial-13-natural-gas-adjustable-feet-wok-range-95000-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "SWR-1-LP Commercial 1 Ring Chinese Wok Range - Liquid Propane Gas",
+      "url": "https://www.kitchenall.com/swr-1-one-ring-chinese-wok-range-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "SWR-1-NG Commercial 1 Ring Chinese Wok Range - Natural Gas",
+      "url": "https://www.kitchenall.com/swr-1-one-ring-chinese-wok-range.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "WOK1-LP Commercial 1 Ring Chinese Wok Range - Liquid Propane Gas",
+      "url": "https://www.kitchenall.com/wok1-30-chinese-wok-range-with-one-burner-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "WOK1-NG Commercial 1 Ring Chinese Wok Range - Natural Gas",
+      "url": "https://www.kitchenall.com/wok1-30-chinese-wok-range-with-one-burner.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "SWR-2-LP Commercial 2 Ring Chinese Wok Range - Liquid Propane Gas",
+      "url": "https://www.kitchenall.com/swr-2-two-ring-chinese-wok-range-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "SWR-2-NG Commercial 2 Ring Chinese Wok Range - Natural Gas",
+      "url": "https://www.kitchenall.com/swr-2-two-ring-chinese-wok-range.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "SWR-3-LP Commercial 3 Ring Chinese Wok Range - Gas",
+      "url": "https://www.kitchenall.com/swr-3-three-ring-chinese-wok-range-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "WOK2-LP Commercial 2 Ring Chinese Wok Range - Liquid Propane Gas",
+      "url": "https://www.kitchenall.com/wok2-54-chinese-wok-range-with-two-burners-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "WOK2-NG Commercial 2 Ring Chinese Wok Range - Natural Gas",
+      "url": "https://www.kitchenall.com/wok2-54-chinese-wok-range-with-two-burners.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "SWR-3-NG Commercial 3 Ring Chinese Wok Range - Natural Gas",
+      "url": "https://www.kitchenall.com/swr-3-three-ring-chinese-wok-range.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "WOK3-LP Commercial 3 Ring Chinese Wok Range - Liquid Propane Gas",
+      "url": "https://www.kitchenall.com/wok3-78-chinese-wok-range-with-three-burners-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "WOK3-NG Commercial 3 Ring Chinese Wok Range - Natural Gas",
+      "url": "https://www.kitchenall.com/wok3-78-chinese-wok-range-with-three-burners.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "SWR-4-LP Commercial 4 Ring Chinese Wok Range - Liquid Propane Gas",
+      "url": "https://www.kitchenall.com/swr-4-four-ring-chinese-wok-range-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "SWR-4-NG Commercial 4 Ring Chinese Wok Range - Natural Gas",
+      "url": "https://www.kitchenall.com/swr-4-four-ring-chinese-wok-range.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "SWR-5-LP Commercial 5 Ring Chinese Wok Range - Liquid Propane Gas",
+      "url": "https://www.kitchenall.com/swr-5-five-ring-chinese-wok-range-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "WOK4-LP Commercial 4 Ring Chinese Wok Range - Liquid Propane Gas",
+      "url": "https://www.kitchenall.com/wok4-110-chinese-wok-range-with-four-burners-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "WOK4-NG Commercial 4 Ring Chinese Wok Range - Natural Gas",
+      "url": "https://www.kitchenall.com/wok4-110-chinese-wok-range-with-four-burners.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "SWR-6-LP Commercial 6 Ring Chinese Wok Range - Liquid Propane Gas",
+      "url": "https://www.kitchenall.com/swr-6-six-ring-chinese-wok-range-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "SWR-6-NG Commercial 6 Ring Chinese Wok Range - Natural Gas",
+      "url": "https://www.kitchenall.com/swr-6-six-ring-chinese-wok-range.html",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page2",
+      "url": "https://www.kitchenall.com/wok-ranges.html?p=2",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page3",
+      "url": "https://www.kitchenall.com/wok-ranges.html?p=3",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page4",
+      "url": "https://www.kitchenall.com/wok-ranges.html?p=4",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Page5",
+      "url": "https://www.kitchenall.com/wok-ranges.html?p=5",
+      "is_subcategory": true,
+      "parent_name": "Chinese Wok Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Winco PGS-1K Black Portable Gas Cooker with Brass Burner, Carrying Case - 9,500 BTU",
+      "url": "https://www.kitchenall.com/winco-pgs-1k-black-portable-gas-cooker-brass-burner-carrying-case-9500-btu.html",
+      "is_subcategory": true,
+      "parent_name": "Portable Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Natural Gas",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_power_type_filter=2527",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Liquid Propane Gas",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_power_type_filter=2528",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "24-35\"",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_length_range_filter=1713",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "36-47\"",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_length_range_filter=1714",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "48-59\"",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_length_range_filter=1715",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "60-71\"",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_length_range_filter=1716",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "72\" Plus",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_length_range_filter=1717",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "2 Burners",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_burner_num_filter=1725",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "4 Burners",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_burner_num_filter=1727",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "6 Burners",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_burner_num_filter=1729",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "8 Burners",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_burner_num_filter=1731",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "12 Burners",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_burner_num_filter=1734",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Burners Only",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_cook_type_filter=1841",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "Burners & Griddle",
+      "url": "https://www.kitchenall.com/pilotless-ignition-gas-range.html?univ_cook_type_filter=1840",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-4-NG 24\" Commercial Natural Gas Range with Green Flame Pilotless Ignition, ...",
+      "url": "https://www.kitchenall.com/american-range-argf-4-24-inch-commercial-range-with-green-flame-pilotless-ignition-4-burners.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-4-LP 24\" Commercial Liquid Propane Gas Range with Green Flame Pilotless Ign...",
+      "url": "https://www.kitchenall.com/american-range-argf-4-24-inch-commercial-range-with-green-flame-pilotless-ignition-4-burners-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-12G-2B-NG 24\" Commercial Natural Gas Range with Green Flame Pilotless Ignit...",
+      "url": "https://www.kitchenall.com/american-range-argf-12g-2b-24-inch-commercial-range-with-green-flame-pilotless-ignition-2-burners.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-12G-2B-LP 24\" Commercial Liquid Propane Gas Range with Green Flame Pilotles...",
+      "url": "https://www.kitchenall.com/american-range-argf-12g-2b-24-inch-commercial-range-with-green-flame-pilotless-ignition-2-burners-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-6-LP 36\" Commercial Liquid Propane Gas Range with Green Flame Pilotless Ign...",
+      "url": "https://www.kitchenall.com/american-range-argf-6-36-in-commercial-range-with-green-flame-pilotless-ignition-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-6-NG 36\" Commercial Natural Gas Range with Green Flame Pilotless Ignition",
+      "url": "https://www.kitchenall.com/american-range-argf-6-36-in-commercial-range-with-green-flame-pilotless-ignition.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF12G-4B 36\" Natural Gas 4 Burner Commercial Range with Oven - 155,000 BTU",
+      "url": "https://www.kitchenall.com/american-range-argf12g-4b-36-inch-commercial-range-with-green-flame-pilotless-ignition-12-inch-griddle.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF24G-2B-NG 36\" Commercial Natural Gas Range with Green Flame Pilotless Igniti...",
+      "url": "https://www.kitchenall.com/american-range-argf24g-2b-36-inch-commercial-range-with-green-flame-pilotless-ignition.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF24G-2B-LP 36\" Commercial Liquid Propane Gas Range with Green Flame Pilotless...",
+      "url": "https://www.kitchenall.com/american-range-argf24g-2b-36-inch-commercial-range-with-green-flame-pilotless-ignition-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF24G-4B-126-NG 48\" Commercial Natural Gas Range with Green Flame Pilotless Ig...",
+      "url": "https://www.kitchenall.com/american-range-argf24g-4b-126-48-inch-commercial-range-with-green-flame-pilotless-ignition.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF24G-4B-126-LP 48\" Commercial Liquid Propane Gas Range with Green Flame Pilot...",
+      "url": "https://www.kitchenall.com/american-range-argf24g-4b-126-48-inch-commercial-range-with-green-flame-pilotless-ignition-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-8-NG 48\" 8 Burner Commercial Natural Gas Range with Green Flame Pilotless I...",
+      "url": "https://www.kitchenall.com/american-range-argf-8-48-inch-commercial-range-with-green-flame-pilotless-ignition-8-burner.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-8-LP 48\" 8 Burner Commercial Liquid Propane Gas Range with Green Flame Pilo...",
+      "url": "https://www.kitchenall.com/american-range-argf-8-48-inch-commercial-range-with-green-flame-pilotless-ignition-8-burner-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-36G-2B-126-NG 48\" Commercial Natural Gas Range with Green Flame Pilotless I...",
+      "url": "https://www.kitchenall.com/american-range-green-flame-griddle-argf36g-2b.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-36G-2B-126-LP 48\" Commercial Liquid Propane Gas Range with Green Flame Pilo...",
+      "url": "https://www.kitchenall.com/american-range-green-flame-griddle-argf36g-2b-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-6B-24RG 60\" Natural Gas 6 Burner Gas Range with Griddle & Broiler - 282...",
+      "url": "https://www.kitchenall.com/american-range-60-commercial-range-green-flame-24-griddle-argf6b-24rg.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-6B-24RG 60\" Liquid Propane Gas 6 Burner Gas Range with Griddle & Broile...",
+      "url": "https://www.kitchenall.com/american-range-60-commercial-range-green-flame-24-griddle-argf6b-24rg-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-12-NG 72\" 12 Burner Commercial Natural Gas Range with Green Flame Pilotless...",
+      "url": "https://www.kitchenall.com/american-range-72-green-flame-12-burner-argf-12.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF-12-LP 72\" 12 Burner Commercial Liquid Propane Gas Range with Green Flame Pi...",
+      "url": "https://www.kitchenall.com/american-range-72-green-flame-12-burner-argf-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF24G-8B-NG 72\" Commercial Natural Gas Range with 24\" Griddle & Green...",
+      "url": "https://www.kitchenall.com/american-range-72-green-flame-argf24g-8b.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF24G-8B-LP 72\" Commercial Liquid Propane Gas Range with 24\" Griddle &amp...",
+      "url": "https://www.kitchenall.com/american-range-72-green-flame-argf24g-8b-lp.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF36G-6B-NG 72\" Commercial Natural Gas Range with 36\" Griddle & Green...",
+      "url": "https://www.kitchenall.com/american-range-green-flame-argf36g-6b.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    },
+    {
+      "name": "American Range ARGF36G-6B-LP 72\" Commercial Liquid Propane Gas Range with 36\" Griddle &amp...",
+      "url": "https://www.kitchenall.com/american-range-green-flame-argf36g-6b-1.html",
+      "is_subcategory": true,
+      "parent_name": "Pilotless Ignition Gas Ranges",
+      "description": "",
+      "image_url": ""
+    }
+  ],
+  "total_categories": 683,
+  "main_categories": 363,
+  "subcategories": 320
+}
