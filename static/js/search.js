@@ -1,4 +1,4 @@
-// Search functionality for Northeast Restaurant Supply
+// Search functionality for Professional Restaurant Supply
 
 class Search {
     constructor() {

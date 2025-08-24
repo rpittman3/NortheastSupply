@@ -1,4 +1,4 @@
-// Cart functionality for Northeast Restaurant Supply
+// Cart functionality for Professional Restaurant Supply
 
 class Cart {
     constructor() {

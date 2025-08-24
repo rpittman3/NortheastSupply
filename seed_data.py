@@ -1,5 +1,5 @@
 """
-Seed data script for Northeast Restaurant Supply
+Seed data script for Professional Restaurant Supply
 Run this script to populate the database with sample data
 """
 

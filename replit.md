@@ -1,6 +1,6 @@
 # Overview
 
-Northeast Restaurant Supply is a Flask-based e-commerce web application designed for selling professional restaurant equipment and supplies. The platform serves restaurants across the Northeast region, offering a comprehensive catalog of commercial kitchen equipment with features like shopping cart functionality, quote requests for bulk orders, user account management, and order processing. The application targets B2B customers in the foodservice industry who need reliable, professional-grade equipment and supplies.
+Professional Restaurant Supply is a Flask-based e-commerce web application designed for selling professional restaurant equipment and supplies. The platform serves restaurants across the Northeast region, offering a comprehensive catalog of commercial kitchen equipment with features like shopping cart functionality, quote requests for bulk orders, user account management, and order processing. The application targets B2B customers in the foodservice industry who need reliable, professional-grade equipment and supplies.
 
 # User Preferences
 
