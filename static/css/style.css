@@ -60,6 +60,15 @@ body {
     background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
+.category-nav-bar .navbar-light .navbar-nav .nav-link {
+    color: #ffffff !important;
+}
+
+.category-nav-bar .navbar-light .navbar-nav .nav-link:hover {
+    color: #d4edda !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
 .navbar-brand {
     font-size: 1.5rem;
     font-weight: 700;
