@@ -31,6 +31,12 @@ body {
 }
 
 /* Navigation Styles */
+.navbar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    min-height: 80px;
+}
+
 .navbar-brand {
     font-size: 1.5rem;
     font-weight: 700;
