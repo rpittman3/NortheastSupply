@@ -15,7 +15,7 @@
                     <div class="cart-item border-bottom py-3">
                         <div class="row align-items-center">
                             <div class="col-md-2">
-                                <img src="{{ item.product.large_image_url }}" alt="{{ item.product.name }}" 
+                                <img src="{{ item.product.large_image_url or item.product.thumb_image_url or 'https://via.placeholder.com/500x400/f8f9fa/6c757d?text=No+Image' }}" alt="{{ item.product.name }}" 
                                      class="img-fluid rounded" style="height: 80px; object-fit: cover;">
                             </div>
                             <div class="col-md-4">
