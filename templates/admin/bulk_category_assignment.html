@@ -1,0 +1,344 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Bulk Category Assignment - Admin{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Bulk Category Assignment</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('admin_dashboard') }}">Admin</a></li>
+                <li class="breadcrumb-item active">Bulk Category Assignment</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-tags"></i> Assign Products to Category</h5>
+        </div>
+        <div class="card-body">
+            <form method="POST" id="bulkAssignmentForm">
+                <!-- Category Selection -->
+                <div class="row mb-4">
+                    <div class="col-lg-4">
+                        <label for="category_id" class="form-label">Select Category to Assign</label>
+                        <select name="category_id" id="category_id" class="form-select" required>
+                            <option value="">-- Select Category --</option>
+                            {% for category in categories %}
+                                {% if category.parent_id is none %}
+                                <optgroup label="{{ category.name }}">
+                                    <option value="{{ category.id }}" 
+                                            {% if selected_category_id == category.id %}selected{% endif %}>
+                                        {{ category.name }}
+                                    </option>
+                                    {% for subcategory in category.children %}
+                                    <option value="{{ subcategory.id }}" 
+                                            {% if selected_category_id == subcategory.id %}selected{% endif %}>
+                                        {{ category.name }} → {{ subcategory.name }}
+                                    </option>
+                                    {% endfor %}
+                                </optgroup>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="searchInput" class="form-label">Search Products</label>
+                        <div class="input-group">
+                            <input type="text" id="searchInput" class="form-control" 
+                                   placeholder="Search by name or SKU..." 
+                                   value="{{ search_query }}">
+                            <button type="button" id="searchBtn" class="btn btn-outline-secondary">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            {% if search_query %}
+                            <button type="button" id="clearBtn" class="btn btn-outline-secondary">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-flex align-items-end">
+                        <div class="btn-group" role="group">
+                            <button type="button" id="selectAllBtn" class="btn btn-outline-primary">
+                                <i class="fas fa-check-square"></i> Select All
+                            </button>
+                            <button type="button" id="selectNoneBtn" class="btn btn-outline-secondary">
+                                <i class="fas fa-square"></i> Select None
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products List -->
+                {% if products.items %}
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="text-muted mb-0">
+                                Showing {{ products.items|length }} of {{ products.total }} products
+                                {% if search_query %} matching "{{ search_query }}"{% endif %}
+                            </p>
+                            <div id="selectedCount" class="text-primary fw-bold">
+                                0 products selected
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th width="50">
+                                    <input type="checkbox" id="selectAllCheckbox" class="form-check-input">
+                                </th>
+                                <th width="80">Image</th>
+                                <th>Product Name</th>
+                                <th>SKU</th>
+                                <th>Current Categories</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products.items %}
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="product_ids" value="{{ product.id }}" 
+                                           class="form-check-input product-checkbox">
+                                </td>
+                                <td>
+                                    <img src="{{ product.large_image_url or product.thumb_image_url or 'https://placehold.co/80x60/f8f9fa/6c757d/png?text=No+Image' }}" 
+                                         alt="{{ product.name }}" 
+                                         class="img-thumbnail" 
+                                         style="width: 60px; height: 45px; object-fit: cover;">
+                                </td>
+                                <td>
+                                    <div>
+                                        <strong>{{ product.name }}</strong>
+                                        {% if product.manufacturer %}
+                                        <br><small class="text-muted">{{ product.manufacturer.name }}</small>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td>
+                                    <code>{{ product.sku }}</code>
+                                </td>
+                                <td>
+                                    {% if product.categories %}
+                                        {% for category in product.categories %}
+                                        <span class="badge bg-secondary me-1">{{ category.name }}</span>
+                                        {% endfor %}
+                                    {% else %}
+                                        <span class="text-muted"><em>No categories</em></span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if product.requires_quote %}
+                                        <span class="text-warning">Quote Required</span>
+                                    {% else %}
+                                        ${{ "%.2f"|format(product.price) }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                {% if products.pages > 1 %}
+                <nav aria-label="Products pagination">
+                    <ul class="pagination justify-content-center">
+                        {% if products.has_prev %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('admin_bulk_category_assignment', page=products.prev_num, search=search_query) }}">Previous</a>
+                        </li>
+                        {% endif %}
+                        
+                        {% for page_num in products.iter_pages() %}
+                            {% if page_num %}
+                                {% if page_num != products.page %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('admin_bulk_category_assignment', page=page_num, search=search_query) }}">{{ page_num }}</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ page_num }}</span>
+                                </li>
+                                {% endif %}
+                            {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">...</span>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if products.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('admin_bulk_category_assignment', page=products.next_num, search=search_query) }}">Next</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+
+                <!-- Submit Button -->
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg" id="submitBtn" disabled>
+                        <i class="fas fa-tags"></i> Assign Selected Products to Category
+                    </button>
+                </div>
+                {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h4>No Products Found</h4>
+                    {% if search_query %}
+                    <p class="text-muted">No products match your search "{{ search_query }}".</p>
+                    <a href="{{ url_for('admin_bulk_category_assignment') }}" class="btn btn-secondary">Clear Search</a>
+                    {% else %}
+                    <p class="text-muted">No products available for assignment.</p>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const selectAllBtn = document.getElementById('selectAllBtn');
+    const selectNoneBtn = document.getElementById('selectNoneBtn');
+    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+    const productCheckboxes = document.querySelectorAll('.product-checkbox');
+    const selectedCount = document.getElementById('selectedCount');
+    const submitBtn = document.getElementById('submitBtn');
+    const categorySelect = document.getElementById('category_id');
+
+    // Search functionality
+    function performSearch() {
+        const searchQuery = searchInput.value.trim();
+        const currentUrl = new URL(window.location);
+        
+        if (searchQuery) {
+            currentUrl.searchParams.set('search', searchQuery);
+        } else {
+            currentUrl.searchParams.delete('search');
+        }
+        currentUrl.searchParams.delete('page');
+        
+        window.location.href = currentUrl.toString();
+    }
+
+    searchBtn.addEventListener('click', performSearch);
+    
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            performSearch();
+        }
+    });
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            const currentUrl = new URL(window.location);
+            currentUrl.searchParams.delete('search');
+            currentUrl.searchParams.delete('page');
+            window.location.href = currentUrl.toString();
+        });
+    }
+
+    // Selection functionality
+    function updateSelectedCount() {
+        const checkedCount = document.querySelectorAll('.product-checkbox:checked').length;
+        selectedCount.textContent = `${checkedCount} product${checkedCount !== 1 ? 's' : ''} selected`;
+        
+        // Update submit button state
+        const categorySelected = categorySelect.value !== '';
+        submitBtn.disabled = !(checkedCount > 0 && categorySelected);
+        
+        // Update select all checkbox state
+        if (productCheckboxes.length > 0) {
+            if (checkedCount === 0) {
+                selectAllCheckbox.indeterminate = false;
+                selectAllCheckbox.checked = false;
+            } else if (checkedCount === productCheckboxes.length) {
+                selectAllCheckbox.indeterminate = false;
+                selectAllCheckbox.checked = true;
+            } else {
+                selectAllCheckbox.indeterminate = true;
+                selectAllCheckbox.checked = false;
+            }
+        }
+    }
+
+    // Select all functionality
+    selectAllBtn.addEventListener('click', function() {
+        productCheckboxes.forEach(checkbox => {
+            checkbox.checked = true;
+        });
+        updateSelectedCount();
+    });
+
+    selectNoneBtn.addEventListener('click', function() {
+        productCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        updateSelectedCount();
+    });
+
+    // Header checkbox functionality
+    if (selectAllCheckbox) {
+        selectAllCheckbox.addEventListener('change', function() {
+            const isChecked = this.checked;
+            productCheckboxes.forEach(checkbox => {
+                checkbox.checked = isChecked;
+            });
+            updateSelectedCount();
+        });
+    }
+
+    // Individual checkbox functionality
+    productCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateSelectedCount);
+    });
+
+    // Category selection functionality
+    categorySelect.addEventListener('change', updateSelectedCount);
+
+    // Form submission validation
+    document.getElementById('bulkAssignmentForm').addEventListener('submit', function(e) {
+        const checkedCount = document.querySelectorAll('.product-checkbox:checked').length;
+        const categorySelected = categorySelect.value !== '';
+        
+        if (!categorySelected) {
+            e.preventDefault();
+            alert('Please select a category.');
+            return false;
+        }
+        
+        if (checkedCount === 0) {
+            e.preventDefault();
+            alert('Please select at least one product.');
+            return false;
+        }
+        
+        // Confirmation dialog
+        const categoryName = categorySelect.options[categorySelect.selectedIndex].text;
+        if (!confirm(`Are you sure you want to assign ${checkedCount} product${checkedCount !== 1 ? 's' : ''} to "${categoryName}"?`)) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // Initial count update
+    updateSelectedCount();
+});
+</script>
+{% endblock %}

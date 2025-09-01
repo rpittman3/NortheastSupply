@@ -1,13 +1,14 @@
 from flask import render_template, request, redirect, url_for, flash, session, jsonify
 from functools import wraps
 from app import app, db
-from models import User, Category, Product, QuoteRequest, QuoteItem
+from models import User, Category, Product, QuoteRequest, QuoteItem, product_categories
 from forms import AdminLoginForm, CategoryForm, ProductForm, UserForm
 from flask_login import current_user
 from datetime import datetime
 import os
 import uuid
 from werkzeug.utils import secure_filename
+from sqlalchemy import text
 
 # Admin password (in production, this should be an environment variable)
 ADMIN_PASSWORD = "admin123"
@@ -354,3 +355,81 @@ def admin_edit_user(user_id):
         return redirect(url_for('admin_users'))
     
     return render_template('admin/user_form.html', form=form, title='Edit User', user=user)
+
+# Bulk Category Assignment
+@app.route('/admin/bulk-category-assignment')
+@admin_required
+def admin_bulk_category_assignment():
+    """Display bulk category assignment page"""
+    categories = Category.query.order_by(Category.name).all()
+    
+    # Get search query and category filter from request
+    search_query = request.args.get('search', '')
+    category_id = request.args.get('category_id', type=int)
+    
+    # Start with all products query
+    products_query = Product.query
+    
+    # Apply search filter if provided
+    if search_query:
+        products_query = products_query.filter(
+            Product.name.ilike(f'%{search_query}%') |
+            Product.sku.ilike(f'%{search_query}%')
+        )
+    
+    # Get paginated products
+    page = request.args.get('page', 1, type=int)
+    products = products_query.order_by(Product.name).paginate(
+        page=page, per_page=50, error_out=False
+    )
+    
+    return render_template('admin/bulk_category_assignment.html',
+                         categories=categories,
+                         products=products,
+                         search_query=search_query,
+                         selected_category_id=category_id)
+
+@app.route('/admin/bulk-category-assignment', methods=['POST'])
+@admin_required
+def admin_process_bulk_category_assignment():
+    """Process bulk category assignment form submission"""
+    category_id = request.form.get('category_id', type=int)
+    product_ids = request.form.getlist('product_ids', type=int)
+    
+    if not category_id:
+        flash('Please select a category.', 'error')
+        return redirect(url_for('admin_bulk_category_assignment'))
+    
+    if not product_ids:
+        flash('Please select at least one product.', 'error')
+        return redirect(url_for('admin_bulk_category_assignment'))
+    
+    category = Category.query.get_or_404(category_id)
+    
+    # Add products to the selected category
+    success_count = 0
+    for product_id in product_ids:
+        product = Product.query.get(product_id)
+        if product:
+            # Check if product is already in this category
+            existing = db.session.execute(
+                text("SELECT 1 FROM product_categories WHERE product_id = :pid AND category_id = :cid"),
+                {'pid': product_id, 'cid': category_id}
+            ).first()
+            
+            if not existing:
+                # Add product to category
+                db.session.execute(
+                    text("INSERT INTO product_categories (product_id, category_id) VALUES (:pid, :cid)"),
+                    {'pid': product_id, 'cid': category_id}
+                )
+                success_count += 1
+            
+            # Update primary category if not set
+            if not product.primary_category_id:
+                product.primary_category_id = category_id
+    
+    db.session.commit()
+    
+    flash(f'Successfully assigned {success_count} products to "{category.name}" category.', 'success')
+    return redirect(url_for('admin_bulk_category_assignment'))
