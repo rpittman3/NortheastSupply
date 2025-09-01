@@ -80,7 +80,7 @@
                 <div class="col-lg-3 col-md-6 product-item">
                     <div class="card border-0 shadow-sm h-100 product-hover">
                         <div class="position-relative">
-                            <img src="{{ product.large_image_url or product.thumb_image_url or 'https://via.placeholder.com/500x400/f8f9fa/6c757d?text=No+Image' }}" alt="{{ product.name }}" 
+                            <img src="{{ product.large_image_url or product.thumb_image_url or 'https://placehold.co/500x400/f8f9fa/6c757d/png?text=No+Image' }}" alt="{{ product.name }}" 
                                  class="card-img-top" style="height: 200px; object-fit: cover;">
                             {% if product.requires_quote %}
                             <span class="badge bg-warning position-absolute top-0 end-0 m-2">Quote Required</span>
