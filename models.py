@@ -88,7 +88,8 @@ class Product(db.Model):
     cost = db.Column(db.Numeric(10, 2))
     primary_category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)  # Main category for display
     manufacturer_id = db.Column(db.Integer, db.ForeignKey('manufacturer.id'), nullable=True)
-    image_url = db.Column(db.String(500))
+    thumb_image_url = db.Column(db.String(500))
+    large_image_url = db.Column(db.String(500))
     additional_images = db.Column(db.Text)  # JSON string of image URLs
     weight = db.Column(db.Numeric(8, 2))
     dimensions = db.Column(db.String(100))
