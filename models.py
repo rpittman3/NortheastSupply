@@ -45,6 +45,16 @@ class OAuth(OAuthConsumerMixin, db.Model):
         name='uq_user_browser_session_key_provider',
     ),)
 
+class Manufacturer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False, unique=True)
+    slug = db.Column(db.String(100), nullable=False, unique=True)
+    created_at = db.Column(db.DateTime, default=eastern_now)
+    updated_at = db.Column(db.DateTime, default=eastern_now, onupdate=eastern_now)
+    
+    # Relationships
+    products = db.relationship('Product', backref='manufacturer', lazy=True)
+
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=True)
@@ -77,8 +87,7 @@ class Product(db.Model):
     price = db.Column(db.Numeric(10, 2), nullable=False)
     cost = db.Column(db.Numeric(10, 2))
     primary_category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)  # Main category for display
-    brand = db.Column(db.String(100))
-    model_number = db.Column(db.String(100))
+    manufacturer_id = db.Column(db.Integer, db.ForeignKey('manufacturer.id'), nullable=True)
     image_url = db.Column(db.String(500))
     additional_images = db.Column(db.Text)  # JSON string of image URLs
     weight = db.Column(db.Numeric(8, 2))
@@ -89,11 +98,11 @@ class Product(db.Model):
     requires_quote = db.Column(db.Boolean, default=False)
     
     # Document/Manual fields
+    bullets = db.Column(db.Text)  # HTML formatted bullet points
     manual_url = db.Column(db.String(500))  # Link to product manual
-    spec_sheet_url = db.Column(db.String(500))  # Link to specification sheet
+    specsheet_url = db.Column(db.String(500))  # Link to specification sheet
     brochure_url = db.Column(db.String(500))  # Link to product brochure
     warranty_url = db.Column(db.String(500))  # Link to warranty document
-    documents = db.Column(db.Text)  # JSON string of additional document URLs and names
 
     created_at = db.Column(db.DateTime, default=eastern_now)
     updated_at = db.Column(db.DateTime, default=eastern_now, onupdate=eastern_now)
