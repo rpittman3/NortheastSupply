@@ -133,6 +133,44 @@
     </div>
     {% endif %}
 
+    <!-- Product Documents -->
+    {% if product.specsheet_url or product.warranty_url or product.manual_url %}
+    <div class="row mt-4">
+        <div class="col-12">
+            <h4 class="fw-bold mb-3">Product Documents</h4>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row g-3">
+                        {% if product.specsheet_url %}
+                        <div class="col-lg-4 col-md-6">
+                            <a href="{{ product.specsheet_url }}" target="_blank" class="btn btn-outline-primary w-100">
+                                <i class="fas fa-file-alt me-2"></i>Specification Sheet
+                            </a>
+                        </div>
+                        {% endif %}
+                        
+                        {% if product.warranty_url %}
+                        <div class="col-lg-4 col-md-6">
+                            <a href="{{ product.warranty_url }}" target="_blank" class="btn btn-outline-success w-100">
+                                <i class="fas fa-shield-alt me-2"></i>Warranty Information
+                            </a>
+                        </div>
+                        {% endif %}
+                        
+                        {% if product.manual_url %}
+                        <div class="col-lg-4 col-md-6">
+                            <a href="{{ product.manual_url }}" target="_blank" class="btn btn-outline-info w-100">
+                                <i class="fas fa-book me-2"></i>User Manual
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     <!-- Related Products -->
     {% if related_products %}
     <div class="row mt-5">
