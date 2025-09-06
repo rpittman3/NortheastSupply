@@ -4,7 +4,7 @@ from replit_auth import require_login, make_replit_blueprint
 from flask_login import current_user
 from models import Category, Product, CartItem, QuoteRequest, QuoteItem, Order, OrderItem, product_categories
 from forms import QuoteRequestForm, CheckoutForm, AccountUpdateForm
-from sqlalchemy import or_, func
+from sqlalchemy import or_, func, and_
 from datetime import datetime
 import uuid
 
