@@ -62,11 +62,71 @@ def category_view(slug):
 def product_view(slug):
     product = Product.query.filter_by(slug=slug).first_or_404()
     
-    # Get related products from the same primary category
-    related_products = Product.query.filter(
-        Product.primary_category_id == product.primary_category_id,
-        Product.id != product.id
-    ).limit(4).all()
+    # Get related products using intelligent matching
+    related_products = []
+    
+    # Strategy 1: Find products with similar names (keyword matching)
+    if product.name:
+        # Extract key words from product name (skip common words)
+        skip_words = ['the', 'and', 'or', 'with', 'without', 'for', 'of', 'in', 'on', 'at', 'by', 'from']
+        product_words = [word.lower() for word in product.name.split() 
+                        if len(word) > 2 and word.lower() not in skip_words]
+        
+        if product_words:
+            # Find products that share keywords in their name
+            keyword_matches = Product.query.filter(
+                Product.id != product.id,
+                or_(*[Product.name.ilike(f'%{word}%') for word in product_words[:3]])  # Use top 3 keywords
+            ).filter(
+                # Prioritize products with images
+                or_(
+                    and_(Product.large_image_url.isnot(None), Product.large_image_url != ''),
+                    and_(Product.thumb_image_url.isnot(None), Product.thumb_image_url != '')
+                )
+            ).limit(4).all()
+            
+            related_products.extend(keyword_matches)
+    
+    # Strategy 2: If we don't have enough keyword matches, get from same category with images
+    if len(related_products) < 4 and product.primary_category_id:
+        remaining_needed = 4 - len(related_products)
+        existing_ids = [p.id for p in related_products]
+        
+        category_matches = Product.query.filter(
+            Product.primary_category_id == product.primary_category_id,
+            Product.id != product.id,
+            Product.id.notin_(existing_ids) if existing_ids else True
+        ).filter(
+            # Prioritize products with images
+            or_(
+                and_(Product.large_image_url.isnot(None), Product.large_image_url != ''),
+                and_(Product.thumb_image_url.isnot(None), Product.thumb_image_url != '')
+            )
+        ).limit(remaining_needed).all()
+        
+        related_products.extend(category_matches)
+    
+    # Strategy 3: If still not enough, get from manufacturer with images
+    if len(related_products) < 4 and product.manufacturer_id:
+        remaining_needed = 4 - len(related_products)
+        existing_ids = [p.id for p in related_products]
+        
+        manufacturer_matches = Product.query.filter(
+            Product.manufacturer_id == product.manufacturer_id,
+            Product.id != product.id,
+            Product.id.notin_(existing_ids) if existing_ids else True
+        ).filter(
+            # Prioritize products with images
+            or_(
+                and_(Product.large_image_url.isnot(None), Product.large_image_url != ''),
+                and_(Product.thumb_image_url.isnot(None), Product.thumb_image_url != '')
+            )
+        ).limit(remaining_needed).all()
+        
+        related_products.extend(manufacturer_matches)
+    
+    # Limit to 4 related products
+    related_products = related_products[:4]
     
     return render_template('product.html', 
                          product=product,
