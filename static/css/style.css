@@ -60,6 +60,18 @@ body {
     background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
+/* Category Filter Hover Effect */
+.category-filter-hover {
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #dee2e6;
+}
+
+.category-filter-hover:hover {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0.25rem 0.75rem rgba(30, 88, 145, 0.15);
+    transform: translateY(-2px);
+}
+
 .category-nav-bar .navbar-light .navbar-nav .nav-link {
     color: #ffffff !important;
 }

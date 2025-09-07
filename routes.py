@@ -38,15 +38,32 @@ def index():
 def category_view(slug):
     category = Category.query.filter_by(slug=slug).first_or_404()
     
-    # Get subcategories
+    # Get subcategories (direct children)
     subcategories = Category.query.filter_by(parent_id=category.id).order_by(Category.sort_order).all()
     
-    # Get products in this category and its subcategories
+    # Get sub-subcategories (grandchildren) - only if this is a second-level category
+    sub_subcategories = []
     if subcategories:
-        category_ids = [category.id] + [sub.id for sub in subcategories]
-        products = Product.query.join(product_categories).filter(product_categories.c.category_id.in_(category_ids))
-    else:
-        products = Product.query.join(product_categories).filter(product_categories.c.category_id == category.id)
+        # If we have subcategories, collect all their children as well
+        for sub in subcategories:
+            sub_subs = Category.query.filter_by(parent_id=sub.id).order_by(Category.sort_order).all()
+            sub_subcategories.extend(sub_subs)
+    
+    # Build complete list of category IDs for product filtering
+    category_ids = [category.id]  # Always include current category
+    
+    if subcategories:
+        # Add all subcategories
+        category_ids.extend([sub.id for sub in subcategories])
+        
+        # Add all sub-subcategories  
+        if sub_subcategories:
+            category_ids.extend([subsub.id for subsub in sub_subcategories])
+    
+    # Get products from current category and all its descendant categories
+    products = Product.query.join(product_categories).filter(
+        product_categories.c.category_id.in_(category_ids)
+    )
     
     # Pagination
     page = request.args.get('page', 1, type=int)
@@ -56,6 +73,7 @@ def category_view(slug):
     return render_template('category.html', 
                          category=category, 
                          subcategories=subcategories,
+                         sub_subcategories=sub_subcategories,
                          products=products)
 
 @app.route('/product/<slug>')

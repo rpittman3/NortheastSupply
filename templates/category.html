@@ -64,6 +64,32 @@
     </div>
     {% endif %}
 
+    <!-- Sub-Subcategories (Third Level) -->
+    {% if sub_subcategories %}
+    <div class="row mb-5">
+        <div class="col-12">
+            <h4 class="fw-bold mb-3">
+                <i class="fas fa-filter me-2"></i>Filter by Type
+            </h4>
+            <div class="row g-2">
+                {% for sub_subcategory in sub_subcategories %}
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                    <a href="{{ url_for('category_view', slug=sub_subcategory.slug) }}" class="text-decoration-none">
+                        <div class="card border-1 h-100 text-center p-2 category-filter-hover" style="border-color: #dee2e6;">
+                            <div class="card-body p-2">
+                                <i class="fas fa-cogs text-primary mb-2"></i>
+                                <h6 class="card-title text-dark mb-0 small">{{ sub_subcategory.name }}</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <hr class="my-4">
+        </div>
+    </div>
+    {% endif %}
+
     <!-- Products -->
     <div class="row">
         <div class="col-12">
