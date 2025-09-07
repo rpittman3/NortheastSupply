@@ -26,21 +26,30 @@
                         <label for="category_id" class="form-label">Select Category to Assign</label>
                         <select name="category_id" id="category_id" class="form-select" required>
                             <option value="">-- Select Category --</option>
-                            {% for category in categories %}
-                                {% if category.parent_id is none %}
-                                <optgroup label="{{ category.name }}">
-                                    <option value="{{ category.id }}" 
-                                            {% if selected_category_id == category.id %}selected{% endif %}>
-                                        {{ category.name }}
+                            {% for main_category_data in categories %}
+                                <optgroup label="{{ main_category_data.category.name }}">
+                                    <!-- Main Category -->
+                                    <option value="{{ main_category_data.category.id }}" 
+                                            {% if selected_category_id == main_category_data.category.id %}selected{% endif %}>
+                                        {{ main_category_data.category.name }}
                                     </option>
-                                    {% for subcategory in category.children %}
-                                    <option value="{{ subcategory.id }}" 
-                                            {% if selected_category_id == subcategory.id %}selected{% endif %}>
-                                        {{ category.name }} → {{ subcategory.name }}
-                                    </option>
+                                    
+                                    <!-- Second Level Categories -->
+                                    {% for subcategory_data in main_category_data.subcategories %}
+                                        <option value="{{ subcategory_data.category.id }}" 
+                                                {% if selected_category_id == subcategory_data.category.id %}selected{% endif %}>
+                                            → {{ subcategory_data.category.name }}
+                                        </option>
+                                        
+                                        <!-- Third Level Categories -->
+                                        {% for sub_subcategory in subcategory_data.sub_subcategories %}
+                                            <option value="{{ sub_subcategory.id }}" 
+                                                    {% if selected_category_id == sub_subcategory.id %}selected{% endif %}>
+                                                → → {{ sub_subcategory.name }}
+                                            </option>
+                                        {% endfor %}
                                     {% endfor %}
                                 </optgroup>
-                                {% endif %}
                             {% endfor %}
                         </select>
                     </div>

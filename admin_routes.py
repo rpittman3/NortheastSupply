@@ -407,11 +407,46 @@ def admin_edit_user(user_id):
     return render_template('admin/user_form.html', form=form, title='Edit User', user=user)
 
 # Bulk Category Assignment
+def get_hierarchical_categories_for_assignment():
+    """Get hierarchical category structure for bulk assignment"""
+    all_categories = Category.query.order_by(Category.sort_order, Category.name).all()
+    
+    # Build hierarchy structure
+    hierarchy = []
+    
+    # First, get all main categories (no parent)
+    main_categories = [cat for cat in all_categories if cat.parent_id is None]
+    
+    for main_cat in main_categories:
+        main_data = {
+            'category': main_cat,
+            'subcategories': []
+        }
+        
+        # Get subcategories for this main category
+        subcategories = [cat for cat in all_categories if cat.parent_id == main_cat.id]
+        
+        for sub_cat in subcategories:
+            sub_data = {
+                'category': sub_cat,
+                'sub_subcategories': []
+            }
+            
+            # Get sub-subcategories for this subcategory
+            sub_subcategories = [cat for cat in all_categories if cat.parent_id == sub_cat.id]
+            sub_data['sub_subcategories'] = sub_subcategories
+            
+            main_data['subcategories'].append(sub_data)
+        
+        hierarchy.append(main_data)
+    
+    return hierarchy
+
 @app.route('/admin/bulk-category-assignment')
 @admin_required
 def admin_bulk_category_assignment():
     """Display bulk category assignment page"""
-    categories = Category.query.order_by(Category.name).all()
+    categories = get_hierarchical_categories_for_assignment()
     
     # Get search query and category filter from request
     search_query = request.args.get('search', '')
