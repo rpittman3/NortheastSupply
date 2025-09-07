@@ -86,14 +86,65 @@ def admin_categories():
     categories = Category.query.order_by(Category.sort_order, Category.name).all()
     return render_template('admin/categories.html', categories=categories)
 
+def get_hierarchical_category_choices(exclude_category_id=None):
+    """Get hierarchical category choices for dropdown selection"""
+    choices = [(0, 'No Parent')]
+    
+    # Get all categories ordered by hierarchy
+    all_categories = Category.query.order_by(Category.sort_order, Category.name).all()
+    
+    # Build hierarchy dictionary
+    hierarchy = {}
+    for cat in all_categories:
+        if exclude_category_id and cat.id == exclude_category_id:
+            continue
+        if cat.parent_id is None:
+            hierarchy[cat.id] = {
+                'category': cat,
+                'children': []
+            }
+    
+    # Add second level
+    for cat in all_categories:
+        if exclude_category_id and cat.id == exclude_category_id:
+            continue
+        if cat.parent_id and cat.parent_id in hierarchy:
+            hierarchy[cat.parent_id]['children'].append({
+                'category': cat,
+                'children': []
+            })
+    
+    # Add third level
+    for cat in all_categories:
+        if exclude_category_id and cat.id == exclude_category_id:
+            continue
+        if cat.parent_id:
+            for main_id, main_data in hierarchy.items():
+                for sub_data in main_data['children']:
+                    if sub_data['category'].id == cat.parent_id:
+                        sub_data['children'].append(cat)
+    
+    # Build choices with hierarchy
+    for main_id, main_data in hierarchy.items():
+        main_cat = main_data['category']
+        choices.append((main_cat.id, main_cat.name))
+        
+        for sub_data in main_data['children']:
+            sub_cat = sub_data['category'] 
+            choices.append((sub_cat.id, f"  → {sub_cat.name}"))
+            
+            for subsub_cat in sub_data['children']:
+                choices.append((subsub_cat.id, f"    → → {subsub_cat.name}"))
+    
+    return choices
+
 @app.route('/admin/categories/add', methods=['GET', 'POST'])
 @admin_required
 def admin_add_category():
     form = CategoryForm()
     
-    # Populate parent category choices
-    categories = Category.query.filter_by(parent_id=None).all()
-    form.parent_id.choices = [(0, 'No Parent')] + [(c.id, c.name) for c in categories]
+    # Populate parent category choices with hierarchy
+    form.parent_id.choices = get_hierarchical_category_choices()
     
     if form.validate_on_submit():
         category = Category()
@@ -125,9 +176,8 @@ def admin_edit_category(category_id):
     category = Category.query.get_or_404(category_id)
     form = CategoryForm(obj=category)
     
-    # Populate parent category choices
-    categories = Category.query.filter_by(parent_id=None).filter(Category.id != category_id).all()
-    form.parent_id.choices = [(0, 'No Parent')] + [(c.id, c.name) for c in categories]
+    # Populate parent category choices with hierarchy (excluding current category)
+    form.parent_id.choices = get_hierarchical_category_choices(exclude_category_id=category_id)
     
     if form.validate_on_submit():
         category.name = form.name.data
