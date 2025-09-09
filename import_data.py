@@ -104,10 +104,27 @@ def import_products(products_data, category_id_mapping):
     for prod_data in products_data:
         product = Product()
         product.name = prod_data['name']
+        product.slug = prod_data['slug']
         product.sku = prod_data['sku']
+        product.short_description = prod_data.get('short_description')
         product.description = prod_data['description']
         product.price = prod_data['price']
-        product.image_url = prod_data['image_url']
+        product.cost = prod_data.get('cost')
+        product.manufacturer_id = prod_data.get('manufacturer_id')
+        product.thumb_image_url = prod_data.get('thumb_image_url')
+        product.large_image_url = prod_data.get('large_image_url')
+        product.additional_images = prod_data.get('additional_images')
+        product.weight = prod_data.get('weight')
+        product.dimensions = prod_data.get('dimensions')
+        product.in_stock = prod_data.get('in_stock', True)
+        product.stock_quantity = prod_data.get('stock_quantity', 0)
+        product.is_featured = prod_data['is_featured']
+        product.requires_quote = prod_data['requires_quote']
+        product.bullets = prod_data.get('bullets')
+        product.manual_url = prod_data.get('manual_url')
+        product.specsheet_url = prod_data.get('specsheet_url')
+        product.brochure_url = prod_data.get('brochure_url')
+        product.warranty_url = prod_data.get('warranty_url')
         
         # Map old category ID to new category ID
         old_category_id = prod_data['primary_category_id']
@@ -117,12 +134,6 @@ def import_products(products_data, category_id_mapping):
             product.primary_category_id = None
             if old_category_id:
                 print(f"⚠️  Warning: Product '{product.name}' references unknown category ID {old_category_id}")
-        
-        product.is_featured = prod_data['is_featured']
-        product.requires_quote = prod_data['requires_quote']
-        product.specification_sheet_url = prod_data['specification_sheet_url']
-        product.warranty_url = prod_data['warranty_url']
-        product.manual_url = prod_data['manual_url']
         
         db.session.add(product)
         imported_count += 1

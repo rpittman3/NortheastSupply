@@ -27,8 +27,7 @@ def export_categories():
             'image_url': category.image_url,
             'is_featured': category.is_featured,
             'sort_order': category.sort_order,
-            'created_at': category.created_at.isoformat() if category.created_at else None,
-            'updated_at': category.updated_at.isoformat() if category.updated_at else None
+            'created_at': category.created_at.isoformat() if category.created_at else None
         }
         category_data.append(category_dict)
     
@@ -46,16 +45,28 @@ def export_products():
         product_dict = {
             'id': product.id,
             'name': product.name,
+            'slug': product.slug,
             'sku': product.sku,
+            'short_description': product.short_description,
             'description': product.description,
             'price': float(product.price) if product.price else None,
-            'image_url': product.image_url,
+            'cost': float(product.cost) if product.cost else None,
             'primary_category_id': product.primary_category_id,
+            'manufacturer_id': product.manufacturer_id,
+            'thumb_image_url': product.thumb_image_url,
+            'large_image_url': product.large_image_url,
+            'additional_images': product.additional_images,
+            'weight': float(product.weight) if product.weight else None,
+            'dimensions': product.dimensions,
+            'in_stock': product.in_stock,
+            'stock_quantity': product.stock_quantity,
             'is_featured': product.is_featured,
             'requires_quote': product.requires_quote,
-            'specification_sheet_url': product.specification_sheet_url,
-            'warranty_url': product.warranty_url,
+            'bullets': product.bullets,
             'manual_url': product.manual_url,
+            'specsheet_url': product.specsheet_url,
+            'brochure_url': product.brochure_url,
+            'warranty_url': product.warranty_url,
             'created_at': product.created_at.isoformat() if product.created_at else None,
             'updated_at': product.updated_at.isoformat() if product.updated_at else None
         }

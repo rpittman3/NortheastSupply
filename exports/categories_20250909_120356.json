@@ -1,0 +1,167 @@
+[
+  {
+    "id": 513,
+    "name": "Cooking",
+    "slug": "cooking",
+    "description": "Commercial cooking equipment for professional kitchens",
+    "parent_id": null,
+    "image_url": "https://usrbrands.com/cdn/shop/files/wok_600x.jpg?v=1679926472",
+    "is_featured": true,
+    "sort_order": 1,
+    "created_at": "2025-09-07T20:42:39.183059"
+  },
+  {
+    "id": 525,
+    "name": "Electric Ranges",
+    "slug": "electric-ranges",
+    "description": "",
+    "parent_id": 519,
+    "image_url": "https://usrbrands.com/cdn/shop/files/er36-electric-range-side_500x.jpg?v=1755831490",
+    "is_featured": false,
+    "sort_order": 1,
+    "created_at": null
+  },
+  {
+    "id": 526,
+    "name": "Gas Ranges",
+    "slug": "gas-ranges",
+    "description": null,
+    "parent_id": 519,
+    "image_url": null,
+    "is_featured": null,
+    "sort_order": 2,
+    "created_at": null
+  },
+  {
+    "id": 517,
+    "name": "Ovens",
+    "slug": "ovens",
+    "description": "",
+    "parent_id": 513,
+    "image_url": "https://usrbrands.com/cdn/shop/collections/cookline_brand_block_burner_600x.jpg?v=1615547180",
+    "is_featured": false,
+    "sort_order": 2,
+    "created_at": "2025-09-07T20:55:22.816885"
+  },
+  {
+    "id": 519,
+    "name": "Ranges",
+    "slug": "ranges",
+    "description": "",
+    "parent_id": 513,
+    "image_url": "https://usrbrands.com/cdn/shop/files/er36-electric-range-side_300x.jpg?v=1755831490",
+    "is_featured": false,
+    "sort_order": 2,
+    "created_at": "2025-09-07T20:58:36.679785"
+  },
+  {
+    "id": 527,
+    "name": "Propane Ranges",
+    "slug": "propane-ranges",
+    "description": null,
+    "parent_id": 519,
+    "image_url": null,
+    "is_featured": null,
+    "sort_order": 3,
+    "created_at": null
+  },
+  {
+    "id": 518,
+    "name": "Fryers",
+    "slug": "fryers",
+    "description": "",
+    "parent_id": 513,
+    "image_url": "https://usrbrands.com/cdn/shop/files/ctf3-natural-gas-countertop-gas-fryer_300x.jpg?v=1697624992",
+    "is_featured": false,
+    "sort_order": 4,
+    "created_at": "2025-09-07T20:57:26.066264"
+  },
+  {
+    "id": 524,
+    "name": "Broilers",
+    "slug": "broilers",
+    "description": "",
+    "parent_id": 513,
+    "image_url": "https://usrbrands.com/cdn/shop/files/csm-36-rm-salamander_angle_1_500x.jpg?v=1755852275",
+    "is_featured": false,
+    "sort_order": 5,
+    "created_at": "2025-09-07T21:11:16.208583"
+  },
+  {
+    "id": 520,
+    "name": "Griddles and Hotplates",
+    "slug": "griddles-and-hotplates",
+    "description": "",
+    "parent_id": 513,
+    "image_url": "https://usrbrands.com/cdn/shop/files/cgg48-angle_300x.jpg?v=1755834762",
+    "is_featured": false,
+    "sort_order": 5,
+    "created_at": "2025-09-07T21:00:36.497106"
+  },
+  {
+    "id": 523,
+    "name": "Toasters",
+    "slug": "toasters",
+    "description": "",
+    "parent_id": 513,
+    "image_url": "https://usrbrands.com/cdn/shop/products/CT2_300x.jpg?v=1612897933",
+    "is_featured": false,
+    "sort_order": 6,
+    "created_at": "2025-09-07T21:10:17.210336"
+  },
+  {
+    "id": 521,
+    "name": "Pasta Cookers",
+    "slug": "pasta-cooker",
+    "description": "",
+    "parent_id": 513,
+    "image_url": "https://usrbrands.com/cdn/shop/files/pc-1-pasta-cooker-angle_500x.jpg?v=1755762363",
+    "is_featured": false,
+    "sort_order": 7,
+    "created_at": "2025-09-07T21:03:10.530775"
+  },
+  {
+    "id": 522,
+    "name": "Sandwich/Panini Pressers",
+    "slug": "panini-press",
+    "description": "",
+    "parent_id": 513,
+    "image_url": "https://usrbrands.com/cdn/shop/products/PG-2_300x.jpg?v=1612897945",
+    "is_featured": false,
+    "sort_order": 8,
+    "created_at": "2025-09-07T21:04:53.183737"
+  },
+  {
+    "id": 514,
+    "name": "Refrigeration And Ice",
+    "slug": "refrigeration",
+    "description": "Commercial refrigeration and ice equipment",
+    "parent_id": null,
+    "image_url": "https://usrbrands.com/cdn/shop/files/xs260-ice-cream-freezer-angle_500x.jpg?v=1755750028",
+    "is_featured": true,
+    "sort_order": 10,
+    "created_at": "2025-09-07T20:44:06.116369"
+  },
+  {
+    "id": 515,
+    "name": "Food Prep",
+    "slug": "food-prep",
+    "description": "Food preparation and processing equipment",
+    "parent_id": null,
+    "image_url": "https://usrbrands.com/cdn/shop/products/combination-processor-5-l-bowl_1_500x.jpg?v=1658401276",
+    "is_featured": true,
+    "sort_order": 11,
+    "created_at": "2025-09-07T20:46:01.622260"
+  },
+  {
+    "id": 516,
+    "name": "Display Cases",
+    "slug": "display-cases",
+    "description": "Food display cases and merchandising equipment",
+    "parent_id": null,
+    "image_url": "https://usrbrands.com/cdn/shop/files/mhcc136heated-countertop-display-with-food-black_500x.jpg?v=1756183355",
+    "is_featured": true,
+    "sort_order": 12,
+    "created_at": "2025-09-07T20:47:03.050419"
+  }
+]
