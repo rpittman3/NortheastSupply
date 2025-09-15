@@ -162,6 +162,7 @@ def admin_add_category():
             
         category.is_featured = form.is_featured.data
         category.sort_order = form.sort_order.data or 0
+        category.markup = form.markup.data
         
         db.session.add(category)
         db.session.commit()
@@ -194,6 +195,7 @@ def admin_edit_category(category_id):
             
         category.is_featured = form.is_featured.data
         category.sort_order = form.sort_order.data or 0
+        category.markup = form.markup.data
         
         db.session.commit()
         flash(f'Category "{category.name}" updated successfully!', 'success')
@@ -247,6 +249,7 @@ def admin_add_product():
         product.description = form.description.data
         product.price = form.price.data
         product.cost = form.cost.data
+        product.override_markup = form.override_markup.data
         
         # Handle image upload
         if form.image_file.data:
@@ -307,6 +310,7 @@ def admin_edit_product(product_id):
         product.description = form.description.data
         product.price = form.price.data
         product.cost = form.cost.data
+        product.override_markup = form.override_markup.data
         
         # Handle image upload
         if form.image_file.data:

@@ -55,6 +55,7 @@ class CategoryForm(FlaskForm):
     image_file = FileField('Upload Image', validators=[Optional(), FileAllowed(['jpg', 'jpeg', 'png', 'gif'], 'Images only!')])
     is_featured = BooleanField('Featured Category')
     sort_order = IntegerField('Sort Order', validators=[Optional(), NumberRange(min=0)])
+    markup = DecimalField('Markup (%)', validators=[Optional(), NumberRange(min=0)])
 
 class ProductForm(FlaskForm):
     name = StringField('Product Name', validators=[DataRequired(), Length(min=2, max=200)])
@@ -68,6 +69,7 @@ class ProductForm(FlaskForm):
     description = TextAreaField('Description', validators=[Optional()])
     price = DecimalField('Price', validators=[DataRequired(), NumberRange(min=0)])
     cost = DecimalField('Cost', validators=[Optional(), NumberRange(min=0)])
+    override_markup = DecimalField('Override Markup (%)', validators=[Optional(), NumberRange(min=0)])
     image_url = StringField('Image URL', validators=[Optional(), Length(max=500)])
     image_file = FileField('Upload Image', validators=[Optional(), FileAllowed(['jpg', 'jpeg', 'png', 'gif'], 'Images only!')])
     weight = DecimalField('Weight (lbs)', validators=[Optional(), NumberRange(min=0)])

@@ -79,6 +79,21 @@
                                 {% endif %}
                             </div>
                         </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.markup.label(class="form-label") }}
+                                {{ form.markup(class="form-control", step="0.01") }}
+                                <small class="form-text text-muted">Enter as percentage (e.g., 25 for 25%)</small>
+                                {% if form.markup.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.markup.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
 
                         <div class="mb-3">
                             {{ form.image_url.label(class="form-label") }}

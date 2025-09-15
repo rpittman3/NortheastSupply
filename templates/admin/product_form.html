@@ -160,6 +160,24 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.override_markup.label(class="form-label") }}
+                                <div class="input-group">
+                                    <span class="input-group-text">%</span>
+                                    {{ form.override_markup(class="form-control", step="0.01") }}
+                                </div>
+                                <small class="form-text text-muted">Override category markup (optional)</small>
+                                {% if form.override_markup.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.override_markup.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
                         <div class="mb-3">
                             {{ form.image_url.label(class="form-label") }}
                             {{ form.image_url(class="form-control") }}
