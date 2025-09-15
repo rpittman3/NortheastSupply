@@ -7,6 +7,7 @@ from flask_login import current_user
 from datetime import datetime
 import os
 import uuid
+import math
 from werkzeug.utils import secure_filename
 from sqlalchemy import text
 from decimal import Decimal, ROUND_HALF_UP
@@ -67,8 +68,9 @@ def compute_price(cost, override_markup, primary_category_id):
     markup_multiplier = Decimal('1') + (markup_decimal / Decimal('100'))
     price = cost_decimal * markup_multiplier
     
-    # Quantize to 2 decimal places with proper rounding
-    return price.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+    # Round up to nearest whole dollar, then quantize to 2 decimal places
+    rounded_up_price = math.ceil(float(price))
+    return Decimal(str(rounded_up_price)).quantize(Decimal('0.01'))
 
 def admin_required(f):
     """Decorator to require admin authentication"""
