@@ -62,7 +62,7 @@ class ProductForm(FlaskForm):
     sku = StringField('SKU', validators=[DataRequired(), Length(min=2, max=50)])
     primary_category_id = SelectField('Primary Category', coerce=int, validators=[DataRequired()])
     category_ids = SelectMultipleField('Additional Categories', coerce=int)
-    brand = StringField('Brand', validators=[Optional(), Length(max=100)])
+    manufacturer_id = SelectField('Manufacturer', coerce=int, validators=[Optional()])
     model_number = StringField('Model Number', validators=[Optional(), Length(max=100)])
     short_description = StringField('Short Description', validators=[Optional(), Length(max=500)])
     description = TextAreaField('Description', validators=[Optional()])
@@ -76,6 +76,10 @@ class ProductForm(FlaskForm):
     stock_quantity = IntegerField('Stock Quantity', validators=[Optional(), NumberRange(min=0)])
     is_featured = BooleanField('Featured Product')
     requires_quote = BooleanField('Requires Quote')
+
+class ManufacturerForm(FlaskForm):
+    name = StringField('Manufacturer Name', validators=[DataRequired(), Length(min=2, max=100)])
+    slug = StringField('URL Slug', validators=[DataRequired(), Length(min=2, max=100)])
 
 class UserForm(FlaskForm):
     first_name = StringField('First Name', validators=[Optional(), Length(max=50)])

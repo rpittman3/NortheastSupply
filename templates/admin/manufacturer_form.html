@@ -1,0 +1,122 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} - Admin{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>{{ title }}</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('admin_dashboard') }}">Admin</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('admin_manufacturers') }}">Manufacturers</a></li>
+                <li class="breadcrumb-item active">{{ title }}</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-industry"></i> 
+                        {% if manufacturer %}
+                            Edit Manufacturer: {{ manufacturer.name }}
+                        {% else %}
+                            Add New Manufacturer
+                        {% endif %}
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.name.label(class="form-label") }}
+                                    {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else "")) }}
+                                    {% if form.name.errors %}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.name.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.slug.label(class="form-label") }}
+                                    {{ form.slug(class="form-control" + (" is-invalid" if form.slug.errors else "")) }}
+                                    {% if form.slug.errors %}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.slug.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    {% endif %}
+                                    <div class="form-text">URL-friendly version of the name (lowercase, no spaces)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('admin_manufacturers') }}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Manufacturers
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> 
+                                {% if manufacturer %}Update{% else %}Create{% endif %} Manufacturer
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0"><i class="fas fa-info-circle"></i> Manufacturer Information</h6>
+                </div>
+                <div class="card-body">
+                    <p class="small text-muted">
+                        Manufacturers represent the companies that produce the products in your catalog. 
+                        Each product can be assigned to one manufacturer.
+                    </p>
+                    
+                    {% if manufacturer %}
+                    <hr>
+                    <h6>Current Stats</h6>
+                    <ul class="list-unstyled small">
+                        <li><strong>Products:</strong> {{ manufacturer.products|length }}</li>
+                        <li><strong>Created:</strong> {{ manufacturer.created_at.strftime('%Y-%m-%d') if manufacturer.created_at else 'N/A' }}</li>
+                        <li><strong>Updated:</strong> {{ manufacturer.updated_at.strftime('%Y-%m-%d') if manufacturer.updated_at else 'N/A' }}</li>
+                    </ul>
+                    {% endif %}
+                    
+                    <hr>
+                    <h6>Tips</h6>
+                    <ul class="small text-muted">
+                        <li>Use clear, recognizable manufacturer names</li>
+                        <li>The slug should be lowercase and URL-friendly</li>
+                        <li>You cannot delete manufacturers that have products assigned</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Auto-generate slug from name
+document.getElementById('name').addEventListener('input', function() {
+    const name = this.value;
+    const slug = name.toLowerCase()
+        .replace(/[^a-z0-9 -]/g, '') // Remove invalid chars
+        .replace(/\s+/g, '-')        // Replace spaces with -
+        .replace(/-+/g, '-')         // Replace multiple - with single -
+        .trim('-');                  // Trim - from ends
+    
+    document.getElementById('slug').value = slug;
+});
+</script>
+{% endblock %}

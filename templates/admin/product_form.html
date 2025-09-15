@@ -81,11 +81,11 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                {{ form.brand.label(class="form-label") }}
-                                {{ form.brand(class="form-control") }}
-                                {% if form.brand.errors %}
+                                {{ form.manufacturer_id.label(class="form-label") }}
+                                {{ form.manufacturer_id(class="form-select") }}
+                                {% if form.manufacturer_id.errors %}
                                     <div class="text-danger">
-                                        {% for error in form.brand.errors %}
+                                        {% for error in form.manufacturer_id.errors %}
                                             <small>{{ error }}</small>
                                         {% endfor %}
                                     </div>

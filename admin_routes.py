@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect, url_for, flash, session, jsonify
 from functools import wraps
 from app import app, db
-from models import User, Category, Product, QuoteRequest, QuoteItem, product_categories
-from forms import AdminLoginForm, CategoryForm, ProductForm, UserForm
+from models import User, Category, Product, Manufacturer, QuoteRequest, QuoteItem, product_categories
+from forms import AdminLoginForm, CategoryForm, ProductForm, ManufacturerForm, UserForm
 from flask_login import current_user
 from datetime import datetime
 import os
@@ -228,10 +228,12 @@ def admin_products():
 def admin_add_product():
     form = ProductForm()
     
-    # Populate category choices
+    # Populate category and manufacturer choices
     categories = Category.query.order_by(Category.name).all()
+    manufacturers = Manufacturer.query.order_by(Manufacturer.name).all()
     form.primary_category_id.choices = [(c.id, c.name) for c in categories]
     form.category_ids.choices = [(c.id, c.name) for c in categories]
+    form.manufacturer_id.choices = [(0, 'No Manufacturer')] + [(m.id, m.name) for m in manufacturers]
     
     if form.validate_on_submit():
         product = Product()
@@ -239,7 +241,7 @@ def admin_add_product():
         product.slug = form.slug.data
         product.sku = form.sku.data
         product.primary_category_id = form.primary_category_id.data
-        product.brand = form.brand.data
+        product.manufacturer_id = form.manufacturer_id.data if form.manufacturer_id.data != 0 else None
         product.model_number = form.model_number.data
         product.short_description = form.short_description.data
         product.description = form.description.data
@@ -281,14 +283,17 @@ def admin_edit_product(product_id):
     product = Product.query.get_or_404(product_id)
     form = ProductForm(obj=product)
     
-    # Populate category choices
+    # Populate category and manufacturer choices
     categories = Category.query.order_by(Category.name).all()
+    manufacturers = Manufacturer.query.order_by(Manufacturer.name).all()
     form.primary_category_id.choices = [(c.id, c.name) for c in categories]
     form.category_ids.choices = [(c.id, c.name) for c in categories]
+    form.manufacturer_id.choices = [(0, 'No Manufacturer')] + [(m.id, m.name) for m in manufacturers]
     
-    # Pre-populate form with current category assignments and image URL
+    # Pre-populate form with current category assignments, manufacturer, and image URL
     if request.method == 'GET':
         form.category_ids.data = [c.id for c in product.categories]
+        form.manufacturer_id.data = product.manufacturer_id or 0
         form.image_url.data = product.thumb_image_url
     
     if form.validate_on_submit():
@@ -296,7 +301,7 @@ def admin_edit_product(product_id):
         product.slug = form.slug.data
         product.sku = form.sku.data
         product.primary_category_id = form.primary_category_id.data
-        product.brand = form.brand.data
+        product.manufacturer_id = form.manufacturer_id.data if form.manufacturer_id.data != 0 else None
         product.model_number = form.model_number.data
         product.short_description = form.short_description.data
         product.description = form.description.data
@@ -339,6 +344,62 @@ def admin_delete_product(product_id):
     db.session.commit()
     flash(f'Product "{product.name}" deleted successfully!', 'success')
     return redirect(url_for('admin_products'))
+
+# Manufacturer Management
+@app.route('/admin/manufacturers')
+@admin_required
+def admin_manufacturers():
+    manufacturers = Manufacturer.query.order_by(Manufacturer.name).all()
+    return render_template('admin/manufacturers.html', manufacturers=manufacturers)
+
+@app.route('/admin/manufacturers/add', methods=['GET', 'POST'])
+@admin_required
+def admin_add_manufacturer():
+    form = ManufacturerForm()
+    
+    if form.validate_on_submit():
+        manufacturer = Manufacturer()
+        manufacturer.name = form.name.data
+        manufacturer.slug = form.slug.data
+        
+        db.session.add(manufacturer)
+        db.session.commit()
+        flash(f'Manufacturer "{manufacturer.name}" added successfully!', 'success')
+        return redirect(url_for('admin_manufacturers'))
+    
+    return render_template('admin/manufacturer_form.html', form=form, title='Add Manufacturer')
+
+@app.route('/admin/manufacturers/<int:manufacturer_id>/edit', methods=['GET', 'POST'])
+@admin_required
+def admin_edit_manufacturer(manufacturer_id):
+    manufacturer = Manufacturer.query.get_or_404(manufacturer_id)
+    form = ManufacturerForm(obj=manufacturer)
+    
+    if form.validate_on_submit():
+        manufacturer.name = form.name.data
+        manufacturer.slug = form.slug.data
+        manufacturer.updated_at = datetime.now()
+        
+        db.session.commit()
+        flash(f'Manufacturer "{manufacturer.name}" updated successfully!', 'success')
+        return redirect(url_for('admin_manufacturers'))
+    
+    return render_template('admin/manufacturer_form.html', form=form, title='Edit Manufacturer', manufacturer=manufacturer)
+
+@app.route('/admin/manufacturers/<int:manufacturer_id>/delete', methods=['POST'])
+@admin_required
+def admin_delete_manufacturer(manufacturer_id):
+    manufacturer = Manufacturer.query.get_or_404(manufacturer_id)
+    
+    # Check if manufacturer has products
+    if manufacturer.products:
+        flash(f'Cannot delete manufacturer "{manufacturer.name}" - it has {len(manufacturer.products)} products assigned.', 'error')
+        return redirect(url_for('admin_manufacturers'))
+    
+    db.session.delete(manufacturer)
+    db.session.commit()
+    flash(f'Manufacturer "{manufacturer.name}" deleted successfully!', 'success')
+    return redirect(url_for('admin_manufacturers'))
 
 # Quote Management
 @app.route('/admin/quotes')
