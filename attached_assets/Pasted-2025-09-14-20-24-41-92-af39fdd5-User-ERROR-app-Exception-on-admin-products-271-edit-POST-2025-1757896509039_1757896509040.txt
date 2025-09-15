@@ -1,0 +1,84 @@
+2025-09-14 20:24:41.92
+af39fdd5
+User
+ERROR:app:Exception on /admin/products/271/edit [POST]
+2025-09-14 20:24:41.92
+af39fdd5
+User
+Traceback (most recent call last):
+2025-09-14 20:24:41.92
+af39fdd5
+User
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+2025-09-14 20:24:41.92
+af39fdd5
+User
+response = self.full_dispatch_request()
+2025-09-14 20:24:41.92
+af39fdd5
+User
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-14 20:24:41.92
+af39fdd5
+User
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+2025-09-14 20:24:41.92
+af39fdd5
+User
+rv = self.handle_user_exception(e)
+2025-09-14 20:24:41.92
+af39fdd5
+User
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-14 20:24:41.92
+af39fdd5
+User
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-09-14 20:24:41.92
+af39fdd5
+User
+rv = self.dispatch_request()
+2025-09-14 20:24:41.92
+af39fdd5
+User
+^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-14 20:24:41.92
+af39fdd5
+User
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 902, in dispatch_request
+2025-09-14 20:24:41.92
+af39fdd5
+User
+return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args) # type: ignore[no-any-return]
+2025-09-14 20:24:41.92
+af39fdd5
+User
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-14 20:24:41.92
+af39fdd5
+User
+File "/home/runner/workspace/admin_routes.py", line 42, in decorated_function
+2025-09-14 20:24:41.92
+af39fdd5
+User
+return f(*args, **kwargs)
+2025-09-14 20:24:41.92
+af39fdd5
+User
+^^^^^^^^^^^^^^^^^^
+2025-09-14 20:24:41.92
+af39fdd5
+User
+File "/home/runner/workspace/admin_routes.py", line 307, in admin_edit_product
+2025-09-14 20:24:41.92
+af39fdd5
+User
+elif form.image_url.data != product.image_url:
+2025-09-14 20:24:41.92
+af39fdd5
+User
+^^^^^^^^^^^^^^^^^
+2025-09-14 20:24:41.92
+af39fdd5
+User
+AttributeError: 'Product' object has no attribute 'image_url'

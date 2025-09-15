@@ -249,9 +249,11 @@ def admin_add_product():
         # Handle image upload
         if form.image_file.data:
             image_url = save_uploaded_image(form.image_file.data, 'products')
-            product.image_url = image_url
+            product.thumb_image_url = image_url
+            product.large_image_url = image_url  # Use same image for both initially
         else:
-            product.image_url = form.image_url.data
+            product.thumb_image_url = form.image_url.data
+            product.large_image_url = form.image_url.data
             
         product.weight = form.weight.data
         product.dimensions = form.dimensions.data
@@ -284,9 +286,10 @@ def admin_edit_product(product_id):
     form.primary_category_id.choices = [(c.id, c.name) for c in categories]
     form.category_ids.choices = [(c.id, c.name) for c in categories]
     
-    # Pre-populate form with current category assignments
+    # Pre-populate form with current category assignments and image URL
     if request.method == 'GET':
         form.category_ids.data = [c.id for c in product.categories]
+        form.image_url.data = product.thumb_image_url
     
     if form.validate_on_submit():
         product.name = form.name.data
@@ -303,9 +306,11 @@ def admin_edit_product(product_id):
         # Handle image upload
         if form.image_file.data:
             image_url = save_uploaded_image(form.image_file.data, 'products')
-            product.image_url = image_url
-        elif form.image_url.data != product.image_url:
-            product.image_url = form.image_url.data
+            product.thumb_image_url = image_url
+            product.large_image_url = image_url  # Use same image for both initially
+        elif form.image_url.data != (product.thumb_image_url or ''):
+            product.thumb_image_url = form.image_url.data
+            product.large_image_url = form.image_url.data
             
         product.weight = form.weight.data
         product.dimensions = form.dimensions.data
