@@ -283,6 +283,9 @@ def admin_add_product():
         form.primary_category_id.data
     )
     
+    # Determine markup source for display
+    markup_source = 'override' if form.override_markup.data is not None else 'category'
+    
     if form.validate_on_submit():
         product = Product()
         product.name = form.name.data
@@ -329,7 +332,7 @@ def admin_add_product():
         flash(f'Product "{product.name}" added successfully!', 'success')
         return redirect(url_for('admin_products'))
     
-    return render_template('admin/product_form.html', form=form, title='Add Product', calculated_price=f'{calculated_price:.2f}')
+    return render_template('admin/product_form.html', form=form, title='Add Product', calculated_price=f'{calculated_price:.2f}', markup_source=markup_source)
 
 @app.route('/admin/products/<int:product_id>/edit', methods=['GET', 'POST'])
 @admin_required
@@ -356,6 +359,9 @@ def admin_edit_product(product_id):
         form.override_markup.data,
         form.primary_category_id.data
     )
+    
+    # Determine markup source for display
+    markup_source = 'override' if form.override_markup.data is not None else 'category'
     
     if form.validate_on_submit():
         product.name = form.name.data
@@ -401,7 +407,7 @@ def admin_edit_product(product_id):
         flash(f'Product "{product.name}" updated successfully!', 'success')
         return redirect(url_for('admin_products'))
     
-    return render_template('admin/product_form.html', form=form, title='Edit Product', product=product, calculated_price=f'{calculated_price:.2f}')
+    return render_template('admin/product_form.html', form=form, title='Edit Product', product=product, calculated_price=f'{calculated_price:.2f}', markup_source=markup_source)
 
 @app.route('/admin/products/<int:product_id>/delete', methods=['POST'])
 @admin_required

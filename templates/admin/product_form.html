@@ -139,7 +139,7 @@
                                     <span class="input-group-text">$</span>
                                     <input type="text" class="form-control" value="{{ calculated_price or '0.00' }}" readonly style="background-color: #f8f9fa;">
                                 </div>
-                                <small class="form-text text-muted">Based on cost + category markup</small>
+                                <small class="form-text text-muted">Based on cost + {% if markup_source == 'override' %}override markup{% else %}category markup{% endif %}</small>
                             </div>
                         </div>
 
