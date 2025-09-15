@@ -64,6 +64,7 @@ class Category(db.Model):
     image_url = db.Column(db.String(500))
     is_featured = db.Column(db.Boolean, default=False)
     sort_order = db.Column(db.Integer, default=0)
+    markup = db.Column(db.Numeric(10, 4), nullable=True)  # Markup percentage as decimal
 
     created_at = db.Column(db.DateTime, default=eastern_now)
 
@@ -86,6 +87,7 @@ class Product(db.Model):
     description = db.Column(db.Text)
     price = db.Column(db.Numeric(10, 2), nullable=False)
     cost = db.Column(db.Numeric(10, 2))
+    override_markup = db.Column(db.Numeric(10, 4), nullable=True)  # Override markup percentage as decimal
     primary_category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)  # Main category for display
     manufacturer_id = db.Column(db.Integer, db.ForeignKey('manufacturer.id'), nullable=True)
     thumb_image_url = db.Column(db.String(500))
