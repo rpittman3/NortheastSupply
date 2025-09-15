@@ -91,17 +91,6 @@
                                     </div>
                                 {% endif %}
                             </div>
-                            <div class="col-md-6 mb-3">
-                                {{ form.model_number.label(class="form-label") }}
-                                {{ form.model_number(class="form-control") }}
-                                {% if form.model_number.errors %}
-                                    <div class="text-danger">
-                                        {% for error in form.model_number.errors %}
-                                            <small>{{ error }}</small>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
                         </div>
 
                         <div class="mb-3">
@@ -130,20 +119,6 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                {{ form.price.label(class="form-label") }}
-                                <div class="input-group">
-                                    <span class="input-group-text">$</span>
-                                    {{ form.price(class="form-control") }}
-                                </div>
-                                {% if form.price.errors %}
-                                    <div class="text-danger">
-                                        {% for error in form.price.errors %}
-                                            <small>{{ error }}</small>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
                                 {{ form.cost.label(class="form-label") }}
                                 <div class="input-group">
                                     <span class="input-group-text">$</span>
@@ -157,6 +132,14 @@
                                         {% endfor %}
                                     </div>
                                 {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Calculated Price</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="text" class="form-control" value="{{ calculated_price or '0.00' }}" readonly style="background-color: #f8f9fa;">
+                                </div>
+                                <small class="form-text text-muted">Based on cost + category markup</small>
                             </div>
                         </div>
 

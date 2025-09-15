@@ -9,6 +9,7 @@ import os
 import uuid
 from werkzeug.utils import secure_filename
 from sqlalchemy import text
+from decimal import Decimal, ROUND_HALF_UP
 
 # Admin password (in production, this should be an environment variable)
 ADMIN_PASSWORD = "admin123"
@@ -32,6 +33,42 @@ def save_uploaded_image(file, folder):
         # Return the URL path
         return f"/static/images/{folder}/{unique_filename}"
     return None
+
+def compute_price(cost, override_markup, primary_category_id):
+    """
+    Compute product price using Decimal arithmetic for precision.
+    
+    Args:
+        cost: Product cost as Decimal or convertible to Decimal
+        override_markup: Override markup percentage (can be None, 0, or positive number)
+        primary_category_id: ID of primary category to get default markup
+        
+    Returns:
+        Decimal: Computed price with proper quantization (2 decimal places)
+    """
+    if not cost:
+        return Decimal('0.00')
+    
+    # Convert cost to Decimal for precision
+    cost_decimal = Decimal(str(cost))
+    
+    # Determine markup to use - explicit None check to allow 0% override
+    markup_decimal = Decimal('0')
+    if override_markup is not None:
+        markup_decimal = Decimal(str(override_markup))
+    else:
+        # Get markup from primary category
+        if primary_category_id:
+            primary_category = Category.query.get(primary_category_id)
+            if primary_category and primary_category.markup:
+                markup_decimal = Decimal(str(primary_category.markup))
+    
+    # Calculate price: cost * (1 + markup/100)
+    markup_multiplier = Decimal('1') + (markup_decimal / Decimal('100'))
+    price = cost_decimal * markup_multiplier
+    
+    # Quantize to 2 decimal places with proper rounding
+    return price.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
 
 def admin_required(f):
     """Decorator to require admin authentication"""
@@ -237,6 +274,13 @@ def admin_add_product():
     form.category_ids.choices = [(c.id, c.name) for c in categories]
     form.manufacturer_id.choices = [(0, 'No Manufacturer')] + [(m.id, m.name) for m in manufacturers]
     
+    # Calculate price for display using helper function
+    calculated_price = compute_price(
+        form.cost.data,
+        form.override_markup.data,
+        form.primary_category_id.data
+    )
+    
     if form.validate_on_submit():
         product = Product()
         product.name = form.name.data
@@ -244,10 +288,15 @@ def admin_add_product():
         product.sku = form.sku.data
         product.primary_category_id = form.primary_category_id.data
         product.manufacturer_id = form.manufacturer_id.data if form.manufacturer_id.data != 0 else None
-        product.model_number = form.model_number.data
         product.short_description = form.short_description.data
         product.description = form.description.data
-        product.price = form.price.data
+        
+        # Calculate and set price using helper function
+        product.price = compute_price(
+            form.cost.data,
+            form.override_markup.data,
+            form.primary_category_id.data
+        )
         product.cost = form.cost.data
         product.override_markup = form.override_markup.data
         
@@ -278,7 +327,7 @@ def admin_add_product():
         flash(f'Product "{product.name}" added successfully!', 'success')
         return redirect(url_for('admin_products'))
     
-    return render_template('admin/product_form.html', form=form, title='Add Product')
+    return render_template('admin/product_form.html', form=form, title='Add Product', calculated_price=f'{calculated_price:.2f}')
 
 @app.route('/admin/products/<int:product_id>/edit', methods=['GET', 'POST'])
 @admin_required
@@ -299,16 +348,28 @@ def admin_edit_product(product_id):
         form.manufacturer_id.data = product.manufacturer_id or 0
         form.image_url.data = product.thumb_image_url
     
+    # Calculate price for display using helper function
+    calculated_price = compute_price(
+        form.cost.data,
+        form.override_markup.data,
+        form.primary_category_id.data
+    )
+    
     if form.validate_on_submit():
         product.name = form.name.data
         product.slug = form.slug.data
         product.sku = form.sku.data
         product.primary_category_id = form.primary_category_id.data
         product.manufacturer_id = form.manufacturer_id.data if form.manufacturer_id.data != 0 else None
-        product.model_number = form.model_number.data
         product.short_description = form.short_description.data
         product.description = form.description.data
-        product.price = form.price.data
+        
+        # Calculate and set price using helper function
+        product.price = compute_price(
+            form.cost.data,
+            form.override_markup.data,
+            form.primary_category_id.data
+        )
         product.cost = form.cost.data
         product.override_markup = form.override_markup.data
         
@@ -338,7 +399,7 @@ def admin_edit_product(product_id):
         flash(f'Product "{product.name}" updated successfully!', 'success')
         return redirect(url_for('admin_products'))
     
-    return render_template('admin/product_form.html', form=form, title='Edit Product', product=product)
+    return render_template('admin/product_form.html', form=form, title='Edit Product', product=product, calculated_price=f'{calculated_price:.2f}')
 
 @app.route('/admin/products/<int:product_id>/delete', methods=['POST'])
 @admin_required
