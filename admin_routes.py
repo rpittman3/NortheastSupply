@@ -663,10 +663,17 @@ def admin_process_bulk_category_assignment():
 def admin_markups():
     """Display category markup management page"""
     from flask_wtf.csrf import generate_csrf
+    from sqlalchemy.orm import aliased
+    
+    # Create alias for parent category to avoid self-join conflict
+    parent_category = aliased(Category)
+    
     # Get only second-level categories (have a parent, but parent has no parent)
-    categories = Category.query.join(Category.parent).filter(
+    categories = Category.query.join(
+        parent_category, Category.parent_id == parent_category.id
+    ).filter(
         Category.parent_id.isnot(None),  # Category has a parent
-        Category.parent.has(Category.parent_id.is_(None))  # Parent has no parent (is first-level)
+        parent_category.parent_id.is_(None)  # Parent has no parent (is first-level)
     ).order_by(Category.name).all()
     return render_template('admin/markups.html', categories=categories, csrf_token=generate_csrf())
 
