@@ -662,14 +662,19 @@ def admin_process_bulk_category_assignment():
 @admin_required
 def admin_markups():
     """Display category markup management page"""
+    from flask_wtf.csrf import generate_csrf
     categories = Category.query.order_by(Category.name).all()
-    return render_template('admin/markups.html', categories=categories)
+    return render_template('admin/markups.html', categories=categories, csrf_token=generate_csrf())
 
 @app.route('/admin/categories/<int:category_id>/markup', methods=['PATCH', 'POST'])
 @admin_required
 def admin_update_category_markup(category_id):
     """Update category markup via AJAX"""
+    from flask_wtf.csrf import validate_csrf
     try:
+        # Validate CSRF token
+        validate_csrf(request.headers.get('X-CSRFToken'))
+        
         category = Category.query.get_or_404(category_id)
         data = request.get_json()
         
