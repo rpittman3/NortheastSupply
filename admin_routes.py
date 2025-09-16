@@ -10,7 +10,7 @@ import uuid
 import math
 from werkzeug.utils import secure_filename
 from sqlalchemy import text
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import Decimal, ROUND_HALF_UP, InvalidOperation
 
 # Admin password (in production, this should be an environment variable)
 ADMIN_PASSWORD = "admin123"
@@ -657,3 +657,71 @@ def admin_process_bulk_category_assignment():
     
     flash(f'Successfully assigned {success_count} products to "{category.name}" category.', 'success')
     return redirect(url_for('admin_bulk_category_assignment'))
+
+@app.route('/admin/markups')
+@admin_required
+def admin_markups():
+    """Display category markup management page"""
+    categories = Category.query.order_by(Category.name).all()
+    return render_template('admin/markups.html', categories=categories)
+
+@app.route('/admin/categories/<int:category_id>/markup', methods=['PATCH', 'POST'])
+@admin_required
+def admin_update_category_markup(category_id):
+    """Update category markup via AJAX"""
+    try:
+        category = Category.query.get_or_404(category_id)
+        data = request.get_json()
+        
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+        
+        markup_value = data.get('markup')
+        
+        # Handle empty string or null as None (clear markup)
+        if markup_value == '' or markup_value is None:
+            markup_decimal = None
+        else:
+            try:
+                # Convert to Decimal and validate range
+                markup_decimal = Decimal(str(markup_value))
+                markup_decimal = markup_decimal.quantize(Decimal('0.0001'))  # 4 decimal places
+                
+                if markup_decimal < 0 or markup_decimal > 300:
+                    return jsonify({'error': 'Markup must be between 0% and 300%'}), 400
+                    
+            except (ValueError, TypeError, InvalidOperation):
+                return jsonify({'error': 'Invalid markup value'}), 400
+        
+        # Update category markup
+        old_markup = category.markup
+        category.markup = markup_decimal
+        
+        # Recompute prices for products that use this category's markup (no override)
+        products_to_update = Product.query.filter(
+            Product.primary_category_id == category_id,
+            Product.override_markup.is_(None)
+        ).all()
+        
+        updated_count = 0
+        for product in products_to_update:
+            if product.cost:  # Only update if product has a cost
+                new_price = compute_price(product.cost, None, category_id)
+                product.price = new_price
+                updated_count += 1
+        
+        db.session.commit()
+        
+        # Log the change
+        app.logger.info(f'Updated category "{category.name}" markup from {old_markup}% to {markup_decimal}%. Updated {updated_count} product prices.')
+        
+        return jsonify({
+            'success': True,
+            'markup': float(markup_decimal) if markup_decimal is not None else None,
+            'updated_count': updated_count
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        app.logger.error(f'Error updating category markup: {str(e)}')
+        return jsonify({'error': 'Internal server error'}), 500

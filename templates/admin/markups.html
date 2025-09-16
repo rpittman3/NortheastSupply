@@ -1,0 +1,84 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Category Markups - Admin{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Category Markups</h1>
+        <div>
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="alert alert-info mb-4">
+                <i class="fas fa-info-circle"></i>
+                Enter markup percentages for each category. Changes are automatically saved. Products with override markups will not be affected.
+            </div>
+
+            {% if categories %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Category Name</th>
+                                <th>Current Markup (%)</th>
+                                <th width="120">New Markup (%)</th>
+                                <th width="80">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for category in categories %}
+                            <tr data-category-id="{{ category.id }}">
+                                <td>
+                                    <strong>{{ category.name }}</strong>
+                                    {% if category.parent %}
+                                        <br><small class="text-muted">Parent: {{ category.parent.name }}</small>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <span class="current-markup">
+                                        {% if category.markup %}
+                                            {{ "%.2f"|format(category.markup) }}%
+                                        {% else %}
+                                            <span class="text-muted">Not set</span>
+                                        {% endif %}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-sm">
+                                        <input 
+                                            type="number" 
+                                            class="form-control markup-input" 
+                                            data-category-id="{{ category.id }}"
+                                            value="{{ category.markup if category.markup else '' }}"
+                                            step="0.01"
+                                            min="0"
+                                            max="300"
+                                            placeholder="0.00">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </td>
+                                <td class="status-cell">
+                                    <span class="status-indicator" data-category-id="{{ category.id }}">
+                                        <i class="fas fa-circle text-muted" title="Ready"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-muted">No categories found. <a href="{{ url_for('admin_add_category') }}">Add your first category</a></p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/admin_markups.js') }}"></script>
+{% endblock %}
