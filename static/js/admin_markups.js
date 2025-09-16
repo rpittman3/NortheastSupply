@@ -80,10 +80,14 @@ class MarkupManager {
                 throw new Error('Markup must be between 0% and 300%');
             }
             
+            // Get CSRF token
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+            
             const response = await fetch(`/admin/categories/${categoryId}/markup`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
                 },
                 body: JSON.stringify({ markup: markup }),
                 signal: abortController.signal
@@ -100,7 +104,8 @@ class MarkupManager {
             const currentValue = currentInput.value.trim() === '' ? null : parseFloat(currentInput.value);
             
             if (result.markup !== currentValue) {
-                // Response is outdated, ignore it
+                // Response is outdated, reset status and ignore it
+                this.updateStatus(categoryId, 'idle');
                 return;
             }
 

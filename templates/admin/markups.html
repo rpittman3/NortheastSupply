@@ -2,6 +2,10 @@
 
 {% block title %}Category Markups - Admin{% endblock %}
 
+{% block extra_head %}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+{% endblock %}
+
 {% block content %}
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
