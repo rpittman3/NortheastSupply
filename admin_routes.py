@@ -677,6 +677,69 @@ def admin_markups():
     ).order_by(Category.name).all()
     return render_template('admin/markups.html', categories=categories, csrf_token=generate_csrf())
 
+@app.route('/admin/product-costs')
+@admin_required
+def admin_product_costs():
+    """Display product cost management page"""
+    from flask_wtf.csrf import generate_csrf
+    
+    # Get all products including those without categories for filtering
+    products = Product.query.outerjoin(Category, Product.primary_category_id == Category.id).order_by(Product.name).all()
+    
+    # Get all categories for filtering
+    categories = Category.query.order_by(Category.name).all()
+    
+    return render_template('admin/product_costs.html', products=products, categories=categories, csrf_token=generate_csrf())
+
+@app.route('/admin/products/<int:product_id>/cost', methods=['PATCH', 'POST'])
+@admin_required
+def admin_update_product_cost(product_id):
+    """Update product cost via AJAX"""
+    from flask_wtf.csrf import validate_csrf
+    
+    try:
+        # Validate CSRF token
+        validate_csrf(request.headers.get('X-CSRFToken'))
+        
+        product = Product.query.get_or_404(product_id)
+        
+        # Get new cost from request (allow empty to clear cost)
+        new_cost = request.form.get('cost', '').strip()
+        
+        if new_cost == '':
+            # Clear the cost
+            cost_decimal = None
+        else:
+            try:
+                cost_decimal = Decimal(str(new_cost))
+                if cost_decimal < 0:
+                    return jsonify({'success': False, 'error': 'Cost cannot be negative'}), 400
+            except (ValueError, InvalidOperation):
+                return jsonify({'success': False, 'error': 'Invalid cost format'}), 400
+        
+        # Update product cost
+        product.cost = cost_decimal
+        
+        # Recalculate price using existing compute_price function
+        new_price = compute_price(
+            cost_decimal,
+            product.override_markup,
+            product.primary_category_id
+        )
+        product.price = new_price
+        
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'cost': float(cost_decimal) if cost_decimal is not None else None,
+            'price': float(new_price)
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 @app.route('/admin/categories/<int:category_id>/markup', methods=['PATCH', 'POST'])
 @admin_required
 def admin_update_category_markup(category_id):

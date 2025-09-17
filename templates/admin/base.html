@@ -166,10 +166,18 @@
                             <i class="fas fa-industry me-1"></i>Manufacturers
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin_products') }}">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-box me-1"></i>Products
                         </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('admin_products') }}">
+                                <i class="fas fa-list me-1"></i>Manage Products
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('admin_product_costs') }}">
+                                <i class="fas fa-dollar-sign me-1"></i>Product Costs
+                            </a></li>
+                        </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="ordersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

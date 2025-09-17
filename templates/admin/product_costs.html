@@ -1,0 +1,125 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Product Costs - Admin{% endblock %}
+
+{% block extra_head %}
+<meta name="csrf-token" content="{{ csrf_token }}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Product Cost Management</h1>
+        <div>
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="alert alert-info mb-4">
+                <i class="fas fa-info-circle"></i>
+                Update product costs below. Prices will be automatically recalculated using category markups or product-specific override markups. Changes are saved immediately.
+            </div>
+
+            <!-- Search and Filter Controls -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text" id="productSearch" class="form-control" placeholder="Search products...">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <select id="categoryFilter" class="form-select">
+                        <option value="">All Categories</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            {% if products %}
+                <div class="table-responsive">
+                    <table class="table table-hover" id="productsTable">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Category</th>
+                                <th>Current Cost</th>
+                                <th>Current Price</th>
+                                <th width="120">New Cost</th>
+                                <th width="80">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products %}
+                            <tr data-product-id="{{ product.id }}" data-category-id="{{ product.primary_category_id }}" class="product-row">
+                                <td>
+                                    <strong>{{ product.name }}</strong>
+                                    {% if product.model %}
+                                        <br><small class="text-muted">Model: {{ product.model }}</small>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <span class="category-name">{{ product.primary_category.name if product.primary_category else 'No Category' }}</span>
+                                </td>
+                                <td>
+                                    <span class="current-cost">
+                                        {% if product.cost %}
+                                            ${{ "%.2f"|format(product.cost) }}
+                                        {% else %}
+                                            <span class="text-muted">Not set</span>
+                                        {% endif %}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="current-price">
+                                        {% if product.price %}
+                                            ${{ "%.2f"|format(product.price) }}
+                                        {% else %}
+                                            <span class="text-muted">Not set</span>
+                                        {% endif %}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text">$</span>
+                                        <input 
+                                            type="number" 
+                                            class="form-control cost-input" 
+                                            data-product-id="{{ product.id }}"
+                                            value="{{ product.cost if product.cost else '' }}"
+                                            step="0.01"
+                                            min="0"
+                                            placeholder="0.00">
+                                    </div>
+                                </td>
+                                <td class="status-cell">
+                                    <span class="status-indicator" data-product-id="{{ product.id }}">
+                                        <i class="fas fa-circle text-muted" title="Ready"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-3">
+                    <small class="text-muted">
+                        Showing <span id="visibleCount">{{ products|length }}</span> of {{ products|length }} products
+                    </small>
+                </div>
+            {% else %}
+                <p class="text-muted">No products found. <a href="{{ url_for('admin_add_product') }}">Add your first product</a></p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/admin_product_costs.js') }}"></script>
+{% endblock %}
