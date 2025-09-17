@@ -42,6 +42,9 @@ class ProductCostManager {
         
         // Setup category filter
         this.setupCategoryFilter();
+        
+        // Setup no cost filter
+        this.setupNoCostFilter();
     }
 
     setupSearch() {
@@ -62,9 +65,19 @@ class ProductCostManager {
         }
     }
 
+    setupNoCostFilter() {
+        const noCostFilter = document.getElementById('noCostFilter');
+        if (noCostFilter) {
+            noCostFilter.addEventListener('change', (e) => {
+                this.filterProducts();
+            });
+        }
+    }
+
     filterProducts() {
         const searchTerm = document.getElementById('productSearch')?.value.toLowerCase() || '';
         const selectedCategory = document.getElementById('categoryFilter')?.value || '';
+        const noCostOnly = document.getElementById('noCostFilter')?.checked || false;
         
         let visibleCount = 0;
 
@@ -79,7 +92,12 @@ class ProductCostManager {
             // Check category filter
             const matchesCategory = !selectedCategory || categoryId === selectedCategory;
             
-            if (matchesSearch && matchesCategory) {
+            // Check no cost filter
+            const currentCostElement = row.querySelector('.current-cost');
+            const hasCost = currentCostElement && !currentCostElement.textContent.includes('Not set');
+            const matchesNoCostFilter = !noCostOnly || !hasCost;
+            
+            if (matchesSearch && matchesCategory && matchesNoCostFilter) {
                 row.style.display = '';
                 visibleCount++;
             } else {
@@ -243,6 +261,9 @@ class ProductCostManager {
                 costElement.innerHTML = '<span class="text-muted">Not set</span>';
             }
         }
+        
+        // Re-apply filters after cost update (in case "no cost" filter is active)
+        this.filterProducts();
     }
 
     updateCurrentPrice(productId, price) {

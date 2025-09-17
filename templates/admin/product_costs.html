@@ -45,19 +45,27 @@
 
             <!-- Search and Filter Controls -->
             <div class="row mb-4">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="input-group">
                         <span class="input-group-text"><i class="fas fa-search"></i></span>
                         <input type="text" id="productSearch" class="form-control" placeholder="Search products...">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <select id="categoryFilter" class="form-select">
                         <option value="">All Categories</option>
                         {% for category in categories %}
                             <option value="{{ category.id }}">{{ category.name }}</option>
                         {% endfor %}
                     </select>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-check d-flex align-items-center h-100">
+                        <input class="form-check-input" type="checkbox" id="noCostFilter">
+                        <label class="form-check-label ms-2" for="noCostFilter">
+                            Show only products without cost
+                        </label>
+                    </div>
                 </div>
             </div>
 
