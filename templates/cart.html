@@ -14,7 +14,7 @@
                     {% for item in cart_items %}
                     <div class="cart-item border-bottom py-3">
                         <div class="row align-items-center">
-                            <div class="col-md-2">
+                            <div class="col-md-2 text-center">
                                 <img src="{{ item.product.large_image_url or item.product.thumb_image_url or 'https://placehold.co/500x400/f8f9fa/6c757d/png?text=No+Image' }}" alt="{{ item.product.name }}" 
                                      class="img-fluid rounded" style="height: 80px; object-fit: cover;">
                             </div>
@@ -29,7 +29,7 @@
                                 <br>
                                 <small class="text-muted">SKU: {{ item.product.sku }}</small>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 text-center">
                                 <span class="fw-bold text-primary">${{ "%.2f"|format(item.product.price) }}</span>
                             </div>
                             <div class="col-md-1">
@@ -42,7 +42,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 text-center">
                                 <span class="fw-bold">${{ "%.2f"|format(item.product.price * item.quantity) }}</span>
                             </div>
                             <div class="col-md-1">
