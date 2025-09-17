@@ -23,8 +23,11 @@ def index():
     # Get featured categories
     featured_categories = Category.query.filter_by(is_featured=True).order_by(Category.sort_order).limit(8).all()
     
-    # Get featured products
-    featured_products = Product.query.filter_by(is_featured=True).limit(12).all()
+    # Get featured products (only show products with both cost and price > 0)
+    featured_products = Product.query.filter_by(is_featured=True).filter(
+        Product.cost > 0,
+        Product.price > 0
+    ).limit(12).all()
     
     # Get main categories (no parent)
     main_categories = Category.query.filter_by(parent_id=None).order_by(Category.sort_order).all()
@@ -60,9 +63,11 @@ def category_view(slug):
         if sub_subcategories:
             category_ids.extend([subsub.id for subsub in sub_subcategories])
     
-    # Get products from current category and all its descendant categories
+    # Get products from current category and all its descendant categories (only show products with both cost and price > 0)
     products = Product.query.join(product_categories).filter(
-        product_categories.c.category_id.in_(category_ids)
+        product_categories.c.category_id.in_(category_ids),
+        Product.cost > 0,
+        Product.price > 0
     )
     
     # Pagination
@@ -94,6 +99,8 @@ def product_view(slug):
             # Find products that share keywords in their name
             keyword_matches = Product.query.filter(
                 Product.id != product.id,
+                Product.cost > 0,
+                Product.price > 0,
                 or_(*[Product.name.ilike(f'%{word}%') for word in product_words[:3]])  # Use top 3 keywords
             ).filter(
                 # Prioritize products with images
@@ -113,7 +120,9 @@ def product_view(slug):
         category_matches = Product.query.filter(
             Product.primary_category_id == product.primary_category_id,
             Product.id != product.id,
-            Product.id.notin_(existing_ids) if existing_ids else True
+            Product.cost > 0,
+            Product.price > 0,
+            ~Product.id.in_(existing_ids) if existing_ids else True
         ).filter(
             # Prioritize products with images
             or_(
@@ -132,7 +141,9 @@ def product_view(slug):
         manufacturer_matches = Product.query.filter(
             Product.manufacturer_id == product.manufacturer_id,
             Product.id != product.id,
-            Product.id.notin_(existing_ids) if existing_ids else True
+            Product.cost > 0,
+            Product.price > 0,
+            ~Product.id.in_(existing_ids) if existing_ids else True
         ).filter(
             # Prioritize products with images
             or_(
@@ -156,13 +167,14 @@ def search():
     if not query:
         return redirect(url_for('index'))
     
-    # Search in product names and descriptions
+    # Search in product names and descriptions (only show products with both cost and price > 0)
     products = Product.query.filter(
+        Product.cost > 0,
+        Product.price > 0,
         or_(
             Product.name.ilike(f'%{query}%'),
             Product.description.ilike(f'%{query}%'),
-            Product.short_description.ilike(f'%{query}%'),
-            Product.brand.ilike(f'%{query}%')
+            Product.short_description.ilike(f'%{query}%')
         )
     )
     
