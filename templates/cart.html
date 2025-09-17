@@ -32,7 +32,7 @@
                             <div class="col-md-2">
                                 <span class="fw-bold text-primary">${{ "%.2f"|format(item.product.price) }}</span>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <form action="{{ url_for('update_cart') }}" method="POST" class="d-inline">
                                     <input type="hidden" name="item_id" value="{{ item.id }}">
                                     <div class="input-group input-group-sm" style="width: 70px;">
@@ -42,7 +42,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <span class="fw-bold">${{ "%.2f"|format(item.product.price * item.quantity) }}</span>
                             </div>
                             <div class="col-md-1">
