@@ -721,19 +721,24 @@ def admin_update_product_cost(product_id):
         product.cost = cost_decimal
         
         # Recalculate price using existing compute_price function
-        new_price = compute_price(
-            cost_decimal,
-            product.override_markup,
-            product.primary_category_id
-        )
-        product.price = new_price
+        if cost_decimal is not None:
+            new_price = compute_price(
+                cost_decimal,
+                product.override_markup,
+                product.primary_category_id
+            )
+            product.price = new_price
+        else:
+            # If cost is cleared, set price to None for consistency
+            product.price = None
+            new_price = None
         
         db.session.commit()
         
         return jsonify({
             'success': True,
             'cost': float(cost_decimal) if cost_decimal is not None else None,
-            'price': float(new_price)
+            'price': float(new_price) if new_price is not None else None
         })
         
     except Exception as e:
