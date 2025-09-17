@@ -1,8 +1,8 @@
 /* Professional Restaurant Supply - Custom Styles */
 
 :root {
-    --primary-color: #0e78e1;
-    --navbar-color: #0e78e1;
+    --primary-color: #1e5891;
+    --navbar-color: #1e5891;
     --secondary-color: #6c757d;
     --success-color: #198754;
     --warning-color: #ffc107;
@@ -40,7 +40,7 @@ body {
 
 /* Category Navigation Bar */
 .category-nav-bar {
-    background-color: #0e78e1 !important;
+    background-color: #1e5891 !important;
 }
 
 .category-nav-bar .navbar {
@@ -128,7 +128,7 @@ body {
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-    color: #0e78e1 !important;
+    color: #1e5891 !important;
 }
 
 /* Hero Section */
@@ -148,7 +148,7 @@ body {
 
 /* Trust Indicators Section */
 .trust-indicators-section {
-    background-color: #0e78e1;
+    background-color: #1e5891;
     color: #ffffff;
 }
 
@@ -341,6 +341,26 @@ body {
 
 .table-hover tbody tr:hover {
     background-color: rgba(0, 0, 0, 0.025);
+}
+
+/* Admin Navbar */
+.admin-navbar {
+    background-color: #0e78e1 !important;
+}
+
+.admin-navbar .navbar-brand {
+    color: #ffffff !important;
+}
+
+.admin-navbar .navbar-nav .nav-link {
+    color: #ffffff !important;
+    transition: all 0.15s ease-in-out;
+}
+
+.admin-navbar .navbar-nav .nav-link:hover {
+    color: #d4edda !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 0.25rem;
 }
 
 /* Footer */
