@@ -103,8 +103,20 @@
                 </div>
                 <div class="card-body">
                     <p><strong>User ID:</strong> {{ user.id }}</p>
-                    <p><strong>Joined:</strong> {{ user.created_at.strftime('%B %d, %Y') }}</p>
-                    <p><strong>Last Updated:</strong> {{ user.updated_at.strftime('%B %d, %Y') }}</p>
+                    <p><strong>Joined:</strong> 
+                        {% if user.created_at %}
+                            {{ user.created_at.strftime('%B %d, %Y') }}
+                        {% else %}
+                            <span class="text-muted">Not available</span>
+                        {% endif %}
+                    </p>
+                    <p><strong>Last Updated:</strong> 
+                        {% if user.updated_at %}
+                            {{ user.updated_at.strftime('%B %d, %Y') }}
+                        {% else %}
+                            <span class="text-muted">Not available</span>
+                        {% endif %}
+                    </p>
                     <p><strong>Cart Items:</strong> {{ user.cart_items|length }}</p>
                     <p><strong>Quote Requests:</strong> {{ user.quote_requests|length }}</p>
                     <p><strong>Orders:</strong> {{ user.orders|length }}</p>
