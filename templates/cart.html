@@ -35,10 +35,10 @@
                             <div class="col-md-2">
                                 <form action="{{ url_for('update_cart') }}" method="POST" class="d-inline">
                                     <input type="hidden" name="item_id" value="{{ item.id }}">
-                                    <div class="input-group input-group-sm">
+                                    <div class="input-group input-group-sm" style="width: 70px;">
                                         <input type="number" name="quantity" class="form-control text-center" 
                                                value="{{ item.quantity }}" min="1" max="99" 
-                                               onchange="this.form.submit()">
+                                               onchange="this.form.submit()" style="padding: 0.25rem 0.5rem;">
                                     </div>
                                 </form>
                             </div>
