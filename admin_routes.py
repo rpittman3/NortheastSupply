@@ -590,9 +590,20 @@ def admin_bulk_category_assignment():
     # Get search query and category filter from request
     search_query = request.args.get('search', '')
     category_id = request.args.get('category_id', type=int)
+    uncategorized_only = request.args.get('uncategorized', type=int)
     
     # Start with all products query
     products_query = Product.query
+    
+    # Apply uncategorized filter if requested
+    if uncategorized_only:
+        # Find products that have no categories using a subquery
+        uncategorized_subquery = text(
+            "SELECT product_id FROM product_categories"
+        )
+        products_query = products_query.filter(
+            ~Product.id.in_(db.session.execute(uncategorized_subquery).scalars())
+        )
     
     # Apply search filter if provided
     if search_query:
@@ -611,7 +622,8 @@ def admin_bulk_category_assignment():
                          categories=categories,
                          products=products,
                          search_query=search_query,
-                         selected_category_id=category_id)
+                         selected_category_id=category_id,
+                         uncategorized_only=uncategorized_only)
 
 @app.route('/admin/bulk-category-assignment', methods=['POST'])
 @admin_required

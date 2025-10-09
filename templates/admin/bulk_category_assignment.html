@@ -68,6 +68,13 @@
                             </button>
                             {% endif %}
                         </div>
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="uncategorizedOnly" 
+                                   {% if uncategorized_only %}checked{% endif %}>
+                            <label class="form-check-label" for="uncategorizedOnly">
+                                Show uncategorized only
+                            </label>
+                        </div>
                     </div>
                     <div class="col-lg-4 d-flex align-items-end">
                         <div class="btn-group" role="group">
@@ -163,7 +170,7 @@
                     <ul class="pagination justify-content-center">
                         {% if products.has_prev %}
                         <li class="page-item">
-                            <a class="page-link" href="{{ url_for('admin_bulk_category_assignment', page=products.prev_num, search=search_query) }}">Previous</a>
+                            <a class="page-link" href="{{ url_for('admin_bulk_category_assignment', page=products.prev_num, search=search_query, uncategorized=uncategorized_only) }}">Previous</a>
                         </li>
                         {% endif %}
                         
@@ -171,7 +178,7 @@
                             {% if page_num %}
                                 {% if page_num != products.page %}
                                 <li class="page-item">
-                                    <a class="page-link" href="{{ url_for('admin_bulk_category_assignment', page=page_num, search=search_query) }}">{{ page_num }}</a>
+                                    <a class="page-link" href="{{ url_for('admin_bulk_category_assignment', page=page_num, search=search_query, uncategorized=uncategorized_only) }}">{{ page_num }}</a>
                                 </li>
                                 {% else %}
                                 <li class="page-item active">
@@ -187,7 +194,7 @@
                         
                         {% if products.has_next %}
                         <li class="page-item">
-                            <a class="page-link" href="{{ url_for('admin_bulk_category_assignment', page=products.next_num, search=search_query) }}">Next</a>
+                            <a class="page-link" href="{{ url_for('admin_bulk_category_assignment', page=products.next_num, search=search_query, uncategorized=uncategorized_only) }}">Next</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -233,6 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Search functionality
     function performSearch() {
         const searchQuery = searchInput.value.trim();
+        const uncategorizedCheckbox = document.getElementById('uncategorizedOnly');
         const currentUrl = new URL(window.location);
         
         if (searchQuery) {
@@ -240,6 +248,13 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             currentUrl.searchParams.delete('search');
         }
+        
+        if (uncategorizedCheckbox && uncategorizedCheckbox.checked) {
+            currentUrl.searchParams.set('uncategorized', '1');
+        } else {
+            currentUrl.searchParams.delete('uncategorized');
+        }
+        
         currentUrl.searchParams.delete('page');
         
         window.location.href = currentUrl.toString();
@@ -261,6 +276,12 @@ document.addEventListener('DOMContentLoaded', function() {
             currentUrl.searchParams.delete('page');
             window.location.href = currentUrl.toString();
         });
+    }
+
+    // Uncategorized filter checkbox
+    const uncategorizedCheckbox = document.getElementById('uncategorizedOnly');
+    if (uncategorizedCheckbox) {
+        uncategorizedCheckbox.addEventListener('change', performSearch);
     }
 
     // Selection functionality
