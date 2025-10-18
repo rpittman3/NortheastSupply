@@ -125,6 +125,22 @@
                 </div>
             </div>
 
+            <!-- Payment Section -->
+            {% if order.payment_link %}
+            <div class="card mb-4 border-success">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-credit-card me-2"></i>Complete Your Payment</h5>
+                </div>
+                <div class="card-body text-center">
+                    <p class="mb-4">Your order total is <strong class="fs-4 text-success">${{ "%.2f"|format(order.total_amount) }}</strong></p>
+                    <a href="{{ order.payment_link }}" target="_blank" class="btn btn-success btn-lg">
+                        <i class="fas fa-lock me-2"></i>Proceed to Secure Payment
+                    </a>
+                    <p class="text-muted mt-3 mb-0"><small>You will be redirected to our secure payment processor</small></p>
+                </div>
+            </div>
+            {% endif %}
+
             <!-- Help Section -->
             <div class="alert alert-info">
                 <i class="fas fa-info-circle me-2"></i>

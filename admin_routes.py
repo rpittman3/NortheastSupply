@@ -846,3 +846,16 @@ def admin_update_order_costs(order_id):
         flash('Invalid tax or shipping amount!', 'error')
     
     return redirect(url_for('admin_order_detail', order_id=order_id))
+
+@app.route('/admin/orders/<int:order_id>/update_payment_link', methods=['POST'])
+@admin_required
+def admin_update_payment_link(order_id):
+    order = Order.query.get_or_404(order_id)
+    
+    payment_link = request.form.get('payment_link', '').strip()
+    order.payment_link = payment_link if payment_link else None
+    
+    db.session.commit()
+    flash('Payment link updated successfully!', 'success')
+    
+    return redirect(url_for('admin_order_detail', order_id=order_id))

@@ -155,6 +155,7 @@ class Order(db.Model):
     user_id = db.Column(db.String, db.ForeignKey('users.id'), nullable=False)
     order_number = db.Column(db.String(20), nullable=False, unique=True)
     secure_token = db.Column(db.String(64), unique=True)  # Secure token for customer order view
+    payment_link = db.Column(db.String(500))  # Secure payment link for offsite payment processing
     status = db.Column(db.String(20), default='pending')  # pending, processing, shipped, delivered, cancelled
     subtotal = db.Column(db.Numeric(10, 2), nullable=False)
     tax_amount = db.Column(db.Numeric(10, 2), default=0)
