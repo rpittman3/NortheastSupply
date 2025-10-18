@@ -74,11 +74,11 @@
                             <tbody>
                                 {% for item in order.items %}
                                 <tr>
-                                    <td>{{ item.product_name }}</td>
-                                    <td><small class="text-muted">{{ item.product_sku }}</small></td>
+                                    <td>{{ item.product.name if item.product else 'Product Not Found' }}</td>
+                                    <td><small class="text-muted">{{ item.product.sku if item.product else 'N/A' }}</small></td>
                                     <td class="text-center">{{ item.quantity }}</td>
-                                    <td class="text-end">${{ "%.2f"|format(item.price) }}</td>
-                                    <td class="text-end">${{ "%.2f"|format(item.price * item.quantity) }}</td>
+                                    <td class="text-end">${{ "%.2f"|format(item.unit_price) }}</td>
+                                    <td class="text-end">${{ "%.2f"|format(item.total_price) }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
