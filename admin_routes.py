@@ -106,17 +106,11 @@ def admin_dashboard():
     total_users = User.query.count()
     total_categories = Category.query.count()
     total_products = Product.query.count()
-    total_quotes = QuoteRequest.query.count()
-    
-    # Recent quotes
-    recent_quotes = QuoteRequest.query.order_by(QuoteRequest.created_at.desc()).limit(5).all()
     
     return render_template('admin/dashboard.html',
                          total_users=total_users,
                          total_categories=total_categories,
-                         total_products=total_products,
-                         total_quotes=total_quotes,
-                         recent_quotes=recent_quotes)
+                         total_products=total_products)
 
 # Category Management
 @app.route('/admin/categories')
@@ -474,27 +468,6 @@ def admin_delete_manufacturer(manufacturer_id):
     flash(f'Manufacturer "{manufacturer.name}" deleted successfully!', 'success')
     return redirect(url_for('admin_manufacturers'))
 
-# Quote Management
-@app.route('/admin/quotes')
-@admin_required
-def admin_quotes():
-    quotes = QuoteRequest.query.order_by(QuoteRequest.created_at.desc()).all()
-    return render_template('admin/quotes.html', quotes=quotes)
-
-@app.route('/admin/quotes/<int:quote_id>')
-@admin_required
-def admin_quote_detail(quote_id):
-    quote = QuoteRequest.query.get_or_404(quote_id)
-    return render_template('admin/quote_detail.html', quote=quote)
-
-@app.route('/admin/quotes/<int:quote_id>/delete', methods=['POST'])
-@admin_required
-def admin_delete_quote(quote_id):
-    quote = QuoteRequest.query.get_or_404(quote_id)
-    db.session.delete(quote)
-    db.session.commit()
-    flash(f'Quote request {quote.request_number} deleted successfully!', 'success')
-    return redirect(url_for('admin_quotes'))
 
 # Category Sorting
 @app.route('/admin/categories/sort')

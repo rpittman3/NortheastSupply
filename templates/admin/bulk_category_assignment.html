@@ -152,11 +152,7 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    {% if product.requires_quote %}
-                                        <span class="text-warning">Quote Required</span>
-                                    {% else %}
-                                        ${{ "%.2f"|format(product.price) }}
-                                    {% endif %}
+                                    ${{ "%.2f"|format(product.price) }}
                                 </td>
                             </tr>
                             {% endfor %}

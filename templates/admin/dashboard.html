@@ -37,20 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body text-center">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="badge bg-warning fs-5">{{ total_quotes }}</span>
-                        <i class="fas fa-quote-left fa-3x text-warning"></i>
-                    </div>
-                    <h5>Quote Requests</h5>
-                    <p class="text-muted">View and manage customer quote requests</p>
-                    <a href="{{ url_for('admin_quotes') }}" class="btn btn-warning">View Quotes</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body text-center">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -62,52 +49,6 @@
                     <a href="{{ url_for('admin_users') }}" class="btn btn-info">Manage Users</a>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Recent Quote Requests -->
-    <div class="card">
-        <div class="card-header">
-            <h5 class="mb-0">Recent Quote Requests</h5>
-        </div>
-        <div class="card-body">
-            {% if recent_quotes %}
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Request #</th>
-                                <th>User</th>
-                                <th>Items</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for quote in recent_quotes %}
-                            <tr>
-                                <td>{{ quote.request_number }}</td>
-                                <td>{{ quote.user.email or quote.user.id }}</td>
-                                <td>{{ quote.items|length }} items</td>
-                                <td>
-                                    <span class="badge bg-{{ 'warning' if quote.status == 'pending' else 'success' }}">
-                                        {{ quote.status.title() }}
-                                    </span>
-                                </td>
-                                <td>{{ quote.created_at.strftime('%m/%d/%Y') }}</td>
-                                <td>
-                                    <a href="{{ url_for('admin_quote_detail', quote_id=quote.id) }}" 
-                                       class="btn btn-sm btn-outline-primary">View</a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            {% else %}
-                <p class="text-muted">No quote requests found.</p>
-            {% endif %}
         </div>
     </div>
 </div>
