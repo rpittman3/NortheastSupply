@@ -77,28 +77,15 @@
                     </div>
                     <div class="d-flex justify-content-between mb-3">
                         <span>Shipping:</span>
-                        <span>
-                            {% if total >= 500 %}
-                            <span class="text-success">FREE</span>
-                            {% else %}
-                            $25.00
-                            {% endif %}
-                        </span>
+                        <span class="text-muted">TBD</span>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between mb-3">
                         <span class="fw-bold">Total:</span>
                         <span class="fw-bold text-primary h5">
-                            ${{ "%.2f"|format(total + (total * 0.08) + (25.00 if total < 500 else 0)) }}
+                            ${{ "%.2f"|format(total + (total * 0.08)) }}
                         </span>
                     </div>
-                    
-                    {% if total < 500 %}
-                    <div class="alert alert-info small">
-                        <i class="fas fa-truck"></i> 
-                        Add ${{ "%.2f"|format(500 - total) }} more for free shipping!
-                    </div>
-                    {% endif %}
                     
                     <div class="d-grid gap-2">
                         <a href="{{ url_for('checkout') }}" class="btn btn-primary btn-lg">
