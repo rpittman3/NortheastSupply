@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash, session, jsonify
 from functools import wraps
 from app import app, db
-from models import User, Category, Product, Manufacturer, QuoteRequest, QuoteItem, product_categories
+from models import User, Category, Product, Manufacturer, QuoteRequest, QuoteItem, product_categories, Order, OrderItem
 from forms import AdminLoginForm, CategoryForm, ProductForm, ManufacturerForm, UserForm
 from flask_login import current_user
 from datetime import datetime
@@ -107,10 +107,14 @@ def admin_dashboard():
     total_categories = Category.query.count()
     total_products = Product.query.count()
     
+    # Get unprocessed orders (pending status)
+    unprocessed_orders = Order.query.filter_by(status='pending').order_by(Order.created_at.desc()).limit(10).all()
+    
     return render_template('admin/dashboard.html',
                          total_users=total_users,
                          total_categories=total_categories,
-                         total_products=total_products)
+                         total_products=total_products,
+                         unprocessed_orders=unprocessed_orders)
 
 # Category Management
 @app.route('/admin/categories')
@@ -794,3 +798,31 @@ def admin_update_category_markup(category_id):
         db.session.rollback()
         app.logger.error(f'Error updating category markup: {str(e)}')
         return jsonify({'error': 'Internal server error'}), 500
+
+# Orders Management
+@app.route('/admin/orders')
+@admin_required
+def admin_orders():
+    orders = Order.query.order_by(Order.created_at.desc()).all()
+    return render_template('admin/orders.html', orders=orders)
+
+@app.route('/admin/orders/<int:order_id>')
+@admin_required
+def admin_order_detail(order_id):
+    order = Order.query.get_or_404(order_id)
+    return render_template('admin/order_detail.html', order=order)
+
+@app.route('/admin/orders/<int:order_id>/update_status', methods=['POST'])
+@admin_required
+def admin_update_order_status(order_id):
+    order = Order.query.get_or_404(order_id)
+    new_status = request.form.get('status')
+    
+    if new_status in ['pending', 'processing', 'shipped', 'delivered', 'cancelled']:
+        order.status = new_status
+        db.session.commit()
+        flash(f'Order {order.order_number} status updated to {new_status}!', 'success')
+    else:
+        flash('Invalid status!', 'error')
+    
+    return redirect(url_for('admin_order_detail', order_id=order_id))
