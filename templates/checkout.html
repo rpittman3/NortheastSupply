@@ -86,8 +86,8 @@
                     <div class="card-body">
                         <div class="alert alert-info">
                             <i class="fas fa-info-circle"></i> 
-                            <strong>Shipping Selection:</strong> If you have a loading dock for delivery, please select "Delivery with Dock." If you do not have a loading dock, please select "Dropgate Delivery."
-                            <strong>Payment Processing:</strong> After placing your order, our team will contact you within 24 hours to process payment and arrange delivery. We accept all major credit cards, ACH transfers, and terms for qualified businesses.
+                            <strong>Shipping Selection:</strong> If you have a loading dock for delivery, please select "Loading Dock Delivery." If you do not have a loading dock, please select "Dropgate Delivery."<br>
+                            <strong>Payment Processing:</strong> After placing your order, our team will contact you within 24 hours to process payment and arrange delivery. We will provide you with a secure payment link for you to complete the payment.
                         </div>
                     </div>
                 </div>
@@ -127,8 +127,8 @@
                         <span>${{ "%.2f"|format(total) }}</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Tax (8%):</span>
-                        <span>${{ "%.2f"|format(total * 0.08) }}</span>
+                        <span>Tax:</span>
+                        <span class="text-muted">TBD</span>
                     </div>
                     <div class="d-flex justify-content-between mb-3">
                         <span>Shipping:</span>
@@ -138,7 +138,7 @@
                     <div class="d-flex justify-content-between">
                         <span class="fw-bold">Total:</span>
                         <span class="fw-bold text-primary h5">
-                            ${{ "%.2f"|format(total + (total * 0.08)) }}
+                            ${{ "%.2f"|format(total) }}
                         </span>
                     </div>
                 </div>
