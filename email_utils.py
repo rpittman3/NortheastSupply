@@ -136,38 +136,52 @@ def send_order_notification(order, user):
         </html>
         """
         
-        text_body = f"""
-        NEW ORDER RECEIVED
+        # Build text body
+        customer_name = f"Name: {user.first_name} {user.last_name}" if user and user.first_name else ""
+        customer_company = f"Company: {user.company_name}" if user and user.company_name else ""
+        shipping_company_line = order.shipping_company if order.shipping_company else ""
+        delivery_type = f"Delivery Type: {order.shipping_option}" if order.shipping_option else ""
         
-        Order Number: {order.order_number}
-        Order Date: {order.created_at.strftime('%B %d, %Y at %I:%M %p')}
-        Status: {order.status.capitalize()}
+        order_items_text = "\n".join([
+            f"{item.product.name if item.product else 'Product Not Found'} (SKU: {item.product.sku if item.product else 'N/A'}) - Qty: {item.quantity} x ${item.unit_price:.2f} = ${item.total_price:.2f}"
+            for item in order.items
+        ])
         
-        CUSTOMER INFORMATION
-        Customer ID: {user.id if user else order.user_id}
-        {"Name: " + user.first_name + " " + user.last_name if user and user.first_name else ""}
-        {"Company: " + user.company_name if user and user.company_name else ""}
+        tax_display = f"${order.tax_amount:.2f}" if order.tax_amount > 0 else "TBD"
+        shipping_display = f"${order.shipping_amount:.2f}" if order.shipping_amount > 0 else "TBD"
+        dev_mode_notice = "DEVELOPMENT MODE - Email sent to DEV_EMAIL" if is_dev_mode() else ""
         
-        SHIPPING INFORMATION
-        {order.shipping_name}
-        {order.shipping_company if order.shipping_company else ""}
-        {order.shipping_address}
-        {order.shipping_city}, {order.shipping_state} {order.shipping_zip}
-        Phone: {order.shipping_phone}
-        {"Delivery Type: " + order.shipping_option if order.shipping_option else ""}
-        
-        ORDER ITEMS
-        {"".join([f"{item.product.name if item.product else 'Product Not Found'} (SKU: {item.product.sku if item.product else 'N/A'}) - Qty: {item.quantity} x ${item.unit_price:.2f} = ${item.total_price:.2f}\n" for item in order.items])}
-        
-        Subtotal: ${order.subtotal:.2f}
-        Tax: {"$%.2f" % order.tax_amount if order.tax_amount > 0 else "TBD"}
-        Shipping: {"$%.2f" % order.shipping_amount if order.shipping_amount > 0 else "TBD"}
-        TOTAL: ${order.total_amount:.2f}
-        
-        ---
-        This is an automated notification from Professional Restaurant Supply
-        {"DEVELOPMENT MODE - Email sent to DEV_EMAIL" if is_dev_mode() else ""}
-        """
+        text_body = f"""NEW ORDER RECEIVED
+
+Order Number: {order.order_number}
+Order Date: {order.created_at.strftime('%B %d, %Y at %I:%M %p')}
+Status: {order.status.capitalize()}
+
+CUSTOMER INFORMATION
+Customer ID: {user.id if user else order.user_id}
+{customer_name}
+{customer_company}
+
+SHIPPING INFORMATION
+{order.shipping_name}
+{shipping_company_line}
+{order.shipping_address}
+{order.shipping_city}, {order.shipping_state} {order.shipping_zip}
+Phone: {order.shipping_phone}
+{delivery_type}
+
+ORDER ITEMS
+{order_items_text}
+
+Subtotal: ${order.subtotal:.2f}
+Tax: {tax_display}
+Shipping: {shipping_display}
+TOTAL: ${order.total_amount:.2f}
+
+---
+This is an automated notification from Professional Restaurant Supply
+{dev_mode_notice}
+"""
         
         part1 = MIMEText(text_body, 'plain')
         part2 = MIMEText(html_body, 'html')
