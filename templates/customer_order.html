@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Order {{ order.order_number }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="mb-3">Order Details</h1>
+                <h3 class="text-primary">{{ order.order_number }}</h3>
+                <p class="text-muted">Order placed on {{ order.created_at.strftime('%B %d, %Y at %I:%M %p') }}</p>
+            </div>
+
+            <!-- Order Status -->
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    <h5 class="mb-3">Order Status</h5>
+                    <h2>
+                        {% if order.status == 'pending' %}
+                            <span class="badge bg-warning fs-4">Pending</span>
+                        {% elif order.status == 'processing' %}
+                            <span class="badge bg-info fs-4">Processing</span>
+                        {% elif order.status == 'shipped' %}
+                            <span class="badge bg-primary fs-4">Shipped</span>
+                        {% elif order.status == 'delivered' %}
+                            <span class="badge bg-success fs-4">Delivered</span>
+                        {% elif order.status == 'cancelled' %}
+                            <span class="badge bg-danger fs-4">Cancelled</span>
+                        {% endif %}
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Order Items</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>SKU</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-end">Price</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order.items %}
+                                <tr>
+                                    <td>{{ item.product.name if item.product else 'Product Not Found' }}</td>
+                                    <td><small class="text-muted">{{ item.product.sku if item.product else 'N/A' }}</small></td>
+                                    <td class="text-center">{{ item.quantity }}</td>
+                                    <td class="text-end">${{ "%.2f"|format(item.unit_price) }}</td>
+                                    <td class="text-end">${{ "%.2f"|format(item.total_price) }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" class="text-end"><strong>Subtotal:</strong></td>
+                                    <td class="text-end">${{ "%.2f"|format(order.subtotal) }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-end"><strong>Tax:</strong></td>
+                                    <td class="text-end">
+                                        {% if order.tax_amount > 0 %}
+                                            ${{ "%.2f"|format(order.tax_amount) }}
+                                        {% else %}
+                                            <span class="text-muted">TBD</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-end"><strong>Shipping:</strong></td>
+                                    <td class="text-end">
+                                        {% if order.shipping_amount > 0 %}
+                                            ${{ "%.2f"|format(order.shipping_amount) }}
+                                        {% else %}
+                                            <span class="text-muted">TBD</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr class="table-active">
+                                    <td colspan="4" class="text-end"><h5 class="mb-0">Total:</h5></td>
+                                    <td class="text-end"><h5 class="mb-0 text-primary">${{ "%.2f"|format(order.total_amount) }}</h5></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping Information -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Shipping Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-2">Ship To:</h6>
+                            <p class="mb-1"><strong>{{ order.shipping_name }}</strong></p>
+                            {% if order.shipping_company %}
+                            <p class="mb-1">{{ order.shipping_company }}</p>
+                            {% endif %}
+                            <p class="mb-1">{{ order.shipping_address }}</p>
+                            <p class="mb-1">{{ order.shipping_city }}, {{ order.shipping_state }} {{ order.shipping_zip }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-2">Contact:</h6>
+                            <p class="mb-1"><i class="fas fa-phone me-2"></i>{{ order.shipping_phone }}</p>
+                            {% if order.shipping_option %}
+                            <hr>
+                            <h6 class="text-muted mb-2">Delivery Type:</h6>
+                            <p class="mb-1">{{ order.shipping_option }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Help Section -->
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>
+                <strong>Need help?</strong> If you have any questions about your order, please contact our support team.
+            </div>
+
+            <!-- Print Button -->
+            <div class="text-center mt-4">
+                <button onclick="window.print()" class="btn btn-outline-primary">
+                    <i class="fas fa-print me-2"></i>Print Order Details
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+@media print {
+    .navbar, .footer, .btn, .alert {
+        display: none !important;
+    }
+}
+</style>
+{% endblock %}

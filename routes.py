@@ -2,7 +2,7 @@ from flask import session, render_template, request, redirect, url_for, flash, j
 from app import app, db
 from replit_auth import require_login, make_replit_blueprint
 from flask_login import current_user
-from models import Category, Product, CartItem, QuoteRequest, QuoteItem, Order, OrderItem, product_categories
+from models import Category, Product, CartItem, QuoteRequest, QuoteItem, Order, OrderItem, product_categories, User
 from forms import QuoteRequestForm, CheckoutForm, AccountUpdateForm
 from sqlalchemy import or_, func, and_
 from datetime import datetime
@@ -472,3 +472,9 @@ def inject_cart_count():
 def inject_categories():
     main_categories = Category.query.filter_by(parent_id=None).order_by(Category.sort_order).all()
     return {'main_categories': main_categories}
+
+# Customer Order View (Public)
+@app.route('/order/<secure_token>')
+def customer_order_view(secure_token):
+    order = Order.query.filter_by(secure_token=secure_token).first_or_404()
+    return render_template('customer_order.html', order=order)

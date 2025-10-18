@@ -826,3 +826,23 @@ def admin_update_order_status(order_id):
         flash('Invalid status!', 'error')
     
     return redirect(url_for('admin_order_detail', order_id=order_id))
+
+@app.route('/admin/orders/<int:order_id>/update_costs', methods=['POST'])
+@admin_required
+def admin_update_order_costs(order_id):
+    order = Order.query.get_or_404(order_id)
+    
+    try:
+        tax_amount = float(request.form.get('tax_amount', 0))
+        shipping_amount = float(request.form.get('shipping_amount', 0))
+        
+        order.tax_amount = tax_amount
+        order.shipping_amount = shipping_amount
+        order.total_amount = float(order.subtotal) + tax_amount + shipping_amount
+        
+        db.session.commit()
+        flash('Tax and shipping costs updated successfully!', 'success')
+    except (ValueError, TypeError):
+        flash('Invalid tax or shipping amount!', 'error')
+    
+    return redirect(url_for('admin_order_detail', order_id=order_id))
