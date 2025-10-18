@@ -125,86 +125,6 @@
                 </div>
             </div>
 
-            <!-- Quote Requests -->
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0"><i class="fas fa-quote-left"></i> Quote Requests</h5>
-                </div>
-                <div class="card-body">
-                    {% if quote_requests %}
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Quote #</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Items</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for quote in quote_requests %}
-                                <tr>
-                                    <td><strong>{{ quote.request_number }}</strong></td>
-                                    <td>{{ quote.created_at.strftime('%m/%d/%Y') }}</td>
-                                    <td>
-                                        {% if quote.status == 'pending' %}
-                                        <span class="badge bg-warning">Pending</span>
-                                        {% elif quote.status == 'quoted' %}
-                                        <span class="badge bg-info">Quoted</span>
-                                        {% elif quote.status == 'converted' %}
-                                        <span class="badge bg-success">Converted</span>
-                                        {% else %}
-                                        <span class="badge bg-secondary">{{ quote.status|title }}</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>{{ quote.items|length }} items</td>
-                                    <td>
-                                        <button class="btn btn-outline-primary btn-sm" 
-                                                onclick="toggleQuoteDetails({{ quote.id }})">
-                                            View Details
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr id="quote-details-{{ quote.id }}" class="collapse">
-                                    <td colspan="5">
-                                        <div class="bg-light p-3 rounded">
-                                            <h6>Requested Items:</h6>
-                                            {% for item in quote.items %}
-                                            <div class="d-flex justify-content-between">
-                                                <span>{{ item.product.name }} (Qty: {{ item.quantity }})</span>
-                                                {% if item.quoted_price %}
-                                                <span>${{ "%.2f"|format(item.quoted_price) }}</span>
-                                                {% else %}
-                                                <span class="text-muted">Pending Quote</span>
-                                                {% endif %}
-                                            </div>
-                                            {% endfor %}
-                                            {% if quote.special_requirements %}
-                                            <hr>
-                                            <div><strong>Special Requirements:</strong><br>{{ quote.special_requirements }}</div>
-                                            {% endif %}
-                                            {% if quote.notes %}
-                                            <hr>
-                                            <div><strong>Notes:</strong><br>{{ quote.notes }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    {% else %}
-                    <div class="text-center py-3">
-                        <i class="fas fa-quote-left fa-2x text-muted mb-2"></i>
-                        <p class="text-muted">No quote requests yet</p>
-                        <a href="{{ url_for('request_quote') }}" class="btn btn-primary">Request Quote</a>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -212,15 +132,6 @@
 <script>
 function toggleOrderDetails(orderId) {
     const element = document.getElementById('order-details-' + orderId);
-    if (element.classList.contains('show')) {
-        element.classList.remove('show');
-    } else {
-        element.classList.add('show');
-    }
-}
-
-function toggleQuoteDetails(quoteId) {
-    const element = document.getElementById('quote-details-' + quoteId);
     if (element.classList.contains('show')) {
         element.classList.remove('show');
     } else {

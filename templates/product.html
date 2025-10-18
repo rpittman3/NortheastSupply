@@ -73,10 +73,6 @@
                     </form>
                     {% endif %}
                     
-                    <a href="{{ url_for('request_quote') }}" class="btn btn-outline-primary btn-lg me-2">
-                        <i class="fas fa-quote-left"></i> Request Quote
-                    </a>
-                    
                     <button class="btn btn-outline-secondary btn-lg" onclick="shareProduct()">
                         <i class="fas fa-share"></i> Share
                     </button>
@@ -84,7 +80,7 @@
                 {% else %}
                 <div class="alert alert-warning">
                     <i class="fas fa-sign-in-alt"></i> 
-                    <a href="{{ url_for('replit_auth.login') }}" class="alert-link">Login</a> to add items to cart or request quotes
+                    <a href="{{ url_for('replit_auth.login') }}" class="alert-link">Login</a> to add items to cart
                 </div>
                 {% endif %}
 
