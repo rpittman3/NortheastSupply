@@ -168,6 +168,7 @@ class Order(db.Model):
     shipping_state = db.Column(db.String(50))
     shipping_zip = db.Column(db.String(20))
     shipping_phone = db.Column(db.String(20))
+    shipping_option = db.Column(db.String(50))
 
     created_at = db.Column(db.DateTime, default=eastern_now)
     updated_at = db.Column(db.DateTime, default=eastern_now, onupdate=eastern_now)

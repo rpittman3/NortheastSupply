@@ -35,6 +35,11 @@ class CheckoutForm(FlaskForm):
     ])
     shipping_zip = StringField('ZIP Code', validators=[DataRequired(), Length(min=5, max=10)])
     shipping_phone = StringField('Phone', validators=[DataRequired(), Length(min=10, max=20)])
+    shipping_option = SelectField('Delivery Type', validators=[DataRequired()], choices=[
+        ('', 'Select Delivery Type'),
+        ('Dropgate Delivery', 'Dropgate Delivery'),
+        ('Loading Dock Delivery', 'Loading Dock Delivery')
+    ])
 
 class AccountUpdateForm(FlaskForm):
     first_name = StringField('First Name', validators=[Optional(), Length(max=50)])

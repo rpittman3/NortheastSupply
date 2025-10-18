@@ -318,7 +318,8 @@ def process_order():
             shipping_city=form.shipping_city.data,
             shipping_state=form.shipping_state.data,
             shipping_zip=form.shipping_zip.data,
-            shipping_phone=form.shipping_phone.data
+            shipping_phone=form.shipping_phone.data,
+            shipping_option=form.shipping_option.data
         )
         db.session.add(order)
         db.session.flush()  # Get the order ID

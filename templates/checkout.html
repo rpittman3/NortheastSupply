@@ -67,6 +67,13 @@
                                 <div class="text-danger small">{{ form.shipping_phone.errors[0] }}</div>
                                 {% endif %}
                             </div>
+                            <div class="col-md-6">
+                                {{ form.shipping_option.label(class="form-label") }}
+                                {{ form.shipping_option(class="form-select") }}
+                                {% if form.shipping_option.errors %}
+                                <div class="text-danger small">{{ form.shipping_option.errors[0] }}</div>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
