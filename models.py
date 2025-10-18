@@ -161,6 +161,7 @@ class Order(db.Model):
     tax_amount = db.Column(db.Numeric(10, 2), default=0)
     shipping_amount = db.Column(db.Numeric(10, 2), default=0)
     total_amount = db.Column(db.Numeric(10, 2), nullable=False)
+    tax_after_shipping = db.Column(db.Boolean, default=False)  # True = tax calculated on subtotal + shipping, False = tax on subtotal only
 
     # Shipping Information
     shipping_name = db.Column(db.String(100))

@@ -835,9 +835,15 @@ def admin_update_order_costs(order_id):
     try:
         tax_amount = float(request.form.get('tax_amount', 0))
         shipping_amount = float(request.form.get('shipping_amount', 0))
+        tax_after_shipping = request.form.get('tax_after_shipping', 'false') == 'true'
         
         order.tax_amount = tax_amount
         order.shipping_amount = shipping_amount
+        order.tax_after_shipping = tax_after_shipping
+        
+        # Calculate total based on tax calculation method
+        # Note: The tax_amount entered by admin is already the calculated amount,
+        # this flag is just for display purposes to show the order of calculation
         order.total_amount = float(order.subtotal) + tax_amount + shipping_amount
         
         db.session.commit()

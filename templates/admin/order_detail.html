@@ -163,6 +163,24 @@
                                        value="{{ "%.2f"|format(order.shipping_amount) }}" required>
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tax Calculation Method</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tax_after_shipping" id="tax_before" value="false" 
+                                       {% if not order.tax_after_shipping %}checked{% endif %}>
+                                <label class="form-check-label" for="tax_before">
+                                    Tax on subtotal only
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tax_after_shipping" id="tax_after" value="true" 
+                                       {% if order.tax_after_shipping %}checked{% endif %}>
+                                <label class="form-check-label" for="tax_after">
+                                    Tax on subtotal + shipping
+                                </label>
+                            </div>
+                            <small class="text-muted">Varies by state law</small>
+                        </div>
                         <button type="submit" class="btn btn-primary w-100">
                             <i class="fas fa-calculator me-2"></i>Update & Recalculate Total
                         </button>
