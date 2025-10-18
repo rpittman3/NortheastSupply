@@ -189,8 +189,13 @@ This is an automated notification from Professional Restaurant Supply
         msg.attach(part1)
         msg.attach(part2)
         
-        server = smtplib.SMTP(smtp_host, smtp_port)
-        server.starttls()
+        # Port 465 requires SSL, port 587 requires STARTTLS
+        if smtp_port == 465:
+            server = smtplib.SMTP_SSL(smtp_host, smtp_port)
+        else:
+            server = smtplib.SMTP(smtp_host, smtp_port)
+            server.starttls()
+        
         server.login(smtp_user, smtp_pass)
         server.send_message(msg)
         server.quit()

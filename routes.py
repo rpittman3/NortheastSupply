@@ -524,9 +524,17 @@ def test_email():
             part = MIMEText(body, 'plain')
             msg.attach(part)
             
-            server = smtplib.SMTP(smtp_host, smtp_port)
-            server.set_debuglevel(1)
-            server.starttls()
+            # Port 465 requires SSL, port 587 requires STARTTLS
+            if smtp_port == 465:
+                logging.info("Using SMTP_SSL for port 465")
+                server = smtplib.SMTP_SSL(smtp_host, smtp_port)
+                server.set_debuglevel(1)
+            else:
+                logging.info("Using SMTP with STARTTLS for port 587")
+                server = smtplib.SMTP(smtp_host, smtp_port)
+                server.set_debuglevel(1)
+                server.starttls()
+            
             server.login(smtp_user, smtp_pass)
             server.send_message(msg)
             server.quit()
