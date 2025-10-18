@@ -865,3 +865,25 @@ def admin_update_payment_link(order_id):
     flash('Payment link updated successfully!', 'success')
     
     return redirect(url_for('admin_order_detail', order_id=order_id))
+
+@app.route('/admin/orders/<int:order_id>/send_email', methods=['POST'])
+@admin_required
+def admin_send_customer_email(order_id):
+    from email_utils import send_customer_order_email
+    
+    order = Order.query.get_or_404(order_id)
+    user = User.query.get(order.user_id)
+    
+    # Generate the customer order view URL
+    order_url = url_for('customer_order_view', secure_token=order.secure_token, _external=True)
+    base_url = request.url_root
+    
+    # Send the email
+    success = send_customer_order_email(order, user, order_url, base_url)
+    
+    if success:
+        flash('Email sent successfully to customer!', 'success')
+    else:
+        flash('Failed to send email. Please check your email configuration.', 'error')
+    
+    return redirect(url_for('admin_order_detail', order_id=order_id))

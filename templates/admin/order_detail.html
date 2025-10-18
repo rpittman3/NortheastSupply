@@ -222,14 +222,21 @@
                 </div>
                 <div class="card-body">
                     <p class="text-muted small mb-2">Share this secure link with the customer:</p>
-                    <div class="input-group">
+                    <div class="input-group mb-3">
                         <input type="text" class="form-control form-control-sm" id="customerLink" 
                                value="{{ url_for('customer_order_view', secure_token=order.secure_token, _external=True) }}" readonly>
                         <button class="btn btn-sm btn-outline-primary" type="button" onclick="copyLink()">
                             <i class="fas fa-copy"></i>
                         </button>
                     </div>
-                    <small class="text-muted">This link allows the customer to view their order details securely.</small>
+                    <small class="text-muted d-block mb-3">This link allows the customer to view their order details securely.</small>
+                    
+                    <form method="POST" action="{{ url_for('admin_send_customer_email', order_id=order.id) }}">
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="fas fa-envelope me-2"></i>Send Order Email to Customer
+                        </button>
+                    </form>
+                    <small class="text-muted d-block mt-2">Sends order details, view link, and payment link (if available) to customer's email.</small>
                 </div>
             </div>
 
