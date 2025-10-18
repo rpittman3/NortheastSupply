@@ -7,6 +7,8 @@ from forms import QuoteRequestForm, CheckoutForm, AccountUpdateForm
 from sqlalchemy import or_, func, and_
 from datetime import datetime
 import uuid
+import logging
+from email_utils import send_order_notification
 
 # Import admin routes
 import admin_routes
@@ -304,14 +306,16 @@ def process_order():
         shipping_amount = 25.00 if subtotal < 500 else 0  # Free shipping over $500
         total_amount = subtotal + tax_amount + shipping_amount
         
-        # Create order
+        # Create order with secure token
+        import secrets
         order = Order(
             user_id=current_user.id,
             order_number=f'ORD-{uuid.uuid4().hex[:8].upper()}',
+            secure_token=secrets.token_urlsafe(32),
             subtotal=subtotal,
-            tax_amount=tax_amount,
-            shipping_amount=shipping_amount,
-            total_amount=total_amount,
+            tax_amount=0,
+            shipping_amount=0,
+            total_amount=subtotal,
             shipping_name=form.shipping_name.data,
             shipping_company=form.shipping_company.data,
             shipping_address=form.shipping_address.data,
@@ -340,6 +344,14 @@ def process_order():
             db.session.delete(cart_item)
         
         db.session.commit()
+        
+        # Send order notification email
+        try:
+            user = User.query.get(current_user.id)
+            send_order_notification(order, user)
+            logging.info(f"Order notification email sent for order {order.order_number}")
+        except Exception as e:
+            logging.error(f"Failed to send order notification email: {str(e)}")
         
         flash(f'Order {order.order_number} placed successfully!', 'success')
         return redirect(url_for('account'))
