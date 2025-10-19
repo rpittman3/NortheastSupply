@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - Professional Restaurant Supply{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-5">
+                <h1 class="mb-3">Contact Us</h1>
+                <p class="lead text-muted">We're here to help with all your restaurant equipment needs</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-5">
+                            <div class="mb-4">
+                                <i class="fas fa-phone fa-3x text-primary"></i>
+                            </div>
+                            <h4 class="card-title mb-3">Call Us</h4>
+                            <p class="text-muted mb-4">Speak with our equipment specialists</p>
+                            <a href="tel:8773653343" class="btn btn-primary btn-lg">
+                                <i class="fas fa-phone me-2"></i>(877) 365-3343
+                            </a>
+                            <p class="text-muted small mt-3 mb-0">Mon-Fri: 8AM-6PM EST</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-5">
+                            <div class="mb-4">
+                                <i class="fas fa-envelope fa-3x text-primary"></i>
+                            </div>
+                            <h4 class="card-title mb-3">Email Us</h4>
+                            <p class="text-muted mb-4">Send us your questions or requests</p>
+                            <a href="mailto:info@professionalrestaurantsupply.com" class="btn btn-primary btn-lg">
+                                <i class="fas fa-envelope me-2"></i>Email Us
+                            </a>
+                            <p class="text-muted small mt-3 mb-0">We respond within 24 hours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm mt-5">
+                <div class="card-body p-5">
+                    <h4 class="card-title mb-4 text-center">Why Choose Professional Restaurant Supply?</h4>
+                    <div class="row g-4">
+                        <div class="col-md-4 text-center">
+                            <i class="fas fa-certificate fa-2x text-primary mb-3"></i>
+                            <h6>25+ Years Experience</h6>
+                            <p class="text-muted small">Industry expertise you can trust</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <i class="fas fa-box fa-2x text-primary mb-3"></i>
+                            <h6>Hundreds of Products</h6>
+                            <p class="text-muted small">Everything you need in one place</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <i class="fas fa-dollar-sign fa-2x text-primary mb-3"></i>
+                            <h6>Competitive Pricing</h6>
+                            <p class="text-muted small">Quality equipment at affordable prices</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

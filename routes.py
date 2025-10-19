@@ -549,3 +549,9 @@ def terms_of_service():
 def privacy_policy():
     main_categories = Category.query.filter_by(parent_id=None).order_by(Category.sort_order).all()
     return render_template('privacy_policy.html', main_categories=main_categories)
+
+# Contact Us Page
+@app.route('/contact')
+def contact():
+    main_categories = Category.query.filter_by(parent_id=None).order_by(Category.sort_order).all()
+    return render_template('contact.html', main_categories=main_categories)
