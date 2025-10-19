@@ -537,3 +537,9 @@ def customer_decline_order(secure_token):
         flash('This order cannot be cancelled at this stage.', 'error')
     
     return redirect(url_for('customer_order_view', secure_token=secure_token))
+
+# Terms of Service Page
+@app.route('/terms-of-service')
+def terms_of_service():
+    main_categories = Category.query.filter_by(parent_id=None).order_by(Category.sort_order).all()
+    return render_template('terms_of_service.html', main_categories=main_categories)

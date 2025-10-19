@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Terms of Service - Professional Restaurant Supply{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <h1 class="mb-4">Professional Restaurant Supply Terms and Conditions</h1>
+            
+            <p class="text-muted mb-4"><strong>Effective Date: 11/01/2025</strong></p>
+            
+            <p class="mb-4">By accessing or using our website, you agree to the following terms:</p>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">Use of Site</h4>
+                    <p class="card-text">This site is intended for customers and vendors of Professional Restaurant Supply. You agree not to misuse the site or its content.</p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">Product Information</h4>
+                    <p class="card-text">All product descriptions, pricing, and availability are subject to change without notice. We strive for accuracy but cannot guarantee it.</p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">Orders and Payments</h4>
+                    <p class="card-text">Orders are processed upon receipt of payment.</p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">Shipping and Returns</h4>
+                    <p class="card-text">Shipping is calculated based on distance and delivery requirements. Shipping costs will be calculated before final payment of order.</p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">Intellectual Property</h4>
+                    <p class="card-text">All content on this site is owned by Professional Restaurant Supply or its licensors. You may not reproduce or distribute it without permission.</p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">Limitation of Liability</h4>
+                    <p class="card-text">Professional Restaurant Supply is not liable for indirect or consequential damages arising from the use of our products or website.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="{{ url_for('index') }}" class="btn btn-primary">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
