@@ -172,12 +172,18 @@ class Order(db.Model):
     shipping_zip = db.Column(db.String(20))
     shipping_phone = db.Column(db.String(20))
     shipping_option = db.Column(db.String(50))
+    
+    # Tracking timestamps
+    sent_at = db.Column(db.DateTime)  # When email was sent to customer
+    first_viewed_at = db.Column(db.DateTime)  # When customer first viewed order
+    last_viewed_at = db.Column(db.DateTime)  # When customer last viewed order
 
     created_at = db.Column(db.DateTime, default=eastern_now)
     updated_at = db.Column(db.DateTime, default=eastern_now, onupdate=eastern_now)
 
     # Relationships
     items = db.relationship('OrderItem', backref='order', lazy=True)
+    status_history = db.relationship('OrderStatusHistory', backref='order', lazy=True, order_by='OrderStatusHistory.changed_at.desc()')
 
 class OrderItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -188,3 +194,11 @@ class OrderItem(db.Model):
     total_price = db.Column(db.Numeric(10, 2), nullable=False)
 
     created_at = db.Column(db.DateTime, default=eastern_now)
+
+class OrderStatusHistory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
+    status = db.Column(db.String(20), nullable=False)
+    changed_by = db.Column(db.String(100))  # 'customer', 'admin', or user identifier
+    notes = db.Column(db.Text)  # Optional notes about the status change
+    changed_at = db.Column(db.DateTime, default=eastern_now, nullable=False)

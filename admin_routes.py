@@ -815,11 +815,26 @@ def admin_order_detail(order_id):
 @app.route('/admin/orders/<int:order_id>/update_status', methods=['POST'])
 @admin_required
 def admin_update_order_status(order_id):
+    from models import OrderStatusHistory
+    
     order = Order.query.get_or_404(order_id)
     new_status = request.form.get('status')
     
     if new_status in ['pending', 'sent', 'shipped', 'delivered', 'cancelled']:
-        order.status = new_status
+        old_status = order.status
+        
+        if old_status != new_status:
+            order.status = new_status
+            
+            # Create status history entry
+            status_change = OrderStatusHistory(
+                order_id=order.id,
+                status=new_status,
+                changed_by='admin',
+                notes=f'Status changed from {old_status} to {new_status}'
+            )
+            db.session.add(status_change)
+            
         db.session.commit()
         flash(f'Order {order.order_number} status updated to {new_status}!', 'success')
     else:
@@ -870,6 +885,8 @@ def admin_update_payment_link(order_id):
 @admin_required
 def admin_send_customer_email(order_id):
     from email_utils import send_customer_order_email
+    from datetime import datetime
+    from models import OrderStatusHistory
     
     order = Order.query.get_or_404(order_id)
     user = User.query.get(order.user_id)
@@ -882,8 +899,24 @@ def admin_send_customer_email(order_id):
     success = send_customer_order_email(order, user, order_url, base_url)
     
     if success:
+        old_status = order.status
+        
+        # Record when email was sent
+        order.sent_at = datetime.now()
+        
         # Automatically change status to "sent" when email is sent
-        order.status = 'sent'
+        if old_status != 'sent':
+            order.status = 'sent'
+            
+            # Create status history entry
+            status_change = OrderStatusHistory(
+                order_id=order.id,
+                status='sent',
+                changed_by='admin',
+                notes='Order email sent to customer'
+            )
+            db.session.add(status_change)
+        
         db.session.commit()
         flash('Email sent successfully to customer! Order status updated to "Sent".', 'success')
     else:
