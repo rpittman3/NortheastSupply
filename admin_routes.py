@@ -818,7 +818,7 @@ def admin_update_order_status(order_id):
     order = Order.query.get_or_404(order_id)
     new_status = request.form.get('status')
     
-    if new_status in ['pending', 'processing', 'shipped', 'delivered', 'cancelled']:
+    if new_status in ['pending', 'sent', 'shipped', 'delivered', 'cancelled']:
         order.status = new_status
         db.session.commit()
         flash(f'Order {order.order_number} status updated to {new_status}!', 'success')
@@ -882,7 +882,10 @@ def admin_send_customer_email(order_id):
     success = send_customer_order_email(order, user, order_url, base_url)
     
     if success:
-        flash('Email sent successfully to customer!', 'success')
+        # Automatically change status to "sent" when email is sent
+        order.status = 'sent'
+        db.session.commit()
+        flash('Email sent successfully to customer! Order status updated to "Sent".', 'success')
     else:
         flash('Failed to send email. Please check your email configuration.', 'error')
     

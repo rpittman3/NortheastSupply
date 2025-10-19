@@ -156,7 +156,7 @@ class Order(db.Model):
     order_number = db.Column(db.String(20), nullable=False, unique=True)
     secure_token = db.Column(db.String(64), unique=True)  # Secure token for customer order view
     payment_link = db.Column(db.String(500))  # Secure payment link for offsite payment processing
-    status = db.Column(db.String(20), default='pending')  # pending, processing, shipped, delivered, cancelled
+    status = db.Column(db.String(20), default='pending')  # pending, sent, shipped, delivered, cancelled
     subtotal = db.Column(db.Numeric(10, 2), nullable=False)
     tax_amount = db.Column(db.Numeric(10, 2), default=0)
     shipping_amount = db.Column(db.Numeric(10, 2), default=0)

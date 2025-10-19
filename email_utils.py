@@ -275,9 +275,10 @@ Payment Link: {order.payment_link}
                 .footer {{ text-align: center; padding: 15px; color: #6c757d; font-size: 12px; }}
                 .status-badge {{ display: inline-block; padding: 5px 10px; border-radius: 3px; font-weight: bold; }}
                 .status-pending {{ background-color: #ffc107; color: #000; }}
-                .status-processing {{ background-color: #0dcaf0; color: #000; }}
+                .status-sent {{ background-color: #0dcaf0; color: #000; }}
                 .status-shipped {{ background-color: #0d6efd; color: white; }}
                 .status-delivered {{ background-color: #198754; color: white; }}
+                .status-cancelled {{ background-color: #dc3545; color: white; }}
             </style>
         </head>
         <body>

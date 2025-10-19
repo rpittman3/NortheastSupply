@@ -20,8 +20,8 @@
                     <h2>
                         {% if order.status == 'pending' %}
                             <span class="badge bg-warning fs-4">Pending</span>
-                        {% elif order.status == 'processing' %}
-                            <span class="badge bg-info fs-4">Processing</span>
+                        {% elif order.status == 'sent' %}
+                            <span class="badge bg-info fs-4">Sent</span>
                         {% elif order.status == 'shipped' %}
                             <span class="badge bg-primary fs-4">Shipped</span>
                         {% elif order.status == 'delivered' %}
