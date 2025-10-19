@@ -819,6 +819,27 @@ def admin_products_without_images():
     
     return render_template('admin/products_without_images.html', products=products)
 
+@app.route('/admin/products/featured')
+@admin_required
+def admin_featured_products():
+    """Display all featured products"""
+    products = Product.query.filter_by(is_featured=True).order_by(Product.name).all()
+    return render_template('admin/featured_products.html', products=products)
+
+@app.route('/admin/products/<int:product_id>/toggle-featured', methods=['POST'])
+@admin_required
+def admin_toggle_featured(product_id):
+    """Toggle featured status of a product"""
+    product = Product.query.get_or_404(product_id)
+    product.is_featured = not product.is_featured
+    db.session.commit()
+    
+    status = "featured" if product.is_featured else "unfeatured"
+    flash(f'Product "{product.name}" is now {status}!', 'success')
+    
+    # Return to the referring page or featured products page
+    return redirect(request.referrer or url_for('admin_featured_products'))
+
 # Orders Management
 @app.route('/admin/orders')
 @admin_required
