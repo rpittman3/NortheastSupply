@@ -147,12 +147,24 @@
                 <strong>Need help?</strong> If you have any questions about your order, please contact our support team.
             </div>
 
-            <!-- Print Button -->
+            <!-- Action Buttons -->
             <div class="text-center mt-4">
-                <button onclick="window.print()" class="btn btn-outline-primary">
+                <button onclick="window.print()" class="btn btn-outline-primary me-2">
                     <i class="fas fa-print me-2"></i>Print Order Details
                 </button>
+                
+                {% if order.status in ['pending', 'sent'] %}
+                <button onclick="confirmDecline()" class="btn btn-outline-danger">
+                    <i class="fas fa-times-circle me-2"></i>Decline Order
+                </button>
+                {% endif %}
             </div>
+            
+            <!-- Hidden Decline Form -->
+            {% if order.status in ['pending', 'sent'] %}
+            <form id="declineForm" method="POST" action="{{ url_for('customer_decline_order', secure_token=order.secure_token) }}" style="display: none;">
+            </form>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -164,4 +176,12 @@
     }
 }
 </style>
+
+<script>
+function confirmDecline() {
+    if (confirm('Are you sure you want to decline this order? This action cannot be undone.')) {
+        document.getElementById('declineForm').submit();
+    }
+}
+</script>
 {% endblock %}

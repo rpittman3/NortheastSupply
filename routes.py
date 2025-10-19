@@ -490,3 +490,17 @@ def inject_categories():
 def customer_order_view(secure_token):
     order = Order.query.filter_by(secure_token=secure_token).first_or_404()
     return render_template('customer_order.html', order=order)
+
+@app.route('/order/<secure_token>/decline', methods=['POST'])
+def customer_decline_order(secure_token):
+    order = Order.query.filter_by(secure_token=secure_token).first_or_404()
+    
+    # Only allow declining if order hasn't been shipped or delivered
+    if order.status in ['pending', 'sent']:
+        order.status = 'cancelled'
+        db.session.commit()
+        flash('Your order has been cancelled.', 'success')
+    else:
+        flash('This order cannot be cancelled at this stage.', 'error')
+    
+    return redirect(url_for('customer_order_view', secure_token=secure_token))
