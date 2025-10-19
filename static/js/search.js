@@ -3,7 +3,6 @@
 class Search {
     constructor() {
         this.init();
-        this.setupAutocomplete();
     }
 
     init() {

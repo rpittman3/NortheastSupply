@@ -799,6 +799,26 @@ def admin_update_category_markup(category_id):
         app.logger.error(f'Error updating category markup: {str(e)}')
         return jsonify({'error': 'Internal server error'}), 500
 
+@app.route('/admin/products/without-images')
+@admin_required
+def admin_products_without_images():
+    """Display products that do not have either image URL or uploaded image"""
+    from sqlalchemy import or_
+    
+    # Query products where both thumb_image_url and large_image_url are NULL or empty
+    products = Product.query.filter(
+        or_(
+            Product.thumb_image_url.is_(None),
+            Product.thumb_image_url == ''
+        ),
+        or_(
+            Product.large_image_url.is_(None),
+            Product.large_image_url == ''
+        )
+    ).order_by(Product.name).all()
+    
+    return render_template('admin/products_without_images.html', products=products)
+
 # Orders Management
 @app.route('/admin/orders')
 @admin_required

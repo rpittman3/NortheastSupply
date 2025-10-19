@@ -1,0 +1,89 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Products Without Images - Admin{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Products Without Images</h1>
+        <div>
+            <a href="{{ url_for('admin_products') }}" class="btn btn-outline-secondary">All Products</a>
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle me-2"></i>
+        This page shows products that are missing both thumbnail and large images. Add images to improve product visibility.
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            {% if products %}
+                <div class="mb-3">
+                    <strong>{{ products|length }}</strong> product(s) without images
+                </div>
+                <div class="table-responsive">
+                    <table id="productsTable" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>SKU</th>
+                                <th>Category</th>
+                                <th>Manufacturer</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products %}
+                            <tr>
+                                <td>{{ product.name }}</td>
+                                <td><code>{{ product.sku }}</code></td>
+                                <td>{{ product.category.name if product.category else '-' }}</td>
+                                <td>{{ product.manufacturer.name if product.manufacturer else '-' }}</td>
+                                <td>
+                                    {% if product.in_stock %}
+                                        <span class="badge bg-success">In Stock</span>
+                                        {% if product.stock_quantity %}
+                                            ({{ product.stock_quantity }})
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="badge bg-danger">Out of Stock</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('admin_edit_product', product_id=product.id) }}" 
+                                       class="btn btn-sm btn-primary">
+                                        <i class="fas fa-edit me-1"></i>Add Images
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle me-2"></i>
+                    Great! All products have images.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    $('#productsTable').DataTable({
+        "pageLength": 25,
+        "order": [[ 0, "asc" ]],
+        "columnDefs": [
+            { "orderable": false, "targets": 5 }
+        ]
+    });
+});
+</script>
+{% endblock %}
