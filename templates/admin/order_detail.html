@@ -240,6 +240,104 @@
                 </div>
             </div>
 
+            <!-- Order Tracking -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Order Tracking</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <small class="text-muted">Order Created</small>
+                        <p class="mb-0"><strong>{{ order.created_at.strftime('%m/%d/%Y %I:%M %p') }}</strong></p>
+                    </div>
+                    <hr>
+                    <div class="mb-3">
+                        <small class="text-muted">Email Sent to Customer</small>
+                        <p class="mb-0">
+                            {% if order.sent_at %}
+                                <strong>{{ order.sent_at.strftime('%m/%d/%Y %I:%M %p') }}</strong>
+                            {% else %}
+                                <span class="text-muted">Not sent yet</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                    <hr>
+                    <div class="mb-3">
+                        <small class="text-muted">First Viewed by Customer</small>
+                        <p class="mb-0">
+                            {% if order.first_viewed_at %}
+                                <strong>{{ order.first_viewed_at.strftime('%m/%d/%Y %I:%M %p') }}</strong>
+                            {% else %}
+                                <span class="text-muted">Not viewed yet</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                    <hr>
+                    <div class="mb-3">
+                        <small class="text-muted">Last Viewed by Customer</small>
+                        <p class="mb-0">
+                            {% if order.last_viewed_at %}
+                                <strong>{{ order.last_viewed_at.strftime('%m/%d/%Y %I:%M %p') }}</strong>
+                            {% else %}
+                                <span class="text-muted">Not viewed yet</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status History -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-history me-2"></i>Status History</h5>
+                </div>
+                <div class="card-body">
+                    {% if order.status_history %}
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Changed By</th>
+                                    <th>Date/Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for history in order.status_history %}
+                                <tr>
+                                    <td>
+                                        {% if history.status == 'pending' %}
+                                            <span class="badge bg-warning">Pending</span>
+                                        {% elif history.status == 'sent' %}
+                                            <span class="badge bg-info">Sent</span>
+                                        {% elif history.status == 'shipped' %}
+                                            <span class="badge bg-primary">Shipped</span>
+                                        {% elif history.status == 'delivered' %}
+                                            <span class="badge bg-success">Delivered</span>
+                                        {% elif history.status == 'cancelled' %}
+                                            <span class="badge bg-danger">Cancelled</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ history.changed_by|title }}</td>
+                                    <td>{{ history.changed_at.strftime('%m/%d/%Y %I:%M %p') }}</td>
+                                </tr>
+                                {% if history.notes %}
+                                <tr>
+                                    <td colspan="3" class="text-muted small ps-4">
+                                        <i class="fas fa-sticky-note me-1"></i>{{ history.notes }}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p class="text-muted mb-0">No status history available.</p>
+                    {% endif %}
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-header">
                     <h5 class="mb-0">Customer Information</h5>
