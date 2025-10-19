@@ -26,8 +26,17 @@ The application implements a comprehensive e-commerce data model including:
 - Hierarchical product categories with parent-child relationships
 - Product catalog with pricing, inventory, and quote requirements
 - Shopping cart with user-specific item storage
-- Order processing with shipping information and item details
+- Order processing with shipping information, item details, and comprehensive tracking
+- Order status history tracking all state changes with timestamps and actors
 - Quote request system for B2B custom pricing
+
+## Order Tracking System
+The platform includes comprehensive order tracking capabilities:
+- **Timestamp Tracking**: Records order creation, email sent time, first customer view, and last customer view
+- **Status History**: Complete audit trail of all status changes with timestamps, who made the change (customer/admin), and optional notes
+- **Status Flow**: Pending → Sent → Shipped → Delivered (or Cancelled at any stage before Shipped)
+- **Customer Actions**: Customers can decline orders in Pending or Sent status through secure order link
+- **Admin Visibility**: Full tracking timeline visible in admin order detail page showing customer engagement
 
 # External Dependencies
 
