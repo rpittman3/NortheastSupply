@@ -339,6 +339,16 @@ def process_order():
             )
             db.session.add(order_item)
         
+        # Create initial status history entry
+        from models import OrderStatusHistory
+        status_change = OrderStatusHistory(
+            order_id=order.id,
+            status='pending',
+            changed_by='customer',
+            notes='Order created'
+        )
+        db.session.add(status_change)
+        
         # Clear cart
         for cart_item in cart_items:
             db.session.delete(cart_item)
@@ -488,16 +498,39 @@ def inject_categories():
 # Customer Order View (Public)
 @app.route('/order/<secure_token>')
 def customer_order_view(secure_token):
+    from datetime import datetime
+    
     order = Order.query.filter_by(secure_token=secure_token).first_or_404()
+    
+    # Track when customer views the order
+    if not order.first_viewed_at:
+        order.first_viewed_at = datetime.now()
+    
+    order.last_viewed_at = datetime.now()
+    db.session.commit()
+    
     return render_template('customer_order.html', order=order)
 
 @app.route('/order/<secure_token>/decline', methods=['POST'])
 def customer_decline_order(secure_token):
+    from models import OrderStatusHistory
+    
     order = Order.query.filter_by(secure_token=secure_token).first_or_404()
     
     # Only allow declining if order hasn't been shipped or delivered
     if order.status in ['pending', 'sent']:
+        old_status = order.status
         order.status = 'cancelled'
+        
+        # Create status history entry
+        status_change = OrderStatusHistory(
+            order_id=order.id,
+            status='cancelled',
+            changed_by='customer',
+            notes=f'Order declined by customer (was {old_status})'
+        )
+        db.session.add(status_change)
+        
         db.session.commit()
         flash('Your order has been cancelled.', 'success')
     else:
