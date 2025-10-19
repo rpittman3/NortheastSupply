@@ -543,3 +543,9 @@ def customer_decline_order(secure_token):
 def terms_of_service():
     main_categories = Category.query.filter_by(parent_id=None).order_by(Category.sort_order).all()
     return render_template('terms_of_service.html', main_categories=main_categories)
+
+# Privacy Policy Page
+@app.route('/privacy-policy')
+def privacy_policy():
+    main_categories = Category.query.filter_by(parent_id=None).order_by(Category.sort_order).all()
+    return render_template('privacy_policy.html', main_categories=main_categories)

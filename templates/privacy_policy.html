@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy - Professional Restaurant Supply{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <h1 class="mb-4">Professional Restaurant Supply Privacy Policy</h1>
+            
+            <p class="text-muted mb-4"><strong>Effective Date: 11/01/2025</strong></p>
+            
+            <p class="mb-4">Professional Restaurant Supply values your privacy. This policy outlines how we collect, use, and protect your personal information when you interact with our website or services.</p>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">Information We Collect</h4>
+                    <ul class="card-text">
+                        <li>Contact details (name, email, phone) submitted via forms</li>
+                        <li>Account information for registered users</li>
+                        <li>Purchase history and payment method (excluding full credit card details)</li>
+                        <li>Website usage data via cookies and analytics tools</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">How We Use Your Information</h4>
+                    <ul class="card-text">
+                        <li>To process orders and provide customer service</li>
+                        <li>To improve our website and product offerings</li>
+                        <li>To send updates, promotions, or important notices (you may opt out anytime)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">Sharing Your Information</h4>
+                    <p class="card-text">We do not sell or rent your personal data. We may share it with trusted third parties (e.g., payment processors, shipping providers) strictly to fulfill services.</p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">Data Security</h4>
+                    <p class="card-text">We implement industry-standard security measures to protect your data. However, no method of transmission over the internet is 100% secure.</p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">Your Rights</h4>
+                    <p class="card-text">You may request access to, correction of, or deletion of your personal data by contacting us at <a href="mailto:info@professionalrestaurantsupply.com">info@professionalrestaurantsupply.com</a>.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="{{ url_for('index') }}" class="btn btn-primary">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
