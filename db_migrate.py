@@ -5,7 +5,7 @@ This tool helps you export and import your PostgreSQL database.
 
 Usage:
     Export: python db_migrate.py export
-    Import: python db_migrate.py import backup_file.sql
+    Import: python db_migrate.py import backup_file.dump
 """
 
 import os
@@ -32,27 +32,27 @@ def get_db_config():
     return config
 
 def export_database():
-    """Export the database to a SQL file using pg_dump."""
+    """Export the database to a custom format file using pg_dump."""
     print("Starting database export...")
     
     config = get_db_config()
     
     # Generate filename with timestamp
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    filename = f"database_backup_{timestamp}.sql"
+    filename = f"database_backup_{timestamp}.dump"
     
     # Set PGPASSWORD environment variable for pg_dump
     env = os.environ.copy()
     env['PGPASSWORD'] = config['password']
     
-    # Build pg_dump command
+    # Build pg_dump command with custom format
     cmd = [
         'pg_dump',
         '-h', config['host'],
         '-p', config['port'],
         '-U', config['user'],
         '-d', config['database'],
-        '-F', 'p',  # Plain text format
+        '-F', 'c',  # Custom compressed format (handles newlines and special chars)
         '-f', filename,
         '--no-owner',  # Don't include ownership commands
         '--no-privileges',  # Don't include privilege commands
@@ -92,7 +92,7 @@ def export_database():
         sys.exit(1)
 
 def import_database(filename):
-    """Import a database from a SQL file using psql."""
+    """Import a database from a backup file using pg_restore or psql."""
     print(f"Starting database import from {filename}...")
     
     # Check if file exists
@@ -109,23 +109,43 @@ def import_database(filename):
         print("Import cancelled.")
         sys.exit(0)
     
-    # Set PGPASSWORD environment variable for psql
+    # Set PGPASSWORD environment variable
     env = os.environ.copy()
     env['PGPASSWORD'] = config['password']
     
-    # Build psql command
-    cmd = [
-        'psql',
-        '-h', config['host'],
-        '-p', config['port'],
-        '-U', config['user'],
-        '-d', config['database'],
-        '-f', filename,
-        '-q',  # Quiet mode
-    ]
+    # Determine which tool to use based on file extension
+    is_custom_format = filename.endswith('.dump') or filename.endswith('.backup')
+    
+    if is_custom_format:
+        # Use pg_restore for custom format
+        print("Using pg_restore for custom format file...")
+        cmd = [
+            'pg_restore',
+            '-h', config['host'],
+            '-p', config['port'],
+            '-U', config['user'],
+            '-d', config['database'],
+            '--clean',  # Drop existing objects before recreating
+            '--if-exists',  # Don't error if objects don't exist
+            '--no-owner',
+            '--no-privileges',
+            filename,
+        ]
+    else:
+        # Use psql for plain SQL format (backward compatibility)
+        print("Using psql for SQL format file...")
+        cmd = [
+            'psql',
+            '-h', config['host'],
+            '-p', config['port'],
+            '-U', config['user'],
+            '-d', config['database'],
+            '-f', filename,
+            '-q',  # Quiet mode
+        ]
     
     try:
-        # Run psql
+        # Run the import command
         result = subprocess.run(
             cmd,
             env=env,
@@ -154,7 +174,7 @@ def show_help():
     print("  python db_migrate.py export")
     print()
     print("  # Import from a backup file")
-    print("  python db_migrate.py import database_backup_20251106_143022.sql")
+    print("  python db_migrate.py import database_backup_20251106_143022.dump")
     print()
 
 def main():
@@ -170,7 +190,7 @@ def main():
     elif command == 'import':
         if len(sys.argv) < 3:
             print("Error: Please specify the backup file to import")
-            print("Usage: python db_migrate.py import <filename.sql>")
+            print("Usage: python db_migrate.py import <filename.dump>")
             sys.exit(1)
         import_database(sys.argv[2])
     elif command in ['help', '-h', '--help']:

@@ -16,7 +16,7 @@ Run the export command:
 python db_migrate.py export
 ```
 
-This creates a backup file named `database_backup_YYYYMMDD_HHMMSS.sql` with:
+This creates a backup file named `database_backup_YYYYMMDD_HHMMSS.dump` with:
 - All table structures (categories, products, orders, users, etc.)
 - All data (your actual products, orders, customer information, etc.)
 - All relationships and constraints
@@ -24,14 +24,14 @@ This creates a backup file named `database_backup_YYYYMMDD_HHMMSS.sql` with:
 **Example output:**
 ```
 ✓ Export successful!
-  File: database_backup_20251106_235633.sql
-  Size: 1,301,884 bytes
+  File: database_backup_20251109_010940.dump
+  Size: 258,053 bytes
 ```
 
 ### Step 2: Download the Backup File
 
 1. Find the backup file in your file explorer (left sidebar)
-2. Right-click on `database_backup_YYYYMMDD_HHMMSS.sql`
+2. Right-click on `database_backup_YYYYMMDD_HHMMSS.dump`
 3. Select "Download" to save it to your computer
 
 ### Step 3: Create Your New Repl
@@ -43,7 +43,7 @@ This creates a backup file named `database_backup_YYYYMMDD_HHMMSS.sql` with:
 ### Step 4: Upload the Backup File (In Your New Repl)
 
 1. In your new Repl, click the "Upload file" button
-2. Select the `database_backup_YYYYMMDD_HHMMSS.sql` file you downloaded
+2. Select the `database_backup_YYYYMMDD_HHMMSS.dump` file you downloaded
 3. Upload it to the root directory
 
 ### Step 5: Import the Database (In Your New Repl)
@@ -51,10 +51,10 @@ This creates a backup file named `database_backup_YYYYMMDD_HHMMSS.sql` with:
 Run the import command:
 
 ```bash
-python db_migrate.py import database_backup_20251106_235633.sql
+python db_migrate.py import database_backup_20251109_010940.dump
 ```
 
-**Important:** Replace `database_backup_20251106_235633.sql` with your actual filename.
+**Important:** Replace `database_backup_20251109_010940.dump` with your actual filename.
 
 You'll see a warning:
 ```
@@ -120,9 +120,13 @@ Creates a new backup file with timestamp.
 
 ### Import Database
 ```bash
-python db_migrate.py import <filename.sql>
+python db_migrate.py import <filename.dump>
 ```
 Restores database from the specified backup file.
+
+**Note:** The tool automatically detects the file format. It supports both:
+- `.dump` files (new custom format - recommended)
+- `.sql` files (old plain text format - for backward compatibility)
 
 ### Help
 ```bash
@@ -134,8 +138,10 @@ Shows usage information.
 
 1. **Regular Backups:** Consider exporting your database regularly as a backup, even if you're not copying to a new Repl
 2. **Filename:** Keep the timestamp in the filename so you know when the backup was created
-3. **Testing:** After importing, test all major features to ensure everything works correctly
-4. **Environment Variables:** Remember to set up your SMTP settings and other environment variables in the new Repl
+3. **File Size:** The new custom format creates smaller, compressed backups (about 5x smaller than old SQL format)
+4. **Special Characters:** The custom format properly handles products with quotes, newlines, and HTML in descriptions
+5. **Testing:** After importing, test all major features to ensure everything works correctly
+6. **Environment Variables:** Remember to set up your SMTP settings and other environment variables in the new Repl
 
 ## Need Help?
 
