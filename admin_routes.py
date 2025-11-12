@@ -736,6 +736,46 @@ def admin_update_product_cost(product_id):
         db.session.rollback()
         return jsonify({'success': False, 'error': str(e)}), 500
 
+@app.route('/admin/products/<int:product_id>/map-price', methods=['PATCH', 'POST'])
+@admin_required
+def admin_update_product_map_price(product_id):
+    """Update product MAP price via AJAX"""
+    from flask_wtf.csrf import validate_csrf
+    
+    try:
+        # Validate CSRF token
+        validate_csrf(request.headers.get('X-CSRFToken'))
+        
+        product = Product.query.get_or_404(product_id)
+        
+        # Get new MAP price from request (allow empty to clear MAP price)
+        new_map_price = request.form.get('map_price', '').strip()
+        
+        if new_map_price == '':
+            # Clear the MAP price
+            map_price_decimal = None
+        else:
+            try:
+                map_price_decimal = Decimal(str(new_map_price))
+                if map_price_decimal < 0:
+                    return jsonify({'success': False, 'error': 'MAP price cannot be negative'}), 400
+            except (ValueError, InvalidOperation):
+                return jsonify({'success': False, 'error': 'Invalid MAP price format'}), 400
+        
+        # Update product MAP price
+        product.map_price = map_price_decimal
+        
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'map_price': float(map_price_decimal) if map_price_decimal is not None else None
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 @app.route('/admin/categories/<int:category_id>/markup', methods=['PATCH', 'POST'])
 @admin_required
 def admin_update_category_markup(category_id):

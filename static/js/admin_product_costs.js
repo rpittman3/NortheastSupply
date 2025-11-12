@@ -16,18 +16,38 @@ class ProductCostManager {
         this.allRows = Array.from(document.querySelectorAll('.product-row'));
         
         // Find all cost input fields
-        const inputs = document.querySelectorAll('.cost-input');
-        
-        inputs.forEach(input => {
+        const costInputs = document.querySelectorAll('.cost-input');
+        costInputs.forEach(input => {
             const productId = input.getAttribute('data-product-id');
             
             // Add event listeners
             input.addEventListener('input', (e) => {
-                this.handleInputChange(productId, e.target.value);
+                this.handleCostInputChange(productId, e.target.value);
             });
             
             input.addEventListener('blur', (e) => {
-                this.handleBlur(productId, e.target.value);
+                this.handleCostBlur(productId, e.target.value);
+            });
+            
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.target.blur(); // Trigger blur event for immediate save
+                }
+            });
+        });
+
+        // Find all MAP input fields
+        const mapInputs = document.querySelectorAll('.map-input');
+        mapInputs.forEach(input => {
+            const productId = input.getAttribute('data-product-id');
+            
+            // Add event listeners
+            input.addEventListener('input', (e) => {
+                this.handleMapInputChange(productId, e.target.value);
+            });
+            
+            input.addEventListener('blur', (e) => {
+                this.handleMapBlur(productId, e.target.value);
             });
             
             input.addEventListener('keypress', (e) => {
@@ -112,10 +132,11 @@ class ProductCostManager {
         }
     }
 
-    handleInputChange(productId, value) {
+    handleCostInputChange(productId, value) {
         // Clear existing timer for this product
-        if (this.debounceTimers.has(productId)) {
-            clearTimeout(this.debounceTimers.get(productId));
+        const timerKey = `cost-${productId}`;
+        if (this.debounceTimers.has(timerKey)) {
+            clearTimeout(this.debounceTimers.get(timerKey));
         }
         
         // Set new debounced timer (700ms)
@@ -123,28 +144,57 @@ class ProductCostManager {
             this.saveCost(productId, value);
         }, 700);
         
-        this.debounceTimers.set(productId, timer);
+        this.debounceTimers.set(timerKey, timer);
     }
 
-    handleBlur(productId, value) {
+    handleCostBlur(productId, value) {
         // Clear any pending debounced save
-        if (this.debounceTimers.has(productId)) {
-            clearTimeout(this.debounceTimers.get(productId));
-            this.debounceTimers.delete(productId);
+        const timerKey = `cost-${productId}`;
+        if (this.debounceTimers.has(timerKey)) {
+            clearTimeout(this.debounceTimers.get(timerKey));
+            this.debounceTimers.delete(timerKey);
         }
         
         // Save immediately on blur
         this.saveCost(productId, value);
     }
 
+    handleMapInputChange(productId, value) {
+        // Clear existing timer for this product
+        const timerKey = `map-${productId}`;
+        if (this.debounceTimers.has(timerKey)) {
+            clearTimeout(this.debounceTimers.get(timerKey));
+        }
+        
+        // Set new debounced timer (700ms)
+        const timer = setTimeout(() => {
+            this.saveMapPrice(productId, value);
+        }, 700);
+        
+        this.debounceTimers.set(timerKey, timer);
+    }
+
+    handleMapBlur(productId, value) {
+        // Clear any pending debounced save
+        const timerKey = `map-${productId}`;
+        if (this.debounceTimers.has(timerKey)) {
+            clearTimeout(this.debounceTimers.get(timerKey));
+            this.debounceTimers.delete(timerKey);
+        }
+        
+        // Save immediately on blur
+        this.saveMapPrice(productId, value);
+    }
+
     async saveCost(productId, value) {
         // Cancel any existing request for this product
-        if (this.abortControllers.has(productId)) {
-            this.abortControllers.get(productId).abort();
+        const abortKey = `cost-${productId}`;
+        if (this.abortControllers.has(abortKey)) {
+            this.abortControllers.get(abortKey).abort();
         }
         
         const abortController = new AbortController();
-        this.abortControllers.set(productId, abortController);
+        this.abortControllers.set(abortKey, abortController);
         
         // Update UI to show saving state
         this.updateStatus(productId, 'saving');
@@ -181,7 +231,7 @@ class ProductCostManager {
             }
 
             // Check if response value matches current input value (avoid race conditions)
-            const currentInput = document.querySelector(`input[data-product-id="${productId}"]`);
+            const currentInput = document.querySelector(`.cost-input[data-product-id="${productId}"]`);
             const currentValue = currentInput.value.trim() === '' ? null : parseFloat(currentInput.value);
             
             if (result.cost !== currentValue) {
@@ -218,7 +268,92 @@ class ProductCostManager {
             }, 3000);
         } finally {
             // Clean up abort controller
-            this.abortControllers.delete(productId);
+            this.abortControllers.delete(abortKey);
+        }
+    }
+
+    async saveMapPrice(productId, value) {
+        // Cancel any existing request for this product
+        const abortKey = `map-${productId}`;
+        if (this.abortControllers.has(abortKey)) {
+            this.abortControllers.get(abortKey).abort();
+        }
+        
+        const abortController = new AbortController();
+        this.abortControllers.set(abortKey, abortController);
+        
+        // Update UI to show saving state
+        this.updateStatus(productId, 'saving');
+        
+        try {
+            // Prepare data
+            const mapPrice = value.trim() === '' ? null : parseFloat(value);
+            
+            // Validate client-side
+            if (mapPrice !== null && (isNaN(mapPrice) || mapPrice < 0)) {
+                throw new Error('MAP price must be a positive number');
+            }
+            
+            // Get CSRF token
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+            
+            // Prepare form data (send empty string to clear MAP price)
+            const formData = new FormData();
+            formData.append('map_price', mapPrice !== null ? mapPrice.toString() : '');
+            
+            const response = await fetch(`/admin/products/${productId}/map-price`, {
+                method: 'PATCH',
+                headers: {
+                    'X-CSRFToken': csrfToken
+                },
+                body: formData,
+                signal: abortController.signal
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || 'Failed to save MAP price');
+            }
+
+            // Check if response value matches current input value (avoid race conditions)
+            const currentInput = document.querySelector(`.map-input[data-product-id="${productId}"]`);
+            const currentValue = currentInput.value.trim() === '' ? null : parseFloat(currentInput.value);
+            
+            if (result.map_price !== currentValue) {
+                // Response is outdated, reset status and ignore it
+                this.updateStatus(productId, 'idle');
+                return;
+            }
+
+            // Update UI with success
+            this.updateStatus(productId, 'success');
+            this.updateCurrentMapPrice(productId, result.map_price);
+            
+            this.showToast('MAP price updated successfully', 'success');
+            
+            // Clear success status after 2 seconds
+            setTimeout(() => {
+                this.updateStatus(productId, 'idle');
+            }, 2000);
+
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                // Request was cancelled, ignore
+                return;
+            }
+            
+            console.error('Error saving MAP price:', error);
+            this.updateStatus(productId, 'error');
+            this.showToast(error.message, 'error');
+            
+            // Clear error status after 3 seconds
+            setTimeout(() => {
+                this.updateStatus(productId, 'idle');
+            }, 3000);
+        } finally {
+            // Clean up abort controller
+            this.abortControllers.delete(abortKey);
         }
     }
 
@@ -276,6 +411,20 @@ class ProductCostManager {
                 priceElement.innerHTML = `$${price.toFixed(2)}`;
             } else {
                 priceElement.innerHTML = '<span class="text-muted">Not set</span>';
+            }
+        }
+    }
+
+    updateCurrentMapPrice(productId, mapPrice) {
+        const row = document.querySelector(`tr[data-product-id="${productId}"]`);
+        if (!row) return;
+        
+        const mapElement = row.querySelector('.current-map');
+        if (mapElement) {
+            if (mapPrice !== null && mapPrice !== undefined) {
+                mapElement.innerHTML = `$${mapPrice.toFixed(2)}`;
+            } else {
+                mapElement.innerHTML = '<span class="text-muted">Not set</span>';
             }
         }
     }

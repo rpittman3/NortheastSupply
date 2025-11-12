@@ -40,7 +40,7 @@
         <div class="card-body">
             <div class="alert alert-info mb-4">
                 <i class="fas fa-info-circle"></i>
-                Update product costs below. Prices will be automatically recalculated using category markups or product-specific override markups. Changes are saved immediately.
+                Update product costs and MAP (Minimum Advertised Price) below. Prices will be automatically recalculated using category markups or product-specific override markups. Changes are saved immediately.
             </div>
 
             <!-- Search and Filter Controls -->
@@ -77,8 +77,10 @@
                                 <th>Product Name</th>
                                 <th>Category</th>
                                 <th>Current Cost</th>
+                                <th>Current MAP</th>
                                 <th>Current Price</th>
                                 <th>New Cost</th>
+                                <th>New MAP</th>
                                 <th width="80">Status</th>
                             </tr>
                         </thead>
@@ -104,6 +106,15 @@
                                     </span>
                                 </td>
                                 <td>
+                                    <span class="current-map">
+                                        {% if product.map_price %}
+                                            ${{ "%.2f"|format(product.map_price) }}
+                                        {% else %}
+                                            <span class="text-muted">Not set</span>
+                                        {% endif %}
+                                    </span>
+                                </td>
+                                <td>
                                     <span class="current-price">
                                         {% if product.price %}
                                             ${{ "%.2f"|format(product.price) }}
@@ -120,6 +131,19 @@
                                             class="form-control cost-input" 
                                             data-product-id="{{ product.id }}"
                                             value="{{ product.cost if product.cost else '' }}"
+                                            step="0.01"
+                                            min="0"
+                                            placeholder="0.00">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text">$</span>
+                                        <input 
+                                            type="number" 
+                                            class="form-control map-input" 
+                                            data-product-id="{{ product.id }}"
+                                            value="{{ product.map_price if product.map_price else '' }}"
                                             step="0.01"
                                             min="0"
                                             placeholder="0.00">
