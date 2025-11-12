@@ -72,6 +72,7 @@ class ProductForm(FlaskForm):
     short_description = StringField('Short Description', validators=[Optional(), Length(max=500)])
     description = TextAreaField('Description', validators=[Optional()])
     cost = DecimalField('Cost', validators=[Optional(), NumberRange(min=0)])
+    map_price = DecimalField('MAP Price', validators=[Optional(), NumberRange(min=0)])
     override_markup = DecimalField('Override Markup (%)', validators=[Optional(), NumberRange(min=0)])
     image_url = StringField('Image URL', validators=[Optional(), Length(max=500)])
     image_file = FileField('Upload Image', validators=[Optional(), FileAllowed(['jpg', 'jpeg', 'png', 'gif'], 'Images only!')])

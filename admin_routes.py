@@ -301,6 +301,7 @@ def admin_add_product():
             form.primary_category_id.data
         )
         product.cost = form.cost.data
+        product.map_price = form.map_price.data
         product.override_markup = form.override_markup.data
         
         # Handle image upload
@@ -377,6 +378,7 @@ def admin_edit_product(product_id):
             form.primary_category_id.data
         )
         product.cost = form.cost.data
+        product.map_price = form.map_price.data
         product.override_markup = form.override_markup.data
         
         # Handle image upload

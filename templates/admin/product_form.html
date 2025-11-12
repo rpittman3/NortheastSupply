@@ -159,6 +159,21 @@
                                     </div>
                                 {% endif %}
                             </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.map_price.label(class="form-label") }}
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    {{ form.map_price(class="form-control") }}
+                                </div>
+                                <small class="form-text text-muted">Minimum Advertised Price (optional)</small>
+                                {% if form.map_price.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.map_price.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
 
                         <div class="mb-3">
