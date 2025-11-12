@@ -89,6 +89,9 @@
                             <tr data-product-id="{{ product.id }}" data-category-id="{{ product.primary_category_id }}" class="product-row">
                                 <td>
                                     <strong>{{ product.name }}</strong>
+                                    {% if product.sku %}
+                                        <span class="text-muted">({{ product.sku }})</span>
+                                    {% endif %}
                                     {% if product.model %}
                                         <br><small class="text-muted">Model: {{ product.model }}</small>
                                     {% endif %}
