@@ -85,7 +85,7 @@ class Product(db.Model):
     sku = db.Column(db.String(50), nullable=False, unique=True)
     short_description = db.Column(db.String(500))
     description = db.Column(db.Text)
-    price = db.Column(db.Numeric(10, 2), nullable=False)
+    price = db.Column(db.Numeric(10, 2), nullable=True)
     cost = db.Column(db.Numeric(10, 2))
     map_price = db.Column(db.Numeric(10, 2))  # Minimum Advertised Price
     override_markup = db.Column(db.Numeric(10, 4), nullable=True)  # Override markup percentage as decimal
