@@ -93,7 +93,10 @@ class ProductCostManager {
             // Check no cost filter
             const currentCostElement = row.querySelector('.current-cost');
             const hasCost = currentCostElement && !currentCostElement.textContent.includes('Not set');
-            const matchesNoCostFilter = !noCostOnly || !hasCost;
+            const priceNaCheckbox = row.querySelector('.price-na-checkbox');
+            const isPriceNa = priceNaCheckbox && priceNaCheckbox.checked;
+            // Show only if: not filtering OR (no cost AND not price N/A)
+            const matchesNoCostFilter = !noCostOnly || (!hasCost && !isPriceNa);
             
             if (matchesSearch && matchesCategory && matchesNoCostFilter) {
                 row.style.display = '';
