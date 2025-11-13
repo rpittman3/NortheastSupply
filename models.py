@@ -70,7 +70,7 @@ class Category(db.Model):
 
     # Self-referential relationship for subcategories
     children = db.relationship('Category', backref=db.backref('parent', remote_side=[id]))
-    primary_products = db.relationship('Product', backref='category', foreign_keys='Product.primary_category_id', lazy=True)
+    primary_products = db.relationship('Product', backref='category', foreign_keys='Product.primary_category_id', lazy=True, overlaps="primary_category")
 
 # Association table for many-to-many relationship between products and categories
 product_categories = db.Table('product_categories',
@@ -113,7 +113,7 @@ class Product(db.Model):
     updated_at = db.Column(db.DateTime, default=eastern_now, onupdate=eastern_now)
 
     # Relationships
-    primary_category = db.relationship('Category', foreign_keys=[primary_category_id])
+    primary_category = db.relationship('Category', foreign_keys=[primary_category_id], overlaps="category,primary_products")
     categories = db.relationship('Category', secondary=product_categories, backref='products')
     cart_items = db.relationship('CartItem', backref='product', lazy=True)
     quote_items = db.relationship('QuoteItem', backref='product', lazy=True)
