@@ -81,6 +81,7 @@
                                 <th>Current Price</th>
                                 <th>New Cost</th>
                                 <th>New MAP</th>
+                                <th width="120">Price N/A</th>
                                 <th width="80">Status</th>
                             </tr>
                         </thead>
@@ -150,6 +151,15 @@
                                             step="0.01"
                                             min="0"
                                             placeholder="0.00">
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="form-check d-inline-block">
+                                        <input 
+                                            class="form-check-input price-na-checkbox" 
+                                            type="checkbox" 
+                                            data-product-id="{{ product.id }}"
+                                            {{ 'checked' if product.price_not_available else '' }}>
                                     </div>
                                 </td>
                                 <td class="status-cell">

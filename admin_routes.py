@@ -776,6 +776,35 @@ def admin_update_product_map_price(product_id):
         db.session.rollback()
         return jsonify({'success': False, 'error': str(e)}), 500
 
+@app.route('/admin/products/<int:product_id>/price-not-available', methods=['PATCH', 'POST'])
+@admin_required
+def admin_update_product_price_not_available(product_id):
+    """Update product price not available checkbox via AJAX"""
+    from flask_wtf.csrf import validate_csrf
+    
+    try:
+        # Validate CSRF token
+        validate_csrf(request.headers.get('X-CSRFToken'))
+        
+        product = Product.query.get_or_404(product_id)
+        
+        # Get checkbox value from request
+        price_not_available = request.form.get('price_not_available', 'false').strip().lower()
+        
+        # Convert to boolean
+        product.price_not_available = price_not_available == 'true'
+        
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'price_not_available': product.price_not_available
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 @app.route('/admin/categories/<int:category_id>/markup', methods=['PATCH', 'POST'])
 @admin_required
 def admin_update_category_markup(category_id):

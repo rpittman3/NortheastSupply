@@ -100,6 +100,7 @@ class Product(db.Model):
     stock_quantity = db.Column(db.Integer, default=0)
     is_featured = db.Column(db.Boolean, default=False)
     requires_quote = db.Column(db.Boolean, default=False)
+    price_not_available = db.Column(db.Boolean, default=False)
     
     # Document/Manual fields
     bullets = db.Column(db.Text)  # HTML formatted bullet points

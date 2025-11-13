@@ -114,9 +114,11 @@ class ProductCostManager {
         // Get the input values
         const costInput = document.querySelector(`.cost-input[data-product-id="${productId}"]`);
         const mapInput = document.querySelector(`.map-input[data-product-id="${productId}"]`);
+        const priceNaCheckbox = document.querySelector(`.price-na-checkbox[data-product-id="${productId}"]`);
         
         const costValue = costInput?.value.trim() || '';
         const mapValue = mapInput?.value.trim() || '';
+        const priceNaValue = priceNaCheckbox?.checked || false;
         
         // Cancel any existing requests for this product
         const abortKey = `apply-${productId}`;
@@ -131,8 +133,8 @@ class ProductCostManager {
         this.updateButtonState(productId, 'saving');
         
         try {
-            // Save both cost and MAP price
-            await this.saveBothValues(productId, costValue, mapValue, abortController.signal);
+            // Save cost, MAP price, and price N/A checkbox
+            await this.saveAllValues(productId, costValue, mapValue, priceNaValue, abortController.signal);
             
             // Update button to show success
             this.updateButtonState(productId, 'success');
@@ -162,7 +164,7 @@ class ProductCostManager {
         }
     }
 
-    async saveBothValues(productId, costValue, mapValue, signal) {
+    async saveAllValues(productId, costValue, mapValue, priceNaValue, signal) {
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
         
         // Prepare cost value
@@ -213,6 +215,25 @@ class ProductCostManager {
 
         if (!mapResponse.ok) {
             throw new Error(mapResult.error || 'Failed to save MAP price');
+        }
+
+        // Save Price N/A checkbox
+        const priceNaFormData = new FormData();
+        priceNaFormData.append('price_not_available', priceNaValue ? 'true' : 'false');
+        
+        const priceNaResponse = await fetch(`/admin/products/${productId}/price-not-available`, {
+            method: 'PATCH',
+            headers: {
+                'X-CSRFToken': csrfToken
+            },
+            body: priceNaFormData,
+            signal: signal
+        });
+
+        const priceNaResult = await priceNaResponse.json();
+
+        if (!priceNaResponse.ok) {
+            throw new Error(priceNaResult.error || 'Failed to save price not available');
         }
 
         // Update UI with results
