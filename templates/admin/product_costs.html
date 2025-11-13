@@ -40,7 +40,7 @@
         <div class="card-body">
             <div class="alert alert-info mb-4">
                 <i class="fas fa-info-circle"></i>
-                Update product costs and MAP (Minimum Advertised Price) below. Prices will be automatically recalculated using category markups or product-specific override markups. Changes are saved immediately.
+                Update product costs and MAP (Minimum Advertised Price) below. Prices will be automatically recalculated using category markups or product-specific override markups. Click "Apply" to save your changes.
             </div>
 
             <!-- Search and Filter Controls -->
@@ -153,9 +153,12 @@
                                     </div>
                                 </td>
                                 <td class="status-cell">
-                                    <span class="status-indicator" data-product-id="{{ product.id }}">
-                                        <i class="fas fa-circle text-muted" title="Ready"></i>
-                                    </span>
+                                    <button type="button" 
+                                            class="btn btn-sm btn-primary apply-btn" 
+                                            data-product-id="{{ product.id }}"
+                                            title="Apply changes">
+                                        <i class="fas fa-check"></i> Apply
+                                    </button>
                                 </td>
                             </tr>
                             {% endfor %}
