@@ -152,7 +152,11 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    ${{ "%.2f"|format(product.price) }}
+                                    {% if product.price %}
+                                        ${{ "%.2f"|format(product.price) }}
+                                    {% else %}
+                                        <span class="text-muted">N/A</span>
+                                    {% endif %}
                                 </td>
                             </tr>
                             {% endfor %}

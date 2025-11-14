@@ -39,7 +39,7 @@
 
                 <!-- Price and Stock -->
                 <div class="mb-4">
-                    {% if product.requires_quote %}
+                    {% if product.requires_quote or not product.price %}
                     <div class="alert alert-info">
                         <i class="fas fa-quote-left"></i> 
                         <strong>Call for Pricing</strong> - This item requires a custom quote
