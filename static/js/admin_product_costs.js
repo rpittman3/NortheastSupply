@@ -43,6 +43,9 @@ class ProductCostManager {
         
         // Setup no cost filter
         this.setupNoCostFilter();
+        
+        // Setup price N/A filter
+        this.setupPriceNaFilter();
     }
 
     setupSearch() {
@@ -72,10 +75,20 @@ class ProductCostManager {
         }
     }
 
+    setupPriceNaFilter() {
+        const priceNaFilter = document.getElementById('priceNaFilter');
+        if (priceNaFilter) {
+            priceNaFilter.addEventListener('change', (e) => {
+                this.filterProducts();
+            });
+        }
+    }
+
     filterProducts() {
         const searchTerm = document.getElementById('productSearch')?.value.toLowerCase() || '';
         const selectedCategory = document.getElementById('categoryFilter')?.value || '';
         const noCostOnly = document.getElementById('noCostFilter')?.checked || false;
+        const priceNaOnly = document.getElementById('priceNaFilter')?.checked || false;
         
         let visibleCount = 0;
 
@@ -98,7 +111,10 @@ class ProductCostManager {
             // Show only if: not filtering OR (no cost AND not price N/A)
             const matchesNoCostFilter = !noCostOnly || (!hasCost && !isPriceNa);
             
-            if (matchesSearch && matchesCategory && matchesNoCostFilter) {
+            // Check price N/A filter
+            const matchesPriceNaFilter = !priceNaOnly || isPriceNa;
+            
+            if (matchesSearch && matchesCategory && matchesNoCostFilter && matchesPriceNaFilter) {
                 row.style.display = '';
                 visibleCount++;
             } else {
