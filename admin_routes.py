@@ -591,8 +591,11 @@ def admin_bulk_category_assignment():
             Product.sku.ilike(f'%{search_query}%')
         )
     
-    # Hide products with no price
-    products_query = products_query.filter(Product.price.isnot(None))
+    # Hide products with no price (NULL or 0)
+    products_query = products_query.filter(
+        Product.price.isnot(None),
+        Product.price > 0
+    )
     
     # Get paginated products
     page = request.args.get('page', 1, type=int)
