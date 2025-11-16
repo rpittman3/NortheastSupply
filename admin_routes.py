@@ -106,6 +106,7 @@ def admin_dashboard():
     total_users = User.query.count()
     total_categories = Category.query.count()
     total_products = Product.query.count()
+    total_orders = Order.query.count()
     
     # Get unprocessed orders (pending status)
     unprocessed_orders = Order.query.filter_by(status='pending').order_by(Order.created_at.desc()).limit(10).all()
@@ -114,6 +115,7 @@ def admin_dashboard():
                          total_users=total_users,
                          total_categories=total_categories,
                          total_products=total_products,
+                         total_orders=total_orders,
                          unprocessed_orders=unprocessed_orders)
 
 # Category Management
