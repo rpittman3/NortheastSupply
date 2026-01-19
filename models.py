@@ -119,6 +119,16 @@ class Product(db.Model):
     quote_items = db.relationship('QuoteItem', backref='product', lazy=True)
     order_items = db.relationship('OrderItem', backref='product', lazy=True)
 
+    @property
+    def display_price(self):
+        """Returns the display price, enforcing MAP pricing rules.
+        If calculated price is below MAP price, return MAP price instead."""
+        if self.price is None:
+            return None
+        if self.map_price is not None and self.price < self.map_price:
+            return self.map_price
+        return self.price
+
 class CartItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.String, db.ForeignKey('users.id'), nullable=False)
