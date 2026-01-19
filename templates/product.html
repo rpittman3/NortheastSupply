@@ -39,14 +39,14 @@
 
                 <!-- Price and Stock -->
                 <div class="mb-4">
-                    {% if product.requires_quote or not product.price %}
+                    {% if product.requires_quote or not product.display_price %}
                     <div class="alert alert-info">
                         <i class="fas fa-quote-left"></i> 
                         <strong>Call for Pricing</strong> - This item requires a custom quote
                     </div>
                     {% else %}
                     <div class="price-display mb-3">
-                        <span class="h2 text-primary fw-bold">${{ "%.2f"|format(product.price) }}</span>
+                        <span class="h2 text-primary fw-bold">${{ "%.2f"|format(product.display_price) }}</span>
                     </div>
                     {% endif %}
                     
