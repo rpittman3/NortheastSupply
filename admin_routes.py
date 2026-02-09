@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash, session, jsonify
+from flask import render_template, request, redirect, url_for, flash, session, jsonify, send_file
 from functools import wraps
 from app import app, db
 from models import User, Category, Product, Manufacturer, QuoteRequest, QuoteItem, product_categories, Order, OrderItem
@@ -8,6 +8,11 @@ from datetime import datetime
 import os
 import uuid
 import math
+import csv
+import io
+import re
+import json
+import tempfile
 from werkzeug.utils import secure_filename
 from sqlalchemy import text
 from decimal import Decimal, ROUND_HALF_UP, InvalidOperation
@@ -1043,3 +1048,332 @@ def admin_send_customer_email(order_id):
         flash('Failed to send email. Please check your email configuration.', 'error')
     
     return redirect(url_for('admin_order_detail', order_id=order_id))
+
+
+def generate_slug(name):
+    slug = name.lower().strip()
+    slug = re.sub(r'[^\w\s-]', '', slug)
+    slug = re.sub(r'[\s_]+', '-', slug)
+    slug = re.sub(r'-+', '-', slug)
+    slug = slug.strip('-')
+    return slug
+
+
+def ensure_unique_slug(base_slug):
+    slug = base_slug
+    counter = 1
+    while Product.query.filter_by(slug=slug).first():
+        slug = f"{base_slug}-{counter}"
+        counter += 1
+    return slug
+
+
+@app.route('/admin/csv-template')
+@admin_required
+def admin_download_csv_template():
+    template_path = os.path.join(app.root_path, 'static', 'csv', 'product_import_template.csv')
+    return send_file(template_path, as_attachment=True, download_name='product_import_template.csv', mimetype='text/csv')
+
+
+@app.route('/admin/csv-import', methods=['GET', 'POST'])
+@admin_required
+def admin_csv_import():
+    categories = Category.query.order_by(Category.name).all()
+
+    if request.method == 'GET':
+        return render_template('admin/csv_import.html', categories=categories, preview_data=None)
+
+    csv_file = request.files.get('csv_file')
+    default_category_id = request.form.get('default_category', type=int)
+
+    if not csv_file or not csv_file.filename:
+        flash('Please select a CSV file to upload.', 'error')
+        return render_template('admin/csv_import.html', categories=categories, preview_data=None)
+
+    if not csv_file.filename.lower().endswith('.csv'):
+        flash('File must be a CSV file (.csv extension).', 'error')
+        return render_template('admin/csv_import.html', categories=categories, preview_data=None)
+
+    try:
+        content = csv_file.read().decode('utf-8-sig')
+    except UnicodeDecodeError:
+        try:
+            csv_file.seek(0)
+            content = csv_file.read().decode('latin-1')
+        except Exception:
+            flash('Could not read the CSV file. Please ensure it is saved as UTF-8.', 'error')
+            return render_template('admin/csv_import.html', categories=categories, preview_data=None)
+
+    reader = csv.DictReader(io.StringIO(content))
+
+    if not reader.fieldnames:
+        flash('CSV file appears to be empty or has no header row.', 'error')
+        return render_template('admin/csv_import.html', categories=categories, preview_data=None)
+
+    headers_lower = [h.strip().lower().replace(' ', '_') for h in reader.fieldnames]
+
+    if 'sku' not in headers_lower or 'name' not in headers_lower:
+        flash('CSV file must contain at least "sku" and "name" columns.', 'error')
+        return render_template('admin/csv_import.html', categories=categories, preview_data=None)
+
+    all_categories = Category.query.all()
+    category_lookup = {}
+    for cat in all_categories:
+        category_lookup[cat.name.lower().strip()] = cat
+
+    existing_skus = {p.sku.lower(): p for p in Product.query.all()}
+
+    preview_data = []
+    raw_rows = []
+    stats = {'new': 0, 'existing': 0, 'errors': 0}
+
+    for row_num, row in enumerate(reader, start=2):
+        cleaned = {}
+        for key, val in row.items():
+            if key:
+                cleaned[key.strip().lower().replace(' ', '_')] = (val or '').strip()
+
+        sku = cleaned.get('sku', '')
+        name = cleaned.get('name', '')
+        brand = cleaned.get('brand', '')
+        category_name = cleaned.get('category', '')
+        cost = cleaned.get('cost', '')
+        map_price = cleaned.get('map_price', '')
+        short_description = cleaned.get('short_description', '')
+        description = cleaned.get('description', '')
+        weight = cleaned.get('weight', '')
+        dimensions = cleaned.get('dimensions', '')
+        thumb_image_url = cleaned.get('thumb_image_url', '')
+        large_image_url = cleaned.get('large_image_url', '')
+        requires_quote = cleaned.get('requires_quote', '').lower() in ('yes', 'true', '1', 'y')
+
+        notes = []
+        status = 'new'
+
+        if not sku:
+            status = 'error'
+            notes.append('Missing SKU')
+        if not name:
+            status = 'error'
+            notes.append('Missing name')
+
+        if sku and sku.lower() in existing_skus:
+            status = 'existing'
+            notes.append('SKU already exists')
+
+        if cost:
+            try:
+                float(cost.replace('$', '').replace(',', ''))
+            except ValueError:
+                notes.append('Invalid cost format')
+                cost = ''
+
+        if map_price:
+            try:
+                float(map_price.replace('$', '').replace(',', ''))
+            except ValueError:
+                notes.append('Invalid MAP price format')
+                map_price = ''
+
+        category_match = False
+        matched_cat_name = category_name
+        if category_name and category_name.lower().strip() in category_lookup:
+            category_match = True
+            matched_cat_name = category_lookup[category_name.lower().strip()].name
+        elif category_name:
+            notes.append('Category not found, will use default')
+
+        if status == 'new':
+            stats['new'] += 1
+        elif status == 'existing':
+            stats['existing'] += 1
+        else:
+            stats['errors'] += 1
+
+        preview_data.append({
+            'row_num': row_num,
+            'status': status,
+            'sku': sku,
+            'name': name,
+            'brand': brand,
+            'category_name': matched_cat_name,
+            'category_match': category_match,
+            'cost': cost,
+            'map_price': map_price,
+            'notes': '; '.join(notes) if notes else ''
+        })
+
+        raw_rows.append(cleaned)
+
+    import_id = uuid.uuid4().hex[:16]
+    temp_path = os.path.join(tempfile.gettempdir(), f'csv_import_{import_id}.json')
+    with open(temp_path, 'w') as f:
+        json.dump(raw_rows, f)
+
+    return render_template('admin/csv_import.html',
+                         categories=categories,
+                         preview_data=preview_data,
+                         stats=stats,
+                         import_id=import_id,
+                         default_category_id=default_category_id or '')
+
+
+@app.route('/admin/csv-process', methods=['POST'])
+@admin_required
+def admin_csv_process():
+    import_id = request.form.get('import_id', '')
+    default_category_id = request.form.get('default_category', type=int)
+    selected_rows = request.form.getlist('import_rows', type=int)
+
+    if not import_id or not selected_rows:
+        flash('No products selected for import.', 'error')
+        return redirect(url_for('admin_csv_import'))
+
+    temp_path = os.path.join(tempfile.gettempdir(), f'csv_import_{import_id}.json')
+    if not os.path.exists(temp_path):
+        flash('Import session expired. Please upload the CSV file again.', 'error')
+        return redirect(url_for('admin_csv_import'))
+
+    with open(temp_path, 'r') as f:
+        raw_rows = json.load(f)
+
+    all_categories = Category.query.all()
+    category_lookup = {}
+    for cat in all_categories:
+        category_lookup[cat.name.lower().strip()] = cat
+
+    existing_skus = {p.sku.lower() for p in Product.query.all()}
+
+    imported_count = 0
+    skipped_count = 0
+    error_count = 0
+
+    for row_num in selected_rows:
+        idx = row_num - 2
+        if idx < 0 or idx >= len(raw_rows):
+            continue
+
+        row = raw_rows[idx]
+        sku = row.get('sku', '').strip()
+        name = row.get('name', '').strip()
+
+        if not sku or not name:
+            error_count += 1
+            continue
+
+        if sku.lower() in existing_skus:
+            skipped_count += 1
+            continue
+
+        category_name = row.get('category', '').strip()
+        category_id = default_category_id
+
+        if category_name and category_name.lower() in category_lookup:
+            category_id = category_lookup[category_name.lower()].id
+
+        if not category_id:
+            first_cat = Category.query.first()
+            if first_cat:
+                category_id = first_cat.id
+            else:
+                error_count += 1
+                continue
+
+        brand = row.get('brand', '').strip()
+
+        manufacturer_id = None
+        if brand:
+            manufacturer = Manufacturer.query.filter(
+                db.func.lower(Manufacturer.name) == brand.lower()
+            ).first()
+            if not manufacturer:
+                mfr_slug = generate_slug(brand)
+                existing_mfr = Manufacturer.query.filter_by(slug=mfr_slug).first()
+                if existing_mfr:
+                    manufacturer_id = existing_mfr.id
+                else:
+                    manufacturer = Manufacturer(name=brand, slug=mfr_slug)
+                    db.session.add(manufacturer)
+                    db.session.flush()
+                    manufacturer_id = manufacturer.id
+            else:
+                manufacturer_id = manufacturer.id
+
+        cost_str = row.get('cost', '').strip()
+        cost = None
+        if cost_str:
+            try:
+                cost = Decimal(cost_str.replace('$', '').replace(',', ''))
+            except (InvalidOperation, ValueError):
+                cost = None
+
+        map_price_str = row.get('map_price', '').strip()
+        map_price = None
+        if map_price_str:
+            try:
+                map_price = Decimal(map_price_str.replace('$', '').replace(',', ''))
+            except (InvalidOperation, ValueError):
+                map_price = None
+
+        price = None
+        if cost and cost > 0:
+            price = compute_price(cost, None, category_id)
+
+        weight_str = row.get('weight', '').strip()
+        weight = None
+        if weight_str:
+            try:
+                weight = Decimal(weight_str.replace(',', ''))
+            except (InvalidOperation, ValueError):
+                weight = None
+
+        requires_quote = row.get('requires_quote', '').strip().lower() in ('yes', 'true', '1', 'y')
+
+        slug = ensure_unique_slug(generate_slug(name))
+
+        product = Product(
+            name=name,
+            slug=slug,
+            sku=sku,
+            primary_category_id=category_id,
+            manufacturer_id=manufacturer_id,
+            short_description=row.get('short_description', '').strip() or None,
+            description=row.get('description', '').strip() or None,
+            cost=cost,
+            map_price=map_price,
+            price=price,
+            weight=weight,
+            dimensions=row.get('dimensions', '').strip() or None,
+            thumb_image_url=row.get('thumb_image_url', '').strip() or None,
+            large_image_url=row.get('large_image_url', '').strip() or None,
+            in_stock=True,
+            is_featured=False,
+            requires_quote=requires_quote,
+            price_not_available=(price is None and not cost)
+        )
+
+        db.session.add(product)
+        db.session.flush()
+
+        category_obj = Category.query.get(category_id)
+        if category_obj:
+            product.categories.append(category_obj)
+
+        existing_skus.add(sku.lower())
+        imported_count += 1
+
+    db.session.commit()
+
+    try:
+        os.remove(temp_path)
+    except OSError:
+        pass
+
+    if imported_count > 0:
+        flash(f'Successfully imported {imported_count} products.', 'success')
+    if skipped_count > 0:
+        flash(f'Skipped {skipped_count} products (SKU already exists).', 'warning')
+    if error_count > 0:
+        flash(f'{error_count} products had errors and were not imported.', 'error')
+
+    return redirect(url_for('admin_products'))

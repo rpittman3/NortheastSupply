@@ -1,0 +1,204 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Import Products from CSV - Admin{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><i class="fas fa-file-csv me-2"></i>Import Products from CSV</h1>
+        <div>
+            <a href="{{ url_for('admin_download_csv_template') }}" class="btn btn-outline-primary">
+                <i class="fas fa-download me-1"></i>Download CSV Template
+            </a>
+            <a href="{{ url_for('admin_products') }}" class="btn btn-outline-secondary ms-2">
+                <i class="fas fa-arrow-left me-1"></i>Back to Products
+            </a>
+        </div>
+    </div>
+
+    {% if not preview_data %}
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-upload me-2"></i>Upload CSV File</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data" action="{{ url_for('admin_csv_import') }}">
+                        <input type="hidden" name="step" value="upload">
+                        <div class="mb-4">
+                            <label for="csv_file" class="form-label fw-bold">Select CSV File</label>
+                            <input type="file" class="form-control form-control-lg" id="csv_file" name="csv_file" accept=".csv" required>
+                            <div class="form-text">Maximum file size: 10MB. File must be in CSV format with comma delimiters.</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="default_category" class="form-label fw-bold">Default Category</label>
+                            <select class="form-select" id="default_category" name="default_category">
+                                <option value="">-- Select a default category for imported products --</option>
+                                {% for cat in categories %}
+                                <option value="{{ cat.id }}">{{ cat.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="form-text">Products will be assigned to this category if no matching category is found in the CSV data.</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-eye me-1"></i>Preview Import
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>CSV Format Guide</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-3">Your CSV file should include these columns:</p>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Column</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>sku</code></td><td><span class="badge bg-danger">Required</span></td></tr>
+                            <tr><td><code>name</code></td><td><span class="badge bg-danger">Required</span></td></tr>
+                            <tr><td><code>cost</code></td><td><span class="badge bg-warning">Recommended</span></td></tr>
+                            <tr><td><code>brand</code></td><td>Optional</td></tr>
+                            <tr><td><code>category</code></td><td>Optional</td></tr>
+                            <tr><td><code>map_price</code></td><td>Optional</td></tr>
+                            <tr><td><code>short_description</code></td><td>Optional</td></tr>
+                            <tr><td><code>description</code></td><td>Optional</td></tr>
+                            <tr><td><code>weight</code></td><td>Optional</td></tr>
+                            <tr><td><code>dimensions</code></td><td>Optional</td></tr>
+                            <tr><td><code>thumb_image_url</code></td><td>Optional</td></tr>
+                            <tr><td><code>large_image_url</code></td><td>Optional</td></tr>
+                            <tr><td><code>upc</code></td><td>Optional</td></tr>
+                            <tr><td><code>requires_quote</code></td><td>Optional</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="alert alert-info mt-3 mb-0">
+                        <small>
+                            <i class="fas fa-lightbulb me-1"></i>
+                            <strong>Tip:</strong> Download the template above and send it to your manufacturers. They can fill in their product data and return it for easy import.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <form method="POST" action="{{ url_for('admin_csv_process') }}">
+        <input type="hidden" name="import_id" value="{{ import_id }}">
+        <input type="hidden" name="default_category" value="{{ default_category_id }}">
+
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-search me-2"></i>Import Preview
+                    <span class="badge bg-primary ms-2">{{ preview_data|length }} products</span>
+                </h5>
+                <div>
+                    <span class="badge bg-success me-2">{{ stats.new }} new</span>
+                    <span class="badge bg-warning me-2">{{ stats.existing }} already exist (will skip)</span>
+                    <span class="badge bg-danger">{{ stats.errors }} errors</span>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width: 40px;">
+                                    <input type="checkbox" id="select-all" checked>
+                                </th>
+                                <th>Row</th>
+                                <th>Status</th>
+                                <th>SKU</th>
+                                <th>Name</th>
+                                <th>Brand</th>
+                                <th>Category</th>
+                                <th>Cost</th>
+                                <th>MAP</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in preview_data %}
+                            <tr class="{% if row.status == 'error' %}table-danger{% elif row.status == 'existing' %}table-warning{% endif %}">
+                                <td>
+                                    {% if row.status == 'new' %}
+                                    <input type="checkbox" name="import_rows" value="{{ row.row_num }}" checked>
+                                    {% endif %}
+                                </td>
+                                <td>{{ row.row_num }}</td>
+                                <td>
+                                    {% if row.status == 'new' %}
+                                    <span class="badge bg-success">New</span>
+                                    {% elif row.status == 'existing' %}
+                                    <span class="badge bg-warning">Exists</span>
+                                    {% else %}
+                                    <span class="badge bg-danger">Error</span>
+                                    {% endif %}
+                                </td>
+                                <td><code>{{ row.sku }}</code></td>
+                                <td>{{ row.name }}</td>
+                                <td>{{ row.brand or '-' }}</td>
+                                <td>
+                                    {% if row.category_match %}
+                                    <span class="text-success"><i class="fas fa-check me-1"></i>{{ row.category_name }}</span>
+                                    {% elif row.category_name %}
+                                    <span class="text-warning" title="Category not found, will use default"><i class="fas fa-exclamation-triangle me-1"></i>{{ row.category_name }}</span>
+                                    {% else %}
+                                    <span class="text-muted">Default</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ row.cost or '-' }}</td>
+                                <td>{{ row.map_price or '-' }}</td>
+                                <td>
+                                    {% if row.notes %}
+                                    <small class="text-muted">{{ row.notes }}</small>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="{{ url_for('admin_csv_import') }}" class="btn btn-outline-secondary btn-lg">
+                <i class="fas fa-arrow-left me-1"></i>Upload Different File
+            </a>
+            {% if stats.new > 0 %}
+            <button type="submit" class="btn btn-success btn-lg">
+                <i class="fas fa-file-import me-1"></i>Import Selected Products
+            </button>
+            {% endif %}
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var selectAll = document.getElementById('select-all');
+    if (selectAll) {
+        selectAll.addEventListener('change', function() {
+            var checkboxes = document.querySelectorAll('input[name="import_rows"]');
+            checkboxes.forEach(function(cb) {
+                cb.checked = selectAll.checked;
+            });
+        });
+    }
+});
+</script>
+{% endblock %}
