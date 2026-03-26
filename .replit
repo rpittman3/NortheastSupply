@@ -35,3 +35,7 @@ externalPort = 80
 
 [agent]
 integrations = ["python_database:1.0.0", "web_scraper:1.0.0", "python_log_in_with_replit:1.0.0"]
+
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 60000
