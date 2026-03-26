@@ -329,8 +329,10 @@ def admin_add_product():
         db.session.add(product)
         db.session.flush()  # Get the product ID
         
-        # Add selected categories
-        selected_categories = Category.query.filter(Category.id.in_(form.category_ids.data)).all()
+        # Add selected categories, ensuring primary category is always included
+        selected_category_ids = set(form.category_ids.data or [])
+        selected_category_ids.add(form.primary_category_id.data)
+        selected_categories = Category.query.filter(Category.id.in_(selected_category_ids)).all()
         product.categories.extend(selected_categories)
         
         db.session.commit()
@@ -404,9 +406,11 @@ def admin_edit_product(product_id):
         product.requires_quote = form.requires_quote.data
         product.updated_at = datetime.now()
         
-        # Update categories
+        # Update categories, ensuring primary category is always included
         product.categories.clear()
-        selected_categories = Category.query.filter(Category.id.in_(form.category_ids.data)).all()
+        selected_category_ids = set(form.category_ids.data or [])
+        selected_category_ids.add(form.primary_category_id.data)
+        selected_categories = Category.query.filter(Category.id.in_(selected_category_ids)).all()
         product.categories.extend(selected_categories)
         
         db.session.commit()
