@@ -17,8 +17,7 @@ from werkzeug.utils import secure_filename
 from sqlalchemy import text
 from decimal import Decimal, ROUND_HALF_UP, InvalidOperation
 
-# Admin password (in production, this should be an environment variable)
-ADMIN_PASSWORD = "admin123"
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin123")
 
 def save_uploaded_image(file, folder):
     """Save uploaded image and return the URL path"""
