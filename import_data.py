@@ -117,7 +117,6 @@ def import_products(products_data, category_id_mapping):
         product.weight = prod_data.get('weight')
         product.dimensions = prod_data.get('dimensions')
         product.in_stock = prod_data.get('in_stock', True)
-        product.stock_quantity = prod_data.get('stock_quantity', 0)
         product.is_featured = prod_data['is_featured']
         product.requires_quote = prod_data['requires_quote']
         product.bullets = prod_data.get('bullets')

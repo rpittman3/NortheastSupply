@@ -311,7 +311,6 @@ def create_products(categories):
             'weight': 185.0,
             'dimensions': '25.4" W x 26.4" D x 20.9" H',
             'in_stock': True,
-            'stock_quantity': 3,
             'is_featured': True,
             'requires_quote': True
         },
@@ -329,7 +328,6 @@ def create_products(categories):
             'weight': 450.0,
             'dimensions': '38" W x 32" D x 28" H',
             'in_stock': True,
-            'stock_quantity': 5,
             'is_featured': False,
             'requires_quote': False
         },
@@ -348,7 +346,6 @@ def create_products(categories):
             'weight': 85.0,
             'dimensions': '15.5" W x 24" D x 16" H',
             'in_stock': True,
-            'stock_quantity': 8,
             'is_featured': True,
             'requires_quote': False
         },
@@ -366,7 +363,6 @@ def create_products(categories):
             'weight': 195.0,
             'dimensions': '15.5" W x 32.5" D x 50" H',
             'in_stock': True,
-            'stock_quantity': 4,
             'is_featured': False,
             'requires_quote': False
         },
@@ -385,7 +381,6 @@ def create_products(categories):
             'weight': 385.0,
             'dimensions': '78" W x 32" D x 80" H',
             'in_stock': True,
-            'stock_quantity': 2,
             'is_featured': True,
             'requires_quote': False
         },
@@ -403,7 +398,6 @@ def create_products(categories):
             'weight': 850.0,
             'dimensions': '6\' W x 12\' L x 7\'7" H',
             'in_stock': False,
-            'stock_quantity': 0,
             'is_featured': False,
             'requires_quote': True
         },
@@ -422,7 +416,6 @@ def create_products(categories):
             'weight': 45.0,
             'dimensions': '30" W x 48" L x 1.25" thick',
             'in_stock': True,
-            'stock_quantity': 25,
             'is_featured': False,
             'requires_quote': False
         },
@@ -440,7 +433,6 @@ def create_products(categories):
             'weight': 32.0,
             'dimensions': '36" diameter x 1.125" thick',
             'in_stock': True,
-            'stock_quantity': 20,
             'is_featured': False,
             'requires_quote': False
         },
@@ -459,7 +451,6 @@ def create_products(categories):
             'weight': 12.0,
             'dimensions': '18" W x 20" D x 32" H',
             'in_stock': True,
-            'stock_quantity': 50,
             'is_featured': True,
             'requires_quote': False
         },
@@ -477,7 +468,6 @@ def create_products(categories):
             'weight': 9.5,
             'dimensions': '19" W x 21" D x 31" H',
             'in_stock': True,
-            'stock_quantity': 40,
             'is_featured': False,
             'requires_quote': False
         },
@@ -496,7 +486,6 @@ def create_products(categories):
             'weight': 4.2,
             'dimensions': '11" diameter x 6" deep',
             'in_stock': True,
-            'stock_quantity': 15,
             'is_featured': False,
             'requires_quote': False
         },
@@ -514,7 +503,6 @@ def create_products(categories):
             'weight': 2.8,
             'dimensions': '12" diameter x 2" deep',
             'in_stock': True,
-            'stock_quantity': 22,
             'is_featured': False,
             'requires_quote': False
         },
@@ -533,7 +521,6 @@ def create_products(categories):
             'weight': 0.5,
             'dimensions': '8" blade length',
             'in_stock': True,
-            'stock_quantity': 35,
             'is_featured': True,
             'requires_quote': False
         },
@@ -551,7 +538,6 @@ def create_products(categories):
             'weight': 3.2,
             'dimensions': 'Various blade lengths',
             'in_stock': True,
-            'stock_quantity': 12,
             'is_featured': False,
             'requires_quote': False
         }
@@ -585,7 +571,6 @@ def create_products(categories):
             weight=product_data.get('weight'),
             dimensions=product_data.get('dimensions'),
             in_stock=product_data['in_stock'],
-            stock_quantity=product_data['stock_quantity'],
             is_featured=product_data['is_featured'],
             requires_quote=product_data['requires_quote']
         )

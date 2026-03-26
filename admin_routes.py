@@ -322,7 +322,6 @@ def admin_add_product():
         product.weight = form.weight.data
         product.dimensions = form.dimensions.data
         product.in_stock = form.in_stock.data
-        product.stock_quantity = form.stock_quantity.data or 0
         product.is_featured = form.is_featured.data
         product.requires_quote = form.requires_quote.data
         
@@ -401,7 +400,6 @@ def admin_edit_product(product_id):
         product.weight = form.weight.data
         product.dimensions = form.dimensions.data
         product.in_stock = form.in_stock.data
-        product.stock_quantity = form.stock_quantity.data or 0
         product.is_featured = form.is_featured.data
         product.requires_quote = form.requires_quote.data
         product.updated_at = datetime.now()

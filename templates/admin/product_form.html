@@ -238,17 +238,6 @@
                                     {{ form.in_stock.label(class="form-check-label") }}
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                {{ form.stock_quantity.label(class="form-label") }}
-                                {{ form.stock_quantity(class="form-control") }}
-                                {% if form.stock_quantity.errors %}
-                                    <div class="text-danger">
-                                        {% for error in form.stock_quantity.errors %}
-                                            <small>{{ error }}</small>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
                         </div>
 
                         <div class="row">

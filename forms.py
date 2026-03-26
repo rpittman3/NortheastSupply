@@ -79,7 +79,6 @@ class ProductForm(FlaskForm):
     weight = DecimalField('Weight (lbs)', validators=[Optional(), NumberRange(min=0)])
     dimensions = StringField('Dimensions', validators=[Optional(), Length(max=100)])
     in_stock = BooleanField('In Stock')
-    stock_quantity = IntegerField('Stock Quantity', validators=[Optional(), NumberRange(min=0)])
     is_featured = BooleanField('Featured Product')
     requires_quote = BooleanField('Requires Quote')
 

@@ -97,7 +97,6 @@ class Product(db.Model):
     weight = db.Column(db.Numeric(8, 2))
     dimensions = db.Column(db.String(100))
     in_stock = db.Column(db.Boolean, default=True)
-    stock_quantity = db.Column(db.Integer, default=0)
     is_featured = db.Column(db.Boolean, default=False)
     requires_quote = db.Column(db.Boolean, default=False)
     price_not_available = db.Column(db.Boolean, default=False)

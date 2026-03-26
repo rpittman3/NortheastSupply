@@ -45,9 +45,6 @@
                                 <td>
                                     {% if product.in_stock %}
                                         <span class="badge bg-success">In Stock</span>
-                                        {% if product.stock_quantity %}
-                                            ({{ product.stock_quantity }})
-                                        {% endif %}
                                     {% else %}
                                         <span class="badge bg-danger">Out of Stock</span>
                                     {% endif %}

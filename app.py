@@ -32,3 +32,14 @@ with app.app_context():
     import models  # noqa: F401
     db.create_all()
     logging.info("Database tables created")
+
+    # Schema migration: drop stock_quantity column if it still exists
+    from sqlalchemy import text, inspect
+    inspector = inspect(db.engine)
+    if 'product' in inspector.get_table_names():
+        columns = [col['name'] for col in inspector.get_columns('product')]
+        if 'stock_quantity' in columns:
+            with db.engine.connect() as conn:
+                conn.execute(text("ALTER TABLE product DROP COLUMN stock_quantity"))
+                conn.commit()
+            logging.info("Dropped stock_quantity column from product table")
