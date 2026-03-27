@@ -78,7 +78,6 @@ class ProductForm(FlaskForm):
     image_file = FileField('Upload Image', validators=[Optional(), FileAllowed(['jpg', 'jpeg', 'png', 'gif'], 'Images only!')])
     weight = DecimalField('Weight (lbs)', validators=[Optional(), NumberRange(min=0)])
     dimensions = StringField('Dimensions', validators=[Optional(), Length(max=100)])
-    in_stock = BooleanField('In Stock')
     is_featured = BooleanField('Featured Product')
     requires_quote = BooleanField('Requires Quote')
 

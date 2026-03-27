@@ -43,3 +43,8 @@ with app.app_context():
                 conn.execute(text("ALTER TABLE product DROP COLUMN stock_quantity"))
                 conn.commit()
             logging.info("Dropped stock_quantity column from product table")
+        if 'in_stock' in columns:
+            with db.engine.connect() as conn:
+                conn.execute(text("ALTER TABLE product DROP COLUMN in_stock"))
+                conn.commit()
+            logging.info("Dropped in_stock column from product table")

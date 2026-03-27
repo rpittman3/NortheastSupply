@@ -31,7 +31,6 @@
                                 <th>SKU</th>
                                 <th>Category</th>
                                 <th>Manufacturer</th>
-                                <th>Stock</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -42,13 +41,6 @@
                                 <td><code>{{ product.sku }}</code></td>
                                 <td>{{ product.category.name if product.category else '-' }}</td>
                                 <td>{{ product.manufacturer.name if product.manufacturer else '-' }}</td>
-                                <td>
-                                    {% if product.in_stock %}
-                                        <span class="badge bg-success">In Stock</span>
-                                    {% else %}
-                                        <span class="badge bg-danger">Out of Stock</span>
-                                    {% endif %}
-                                </td>
                                 <td>
                                     <a href="{{ url_for('admin_edit_product', product_id=product.id) }}" 
                                        class="btn btn-sm btn-primary">

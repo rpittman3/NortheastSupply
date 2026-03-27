@@ -58,7 +58,6 @@ def export_products():
             'additional_images': product.additional_images,
             'weight': float(product.weight) if product.weight else None,
             'dimensions': product.dimensions,
-            'in_stock': product.in_stock,
             'is_featured': product.is_featured,
             'requires_quote': product.requires_quote,
             'bullets': product.bullets,

@@ -23,7 +23,6 @@
                                 <th>SKU</th>
                                 <th>Category</th>
                                 <th>Cost</th>
-                                <th>Stock</th>
                                 <th>Featured</th>
                                 <th>Actions</th>
                             </tr>
@@ -35,13 +34,6 @@
                                 <td><code>{{ product.sku }}</code></td>
                                 <td>{{ product.category.name if product.category else '-' }}</td>
                                 <td>${{ "%.2f"|format(product.cost) if product.cost else '-' }}</td>
-                                <td>
-                                    {% if product.in_stock %}
-                                        <span class="badge bg-success">In Stock</span>
-                                    {% else %}
-                                        <span class="badge bg-danger">Out of Stock</span>
-                                    {% endif %}
-                                </td>
                                 <td>
                                     {% if product.is_featured %}
                                         <span class="badge bg-success">Featured</span>

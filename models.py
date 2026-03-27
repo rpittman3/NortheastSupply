@@ -96,7 +96,6 @@ class Product(db.Model):
     additional_images = db.Column(db.Text)  # JSON string of image URLs
     weight = db.Column(db.Numeric(8, 2))
     dimensions = db.Column(db.String(100))
-    in_stock = db.Column(db.Boolean, default=True)
     is_featured = db.Column(db.Boolean, default=False)
     requires_quote = db.Column(db.Boolean, default=False)
     price_not_available = db.Column(db.Boolean, default=False)
