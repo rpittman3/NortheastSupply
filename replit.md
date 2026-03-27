@@ -59,6 +59,7 @@ The platform includes comprehensive order tracking capabilities:
 
 ## Infrastructure
 - **Database**: Configurable through DATABASE_URL environment variable (supports PostgreSQL, MySQL, SQLite)
+- **Image Storage**: DigitalOcean Spaces (S3-compatible) via boto3. Uploaded product/category images are stored in Spaces and served via public URLs. Falls back to local filesystem if DO credentials are missing. Requires secrets: DO_SPACES_KEY, DO_SPACES_SECRET, DO_SPACES_BUCKET, DO_SPACES_REGION.
 - **Session Management**: Flask sessions with configurable secret key
 - **Logging**: Python standard library logging with DEBUG level configuration
 - **WSGI**: ProxyFix middleware for proper URL generation behind reverse proxies

@@ -16,26 +16,60 @@ import tempfile
 from werkzeug.utils import secure_filename
 from sqlalchemy import text
 from decimal import Decimal, ROUND_HALF_UP, InvalidOperation
+import logging
+import boto3
+from botocore.exceptions import ClientError
+
+logger = logging.getLogger(__name__)
 
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin123")
 
+DO_SPACES_KEY = os.environ.get("DO_SPACES_KEY")
+DO_SPACES_SECRET = os.environ.get("DO_SPACES_SECRET")
+DO_SPACES_BUCKET = os.environ.get("DO_SPACES_BUCKET")
+DO_SPACES_REGION = os.environ.get("DO_SPACES_REGION")
+
+def _get_spaces_client():
+    if all([DO_SPACES_KEY, DO_SPACES_SECRET, DO_SPACES_BUCKET, DO_SPACES_REGION]):
+        return boto3.client(
+            "s3",
+            region_name=DO_SPACES_REGION,
+            endpoint_url=f"https://{DO_SPACES_REGION}.digitaloceanspaces.com",
+            aws_access_key_id=DO_SPACES_KEY,
+            aws_secret_access_key=DO_SPACES_SECRET,
+        )
+    return None
+
 def save_uploaded_image(file, folder):
-    """Save uploaded image and return the URL path"""
+    """Save uploaded image to DigitalOcean Spaces (or local fallback) and return the URL"""
     if file and file.filename:
-        # Generate unique filename
         filename = secure_filename(file.filename)
         name, ext = os.path.splitext(filename)
         unique_filename = f"{name}_{uuid.uuid4().hex[:8]}{ext}"
-        
-        # Create the directory if it doesn't exist
-        upload_path = os.path.join('static', 'images', folder)
+        object_key = f"images/{folder}/{unique_filename}"
+
+        spaces_client = _get_spaces_client()
+        if spaces_client:
+            try:
+                content_type = file.content_type or "application/octet-stream"
+                spaces_client.upload_fileobj(
+                    file,
+                    DO_SPACES_BUCKET,
+                    object_key,
+                    ExtraArgs={"ACL": "public-read", "ContentType": content_type},
+                )
+                url = f"https://{DO_SPACES_BUCKET}.{DO_SPACES_REGION}.digitaloceanspaces.com/{object_key}"
+                logger.info("Uploaded image to DigitalOcean Spaces: %s", url)
+                return url
+            except Exception:
+                logger.exception("Failed to upload to DigitalOcean Spaces, falling back to local storage")
+                file.stream.seek(0)
+        else:
+            logger.warning("DigitalOcean Spaces credentials not configured — saving image to local filesystem")
+        upload_path = os.path.join("static", "images", folder)
         os.makedirs(upload_path, exist_ok=True)
-        
-        # Save the file
         file_path = os.path.join(upload_path, unique_filename)
         file.save(file_path)
-        
-        # Return the URL path
         return f"/static/images/{folder}/{unique_filename}"
     return None
 
