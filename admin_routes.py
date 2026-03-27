@@ -938,6 +938,23 @@ def admin_products_without_images():
     
     return render_template('admin/products_without_images.html', products=products)
 
+@app.route('/admin/image-url-search')
+@admin_required
+def admin_image_url_search():
+    """Search products by image URL keyword"""
+    from sqlalchemy import or_
+    q = request.args.get('q', '').strip()
+    products = []
+    if q:
+        search_term = f'%{q}%'
+        products = Product.query.filter(
+            or_(
+                Product.thumb_image_url.ilike(search_term),
+                Product.large_image_url.ilike(search_term)
+            )
+        ).order_by(Product.name).all()
+    return render_template('admin/image_url_search.html', products=products, q=q)
+
 @app.route('/admin/products/featured')
 @admin_required
 def admin_featured_products():
