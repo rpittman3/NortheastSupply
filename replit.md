@@ -64,6 +64,11 @@ The platform includes comprehensive order tracking capabilities:
 - **Logging**: Python standard library logging with DEBUG level configuration
 - **WSGI**: ProxyFix middleware for proper URL generation behind reverse proxies
 
+## AI Features
+- **AI Description Generator**: Admin product form has a "Generate with AI" button next to the long description field. Clicking it scrapes restaurantsupply.com (search by product name/SKU/manufacturer/category) and attempts to scrape the manufacturer's official website, then passes the gathered content to OpenAI (gpt-5 via Replit AI Integrations) to synthesize a rich HTML product description that populates the CKEditor field automatically. Route: `POST /admin/products/generate-description`.
+
 ## Development Tools
 - **Werkzeug**: WSGI utilities and development server
 - **Jinja2**: Template engine (included with Flask)
+- **OpenAI**: Replit AI Integrations (no separate API key required; billed to Replit credits)
+- **Trafilatura**: Web content extraction for AI description generator

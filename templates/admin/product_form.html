@@ -106,7 +106,15 @@
                         </div>
 
                         <div class="mb-3">
-                            {{ form.description.label(class="form-label") }}
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                {{ form.description.label(class="form-label mb-0") }}
+                                <button type="button" id="generate-description-btn" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-robot me-1"></i>
+                                    <span id="generate-btn-text">Generate with AI</span>
+                                    <span id="generate-btn-spinner" class="spinner-border spinner-border-sm ms-1 d-none" role="status" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                            <div id="generate-description-alert" class="d-none mb-2"></div>
                             {{ form.description(class="form-control rich-text-editor", rows="8") }}
                             {% if form.description.errors %}
                                 <div class="text-danger">
@@ -275,6 +283,96 @@ document.addEventListener('DOMContentLoaded', function() {
             height: 320,
             removePlugins: 'elementspath'
         });
+    }
+
+    // AI Description Generator
+    var generateBtn = document.getElementById('generate-description-btn');
+    if (generateBtn) {
+        generateBtn.addEventListener('click', function() {
+            var btnText = document.getElementById('generate-btn-text');
+            var spinner = document.getElementById('generate-btn-spinner');
+            var alertBox = document.getElementById('generate-description-alert');
+
+            // Read form field values
+            var productName = (document.getElementById('name') || document.querySelector('[name="name"]') || {}).value || '';
+            var sku = (document.getElementById('sku') || document.querySelector('[name="sku"]') || {}).value || '';
+            var manufacturerSelect = document.getElementById('manufacturer_id') || document.querySelector('[name="manufacturer_id"]');
+            var manufacturerName = '';
+            if (manufacturerSelect && manufacturerSelect.selectedIndex >= 0) {
+                var selectedOption = manufacturerSelect.options[manufacturerSelect.selectedIndex];
+                if (selectedOption && selectedOption.value !== '0') {
+                    manufacturerName = selectedOption.text.trim();
+                }
+            }
+            var categorySelect = document.getElementById('primary_category_id') || document.querySelector('[name="primary_category_id"]');
+            var primaryCategory = '';
+            if (categorySelect && categorySelect.selectedIndex >= 0) {
+                primaryCategory = categorySelect.options[categorySelect.selectedIndex].text.trim();
+            }
+
+            if (!productName.trim()) {
+                showAlert('warning', 'Please enter a product name before generating a description.');
+                return;
+            }
+
+            // Get CSRF token from the hidden input
+            var csrfToken = (document.querySelector('input[name="csrf_token"]') || {}).value || '';
+
+            // Disable button and show spinner
+            generateBtn.disabled = true;
+            btnText.textContent = 'Generating…';
+            spinner.classList.remove('d-none');
+            alertBox.className = 'd-none mb-2';
+
+            fetch('{{ url_for("admin_generate_description") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({
+                    product_name: productName,
+                    sku: sku,
+                    manufacturer_name: manufacturerName,
+                    primary_category: primaryCategory
+                })
+            })
+            .then(function(response) {
+                return response.json().then(function(data) {
+                    return { ok: response.ok, data: data };
+                });
+            })
+            .then(function(result) {
+                if (result.ok && result.data.description) {
+                    // Set CKEditor content
+                    if (window.CKEDITOR && CKEDITOR.instances['description']) {
+                        CKEDITOR.instances['description'].setData(result.data.description);
+                    } else {
+                        var textarea = document.getElementById('description') || document.querySelector('[name="description"]');
+                        if (textarea) textarea.value = result.data.description;
+                    }
+                    showAlert('success', 'Description generated successfully. Review and edit it before saving.');
+                } else {
+                    var msg = (result.data && result.data.error) ? result.data.error : 'An unexpected error occurred.';
+                    showAlert('danger', 'Generation failed: ' + msg);
+                }
+            })
+            .catch(function(err) {
+                showAlert('danger', 'Request failed. Please check your connection and try again.');
+            })
+            .finally(function() {
+                generateBtn.disabled = false;
+                btnText.textContent = 'Generate with AI';
+                spinner.classList.add('d-none');
+            });
+        });
+    }
+
+    function showAlert(type, message) {
+        var alertBox = document.getElementById('generate-description-alert');
+        alertBox.className = 'alert alert-' + type + ' alert-dismissible fade show mb-2';
+        alertBox.innerHTML = message +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
     }
 });
 </script>

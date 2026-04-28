@@ -26,15 +26,18 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "gunicorn --bind 0.0.0.0:5000 --reuse-port --reload main:app"
+args = "gunicorn --bind 0.0.0.0:5000 --reuse-port --reload --timeout 120 main:app"
 waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
 
 [[ports]]
 localPort = 5000
 externalPort = 80
 
 [agent]
-integrations = ["python_database:1.0.0", "web_scraper:1.0.0", "python_log_in_with_replit:1.0.0"]
+integrations = ["python_database:1.0.0", "web_scraper:1.0.0", "python_log_in_with_replit:1.0.0", "python_openai_ai_integrations:1.0.0"]
 
 [postMerge]
 path = "scripts/post-merge.sh"

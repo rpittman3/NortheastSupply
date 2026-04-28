@@ -13,12 +13,17 @@ import io
 import re
 import json
 import tempfile
+import urllib.parse
 from werkzeug.utils import secure_filename
 from sqlalchemy import text
 from decimal import Decimal, ROUND_HALF_UP, InvalidOperation
 import logging
 import boto3
 from botocore.exceptions import ClientError
+import trafilatura
+from openai import OpenAI
+from flask_wtf.csrf import validate_csrf
+from wtforms import ValidationError
 
 logger = logging.getLogger(__name__)
 
@@ -1426,3 +1431,157 @@ def admin_csv_process():
         flash(f'{error_count} products had errors and were not imported.', 'error')
 
     return redirect(url_for('admin_products'))
+
+
+def _scrape_url(url):
+    """Scrape text content from a URL using trafilatura. Returns text or empty string."""
+    try:
+        downloaded = trafilatura.fetch_url(url)
+        if downloaded:
+            text = trafilatura.extract(downloaded)
+            return text or ''
+    except Exception as e:
+        logger.warning("Failed to scrape %s: %s", url, e)
+    return ''
+
+
+def _extract_product_links(html_bytes, base_domain):
+    """Extract product page links from a raw HTML search results page."""
+    try:
+        text = html_bytes.decode('utf-8', errors='replace') if isinstance(html_bytes, bytes) else html_bytes
+        pattern = r'href=["\']([^"\']+/products/[^"\']+)["\']'
+        raw_links = re.findall(pattern, text)
+        seen = set()
+        links = []
+        for href in raw_links:
+            if href.startswith('/'):
+                href = base_domain.rstrip('/') + href
+            elif not href.startswith('http'):
+                continue
+            if href not in seen:
+                seen.add(href)
+                links.append(href)
+        return links[:3]
+    except Exception:
+        return []
+
+
+def _get_openai_client():
+    """Create an OpenAI client using Replit AI Integrations."""
+    return OpenAI(
+        api_key=os.environ.get("AI_INTEGRATIONS_OPENAI_API_KEY"),
+        base_url=os.environ.get("AI_INTEGRATIONS_OPENAI_BASE_URL"),
+    )
+
+
+@app.route('/admin/products/generate-description', methods=['POST'])
+@admin_required
+def admin_generate_description():
+    """Generate a product description using web scraping + OpenAI."""
+    try:
+        validate_csrf(request.headers.get('X-CSRFToken'))
+    except ValidationError:
+        return jsonify({'error': 'Invalid or missing CSRF token.'}), 400
+
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+
+    product_name = (data.get('product_name') or '').strip()
+    sku = (data.get('sku') or '').strip()
+    manufacturer_name = (data.get('manufacturer_name') or '').strip()
+    primary_category = (data.get('primary_category') or '').strip()
+
+    if not product_name:
+        return jsonify({'error': 'Product name is required'}), 400
+
+    scraped_sections = []
+
+    # Search restaurantsupply.com and scrape both search results and product detail pages
+    search_terms = ' '.join(filter(None, [product_name, sku, manufacturer_name, primary_category]))
+    encoded_terms = urllib.parse.quote_plus(search_terms)
+    rs_base = 'https://www.restaurantsupply.com'
+    rs_search_url = f"{rs_base}/search?q={encoded_terms}"
+    logger.info("Scraping restaurantsupply.com search: %s", rs_search_url)
+
+    try:
+        rs_html = trafilatura.fetch_url(rs_search_url)
+        if rs_html:
+            rs_search_text = trafilatura.extract(rs_html) or ''
+            if rs_search_text:
+                scraped_sections.append(f"[restaurantsupply.com search results]\n{rs_search_text[:2000]}")
+            product_links = _extract_product_links(rs_html, rs_base)
+            for link in product_links[:2]:
+                logger.info("Scraping restaurantsupply.com product page: %s", link)
+                page_text = _scrape_url(link)
+                if page_text:
+                    scraped_sections.append(f"[restaurantsupply.com product page: {link}]\n{page_text[:2500]}")
+    except Exception as e:
+        logger.warning("Error scraping restaurantsupply.com: %s", e)
+
+    # Scrape the manufacturer's website
+    if manufacturer_name:
+        mfr_slug = re.sub(r'[^a-z0-9]', '', manufacturer_name.lower())
+        candidate_urls = [
+            f"https://www.{mfr_slug}.com",
+            f"https://{mfr_slug}.com",
+        ]
+        for mfr_url in candidate_urls:
+            logger.info("Trying manufacturer site: %s", mfr_url)
+            mfr_text = _scrape_url(mfr_url)
+            if mfr_text:
+                scraped_sections.append(f"[{mfr_url}]\n{mfr_text[:2000]}")
+                break
+
+    # Build prompt for OpenAI
+    product_context = f"Product Name: {product_name}"
+    if sku:
+        product_context += f"\nSKU: {sku}"
+    if manufacturer_name:
+        product_context += f"\nManufacturer: {manufacturer_name}"
+    if primary_category:
+        product_context += f"\nCategory: {primary_category}"
+
+    scraped_content = "\n\n".join(scraped_sections) if scraped_sections else "No scraped content available."
+
+    prompt = f"""You are a professional product copywriter for a restaurant supply e-commerce store.
+
+Using the product details and any scraped reference content below, write a rich, well-formatted HTML product description suitable for a CKEditor field. The description should:
+- Be informative and professional, targeted at restaurant and foodservice buyers
+- Include a brief intro paragraph, key features as a bulleted list (<ul>/<li>), and any relevant specifications
+- Be formatted with proper HTML tags (h3, p, ul, li, strong)
+- Draw from the scraped content where relevant, but write in your own words
+- Be 200-400 words total
+- NOT include the product name as an <h1> or <h2> heading (the page already has a title)
+- NOT include placeholder text or mention that content was "scraped"
+
+{product_context}
+
+Reference content gathered from the web:
+{scraped_content[:6000]}
+
+Return ONLY the HTML content, no markdown fences or explanatory text."""
+
+    try:
+        client = _get_openai_client()
+        response = client.chat.completions.create(
+            model="gpt-5",
+            messages=[{"role": "user", "content": prompt}],
+            max_completion_tokens=8192,
+        )
+        description_html = response.choices[0].message.content or ''
+        description_html = description_html.strip()
+        # Strip markdown code fences if the model wrapped output anyway
+        if description_html.startswith('```'):
+            description_html = re.sub(r'^```[a-z]*\n?', '', description_html)
+            description_html = re.sub(r'\n?```$', '', description_html).strip()
+        # Remove any script or iframe tags from generated content
+        description_html = re.sub(r'<script[\s\S]*?</script>', '', description_html, flags=re.IGNORECASE)
+        description_html = re.sub(r'<iframe[\s\S]*?</iframe>', '', description_html, flags=re.IGNORECASE)
+        return jsonify({'description': description_html})
+    except Exception as e:
+        logger.exception("OpenAI generation failed")
+        error_msg = str(e)
+        if 'FREE_CLOUD_BUDGET_EXCEEDED' in error_msg:
+            return jsonify({'error': 'AI credits budget exceeded. Please upgrade your plan to continue using AI generation.'}), 402
+        return jsonify({'error': 'Description generation failed. Please try again.'}), 500
