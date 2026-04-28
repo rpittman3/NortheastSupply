@@ -1732,3 +1732,82 @@ Return ONLY the HTML content, no markdown fences or explanatory text."""
         if 'FREE_CLOUD_BUDGET_EXCEEDED' in error_msg:
             return jsonify({'error': 'AI credits budget exceeded. Please upgrade your plan to continue using AI generation.'}), 402
         return jsonify({'error': 'Description generation failed. Please try again.'}), 500
+
+
+@app.route('/admin/products/<int:product_id>/clear-scrape-cache', methods=['POST'])
+@admin_required
+def admin_clear_scrape_cache(product_id):
+    """Delete scraped content cache entries associated with a product.
+
+    Invalidation strategy (deterministic, no name-word guessing):
+    1. Reconstruct the restaurantsupply.com search URL exactly as the
+       generate-description flow does and delete that exact entry.
+    2. If the product has a SKU, delete entries whose URL contains the
+       URL-encoded SKU (both quote and quote_plus variants).  This covers
+       manufacturer search-results pages that include the SKU in the query
+       string.
+    3. Honour an optional ``url_prefix`` field in the JSON body: delete any
+       cached entry whose URL starts with that prefix.  This lets the caller
+       explicitly target additional URLs (e.g. a manufacturer domain).
+    """
+    try:
+        validate_csrf(request.headers.get('X-CSRFToken'))
+    except ValidationError:
+        return jsonify({'error': 'Invalid or missing CSRF token.'}), 400
+
+    product = Product.query.get_or_404(product_id)
+
+    data = request.get_json(silent=True) or {}
+    url_prefix = (data.get('url_prefix') or '').strip()
+
+    # --- Build the exact restaurantsupply.com search URL ---
+    manufacturer = Manufacturer.query.get(product.manufacturer_id) if product.manufacturer_id else None
+    manufacturer_name = manufacturer.name if manufacturer else ''
+    primary_cat = Category.query.get(product.primary_category_id) if product.primary_category_id else None
+    primary_category = primary_cat.name if primary_cat else ''
+    search_terms = ' '.join(filter(None, [product.name, product.sku, manufacturer_name, primary_category]))
+    rs_search_url = f"https://www.restaurantsupply.com/search?q={urllib.parse.quote_plus(search_terms)}"
+
+    from sqlalchemy import or_
+
+    deleted_ids = set()
+
+    def _collect(entries):
+        for entry in entries:
+            if entry.id not in deleted_ids:
+                deleted_ids.add(entry.id)
+                db.session.delete(entry)
+
+    # 1. Exact restaurantsupply.com search URL
+    rs_entry = ScrapedContentCache.query.filter_by(url=rs_search_url).first()
+    if rs_entry:
+        _collect([rs_entry])
+
+    # 2. Entries whose URL contains the exact (URL-encoded) SKU
+    if product.sku:
+        sku_plus = urllib.parse.quote_plus(product.sku)
+        sku_pct = urllib.parse.quote(product.sku)
+        filters = [ScrapedContentCache.url.ilike(f'%{sku_plus}%')]
+        if sku_pct != sku_plus:
+            filters.append(ScrapedContentCache.url.ilike(f'%{sku_pct}%'))
+        _collect(ScrapedContentCache.query.filter(or_(*filters)).all())
+
+    # 3. Optional explicit URL prefix supplied by the caller
+    if url_prefix:
+        _collect(
+            ScrapedContentCache.query.filter(
+                ScrapedContentCache.url.like(f'{url_prefix}%')
+            ).all()
+        )
+
+    try:
+        db.session.commit()
+        logger.info(
+            "Cleared %d scrape cache entries for product %d (%s)",
+            len(deleted_ids), product_id, product.name,
+        )
+        return jsonify({'success': True, 'deleted': len(deleted_ids)})
+    except Exception as e:
+        db.session.rollback()
+        logger.exception("Failed to clear scrape cache for product %d", product_id)
+        return jsonify({'error': 'Failed to clear cache. Please try again.'}), 500

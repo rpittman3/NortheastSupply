@@ -108,11 +108,21 @@
                         <div class="mb-3">
                             <div class="d-flex justify-content-between align-items-center mb-1">
                                 {{ form.description.label(class="form-label mb-0") }}
-                                <button type="button" id="generate-description-btn" class="btn btn-sm btn-outline-primary">
-                                    <i class="fas fa-robot me-1"></i>
-                                    <span id="generate-btn-text">Generate with AI</span>
-                                    <span id="generate-btn-spinner" class="spinner-border spinner-border-sm ms-1 d-none" role="status" aria-hidden="true"></span>
-                                </button>
+                                <div class="d-flex gap-2">
+                                    {% if product %}
+                                    <button type="button" id="clear-cache-btn" class="btn btn-sm btn-outline-secondary"
+                                            data-product-id="{{ product.id }}">
+                                        <i class="fas fa-trash-alt me-1"></i>
+                                        <span id="clear-cache-btn-text">Clear Cache</span>
+                                        <span id="clear-cache-spinner" class="spinner-border spinner-border-sm ms-1 d-none" role="status" aria-hidden="true"></span>
+                                    </button>
+                                    {% endif %}
+                                    <button type="button" id="generate-description-btn" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-robot me-1"></i>
+                                        <span id="generate-btn-text">Generate with AI</span>
+                                        <span id="generate-btn-spinner" class="spinner-border spinner-border-sm ms-1 d-none" role="status" aria-hidden="true"></span>
+                                    </button>
+                                </div>
                             </div>
                             <div id="generate-description-alert" class="d-none mb-2"></div>
                             {{ form.description(class="form-control rich-text-editor", rows="8") }}
@@ -379,6 +389,54 @@ document.addEventListener('DOMContentLoaded', function() {
         aiModal.hide();
         showAlert('success', 'AI-generated content appended to the existing description. Review and edit before saving.');
     });
+
+    // Clear Scrape Cache
+    var clearCacheBtn = document.getElementById('clear-cache-btn');
+    if (clearCacheBtn) {
+        clearCacheBtn.addEventListener('click', function() {
+            var productId = clearCacheBtn.getAttribute('data-product-id');
+            var btnText = document.getElementById('clear-cache-btn-text');
+            var spinner = document.getElementById('clear-cache-spinner');
+            var csrfToken = (document.querySelector('input[name="csrf_token"]') || {}).value || '';
+
+            clearCacheBtn.disabled = true;
+            btnText.textContent = 'Clearing…';
+            spinner.classList.remove('d-none');
+
+            fetch('/admin/products/' + productId + '/clear-scrape-cache', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                }
+            })
+            .then(function(response) {
+                return response.json().then(function(data) {
+                    return { ok: response.ok, data: data };
+                });
+            })
+            .then(function(result) {
+                if (result.ok && result.data.success) {
+                    var count = result.data.deleted;
+                    var msg = count === 0
+                        ? 'No cached entries found for this product. The next generation will fetch fresh data.'
+                        : 'Cleared ' + count + ' cached entr' + (count === 1 ? 'y' : 'ies') + '. The next generation will fetch fresh data.';
+                    showAlert('success', msg);
+                } else {
+                    var errMsg = (result.data && result.data.error) ? result.data.error : 'Failed to clear cache.';
+                    showAlert('danger', errMsg);
+                }
+            })
+            .catch(function() {
+                showAlert('danger', 'Request failed. Please check your connection and try again.');
+            })
+            .finally(function() {
+                clearCacheBtn.disabled = false;
+                btnText.textContent = 'Clear Cache';
+                spinner.classList.add('d-none');
+            });
+        });
+    }
 
     // AI Description Generator
     var generateBtn = document.getElementById('generate-description-btn');
