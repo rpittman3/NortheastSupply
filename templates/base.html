@@ -36,12 +36,13 @@
             
             <div class="collapse navbar-collapse" id="navbarNav">
                 <!-- Search Form -->
-                <form class="d-flex mx-auto" action="{{ url_for('search') }}" method="GET" style="width: 400px;">
-                    <input class="form-control me-2" type="search" name="q" placeholder="Search products..." 
-                           value="{{ request.args.get('q', '') }}">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
+                <form class="mx-auto" action="{{ url_for('search') }}" method="GET" style="width: 100%; max-width: 620px;">
+                    <div class="input-group header-search-group">
+                        <input class="form-control header-search-input" type="search" name="q" placeholder="Enter product type, SKU or Brand name" value="{{ request.args.get('q', '') }}">
+                        <button class="btn header-search-button" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </form>
                 
                 <!-- User Menu -->

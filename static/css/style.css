@@ -96,6 +96,36 @@ body {
     color: var(--primary-color) !important;
 }
 
+.header-search-group {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.header-search-input {
+    border: none;
+    border-radius: 0;
+    padding: 0.9rem 1rem;
+    font-size: 1.05rem;
+}
+
+.header-search-input:focus {
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.header-search-button {
+    background-color: #f95d5d;
+    color: #ffffff;
+    border: none;
+    padding: 0 1.2rem;
+}
+
+.header-search-button:hover {
+    background-color: #f34747;
+    color: #ffffff;
+}
+
 .dropdown-menu {
     border: none;
     box-shadow: var(--box-shadow-lg);
