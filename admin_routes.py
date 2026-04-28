@@ -1436,6 +1436,27 @@ def admin_csv_process():
 SCRAPE_CACHE_TTL_HOURS = int(os.environ.get("SCRAPE_CACHE_TTL_HOURS", "24"))
 
 
+def _purge_expired_cache_entries():
+    """Delete all ScrapedContentCache rows that are older than SCRAPE_CACHE_TTL_HOURS.
+
+    Called once at the start of each generate-description request so the table
+    stays bounded without requiring any admin intervention.
+    """
+    cutoff = datetime.utcnow() - timedelta(hours=SCRAPE_CACHE_TTL_HOURS)
+    try:
+        deleted = (
+            ScrapedContentCache.query
+            .filter(ScrapedContentCache.cached_at < cutoff)
+            .delete(synchronize_session=False)
+        )
+        if deleted:
+            db.session.commit()
+            logger.debug("Purged %d expired scrape cache entries.", deleted)
+    except Exception as e:
+        db.session.rollback()
+        logger.warning("Failed to purge expired scrape cache entries: %s", e)
+
+
 def _fetch_url_cached(url):
     """Fetch raw HTML for a URL, using the DB cache to avoid redundant requests.
 
@@ -1610,6 +1631,8 @@ def admin_generate_description():
 
     if not product_name:
         return jsonify({'error': 'Product name is required'}), 400
+
+    _purge_expired_cache_entries()
 
     scraped_sections = []
 
