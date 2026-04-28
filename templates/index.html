@@ -40,34 +40,44 @@
     </div>
 </section>
 
-<!-- Featured Categories -->
+<!-- About / Services -->
 <section class="py-5">
     <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Shop by Category</h2>
-            <p class="text-muted">Find exactly what you need for your restaurant</p>
-        </div>
-        
-        <div class="row g-4">
-            {% for category in featured_categories %}
-            <div class="col-lg-3 col-md-6">
-                <div class="category-card h-100">
-                    <a href="{{ url_for('category_view', slug=category.slug) }}" class="text-decoration-none">
-                        <div class="card border-0 shadow-sm h-100 category-hover">
-                            <div class="card-img-top position-relative" style="height: 200px; overflow: hidden;">
-                                <img src="{{ category.image_url or 'https://pixabay.com/get/gc00468883f7687522738492f7b9167fca5dcb35eba1623167aeba8e2ddf4edaa1d7ed2581acafa6df076bf847511e19c37214339c285106bc1e2b797f76f78d7_1280.jpg' }}" 
-                                     alt="{{ category.name }}" class="w-100 h-100 object-fit-cover">
-                                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25"></div>
-                            </div>
-                            <div class="card-body text-center">
-                                <h5 class="card-title text-dark">{{ category.name }}</h5>
-                                <p class="card-text text-muted small">{{ category.description[:100] }}...</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h2 class="fw-bold mb-4">Complete Restaurant Equipment & Kitchen Solutions in New England</h2>
+                <p>Professional Restaurant Supply is a trusted provider of commercial kitchen equipment and restaurant supplies in New England, serving restaurants, cafes, franchises, and foodservice operations.</p>
+                <p>We specialize in new restaurant buildouts, kitchen renovations, and equipment upgrades, delivering reliable solutions that improve efficiency, reduce downtime, and support long-term performance.</p>
+
+                <h2 class="fw-bold mt-5 mb-4">Commercial Restaurant Equipment We Supply</h2>
+                <p>We offer a full range of restaurant equipment and supplies, including:</p>
+                <ul class="mb-4">
+                    <li>Commercial refrigeration and walk-in coolers</li>
+                    <li>Ice machines and refrigeration systems</li>
+                    <li>Restaurant ranges, ovens, and cooktops</li>
+                    <li>Combi ovens and advanced cooking systems</li>
+                    <li>Commercial kitchen ventilation systems (hoods & hood systems)</li>
+                    <li>Food preparation equipment</li>
+                    <li>Stainless steel fabrication and workstations</li>
+                </ul>
+                <p>All equipment is sourced from trusted manufacturers and competitively priced for both independent operators and multi-location restaurants.</p>
+
+                <h2 class="fw-bold mt-5 mb-4">Commercial Kitchen Design & Project Services</h2>
+                <p>We provide complete commercial kitchen design and turnkey project support, including:</p>
+                <ul class="mb-4">
+                    <li>Kitchen design and layout planning</li>
+                    <li>Equipment specification and sourcing</li>
+                    <li>Project management and coordination</li>
+                    <li>Delivery and installation support</li>
+                    <li>Electrical coordination and load planning</li>
+                    <li>Plumbing coordination and utility integration</li>
+                </ul>
+                <p>Our team works closely with restaurant owners, general contractors, electricians, and plumbers to ensure proper infrastructure, efficient workflow, code compliance, and successful project execution.</p>
+
+                <h2 class="fw-bold mt-5 mb-4">Serving Restaurants Across New England</h2>
+                <p class="mb-0">Massachusetts • Connecticut • Rhode Island • New Hampshire • Maine • Vermont</p>
+                <p class="mt-3">If you are searching for commercial restaurant equipment near you, a restaurant equipment supplier in New England, or professional kitchen design services, Professional Restaurant Supply is ready to help.</p>
             </div>
-            {% endfor %}
         </div>
     </div>
 </section>
