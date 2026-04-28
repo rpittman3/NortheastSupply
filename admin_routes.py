@@ -1,10 +1,10 @@
 from flask import render_template, request, redirect, url_for, flash, session, jsonify, send_file
 from functools import wraps
 from app import app, db
-from models import User, Category, Product, Manufacturer, QuoteRequest, QuoteItem, product_categories, Order, OrderItem
+from models import User, Category, Product, Manufacturer, QuoteRequest, QuoteItem, product_categories, Order, OrderItem, ScrapedContentCache
 from forms import AdminLoginForm, CategoryForm, ProductForm, ManufacturerForm, UserForm
 from flask_login import current_user
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import uuid
 import math
@@ -1433,10 +1433,47 @@ def admin_csv_process():
     return redirect(url_for('admin_products'))
 
 
+SCRAPE_CACHE_TTL_HOURS = int(os.environ.get("SCRAPE_CACHE_TTL_HOURS", "24"))
+
+
+def _fetch_url_cached(url):
+    """Fetch raw HTML for a URL, using the DB cache to avoid redundant requests.
+
+    Returns the raw downloaded content (same type as trafilatura.fetch_url) or None.
+    Cached entries are reused for up to SCRAPE_CACHE_TTL_HOURS hours (default: 24).
+    """
+    cutoff = datetime.utcnow() - timedelta(hours=SCRAPE_CACHE_TTL_HOURS)
+    try:
+        entry = ScrapedContentCache.query.filter_by(url=url).first()
+        if entry and entry.cached_at >= cutoff:
+            logger.debug("Cache hit for URL: %s", url)
+            return entry.raw_html
+        raw = trafilatura.fetch_url(url)
+        if raw is not None:
+            if entry:
+                entry.raw_html = raw
+                entry.cached_at = datetime.utcnow()
+            else:
+                entry = ScrapedContentCache(url=url, raw_html=raw, cached_at=datetime.utcnow())
+                db.session.add(entry)
+            try:
+                db.session.commit()
+            except Exception as ce:
+                db.session.rollback()
+                logger.warning("Failed to cache scrape result for %s: %s", url, ce)
+        return raw
+    except Exception as e:
+        logger.warning("_fetch_url_cached error for %s: %s", url, e)
+        try:
+            return trafilatura.fetch_url(url)
+        except Exception:
+            return None
+
+
 def _scrape_url(url):
     """Scrape text content from a URL using trafilatura. Returns text or empty string."""
     try:
-        downloaded = trafilatura.fetch_url(url)
+        downloaded = _fetch_url_cached(url)
         if downloaded:
             text = trafilatura.extract(downloaded)
             return text or ''
@@ -1518,7 +1555,7 @@ def _find_manufacturer_product_url(mfr_base_url, sku, product_name):
     for path in candidate_search_paths:
         candidate_url = base + path
         try:
-            raw = trafilatura.fetch_url(candidate_url)
+            raw = _fetch_url_cached(candidate_url)
             if not raw:
                 continue
             page_text = trafilatura.extract(raw) or ''
@@ -1584,7 +1621,7 @@ def admin_generate_description():
     logger.info("Scraping restaurantsupply.com search: %s", rs_search_url)
 
     try:
-        rs_html = trafilatura.fetch_url(rs_search_url)
+        rs_html = _fetch_url_cached(rs_search_url)
         if rs_html:
             rs_search_text = trafilatura.extract(rs_html) or ''
             if rs_search_text:

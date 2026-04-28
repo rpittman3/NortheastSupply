@@ -212,3 +212,11 @@ class OrderStatusHistory(db.Model):
     changed_by = db.Column(db.String(100))  # 'customer', 'admin', or user identifier
     notes = db.Column(db.Text)  # Optional notes about the status change
     changed_at = db.Column(db.DateTime, default=eastern_now, nullable=False)
+
+
+class ScrapedContentCache(db.Model):
+    __tablename__ = 'scraped_content_cache'
+    id = db.Column(db.Integer, primary_key=True)
+    url = db.Column(db.String(2048), nullable=False, unique=True, index=True)
+    raw_html = db.Column(db.Text, nullable=True)
+    cached_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
