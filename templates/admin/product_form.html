@@ -264,9 +264,64 @@
         </div>
     </div>
 </div>
+
+<!-- AI Description Preview Modal -->
+<div class="modal fade" id="aiDescriptionModal" tabindex="-1" aria-labelledby="aiDescriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="aiDescriptionModalLabel">
+                    <i class="fas fa-robot me-2"></i>AI-Generated Description Preview
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted mb-3">The description field already has content. Review the AI-generated version below and choose how to proceed.</p>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-secondary">
+                            <div class="card-header bg-secondary text-white d-flex align-items-center">
+                                <i class="fas fa-file-alt me-2"></i>
+                                <strong>Current Description</strong>
+                            </div>
+                            <div class="card-body overflow-auto" style="max-height: 400px;">
+                                <div id="ai-modal-existing" class="prose"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-header bg-primary text-white d-flex align-items-center">
+                                <i class="fas fa-robot me-2"></i>
+                                <strong>AI-Generated Description</strong>
+                            </div>
+                            <div class="card-body overflow-auto" style="max-height: 400px;">
+                                <div id="ai-modal-generated" class="prose"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>Cancel
+                </button>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-outline-primary" id="ai-modal-append-btn">
+                        <i class="fas fa-plus me-1"></i>Append to Existing
+                    </button>
+                    <button type="button" class="btn btn-primary" id="ai-modal-replace-btn">
+                        <i class="fas fa-exchange-alt me-1"></i>Replace Existing
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.3/dist/purify.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/ckeditor4@4.25.1/ckeditor.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -284,6 +339,46 @@ document.addEventListener('DOMContentLoaded', function() {
             removePlugins: 'elementspath'
         });
     }
+
+    var aiModal = null;
+    var pendingGeneratedHtml = '';
+
+    function getEditorContent() {
+        if (window.CKEDITOR && CKEDITOR.instances['description']) {
+            return CKEDITOR.instances['description'].getData();
+        }
+        var textarea = document.getElementById('description') || document.querySelector('[name="description"]');
+        return textarea ? textarea.value : '';
+    }
+
+    function setEditorContent(html) {
+        if (window.CKEDITOR && CKEDITOR.instances['description']) {
+            CKEDITOR.instances['description'].setData(html);
+        } else {
+            var textarea = document.getElementById('description') || document.querySelector('[name="description"]');
+            if (textarea) textarea.value = html;
+        }
+    }
+
+    function stripHtmlForBlankCheck(html) {
+        var tmp = document.createElement('div');
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || '';
+    }
+
+    // Modal action buttons
+    document.getElementById('ai-modal-replace-btn').addEventListener('click', function() {
+        setEditorContent(pendingGeneratedHtml);
+        aiModal.hide();
+        showAlert('success', 'Description replaced with AI-generated content. Review and edit before saving.');
+    });
+
+    document.getElementById('ai-modal-append-btn').addEventListener('click', function() {
+        var existing = getEditorContent();
+        setEditorContent(existing + '<hr />' + pendingGeneratedHtml);
+        aiModal.hide();
+        showAlert('success', 'AI-generated content appended to the existing description. Review and edit before saving.');
+    });
 
     // AI Description Generator
     var generateBtn = document.getElementById('generate-description-btn');
@@ -344,14 +439,25 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(function(result) {
                 if (result.ok && result.data.description) {
-                    // Set CKEditor content
-                    if (window.CKEDITOR && CKEDITOR.instances['description']) {
-                        CKEDITOR.instances['description'].setData(result.data.description);
+                    var generatedHtml = result.data.description;
+                    var existingContent = getEditorContent();
+                    var existingText = stripHtmlForBlankCheck(existingContent).trim();
+
+                    if (existingText.length === 0) {
+                        // Field is empty — insert directly
+                        setEditorContent(generatedHtml);
+                        showAlert('success', 'Description generated successfully. Review and edit it before saving.');
                     } else {
-                        var textarea = document.getElementById('description') || document.querySelector('[name="description"]');
-                        if (textarea) textarea.value = result.data.description;
+                        // Field has content — show preview modal
+                        pendingGeneratedHtml = generatedHtml;
+                        var sanitize = (typeof DOMPurify !== 'undefined') ? function(h) { return DOMPurify.sanitize(h); } : function(h) { return h; };
+                        document.getElementById('ai-modal-existing').innerHTML = sanitize(existingContent);
+                        document.getElementById('ai-modal-generated').innerHTML = sanitize(generatedHtml);
+                        if (!aiModal) {
+                            aiModal = new bootstrap.Modal(document.getElementById('aiDescriptionModal'));
+                        }
+                        aiModal.show();
                     }
-                    showAlert('success', 'Description generated successfully. Review and edit it before saving.');
                 } else {
                     var msg = (result.data && result.data.error) ? result.data.error : 'An unexpected error occurred.';
                     showAlert('danger', 'Generation failed: ' + msg);
