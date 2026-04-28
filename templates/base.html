@@ -29,19 +29,16 @@
             <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Professional Restaurant Supply" style="height: 100px; background: antiquewhite; border-radius: 10px;">
             </a>
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse w-100" id="navbarNav">
-                <form class="mx-auto w-100 my-3 my-lg-0" action="{{ url_for('search') }}" method="GET" style="max-width: 620px;">
-                    <div class="input-group header-search-group">
-                        <input class="form-control header-search-input" type="search" name="q" placeholder="Enter product type, SKU or Brand name" value="{{ request.args.get('q', '') }}">
-                        <button class="btn header-search-button" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-                <ul class="navbar-nav ms-auto">
+            <form class="mx-auto w-100 my-3 my-lg-0" action="{{ url_for('search') }}" method="GET" style="max-width: 620px;">
+                <div class="input-group header-search-group">
+                    <input class="form-control header-search-input" type="search" name="q" placeholder="Enter product type, SKU or Brand name" value="{{ request.args.get('q', '') }}">
+                    <button class="btn header-search-button" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+            <div class="d-none d-lg-flex ms-auto">
+                <ul class="navbar-nav">
                     {% if current_user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('cart') }}">
@@ -83,8 +80,11 @@
     <!-- Category Navigation -->
     <div class="category-nav-bar border-bottom">
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light p-0">
-                <div class="collapse navbar-collapse">
+            <nav class="navbar navbar-expand-lg navbar-dark p-0">
+                <button class="navbar-toggler ms-auto category-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#categoryNav" aria-controls="categoryNav" aria-expanded="false" aria-label="Toggle categories">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="categoryNav">
                     <ul class="navbar-nav">
                         {% for category in main_categories %}
                         {% if category.children %}
