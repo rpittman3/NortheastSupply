@@ -24,16 +24,15 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top border-bottom" style="background-color: #380817;">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top border-bottom" style="background-color: #380817;">
         <div class="container">
             <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Professional Restaurant Supply" style="height: 100px; background: antiquewhite; border-radius: 10px;">
             </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse w-100" id="navbarNav">
                 <form class="mx-auto w-100 my-3 my-lg-0" action="{{ url_for('search') }}" method="GET" style="max-width: 620px;">
                     <div class="input-group header-search-group">
                         <input class="form-control header-search-input" type="search" name="q" placeholder="Enter product type, SKU or Brand name" value="{{ request.args.get('q', '') }}">
