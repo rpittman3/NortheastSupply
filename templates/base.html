@@ -30,13 +30,11 @@
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Professional Restaurant Supply" style="height: 100px; background: antiquewhite; border-radius: 10px;">
             </a>
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
             <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Search Form -->
-                <form class="mx-auto" action="{{ url_for('search') }}" method="GET" style="width: 100%; max-width: 620px;">
+                <form class="mx-auto w-100 my-3 my-lg-0" action="{{ url_for('search') }}" method="GET" style="max-width: 620px;">
                     <div class="input-group header-search-group">
                         <input class="form-control header-search-input" type="search" name="q" placeholder="Enter product type, SKU or Brand name" value="{{ request.args.get('q', '') }}">
                         <button class="btn header-search-button" type="submit">
@@ -44,8 +42,6 @@
                         </button>
                     </div>
                 </form>
-                
-                <!-- User Menu -->
                 <ul class="navbar-nav ms-auto">
                     {% if current_user.is_authenticated %}
                         <li class="nav-item">
@@ -55,30 +51,22 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
-                               data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
                                 {% if current_user.profile_image_url %}
-                                    <img src="{{ current_user.profile_image_url }}" alt="Profile" 
-                                         class="rounded-circle me-1" width="24" height="24" style="object-fit: cover;">
+                                    <img src="{{ current_user.profile_image_url }}" alt="Profile" class="rounded-circle me-1" width="24" height="24" style="object-fit: cover;">
                                 {% else %}
                                     <i class="fas fa-user me-1"></i>
                                 {% endif %}
                                 {{ current_user.first_name or 'Account' }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ url_for('account') }}">
-                                    <i class="fas fa-user me-2"></i>My Account
-                                </a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('account') }}"><i class="fas fa-user me-2"></i>My Account</a></li>
                                 {% if current_user.is_admin %}
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="{{ url_for('admin_dashboard') }}">
-                                        <i class="fas fa-cog me-2"></i>Admin Panel
-                                    </a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('admin_dashboard') }}"><i class="fas fa-cog me-2"></i>Admin Panel</a></li>
                                 {% endif %}
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="{{ url_for('replit_auth.logout') }}">
-                                    <i class="fas fa-sign-out-alt me-2"></i>Logout
-                                </a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('replit_auth.logout') }}"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                             </ul>
                         </li>
                     {% else %}
