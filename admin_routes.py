@@ -1466,6 +1466,85 @@ def _extract_product_links(html_bytes, base_domain):
         return []
 
 
+def _extract_links_from_html(html_bytes, base_url, keywords):
+    """Extract hrefs from HTML that contain any of the given keywords (case-insensitive)."""
+    try:
+        text = html_bytes.decode('utf-8', errors='replace') if isinstance(html_bytes, bytes) else html_bytes
+        pattern = r'href=["\']([^"\'#?][^"\']*)["\']'
+        raw_links = re.findall(pattern, text)
+        seen = set()
+        matches = []
+        kw_lower = [k.lower() for k in keywords if k]
+        base = base_url.rstrip('/')
+        for href in raw_links:
+            if href.startswith('/'):
+                href = base + href
+            elif not href.startswith('http'):
+                continue
+            lower_href = href.lower()
+            if href not in seen and any(kw in lower_href for kw in kw_lower):
+                seen.add(href)
+                matches.append(href)
+        return matches[:3]
+    except Exception:
+        return []
+
+
+def _find_manufacturer_product_url(mfr_base_url, sku, product_name):
+    """
+    Try to locate a product-specific or search-results page on a manufacturer's site.
+    Returns (url, scraped_text) for the best match, or (None, '') if nothing useful found.
+    """
+    search_term = ' '.join(filter(None, [sku, product_name]))
+    encoded = urllib.parse.quote_plus(search_term)
+    encoded_sku = urllib.parse.quote_plus(sku) if sku else None
+    base = mfr_base_url.rstrip('/')
+
+    candidate_search_paths = [
+        f"/search?q={encoded}",
+        f"/search?query={encoded}",
+        f"/search?keywords={encoded}",
+        f"/catalogsearch/result/?q={encoded}",
+        f"/products/search?q={encoded}",
+        f"/en/search?q={encoded}",
+        f"/us/search?q={encoded}",
+    ]
+    if encoded_sku:
+        candidate_search_paths += [
+            f"/search?q={encoded_sku}",
+            f"/search?query={encoded_sku}",
+        ]
+
+    for path in candidate_search_paths:
+        candidate_url = base + path
+        try:
+            raw = trafilatura.fetch_url(candidate_url)
+            if not raw:
+                continue
+            page_text = trafilatura.extract(raw) or ''
+            if len(page_text) < 100:
+                continue
+            sku_lower = sku.lower() if sku else ''
+            name_words = [w for w in product_name.lower().split() if len(w) > 3]
+            relevance = sum(1 for w in name_words if w in page_text.lower())
+            if sku_lower and sku_lower in page_text.lower():
+                relevance += 5
+            if relevance >= 2:
+                product_links = _extract_links_from_html(raw, base, [sku] + name_words[:3])
+                for detail_link in product_links[:2]:
+                    detail_text = _scrape_url(detail_link)
+                    if detail_text and len(detail_text) > 200:
+                        logger.info("Found manufacturer product detail page: %s", detail_link)
+                        return detail_link, detail_text
+                logger.info("Using manufacturer search results page: %s", candidate_url)
+                return candidate_url, page_text
+        except Exception as e:
+            logger.debug("Candidate URL %s failed: %s", candidate_url, e)
+            continue
+
+    return None, ''
+
+
 def _get_openai_client():
     """Create an OpenAI client using Replit AI Integrations."""
     return OpenAI(
@@ -1519,18 +1598,26 @@ def admin_generate_description():
     except Exception as e:
         logger.warning("Error scraping restaurantsupply.com: %s", e)
 
-    # Scrape the manufacturer's website
+    # Scrape the manufacturer's website — prefer a product/search page over the homepage
     if manufacturer_name:
         mfr_slug = re.sub(r'[^a-z0-9]', '', manufacturer_name.lower())
-        candidate_urls = [
+        candidate_bases = [
             f"https://www.{mfr_slug}.com",
             f"https://{mfr_slug}.com",
         ]
-        for mfr_url in candidate_urls:
-            logger.info("Trying manufacturer site: %s", mfr_url)
-            mfr_text = _scrape_url(mfr_url)
-            if mfr_text:
-                scraped_sections.append(f"[{mfr_url}]\n{mfr_text[:2000]}")
+        for mfr_base in candidate_bases:
+            logger.info("Trying manufacturer site: %s", mfr_base)
+            # Attempt targeted product/search page regardless of homepage availability
+            product_url, product_text = _find_manufacturer_product_url(mfr_base, sku, product_name)
+            if product_url and product_text:
+                logger.info("Using manufacturer product/search page: %s", product_url)
+                scraped_sections.append(f"[{product_url}]\n{product_text[:2500]}")
+                break
+            # Fall back to homepage if no targeted page was found
+            mfr_homepage_text = _scrape_url(mfr_base)
+            if mfr_homepage_text:
+                logger.info("Falling back to manufacturer homepage: %s", mfr_base)
+                scraped_sections.append(f"[{mfr_base}]\n{mfr_homepage_text[:2000]}")
                 break
 
     # Build prompt for OpenAI
