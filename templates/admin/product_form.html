@@ -107,7 +107,7 @@
 
                         <div class="mb-3">
                             {{ form.description.label(class="form-label") }}
-                            {{ form.description(class="form-control", rows="4") }}
+                            {{ form.description(class="form-control rich-text-editor", rows="8") }}
                             {% if form.description.errors %}
                                 <div class="text-danger">
                                     {% for error in form.description.errors %}
@@ -256,4 +256,26 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/ckeditor4@4.25.1/ckeditor.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.CKEDITOR) {
+        CKEDITOR.replace('description', {
+            toolbar: [
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
+                { name: 'links', items: ['Link', 'Unlink'] },
+                { name: 'insert', items: ['Table', 'HorizontalRule'] },
+                { name: 'styles', items: ['Format'] },
+                { name: 'tools', items: ['Maximize'] }
+            ],
+            height: 320,
+            removePlugins: 'elementspath'
+        });
+    }
+});
+</script>
 {% endblock %}
