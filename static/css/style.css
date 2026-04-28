@@ -3,7 +3,7 @@
 :root {
     --primary-color: #380817;
     --navbar-color: #380817;
-    --secondary-color: #6c757d;
+    --secondary-color: #19020b;
     --success-color: #198754;
     --warning-color: #ffc107;
     --danger-color: #dc3545;
@@ -40,7 +40,7 @@ body {
 
 /* Category Navigation Bar */
 .category-nav-bar {
-    background-color: #1e5891 !important;
+    background-color: var(--secondary-color) !important;
 }
 
 .category-nav-bar .navbar {
@@ -148,7 +148,7 @@ body {
 
 /* Trust Indicators Section */
 .trust-indicators-section {
-    background-color: #1e5891;
+    background-color: var(--secondary-color);
     color: #ffffff;
 }
 
