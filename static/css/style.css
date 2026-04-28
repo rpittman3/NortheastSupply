@@ -4,6 +4,7 @@
     --primary-color: #380817;
     --navbar-color: #380817;
     --secondary-color: #19020b;
+    --background-tertiary: #e5e5e5;
     --success-color: #198754;
     --warning-color: #ffc107;
     --danger-color: #dc3545;
@@ -133,7 +134,8 @@ body {
 
 /* Hero Section */
 .hero-section {
-    background-image: linear-gradient(135deg, rgb(117, 160, 223) 0%, rgb(217, 224, 235) 100%);
+    background-color: var(--background-tertiary);
+    background-image: none;
     background-position-x: initial;
     background-position-y: initial;
     background-size: initial;
