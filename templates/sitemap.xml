@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home page -->
+  <url>
+    <loc>{{ url_for('index', _external=True) }}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Category pages -->
+  {% for category in categories %}
+  <url>
+    <loc>{{ url_for('category_view', slug=category.slug, _external=True) }}</loc>
+    {% if category.created_at %}
+    <lastmod>{{ category.created_at.strftime('%Y-%m-%d') }}</lastmod>
+    {% endif %}
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  {% endfor %}
+
+  <!-- Product pages -->
+  {% for product in products %}
+  <url>
+    <loc>{{ url_for('product_view', slug=product.slug, _external=True) }}</loc>
+    {% if product.updated_at %}
+    <lastmod>{{ product.updated_at.strftime('%Y-%m-%d') }}</lastmod>
+    {% elif product.created_at %}
+    <lastmod>{{ product.created_at.strftime('%Y-%m-%d') }}</lastmod>
+    {% endif %}
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  {% endfor %}
+
+</urlset>

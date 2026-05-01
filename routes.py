@@ -555,3 +555,11 @@ def privacy_policy():
 def contact():
     main_categories = Category.query.filter_by(parent_id=None).order_by(Category.sort_order).all()
     return render_template('contact.html', main_categories=main_categories)
+
+# XML Sitemap
+@app.route('/sitemap.xml')
+def sitemap():
+    categories = Category.query.order_by(Category.id).all()
+    products = Product.query.order_by(Product.id).all()
+    xml = render_template('sitemap.xml', categories=categories, products=products)
+    return app.response_class(xml, mimetype='application/xml')

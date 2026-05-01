@@ -6,6 +6,7 @@
     <title>{% block title %}Commercial Restaurant Equipment in New England{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Commercial restaurant equipment, kitchen design, ventilation systems, electrical & plumbing coordination in New England. Turnkey solutions. Contact us for a fast quote.{% endblock %}">
     <link rel="canonical" href="{% block canonical_url %}{{ request.url }}{% endblock %}">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ url_for('sitemap', _external=True) }}">
 
     <!-- Open Graph -->
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
