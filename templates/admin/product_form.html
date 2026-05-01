@@ -2,6 +2,15 @@
 
 {% block title %}{{ title }} - Admin{% endblock %}
 
+{% block extra_head %}
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+<style>
+  #quill-editor { height: 320px; background: #fff; font-size: 0.95rem; }
+  .ql-toolbar.ql-snow { border-radius: 4px 4px 0 0; }
+  .ql-container.ql-snow { border-radius: 0 0 4px 4px; }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -125,7 +134,8 @@
                                 </div>
                             </div>
                             <div id="generate-description-alert" class="d-none mb-2"></div>
-                            {{ form.description(class="form-control rich-text-editor", rows="8") }}
+                            <div id="quill-editor"></div>
+                            {{ form.description(class="d-none", id="description", style="display:none") }}
                             {% if form.description.errors %}
                                 <div class="text-danger">
                                     {% for error in form.description.errors %}
@@ -332,21 +342,34 @@
 
 {% block extra_scripts %}
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.3/dist/purify.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ckeditor4@4.25.1/ckeditor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    if (window.CKEDITOR) {
-        CKEDITOR.replace('description', {
+    var textarea = document.getElementById('description');
+
+    var quill = new Quill('#quill-editor', {
+        theme: 'snow',
+        modules: {
             toolbar: [
-                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
-                { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
-                { name: 'links', items: ['Link', 'Unlink'] },
-                { name: 'insert', items: ['Table', 'HorizontalRule'] },
-                { name: 'styles', items: ['Format'] },
-                { name: 'tools', items: ['Maximize'] }
-            ],
-            height: 320,
-            removePlugins: 'elementspath'
+                [{ header: [2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                ['link'],
+                ['clean']
+            ]
+        }
+    });
+
+    // Seed editor with existing content
+    if (textarea && textarea.value.trim()) {
+        quill.clipboard.dangerouslyPasteHTML(textarea.value);
+    }
+
+    // Sync Quill → hidden textarea before form submit
+    var form = textarea ? textarea.closest('form') : null;
+    if (form) {
+        form.addEventListener('submit', function() {
+            textarea.value = quill.getSemanticHTML();
         });
     }
 
@@ -354,19 +377,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var pendingGeneratedHtml = '';
 
     function getEditorContent() {
-        if (window.CKEDITOR && CKEDITOR.instances['description']) {
-            return CKEDITOR.instances['description'].getData();
-        }
-        var textarea = document.getElementById('description') || document.querySelector('[name="description"]');
-        return textarea ? textarea.value : '';
+        return quill ? quill.getSemanticHTML() : (textarea ? textarea.value : '');
     }
 
     function setEditorContent(html) {
-        if (window.CKEDITOR && CKEDITOR.instances['description']) {
-            CKEDITOR.instances['description'].setData(html);
-        } else {
-            var textarea = document.getElementById('description') || document.querySelector('[name="description"]');
-            if (textarea) textarea.value = html;
+        if (quill) {
+            quill.clipboard.dangerouslyPasteHTML(html);
+        } else if (textarea) {
+            textarea.value = html;
         }
     }
 
