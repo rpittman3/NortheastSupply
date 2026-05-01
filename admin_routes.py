@@ -20,6 +20,8 @@ from decimal import Decimal, ROUND_HALF_UP, InvalidOperation
 import logging
 import boto3
 from botocore.exceptions import ClientError
+import time
+import requests as http_requests
 import trafilatura
 from openai import OpenAI
 from flask_wtf.csrf import validate_csrf
@@ -1434,6 +1436,13 @@ def admin_csv_process():
 
 
 SCRAPE_CACHE_TTL_HOURS = int(os.environ.get("SCRAPE_CACHE_TTL_HOURS", "24"))
+SCRAPE_REQUEST_TIMEOUT = 8  # seconds per individual HTTP request
+_SCRAPE_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (compatible; RestaurantSupplyBot/1.0; "
+        "+https://professionalrestaurantsupply.com)"
+    )
+}
 
 
 def _purge_expired_cache_entries():
@@ -1457,44 +1466,56 @@ def _purge_expired_cache_entries():
         logger.warning("Failed to purge expired scrape cache entries: %s", e)
 
 
-def _fetch_url_cached(url):
+def _fetch_url_cached(url, deadline=None):
     """Fetch raw HTML for a URL, using the DB cache to avoid redundant requests.
 
-    Returns the raw downloaded content (same type as trafilatura.fetch_url) or None.
+    Returns the raw HTML string or None.
     Cached entries are reused for up to SCRAPE_CACHE_TTL_HOURS hours (default: 24).
+    If `deadline` is set (time.time() value), skips the live fetch when time is up.
     """
+    if deadline and time.time() >= deadline:
+        logger.debug("Skipping fetch (deadline reached): %s", url)
+        return None
     cutoff = datetime.utcnow() - timedelta(hours=SCRAPE_CACHE_TTL_HOURS)
     try:
         entry = ScrapedContentCache.query.filter_by(url=url).first()
         if entry and entry.cached_at >= cutoff:
             logger.debug("Cache hit for URL: %s", url)
             return entry.raw_html
-        raw = trafilatura.fetch_url(url)
-        if raw is not None:
+    except Exception as e:
+        logger.warning("Cache lookup error for %s: %s", url, e)
+
+    # Live fetch with explicit per-request timeout
+    try:
+        resp = http_requests.get(url, headers=_SCRAPE_HEADERS, timeout=SCRAPE_REQUEST_TIMEOUT, allow_redirects=True)
+        if resp.status_code != 200:
+            logger.debug("Non-200 response (%s) for %s", resp.status_code, url)
+            return None
+        raw = resp.text
+    except Exception as e:
+        logger.warning("HTTP fetch failed for %s: %s", url, e)
+        return None
+
+    if raw:
+        try:
+            entry = ScrapedContentCache.query.filter_by(url=url).first()
             if entry:
                 entry.raw_html = raw
                 entry.cached_at = datetime.utcnow()
             else:
                 entry = ScrapedContentCache(url=url, raw_html=raw, cached_at=datetime.utcnow())
                 db.session.add(entry)
-            try:
-                db.session.commit()
-            except Exception as ce:
-                db.session.rollback()
-                logger.warning("Failed to cache scrape result for %s: %s", url, ce)
-        return raw
-    except Exception as e:
-        logger.warning("_fetch_url_cached error for %s: %s", url, e)
-        try:
-            return trafilatura.fetch_url(url)
-        except Exception:
-            return None
+            db.session.commit()
+        except Exception as ce:
+            db.session.rollback()
+            logger.warning("Failed to cache scrape result for %s: %s", url, ce)
+    return raw
 
 
-def _scrape_url(url):
+def _scrape_url(url, deadline=None):
     """Scrape text content from a URL using trafilatura. Returns text or empty string."""
     try:
-        downloaded = _fetch_url_cached(url)
+        downloaded = _fetch_url_cached(url, deadline=deadline)
         if downloaded:
             text = trafilatura.extract(downloaded)
             return text or ''
@@ -1548,35 +1569,34 @@ def _extract_links_from_html(html_bytes, base_url, keywords):
         return []
 
 
-def _find_manufacturer_product_url(mfr_base_url, sku, product_name):
+def _find_manufacturer_product_url(mfr_base_url, sku, product_name, deadline=None):
     """
     Try to locate a product-specific or search-results page on a manufacturer's site.
     Returns (url, scraped_text) for the best match, or (None, '') if nothing useful found.
+    Stops early if deadline (time.time() value) is reached.
     """
+    if deadline and time.time() >= deadline:
+        return None, ''
+
     search_term = ' '.join(filter(None, [sku, product_name]))
     encoded = urllib.parse.quote_plus(search_term)
-    encoded_sku = urllib.parse.quote_plus(sku) if sku else None
     base = mfr_base_url.rstrip('/')
 
+    # Reduced to 4 most common patterns to stay within time budget
     candidate_search_paths = [
         f"/search?q={encoded}",
         f"/search?query={encoded}",
-        f"/search?keywords={encoded}",
         f"/catalogsearch/result/?q={encoded}",
         f"/products/search?q={encoded}",
-        f"/en/search?q={encoded}",
-        f"/us/search?q={encoded}",
     ]
-    if encoded_sku:
-        candidate_search_paths += [
-            f"/search?q={encoded_sku}",
-            f"/search?query={encoded_sku}",
-        ]
 
     for path in candidate_search_paths:
+        if deadline and time.time() >= deadline:
+            logger.debug("Manufacturer search aborted (deadline reached)")
+            break
         candidate_url = base + path
         try:
-            raw = _fetch_url_cached(candidate_url)
+            raw = _fetch_url_cached(candidate_url, deadline=deadline)
             if not raw:
                 continue
             page_text = trafilatura.extract(raw) or ''
@@ -1589,8 +1609,10 @@ def _find_manufacturer_product_url(mfr_base_url, sku, product_name):
                 relevance += 5
             if relevance >= 2:
                 product_links = _extract_links_from_html(raw, base, [sku] + name_words[:3])
-                for detail_link in product_links[:2]:
-                    detail_text = _scrape_url(detail_link)
+                for detail_link in product_links[:1]:
+                    if deadline and time.time() >= deadline:
+                        break
+                    detail_text = _scrape_url(detail_link, deadline=deadline)
                     if detail_text and len(detail_text) > 200:
                         logger.info("Found manufacturer product detail page: %s", detail_link)
                         return detail_link, detail_text
@@ -1634,6 +1656,8 @@ def admin_generate_description():
 
     _purge_expired_cache_entries()
 
+    # Allow 70 seconds for all scraping; the remaining ~50s covers OpenAI + overhead
+    scrape_deadline = time.time() + 70
     scraped_sections = []
 
     # Search restaurantsupply.com and scrape both search results and product detail pages
@@ -1644,41 +1668,47 @@ def admin_generate_description():
     logger.info("Scraping restaurantsupply.com search: %s", rs_search_url)
 
     try:
-        rs_html = _fetch_url_cached(rs_search_url)
+        rs_html = _fetch_url_cached(rs_search_url, deadline=scrape_deadline)
         if rs_html:
             rs_search_text = trafilatura.extract(rs_html) or ''
             if rs_search_text:
                 scraped_sections.append(f"[restaurantsupply.com search results]\n{rs_search_text[:2000]}")
             product_links = _extract_product_links(rs_html, rs_base)
             for link in product_links[:2]:
+                if time.time() >= scrape_deadline:
+                    break
                 logger.info("Scraping restaurantsupply.com product page: %s", link)
-                page_text = _scrape_url(link)
+                page_text = _scrape_url(link, deadline=scrape_deadline)
                 if page_text:
                     scraped_sections.append(f"[restaurantsupply.com product page: {link}]\n{page_text[:2500]}")
     except Exception as e:
         logger.warning("Error scraping restaurantsupply.com: %s", e)
 
     # Scrape the manufacturer's website — prefer a product/search page over the homepage
-    if manufacturer_name:
+    if manufacturer_name and time.time() < scrape_deadline:
         mfr_slug = re.sub(r'[^a-z0-9]', '', manufacturer_name.lower())
         candidate_bases = [
             f"https://www.{mfr_slug}.com",
             f"https://{mfr_slug}.com",
         ]
         for mfr_base in candidate_bases:
+            if time.time() >= scrape_deadline:
+                break
             logger.info("Trying manufacturer site: %s", mfr_base)
             # Attempt targeted product/search page regardless of homepage availability
-            product_url, product_text = _find_manufacturer_product_url(mfr_base, sku, product_name)
+            product_url, product_text = _find_manufacturer_product_url(
+                mfr_base, sku, product_name, deadline=scrape_deadline)
             if product_url and product_text:
                 logger.info("Using manufacturer product/search page: %s", product_url)
                 scraped_sections.append(f"[{product_url}]\n{product_text[:2500]}")
                 break
-            # Fall back to homepage if no targeted page was found
-            mfr_homepage_text = _scrape_url(mfr_base)
-            if mfr_homepage_text:
-                logger.info("Falling back to manufacturer homepage: %s", mfr_base)
-                scraped_sections.append(f"[{mfr_base}]\n{mfr_homepage_text[:2000]}")
-                break
+            # Fall back to homepage if no targeted page was found and time remains
+            if time.time() < scrape_deadline:
+                mfr_homepage_text = _scrape_url(mfr_base, deadline=scrape_deadline)
+                if mfr_homepage_text:
+                    logger.info("Falling back to manufacturer homepage: %s", mfr_base)
+                    scraped_sections.append(f"[{mfr_base}]\n{mfr_homepage_text[:2000]}")
+                    break
 
     # Build prompt for OpenAI
     product_context = f"Product Name: {product_name}"
