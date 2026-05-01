@@ -155,13 +155,31 @@ def admin_dashboard():
     
     # Get unprocessed orders (pending status)
     unprocessed_orders = Order.query.filter_by(status='pending').order_by(Order.created_at.desc()).limit(10).all()
-    
+
+    # SEO health: products missing meta_title or meta_description
+    products_missing_seo = Product.query.filter(
+        db.or_(
+            db.or_(Product.meta_title == None, Product.meta_title == ''),
+            db.or_(Product.meta_description == None, Product.meta_description == '')
+        )
+    ).order_by(Product.name).all()
+
+    # SEO health: categories missing meta_title or meta_description
+    categories_missing_seo = Category.query.filter(
+        db.or_(
+            db.or_(Category.meta_title == None, Category.meta_title == ''),
+            db.or_(Category.meta_description == None, Category.meta_description == '')
+        )
+    ).order_by(Category.name).all()
+
     return render_template('admin/dashboard.html',
                          total_users=total_users,
                          total_categories=total_categories,
                          total_products=total_products,
                          total_orders=total_orders,
-                         unprocessed_orders=unprocessed_orders)
+                         unprocessed_orders=unprocessed_orders,
+                         products_missing_seo=products_missing_seo,
+                         categories_missing_seo=categories_missing_seo)
 
 # Category Management
 @app.route('/admin/categories')

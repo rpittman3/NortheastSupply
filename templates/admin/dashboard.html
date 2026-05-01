@@ -65,6 +65,100 @@
         </div>
     </div>
 
+    <!-- SEO Health Report -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-search me-2"></i>SEO Health Report
+                    </h5>
+                    <div>
+                        {% set total_missing = products_missing_seo|length + categories_missing_seo|length %}
+                        {% if total_missing == 0 %}
+                        <span class="badge bg-success fs-6">All Good</span>
+                        {% else %}
+                        <span class="badge bg-danger fs-6">{{ total_missing }} item{{ 's' if total_missing != 1 }} need attention</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if products_missing_seo or categories_missing_seo %}
+                    <div class="row">
+                        <!-- Products Missing SEO -->
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-3">
+                                <i class="fas fa-box me-1 text-success"></i>
+                                Products Missing SEO
+                                <span class="badge bg-{% if products_missing_seo %}warning{% else %}success{% endif %} ms-1">{{ products_missing_seo|length }}</span>
+                            </h6>
+                            {% if products_missing_seo %}
+                            <div class="list-group list-group-flush" style="max-height: 300px; overflow-y: auto;">
+                                {% for product in products_missing_seo %}
+                                <a href="{{ url_for('admin_edit_product', product_id=product.id) }}" class="list-group-item list-group-item-action py-2 px-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-truncate me-2">{{ product.name }}</span>
+                                        <div class="d-flex gap-1 flex-shrink-0">
+                                            {% if not product.meta_title %}
+                                            <span class="badge bg-warning text-dark" title="Missing meta title">Title</span>
+                                            {% endif %}
+                                            {% if not product.meta_description %}
+                                            <span class="badge bg-danger" title="Missing meta description">Desc</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </a>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <div class="text-center text-muted py-3">
+                                <i class="fas fa-check-circle me-1"></i> All products have SEO content.
+                            </div>
+                            {% endif %}
+                        </div>
+                        <!-- Categories Missing SEO -->
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-3">
+                                <i class="fas fa-tags me-1 text-primary"></i>
+                                Categories Missing SEO
+                                <span class="badge bg-{% if categories_missing_seo %}warning{% else %}success{% endif %} ms-1">{{ categories_missing_seo|length }}</span>
+                            </h6>
+                            {% if categories_missing_seo %}
+                            <div class="list-group list-group-flush" style="max-height: 300px; overflow-y: auto;">
+                                {% for category in categories_missing_seo %}
+                                <a href="{{ url_for('admin_edit_category', category_id=category.id) }}" class="list-group-item list-group-item-action py-2 px-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-truncate me-2">{{ category.name }}</span>
+                                        <div class="d-flex gap-1 flex-shrink-0">
+                                            {% if not category.meta_title %}
+                                            <span class="badge bg-warning text-dark" title="Missing meta title">Title</span>
+                                            {% endif %}
+                                            {% if not category.meta_description %}
+                                            <span class="badge bg-danger" title="Missing meta description">Desc</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </a>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <div class="text-center text-muted py-3">
+                                <i class="fas fa-check-circle me-1"></i> All categories have SEO content.
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="text-center text-success py-4">
+                        <i class="fas fa-check-circle fa-3x mb-3"></i>
+                        <p class="mb-0 fw-bold">All products and categories have SEO content filled in.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Unprocessed Orders Card -->
     <div class="row">
         <div class="col-12">
