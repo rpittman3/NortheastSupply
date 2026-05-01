@@ -1641,6 +1641,75 @@ def _get_openai_client():
     )
 
 
+@app.route('/admin/generate-seo', methods=['POST'])
+@admin_required
+def admin_generate_seo():
+    """Generate SEO meta title and description using OpenAI."""
+    try:
+        validate_csrf(request.headers.get('X-CSRFToken'))
+    except ValidationError:
+        return jsonify({'error': 'Invalid or missing CSRF token.'}), 400
+
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+
+    name = (data.get('name') or '').strip()
+    description = (data.get('description') or '').strip()
+    slug = (data.get('slug') or '').strip()
+    entity_type = (data.get('entity_type') or 'product').strip().lower()
+
+    if not name:
+        return jsonify({'error': 'Name is required'}), 400
+
+    if entity_type == 'category':
+        entity_label = 'category'
+        url_path = f'/category/{slug}' if slug else '/category/...'
+    else:
+        entity_label = 'product'
+        url_path = f'/product/{slug}' if slug else '/product/...'
+
+    prompt = f"""You are an SEO specialist for a restaurant supply e-commerce store.
+
+Write a meta title and meta description for the following {entity_label}:
+
+Name: {name}
+{('Description: ' + description) if description else ''}
+{('URL path: ' + url_path) if slug else ''}
+
+Requirements:
+- Meta title: compelling, includes the {entity_label} name, ≤60 characters, no trailing punctuation
+- Meta description: informative summary for search results, includes a call-to-action, ≤160 characters
+- Both should target restaurant and foodservice buyers
+- Do NOT mention character counts or include labels like "Meta Title:"
+
+Respond with ONLY a JSON object in this exact format (no markdown, no extra text):
+{{"meta_title": "...", "meta_description": "..."}}"""
+
+    try:
+        client = _get_openai_client()
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            max_completion_tokens=256,
+        )
+        raw = (response.choices[0].message.content or '').strip()
+        # Strip markdown fences if present
+        if raw.startswith('```'):
+            raw = re.sub(r'^```[a-z]*\n?', '', raw)
+            raw = re.sub(r'\n?```$', '', raw).strip()
+        parsed = json.loads(raw)
+        meta_title = str(parsed.get('meta_title', '')).strip()[:60]
+        meta_description = str(parsed.get('meta_description', '')).strip()[:160]
+        return jsonify({'meta_title': meta_title, 'meta_description': meta_description})
+    except Exception as e:
+        logger.exception("SEO generation failed")
+        error_msg = str(e)
+        if 'FREE_CLOUD_BUDGET_EXCEEDED' in error_msg:
+            return jsonify({'error': 'AI credits budget exceeded. Please upgrade your plan to continue using AI generation.'}), 402
+        return jsonify({'error': 'SEO generation failed. Please try again.'}), 500
+
+
 @app.route('/admin/products/generate-description', methods=['POST'])
 @admin_required
 def admin_generate_description():

@@ -164,6 +164,15 @@
                                         {% endif %}
                                     </div>
 
+                                    <!-- Generate SEO with AI -->
+                                    <div class="mb-3">
+                                        <button type="button" id="generate-seo-btn" class="btn btn-outline-primary btn-sm">
+                                            <span id="generate-seo-btn-text"><i class="fas fa-robot me-1"></i>Generate SEO with AI</span>
+                                            <span id="generate-seo-btn-spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                        </button>
+                                        <div id="generate-seo-alert" class="d-none mt-2 small"></div>
+                                    </div>
+
                                     <!-- Google Search Preview -->
                                     <div class="mt-4">
                                         <p class="text-muted small mb-2"><i class="fas fa-eye me-1"></i>Search result preview</p>
@@ -294,6 +303,77 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     updatePreview();
+
+    // Generate SEO with AI
+    var generateSeoBtn = document.getElementById('generate-seo-btn');
+    if (generateSeoBtn) {
+        generateSeoBtn.addEventListener('click', function() {
+            var btnText = document.getElementById('generate-seo-btn-text');
+            var spinner = document.getElementById('generate-seo-btn-spinner');
+            var alertBox = document.getElementById('generate-seo-alert');
+
+            var name = nameInput ? nameInput.value.trim() : '';
+            var desc = descriptionInput ? descriptionInput.value.trim() : '';
+            var slug = slugInput ? slugInput.value.trim() : '';
+
+            if (!name) {
+                alertBox.className = 'alert alert-warning mt-2 small py-1 px-2';
+                alertBox.textContent = 'Please enter a category name before generating SEO fields.';
+                return;
+            }
+
+            var csrfToken = (document.querySelector('input[name="csrf_token"]') || {}).value || '';
+
+            generateSeoBtn.disabled = true;
+            btnText.innerHTML = '<i class="fas fa-robot me-1"></i>Generating…';
+            spinner.classList.remove('d-none');
+            alertBox.className = 'd-none';
+
+            fetch('{{ url_for("admin_generate_seo") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({
+                    name: name,
+                    description: desc,
+                    slug: slug,
+                    entity_type: 'category'
+                })
+            })
+            .then(function(response) {
+                return response.json().then(function(data) { return { ok: response.ok, data: data }; });
+            })
+            .then(function(result) {
+                if (result.ok && (result.data.meta_title || result.data.meta_description)) {
+                    if (metaTitleInput && result.data.meta_title) {
+                        metaTitleInput.value = result.data.meta_title;
+                        metaTitleInput.dispatchEvent(new Event('input'));
+                    }
+                    if (metaDescInput && result.data.meta_description) {
+                        metaDescInput.value = result.data.meta_description;
+                        metaDescInput.dispatchEvent(new Event('input'));
+                    }
+                    alertBox.className = 'alert alert-success mt-2 small py-1 px-2';
+                    alertBox.textContent = 'SEO fields generated. Review and adjust before saving.';
+                } else {
+                    var msg = (result.data && result.data.error) ? result.data.error : 'An unexpected error occurred.';
+                    alertBox.className = 'alert alert-danger mt-2 small py-1 px-2';
+                    alertBox.textContent = 'Generation failed: ' + msg;
+                }
+            })
+            .catch(function() {
+                alertBox.className = 'alert alert-danger mt-2 small py-1 px-2';
+                alertBox.textContent = 'Request failed. Please check your connection and try again.';
+            })
+            .finally(function() {
+                generateSeoBtn.disabled = false;
+                btnText.innerHTML = '<i class="fas fa-robot me-1"></i>Generate SEO with AI';
+                spinner.classList.add('d-none');
+            });
+        });
+    }
 });
 </script>
 {% endblock %}
