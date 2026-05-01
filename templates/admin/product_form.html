@@ -288,20 +288,36 @@
                                 <div class="card-body">
                                     <p class="text-muted small mb-3">Override the auto-generated meta tags for this product. Leave blank to use defaults derived from the product name and description.</p>
                                     <div class="mb-3">
-                                        {{ form.meta_title.label(class="form-label") }}
-                                        {{ form.meta_title(class="form-control", placeholder=product.name if product else 'e.g. ' ~ (form.name.data or 'Product Name') ~ ' - Professional Restaurant Supply', maxlength=160) }}
-                                        <small class="form-text text-muted">Max 160 characters. Leave blank to use the product name.</small>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            {{ form.meta_title.label(class="form-label mb-0") }}
+                                            <span id="meta-title-counter" class="small text-muted">0 / 60</span>
+                                        </div>
+                                        {{ form.meta_title(class="form-control mt-1", placeholder=product.name if product else 'e.g. ' ~ (form.name.data or 'Product Name') ~ ' - Professional Restaurant Supply', maxlength=160) }}
+                                        <small class="form-text text-muted">Aim for 60 characters. Leave blank to use the product name.</small>
                                         {% if form.meta_title.errors %}
                                             <div class="text-danger">{% for e in form.meta_title.errors %}<small>{{ e }}</small>{% endfor %}</div>
                                         {% endif %}
                                     </div>
                                     <div class="mb-3">
-                                        {{ form.meta_description.label(class="form-label") }}
-                                        {{ form.meta_description(class="form-control", rows="3", placeholder=product.short_description if product else 'Brief product description for search engines (up to 320 characters)', maxlength=320) }}
-                                        <small class="form-text text-muted">Max 320 characters. Leave blank to use the short description.</small>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            {{ form.meta_description.label(class="form-label mb-0") }}
+                                            <span id="meta-desc-counter" class="small text-muted">0 / 160</span>
+                                        </div>
+                                        {{ form.meta_description(class="form-control mt-1", rows="3", placeholder=product.short_description if product else 'Brief product description for search engines (up to 320 characters)', maxlength=320) }}
+                                        <small class="form-text text-muted">Aim for 160 characters. Leave blank to use the short description.</small>
                                         {% if form.meta_description.errors %}
                                             <div class="text-danger">{% for e in form.meta_description.errors %}<small>{{ e }}</small>{% endfor %}</div>
                                         {% endif %}
+                                    </div>
+
+                                    <!-- Google Search Preview -->
+                                    <div class="mt-4">
+                                        <p class="text-muted small mb-2"><i class="fas fa-eye me-1"></i>Search result preview</p>
+                                        <div class="border rounded p-3" style="background:#fff; max-width:600px; font-family: Arial, sans-serif;">
+                                            <div id="seo-preview-url" class="small mb-1" style="color:#202124; font-size:12px; line-height:1.3;"></div>
+                                            <div id="seo-preview-title" class="mb-1" style="color:#1a0dab; font-size:18px; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"></div>
+                                            <div id="seo-preview-desc" style="color:#4d5156; font-size:13px; line-height:1.5;"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -589,6 +605,112 @@ document.addEventListener('DOMContentLoaded', function() {
         alertBox.innerHTML = message +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
     }
+
+    // SEO Live Preview
+    (function() {
+        var TITLE_LIMIT = 60;
+        var DESC_LIMIT = 160;
+        var metaTitleInput = document.getElementById('meta_title');
+        var metaDescInput = document.getElementById('meta_description');
+        var slugInput = document.getElementById('slug');
+        var nameInput = document.getElementById('name') || document.querySelector('[name="name"]');
+        var shortDescInput = document.getElementById('short_description') || document.querySelector('[name="short_description"]');
+
+        var titleCounter = document.getElementById('meta-title-counter');
+        var descCounter = document.getElementById('meta-desc-counter');
+        var previewUrl = document.getElementById('seo-preview-url');
+        var previewTitle = document.getElementById('seo-preview-title');
+        var previewDesc = document.getElementById('seo-preview-desc');
+
+        var fallbackName = {{ (product.name)|tojson if product else 'null' }};
+        var fallbackDesc = {{ (product.short_description)|tojson if product else 'null' }};
+        var savedSlug = {{ (product.slug)|tojson if product else 'null' }};
+
+        function getSlug() {
+            var v = slugInput ? slugInput.value.trim() : '';
+            return v || savedSlug || 'product-slug';
+        }
+
+        function updateCounter(input, counter, limit) {
+            if (!input || !counter) return;
+            var len = input.value.length;
+            counter.textContent = len + ' / ' + limit;
+            if (len > limit) {
+                counter.classList.remove('text-muted');
+                counter.classList.add('text-danger', 'fw-bold');
+            } else {
+                counter.classList.remove('text-danger', 'fw-bold');
+                counter.classList.add('text-muted');
+            }
+        }
+
+        function truncate(text, max) {
+            if (!text) return '';
+            return text.length > max ? text.slice(0, max) + '…' : text;
+        }
+
+        function updatePreview() {
+            var slug = getSlug();
+            var origin = window.location.origin;
+            var url = origin + '/product/' + slug;
+
+            var titleVal = metaTitleInput ? metaTitleInput.value.trim() : '';
+            var descVal = metaDescInput ? metaDescInput.value.trim() : '';
+
+            var effectiveTitle = titleVal || (nameInput ? nameInput.value.trim() : '') || fallbackName || 'Product Title';
+            var effectiveDesc = descVal || (shortDescInput ? shortDescInput.value.trim() : '') || fallbackDesc || 'Product description will appear here.';
+
+            var truncatedTitle = truncate(effectiveTitle, TITLE_LIMIT);
+            var truncatedDesc = truncate(effectiveDesc, DESC_LIMIT);
+
+            if (previewUrl) {
+                previewUrl.textContent = url;
+                previewUrl.style.color = (titleVal.length > TITLE_LIMIT) ? '#b00' : '#202124';
+            }
+            if (previewTitle) {
+                previewTitle.textContent = truncatedTitle;
+                previewTitle.style.color = (titleVal.length > TITLE_LIMIT) ? '#b00' : '#1a0dab';
+            }
+            if (previewDesc) {
+                previewDesc.textContent = truncatedDesc;
+            }
+        }
+
+        if (metaTitleInput) {
+            metaTitleInput.addEventListener('input', function() {
+                updateCounter(metaTitleInput, titleCounter, TITLE_LIMIT);
+                updatePreview();
+            });
+            updateCounter(metaTitleInput, titleCounter, TITLE_LIMIT);
+        }
+        if (metaDescInput) {
+            metaDescInput.addEventListener('input', function() {
+                updateCounter(metaDescInput, descCounter, DESC_LIMIT);
+                updatePreview();
+            });
+            updateCounter(metaDescInput, descCounter, DESC_LIMIT);
+        }
+        if (slugInput) {
+            slugInput.addEventListener('input', updatePreview);
+        }
+        if (nameInput) {
+            nameInput.addEventListener('input', updatePreview);
+        }
+        if (shortDescInput) {
+            shortDescInput.addEventListener('input', updatePreview);
+        }
+
+        // Expand SEO section if fields already have content
+        if (metaTitleInput && metaTitleInput.value.trim() || metaDescInput && metaDescInput.value.trim()) {
+            var seoCollapse = document.getElementById('seo-collapse');
+            if (seoCollapse) {
+                var bsCollapse = new bootstrap.Collapse(seoCollapse, { toggle: false });
+                bsCollapse.show();
+            }
+        }
+
+        updatePreview();
+    })();
 });
 </script>
 {% endblock %}
