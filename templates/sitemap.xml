@@ -8,6 +8,23 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Static pages -->
+  <url>
+    <loc>{{ url_for('contact', _external=True) }}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>{{ url_for('terms_of_service', _external=True) }}</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>{{ url_for('privacy_policy', _external=True) }}</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
   <!-- Category pages -->
   {% for category in categories %}
   <url>
