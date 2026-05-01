@@ -563,3 +563,11 @@ def sitemap():
     products = Product.query.order_by(Product.id).all()
     xml = render_template('sitemap.xml', categories=categories, products=products)
     return app.response_class(xml, mimetype='application/xml')
+
+
+# Robots.txt
+@app.route('/robots.txt')
+def robots_txt():
+    sitemap_url = url_for('sitemap', _external=True)
+    content = f"User-agent: *\nDisallow: /admin/\n\nSitemap: {sitemap_url}\n"
+    return app.response_class(content, mimetype='text/plain')
