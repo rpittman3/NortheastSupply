@@ -247,6 +247,8 @@ def admin_add_category():
         category.is_featured = form.is_featured.data
         category.sort_order = form.sort_order.data or 0
         category.markup = form.markup.data
+        category.meta_title = form.meta_title.data or None
+        category.meta_description = form.meta_description.data or None
         
         db.session.add(category)
         db.session.commit()
@@ -280,6 +282,8 @@ def admin_edit_category(category_id):
         category.is_featured = form.is_featured.data
         category.sort_order = form.sort_order.data or 0
         category.markup = form.markup.data
+        category.meta_title = form.meta_title.data or None
+        category.meta_description = form.meta_description.data or None
         
         db.session.commit()
         flash(f'Category "{category.name}" updated successfully!', 'success')
@@ -364,6 +368,8 @@ def admin_add_product():
         product.dimensions = form.dimensions.data
         product.is_featured = form.is_featured.data
         product.requires_quote = form.requires_quote.data
+        product.meta_title = form.meta_title.data or None
+        product.meta_description = form.meta_description.data or None
         
         db.session.add(product)
         db.session.flush()  # Get the product ID
@@ -441,6 +447,8 @@ def admin_edit_product(product_id):
         product.dimensions = form.dimensions.data
         product.is_featured = form.is_featured.data
         product.requires_quote = form.requires_quote.data
+        product.meta_title = form.meta_title.data or None
+        product.meta_description = form.meta_description.data or None
         product.updated_at = datetime.now()
         
         # Update categories, ensuring primary category is always included

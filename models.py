@@ -65,6 +65,8 @@ class Category(db.Model):
     is_featured = db.Column(db.Boolean, default=False)
     sort_order = db.Column(db.Integer, default=0)
     markup = db.Column(db.Numeric(10, 4), nullable=True)  # Markup percentage as decimal
+    meta_title = db.Column(db.String(160), nullable=True)
+    meta_description = db.Column(db.String(320), nullable=True)
 
     created_at = db.Column(db.DateTime, default=eastern_now)
 
@@ -106,6 +108,10 @@ class Product(db.Model):
     specsheet_url = db.Column(db.String(500))  # Link to specification sheet
     brochure_url = db.Column(db.String(500))  # Link to product brochure
     warranty_url = db.Column(db.String(500))  # Link to warranty document
+
+    # SEO override fields
+    meta_title = db.Column(db.String(160), nullable=True)
+    meta_description = db.Column(db.String(320), nullable=True)
 
     created_at = db.Column(db.DateTime, default=eastern_now)
     updated_at = db.Column(db.DateTime, default=eastern_now, onupdate=eastern_now)

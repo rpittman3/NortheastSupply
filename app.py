@@ -48,3 +48,25 @@ with app.app_context():
                 conn.execute(text("ALTER TABLE product DROP COLUMN in_stock"))
                 conn.commit()
             logging.info("Dropped in_stock column from product table")
+        if 'meta_title' not in columns:
+            with db.engine.connect() as conn:
+                conn.execute(text("ALTER TABLE product ADD COLUMN meta_title VARCHAR(160)"))
+                conn.commit()
+            logging.info("Added meta_title column to product table")
+        if 'meta_description' not in columns:
+            with db.engine.connect() as conn:
+                conn.execute(text("ALTER TABLE product ADD COLUMN meta_description VARCHAR(320)"))
+                conn.commit()
+            logging.info("Added meta_description column to product table")
+    if 'category' in inspector.get_table_names():
+        cat_columns = [col['name'] for col in inspector.get_columns('category')]
+        if 'meta_title' not in cat_columns:
+            with db.engine.connect() as conn:
+                conn.execute(text("ALTER TABLE category ADD COLUMN meta_title VARCHAR(160)"))
+                conn.commit()
+            logging.info("Added meta_title column to category table")
+        if 'meta_description' not in cat_columns:
+            with db.engine.connect() as conn:
+                conn.execute(text("ALTER TABLE category ADD COLUMN meta_description VARCHAR(320)"))
+                conn.commit()
+            logging.info("Added meta_description column to category table")

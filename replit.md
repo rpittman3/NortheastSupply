@@ -67,6 +67,13 @@ The platform includes comprehensive order tracking capabilities:
 ## AI Features
 - **AI Description Generator**: Admin product form has a "Generate with AI" button next to the long description field. Clicking it scrapes restaurantsupply.com (search by product name/SKU/manufacturer/category) and attempts to scrape the manufacturer's official website, then passes the gathered content to OpenAI (gpt-5 via Replit AI Integrations) to synthesize a rich HTML product description that populates the CKEditor field automatically. Route: `POST /admin/products/generate-description`.
 
+## SEO Features
+- **Meta Tags**: Product and category pages have unique `<meta name="description">`, canonical URL, Open Graph tags (og:title, og:description, og:image, og:url, og:type, og:site_name), and Twitter Card tags. All other pages inherit site-wide defaults defined via Jinja2 blocks in `base.html`.
+- **Product SEO**: Each product page auto-populates all SEO tags from `product.name`, `product.short_description` (stripped of HTML), and `product.thumb_image_url`. Admins can override with `product.meta_title` (max 160 chars) and `product.meta_description` (max 320 chars) via a collapsible "SEO (Optional)" panel in the admin product form.
+- **Category SEO**: Same treatment for category pages using `category.name`, `category.description`, and `category.image_url`. Overridable via `category.meta_title` and `category.meta_description` in the admin category form.
+- **JSON-LD Structured Data**: Product pages include a Schema.org `Product` schema (name, description, sku, image, brand, offers) and a `BreadcrumbList` schema. Category pages include a `BreadcrumbList` schema reflecting the navigation path.
+- **Database columns**: `product.meta_title`, `product.meta_description`, `category.meta_title`, `category.meta_description` (all nullable VARCHAR, added via ALTER TABLE).
+
 ## Development Tools
 - **Werkzeug**: WSGI utilities and development server
 - **Jinja2**: Template engine (included with Flask)

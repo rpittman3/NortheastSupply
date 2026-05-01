@@ -61,6 +61,8 @@ class CategoryForm(FlaskForm):
     is_featured = BooleanField('Featured Category')
     sort_order = IntegerField('Sort Order', validators=[Optional(), NumberRange(min=0)])
     markup = DecimalField('Markup (%)', validators=[Optional(), NumberRange(min=0)])
+    meta_title = StringField('Meta Title', validators=[Optional(), Length(max=160)])
+    meta_description = TextAreaField('Meta Description', validators=[Optional(), Length(max=320)])
 
 class ProductForm(FlaskForm):
     name = StringField('Product Name', validators=[DataRequired(), Length(min=2, max=200)])
@@ -80,6 +82,8 @@ class ProductForm(FlaskForm):
     dimensions = StringField('Dimensions', validators=[Optional(), Length(max=100)])
     is_featured = BooleanField('Featured Product')
     requires_quote = BooleanField('Requires Quote')
+    meta_title = StringField('Meta Title', validators=[Optional(), Length(max=160)])
+    meta_description = TextAreaField('Meta Description', validators=[Optional(), Length(max=320)])
 
 class ManufacturerForm(FlaskForm):
     name = StringField('Manufacturer Name', validators=[DataRequired(), Length(min=2, max=100)])

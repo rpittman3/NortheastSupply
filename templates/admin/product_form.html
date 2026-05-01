@@ -274,7 +274,40 @@
                             </div>
                         </div>
 
-                        <div class="d-flex gap-2">
+                        <!-- SEO Section -->
+                        <div class="card border-secondary mt-4">
+                            <div class="card-header bg-light" id="seo-heading">
+                                <button class="btn btn-link text-dark text-decoration-none w-100 text-start p-0 d-flex justify-content-between align-items-center"
+                                        type="button" data-bs-toggle="collapse" data-bs-target="#seo-collapse"
+                                        aria-expanded="false" aria-controls="seo-collapse">
+                                    <span><i class="fas fa-search me-2 text-secondary"></i><strong>SEO (Optional)</strong></span>
+                                    <i class="fas fa-chevron-down text-secondary"></i>
+                                </button>
+                            </div>
+                            <div id="seo-collapse" class="collapse">
+                                <div class="card-body">
+                                    <p class="text-muted small mb-3">Override the auto-generated meta tags for this product. Leave blank to use defaults derived from the product name and description.</p>
+                                    <div class="mb-3">
+                                        {{ form.meta_title.label(class="form-label") }}
+                                        {{ form.meta_title(class="form-control", placeholder=product.name if product else 'e.g. ' ~ (form.name.data or 'Product Name') ~ ' - Professional Restaurant Supply', maxlength=160) }}
+                                        <small class="form-text text-muted">Max 160 characters. Leave blank to use the product name.</small>
+                                        {% if form.meta_title.errors %}
+                                            <div class="text-danger">{% for e in form.meta_title.errors %}<small>{{ e }}</small>{% endfor %}</div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{ form.meta_description.label(class="form-label") }}
+                                        {{ form.meta_description(class="form-control", rows="3", placeholder=product.short_description if product else 'Brief product description for search engines (up to 320 characters)', maxlength=320) }}
+                                        <small class="form-text text-muted">Max 320 characters. Leave blank to use the short description.</small>
+                                        {% if form.meta_description.errors %}
+                                            <div class="text-danger">{% for e in form.meta_description.errors %}<small>{{ e }}</small>{% endfor %}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2 mt-3">
                             <button type="submit" class="btn btn-primary">Save Product</button>
                             <a href="{{ url_for('admin_products') }}" class="btn btn-outline-secondary">Cancel</a>
                         </div>
