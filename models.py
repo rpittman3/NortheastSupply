@@ -125,11 +125,9 @@ class Product(db.Model):
 
     @property
     def display_price(self):
-        """Returns the display price, enforcing MAP pricing rules.
-        If calculated price is below MAP price, return MAP price instead."""
-        if self.price is None:
-            return None
-        if self.map_price is not None and self.price < self.map_price:
+        """Returns the display price using MAP-first logic.
+        If MAP price is set, always show it; otherwise show the calculated price."""
+        if self.map_price is not None:
             return self.map_price
         return self.price
 
