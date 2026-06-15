@@ -329,7 +329,8 @@ def admin_delete_category(category_id):
 @admin_required
 def admin_products():
     products = Product.query.all()
-    return render_template('admin/products.html', products=products)
+    manufacturers = Manufacturer.query.order_by(Manufacturer.name).all()
+    return render_template('admin/products.html', products=products, manufacturers=manufacturers)
 
 @app.route('/admin/products/add', methods=['GET', 'POST'])
 @admin_required

@@ -15,6 +15,15 @@
     <div class="card">
         <div class="card-body">
             {% if products %}
+                <div class="mb-3 d-flex align-items-center gap-3">
+                    <label for="manufacturerFilter" class="form-label mb-0 fw-semibold text-nowrap">Filter by Manufacturer:</label>
+                    <select id="manufacturerFilter" class="form-select" style="max-width: 280px;">
+                        <option value="">All Manufacturers</option>
+                        {% for manufacturer in manufacturers %}
+                        <option value="{{ manufacturer.name }}">{{ manufacturer.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
                 <div class="table-responsive">
                     <table id="productsTable" class="table table-hover">
                         <thead>
@@ -22,6 +31,7 @@
                                 <th>Name</th>
                                 <th>SKU</th>
                                 <th>Category</th>
+                                <th>Manufacturer</th>
                                 <th>Cost</th>
                                 <th>Featured</th>
                                 <th>Actions</th>
@@ -33,6 +43,7 @@
                                 <td>{{ product.name }}</td>
                                 <td><code>{{ product.sku }}</code></td>
                                 <td>{{ product.category.name if product.category else '-' }}</td>
+                                <td>{{ product.manufacturer.name if product.manufacturer else '-' }}</td>
                                 <td>${{ "%.2f"|format(product.cost) if product.cost else '-' }}</td>
                                 <td>
                                     {% if product.is_featured %}
@@ -69,12 +80,17 @@
 {% block extra_js %}
 <script>
 $(document).ready(function() {
-    $('#productsTable').DataTable({
+    var table = $('#productsTable').DataTable({
         "pageLength": 25,
         "order": [[ 0, "asc" ]],
         "columnDefs": [
-            { "orderable": false, "targets": 5 }
+            { "orderable": false, "targets": 6 }
         ]
+    });
+
+    $('#manufacturerFilter').on('change', function() {
+        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+        table.column(3).search(val ? '^' + val + '$' : '', true, false).draw();
     });
 });
 </script>
