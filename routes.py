@@ -2,7 +2,7 @@ from flask import session, render_template, request, redirect, url_for, flash, j
 from app import app, db
 from replit_auth import require_login, make_replit_blueprint
 from flask_login import current_user
-from models import Category, Product, CartItem, QuoteRequest, QuoteItem, Order, OrderItem, product_categories, User
+from models import Category, Product, CartItem, QuoteRequest, QuoteItem, Order, OrderItem, product_categories, User, Manufacturer
 from forms import QuoteRequestForm, CheckoutForm, AccountUpdateForm
 from sqlalchemy import or_, func, and_
 from datetime import datetime
@@ -169,14 +169,15 @@ def search():
     if not query:
         return redirect(url_for('index'))
     
-    # Search in product names and descriptions (only show products with both cost and price > 0)
-    products = Product.query.filter(
+    # Search in product names, descriptions, and manufacturer name (only show products with both cost and price > 0)
+    products = Product.query.outerjoin(Manufacturer, Product.manufacturer_id == Manufacturer.id).filter(
         Product.cost > 0,
         Product.price > 0,
         or_(
             Product.name.ilike(f'%{query}%'),
             Product.description.ilike(f'%{query}%'),
-            Product.short_description.ilike(f'%{query}%')
+            Product.short_description.ilike(f'%{query}%'),
+            Manufacturer.name.ilike(f'%{query}%')
         )
     )
     
