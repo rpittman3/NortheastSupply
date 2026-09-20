@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect, url_for, flash, session, jsonify, send_file
 from functools import wraps
 from app import app, db
-from models import User, Category, Product, Manufacturer, QuoteRequest, QuoteItem, product_categories, Order, OrderItem, ScrapedContentCache
-from forms import AdminLoginForm, CategoryForm, ProductForm, ManufacturerForm, UserForm
+from models import User, Category, Product, Manufacturer, QuoteRequest, QuoteItem, product_categories, Order, OrderItem, ScrapedContentCache, DiscountCode
+from forms import AdminLoginForm, CategoryForm, ProductForm, ManufacturerForm, UserForm, DiscountCodeForm, AdminDeleteForm
 from flask_login import current_user
 from datetime import datetime, timedelta
 import os
@@ -15,7 +15,7 @@ import json
 import tempfile
 import urllib.parse
 from werkzeug.utils import secure_filename
-from sqlalchemy import text
+from sqlalchemy import func, text
 from decimal import Decimal, ROUND_HALF_UP, InvalidOperation
 import logging
 import boto3
@@ -180,6 +180,72 @@ def admin_dashboard():
                          unprocessed_orders=unprocessed_orders,
                          products_missing_seo=products_missing_seo,
                          categories_missing_seo=categories_missing_seo)
+
+
+@app.route('/admin/discount-codes')
+@admin_required
+def admin_discount_codes():
+    codes = DiscountCode.query.order_by(DiscountCode.code).all()
+    return render_template('admin/discount_codes.html', codes=codes, delete_form=AdminDeleteForm())
+
+
+@app.route('/admin/discount-codes/add', methods=['GET', 'POST'])
+@admin_required
+def admin_add_discount_code():
+    form = DiscountCodeForm()
+    if form.validate_on_submit():
+        normalized = form.code.data.strip().upper()
+        if DiscountCode.query.filter(func.upper(DiscountCode.code) == normalized).first():
+            form.code.errors.append('That discount code already exists.')
+        else:
+            code = DiscountCode(
+                code=normalized,
+                percentage=form.percentage.data,
+                is_active=form.is_active.data,
+            )
+            db.session.add(code)
+            db.session.commit()
+            flash(f'Discount code {code.code} created.', 'success')
+            return redirect(url_for('admin_discount_codes'))
+    return render_template('admin/discount_code_form.html', form=form, title='Add Discount Code')
+
+
+@app.route('/admin/discount-codes/<int:code_id>/edit', methods=['GET', 'POST'])
+@admin_required
+def admin_edit_discount_code(code_id):
+    code = DiscountCode.query.get_or_404(code_id)
+    form = DiscountCodeForm(obj=code)
+    if form.validate_on_submit():
+        normalized = form.code.data.strip().upper()
+        duplicate = DiscountCode.query.filter(
+            func.upper(DiscountCode.code) == normalized,
+            DiscountCode.id != code.id,
+        ).first()
+        if duplicate:
+            form.code.errors.append('That discount code already exists.')
+        else:
+            code.code = normalized
+            code.percentage = form.percentage.data
+            code.is_active = form.is_active.data
+            db.session.commit()
+            flash(f'Discount code {code.code} updated.', 'success')
+            return redirect(url_for('admin_discount_codes'))
+    return render_template('admin/discount_code_form.html', form=form, title='Edit Discount Code', code=code)
+
+
+@app.route('/admin/discount-codes/<int:code_id>/delete', methods=['POST'])
+@admin_required
+def admin_delete_discount_code(code_id):
+    code = DiscountCode.query.get_or_404(code_id)
+    form = AdminDeleteForm()
+    if form.validate_on_submit():
+        code_name = code.code
+        db.session.delete(code)
+        db.session.commit()
+        flash(f'Discount code {code_name} deleted.', 'success')
+    else:
+        flash('Could not delete the discount code. Please try again.', 'error')
+    return redirect(url_for('admin_discount_codes'))
 
 # Category Management
 @app.route('/admin/categories')

@@ -1,0 +1,57 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Discount Codes - Admin{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Discount Codes</h1>
+        <a href="{{ url_for('admin_add_discount_code') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i>Add Discount Code
+        </a>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            {% if codes %}
+            <div class="table-responsive">
+                <table class="table table-striped align-middle">
+                    <thead>
+                        <tr><th>Code</th><th>Discount</th><th>Status</th><th>Updated</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+                    {% for code in codes %}
+                        <tr>
+                            <td><strong>{{ code.code }}</strong></td>
+                            <td>{{ code.percentage|float|round(2) }}%</td>
+                            <td>
+                                <span class="badge {{ 'bg-success' if code.is_active else 'bg-secondary' }}">
+                                    {{ 'Active' if code.is_active else 'Inactive' }}
+                                </span>
+                            </td>
+                            <td>{{ code.updated_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>
+                                <a href="{{ url_for('admin_edit_discount_code', code_id=code.id) }}" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form method="POST" action="{{ url_for('admin_delete_discount_code', code_id=code.id) }}" class="d-inline"
+                                      onsubmit="return confirm('Delete discount code {{ code.code }}? Existing orders will keep their saved discount details.')">
+                                    {{ delete_form.hidden_tag() }}
+                                    <button class="btn btn-sm btn-outline-danger" type="submit"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-tags fa-3x text-muted mb-3"></i>
+                <h4>No discount codes yet</h4>
+                <p class="text-muted">Create a code customers can use during their browsing session.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

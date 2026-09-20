@@ -1,0 +1,38 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} - Admin{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>{{ title }}</h1>
+        <a href="{{ url_for('admin_discount_codes') }}" class="btn btn-outline-secondary">Back to Codes</a>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.code.label(class="form-label") }}
+                    {{ form.code(class="form-control", placeholder="e.g. SAVE15", autocomplete="off") }}
+                    {% for error in form.code.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+                    <div class="form-text">Codes are stored and matched without regard to letter case.</div>
+                </div>
+                <div class="mb-3">
+                    {{ form.percentage.label(class="form-label") }}
+                    <div class="input-group">
+                        {{ form.percentage(class="form-control", min="0", max="100", step="0.01") }}
+                        <span class="input-group-text">%</span>
+                    </div>
+                    {% for error in form.percentage.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+                </div>
+                <div class="form-check mb-4">
+                    {{ form.is_active(class="form-check-input") }}
+                    {{ form.is_active.label(class="form-check-label") }}
+                </div>
+                <button class="btn btn-primary" type="submit">Save Discount Code</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

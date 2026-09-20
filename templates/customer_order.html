@@ -62,6 +62,16 @@
                                 {% endfor %}
                             </tbody>
                             <tfoot>
+                                {% if order.discount_code %}
+                                <tr>
+                                    <td colspan="4" class="text-end">Calculated-price subtotal:</td>
+                                    <td class="text-end">${{ "%.2f"|format(order.undiscounted_subtotal) }}</td>
+                                </tr>
+                                <tr class="text-success">
+                                    <td colspan="4" class="text-end"><strong>Discount ({{ order.discount_code }}, {{ order.discount_percentage|float|round(2) }}%):</strong></td>
+                                    <td class="text-end">-${{ "%.2f"|format(order.discount_amount) }}</td>
+                                </tr>
+                                {% endif %}
                                 <tr>
                                     <td colspan="4" class="text-end"><strong>Subtotal:</strong></td>
                                     <td class="text-end">${{ "%.2f"|format(order.subtotal) }}</td>

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SelectField, SelectMultipleField, IntegerField, DateField, BooleanField, DecimalField, FileField
-from wtforms.validators import DataRequired, Email, Length, NumberRange, Optional
+from wtforms.validators import DataRequired, Email, InputRequired, Length, NumberRange, Optional
 from flask_wtf.file import FileAllowed
 
 class QuoteRequestForm(FlaskForm):
@@ -50,6 +50,20 @@ class AccountUpdateForm(FlaskForm):
 # Admin Forms
 class AdminLoginForm(FlaskForm):
     admin_password = StringField('Admin Password', validators=[DataRequired()])
+
+
+class DiscountCodeForm(FlaskForm):
+    code = StringField('Code', validators=[DataRequired(), Length(min=1, max=50)])
+    percentage = DecimalField(
+        'Discount Percentage',
+        places=2,
+        validators=[InputRequired(), NumberRange(min=0, max=100)],
+    )
+    is_active = BooleanField('Active', default=True)
+
+
+class AdminDeleteForm(FlaskForm):
+    pass
 
 class CategoryForm(FlaskForm):
     name = StringField('Category Name', validators=[DataRequired(), Length(min=2, max=100)])

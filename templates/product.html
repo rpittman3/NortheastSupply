@@ -40,8 +40,9 @@
   "offers": {
     "@type": "Offer",
     "priceCurrency": "USD",
-    {% if product.display_price and not product.requires_quote %}
-    "price": {{ product.display_price | string | tojson }},
+    {% set structured_price = customer_price(product) %}
+    {% if structured_price is not none and not product.requires_quote %}
+    "price": {{ structured_price | string | tojson }},
     "availability": "https://schema.org/InStock",
     {% else %}
     "availability": "https://schema.org/InStock",
@@ -119,14 +120,18 @@
 
                 <!-- Price and Stock -->
                 <div class="mb-4">
-                    {% if product.requires_quote or not product.display_price %}
+                    {% set price = customer_price(product) %}
+                    {% if product.requires_quote or price is none %}
                     <div class="alert alert-info">
                         <i class="fas fa-quote-left"></i> 
                         <strong>Call for Pricing</strong> - This item requires a custom quote
                     </div>
                     {% else %}
                     <div class="price-display mb-3">
-                        <span class="h2 text-primary fw-bold">${{ "%.2f"|format(product.display_price) }}</span>
+                        <span class="h2 text-primary fw-bold">${{ "%.2f"|format(price) }}</span>
+                        {% if active_discount %}
+                        <div class="small text-success">{{ active_discount.percentage|float|round(2) }}% session discount applied</div>
+                        {% endif %}
                     </div>
                     {% endif %}
                     
@@ -247,7 +252,8 @@
                         <div class="position-relative">
                             <img src="{{ related_product.large_image_url or related_product.thumb_image_url or 'https://placehold.co/500x400/f8f9fa/6c757d/png?text=No+Image' }}" alt="{{ related_product.name }}" 
                                  class="card-img-top" style="height: 200px; object-fit: cover;">
-                            {% if related_product.requires_quote %}
+                                     {% set related_price = customer_price(related_product) %}
+                                     {% if related_product.requires_quote or related_price is none %}
                             <span class="badge bg-warning position-absolute top-0 end-0 m-2">Quote Required</span>
                             {% endif %}
                         </div>
@@ -259,7 +265,7 @@
                                     {% if related_product.requires_quote %}
                                     <span class="h6 text-primary mb-0">Call for Price</span>
                                     {% else %}
-                                    <span class="h6 text-primary mb-0">${{ "%.2f"|format(related_product.price) }}</span>
+                                    <span class="h6 text-primary mb-0">${{ "%.2f"|format(related_price) }}</span>
                                     {% endif %}
                                 </div>
                                 <a href="{{ url_for('product_view', slug=related_product.slug) }}" 

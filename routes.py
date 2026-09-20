@@ -1,14 +1,15 @@
-from flask import session, render_template, request, redirect, url_for, flash, jsonify
+from flask import g, session, render_template, request, redirect, url_for, flash, jsonify
 from app import app, db
 from replit_auth import require_login, make_replit_blueprint
 from flask_login import current_user
-from models import Category, Product, CartItem, QuoteRequest, QuoteItem, Order, OrderItem, product_categories, User, Manufacturer
+from models import Category, Product, CartItem, QuoteRequest, QuoteItem, Order, OrderItem, product_categories, User, Manufacturer, DiscountCode
 from forms import QuoteRequestForm, CheckoutForm, AccountUpdateForm
 from sqlalchemy import or_, func, and_
 from datetime import datetime
 import uuid
 import logging
 from email_utils import send_order_notification
+from pricing import cart_pricing, money, product_price
 
 # Import admin routes
 import admin_routes
@@ -19,6 +20,54 @@ app.register_blueprint(make_replit_blueprint(), url_prefix="/auth")
 @app.before_request
 def make_session_permanent():
     session.permanent = True
+
+
+@app.before_request
+def resolve_session_discount():
+    """Resolve the stored code every request so stale codes stop applying."""
+    g.active_discount = None
+    stored_code = session.get('discount_code')
+    if not stored_code:
+        return
+    discount = DiscountCode.query.filter(
+        func.upper(DiscountCode.code) == stored_code.upper(),
+        DiscountCode.is_active.is_(True),
+    ).first()
+    if discount is None:
+        session.pop('discount_code', None)
+        if request.endpoint not in {'apply_discount_code', 'remove_discount_code', 'static'}:
+            flash('Your discount code is no longer valid and has been removed.', 'error')
+        return
+    g.active_discount = discount
+
+
+def safe_return_url():
+    target = request.form.get('next', '')
+    if target.startswith('/') and not target.startswith('//'):
+        return target
+    return url_for('index')
+
+
+@app.route('/discount-code/apply', methods=['POST'])
+def apply_discount_code():
+    code = request.form.get('code', '').strip().upper()
+    discount = DiscountCode.query.filter(
+        func.upper(DiscountCode.code) == code,
+        DiscountCode.is_active.is_(True),
+    ).first()
+    if discount is None:
+        flash('That discount code is invalid or inactive.', 'error')
+    else:
+        session['discount_code'] = discount.code
+        flash(f'Code {discount.code} applied: {discount.percentage:g}% off.', 'success')
+    return redirect(safe_return_url())
+
+
+@app.route('/discount-code/remove', methods=['POST'])
+def remove_discount_code():
+    session.pop('discount_code', None)
+    flash('Discount code removed.', 'success')
+    return redirect(safe_return_url())
 
 @app.route('/')
 def index():
@@ -201,6 +250,9 @@ def add_to_cart():
         return redirect(request.referrer or url_for('index'))
     
     product = Product.query.get_or_404(product_id)
+    if product.requires_quote or product.price is None:
+        flash('This product requires a quote and cannot be added to checkout.', 'error')
+        return redirect(request.referrer or url_for('product_view', slug=product.slug))
     
     # Check if item already in cart
     cart_item = CartItem.query.filter_by(
@@ -228,12 +280,24 @@ def add_to_cart():
 @require_login
 def cart():
     cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
-    
-    total = 0
+    checkout_blocked = any(
+        item.product.requires_quote or item.product.price is None
+        for item in cart_items
+    )
+    purchasable_items = [
+        item for item in cart_items
+        if not item.product.requires_quote and item.product.price is not None
+    ]
+    pricing = cart_pricing(purchasable_items, g.active_discount)
     for item in cart_items:
-        total += float(item.product.price) * item.quantity
-    
-    return render_template('cart.html', cart_items=cart_items, total=total)
+        pricing['items'].setdefault(item.id, {'unit': None, 'total': None})
+    return render_template(
+        'cart.html',
+        cart_items=cart_items,
+        total=pricing['subtotal'],
+        item_prices=pricing['items'],
+        checkout_blocked=checkout_blocked,
+    )
 
 @app.route('/update_cart', methods=['POST'])
 @require_login
@@ -280,13 +344,17 @@ def checkout():
     if not cart_items:
         flash('Your cart is empty!', 'error')
         return redirect(url_for('cart'))
+    if any(item.product.requires_quote or item.product.price is None for item in cart_items):
+        flash('Remove quote-only or unpriced products before checking out.', 'error')
+        return redirect(url_for('cart'))
     
-    total = sum(float(item.product.price) * item.quantity for item in cart_items)
+    pricing = cart_pricing(cart_items, g.active_discount)
     form = CheckoutForm()
     
     return render_template('checkout.html', 
                          cart_items=cart_items, 
-                         total=total, 
+                         total=pricing['subtotal'],
+                         item_prices=pricing['items'],
                          form=form)
 
 @app.route('/process_order', methods=['POST'])
@@ -300,12 +368,12 @@ def process_order():
         if not cart_items:
             flash('Your cart is empty!', 'error')
             return redirect(url_for('cart'))
+        if any(item.product.requires_quote or item.product.price is None for item in cart_items):
+            flash('Remove quote-only or unpriced products before placing an order.', 'error')
+            return redirect(url_for('cart'))
         
-        # Calculate totals
-        subtotal = sum(float(item.product.price) * item.quantity for item in cart_items)
-        tax_amount = subtotal * 0.08  # 8% tax
-        shipping_amount = 25.00 if subtotal < 500 else 0  # Free shipping over $500
-        total_amount = subtotal + tax_amount + shipping_amount
+        pricing = cart_pricing(cart_items, g.active_discount)
+        subtotal = pricing['subtotal']
         
         # Create order with secure token
         import secrets
@@ -317,6 +385,10 @@ def process_order():
             tax_amount=0,
             shipping_amount=0,
             total_amount=subtotal,
+            discount_code=g.active_discount.code if g.active_discount else None,
+            discount_percentage=g.active_discount.percentage if g.active_discount else None,
+            undiscounted_subtotal=pricing['undiscounted_subtotal'],
+            discount_amount=pricing['discount_amount'],
             shipping_name=form.shipping_name.data,
             shipping_company=form.shipping_company.data,
             shipping_address=form.shipping_address.data,
@@ -331,12 +403,13 @@ def process_order():
         
         # Create order items
         for cart_item in cart_items:
+            item_price = pricing['items'][cart_item.id]
             order_item = OrderItem(
                 order_id=order.id,
                 product_id=cart_item.product_id,
                 quantity=cart_item.quantity,
-                unit_price=cart_item.product.price,
-                total_price=float(cart_item.product.price) * cart_item.quantity
+                unit_price=item_price['unit'],
+                total_price=item_price['total'],
             )
             db.session.add(order_item)
         
@@ -369,11 +442,15 @@ def process_order():
     
     # If form validation fails
     cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
-    total = sum(float(item.product.price) * item.quantity for item in cart_items)
+    if any(item.product.requires_quote or item.product.price is None for item in cart_items):
+        flash('Remove quote-only or unpriced products before placing an order.', 'error')
+        return redirect(url_for('cart'))
+    pricing = cart_pricing(cart_items, g.active_discount)
     
     return render_template('checkout.html', 
                          cart_items=cart_items, 
-                         total=total, 
+                         total=pricing['subtotal'],
+                         item_prices=pricing['items'],
                          form=form)
 
 @app.route('/request_quote')
@@ -495,6 +572,14 @@ def inject_cart_count():
 def inject_categories():
     main_categories = Category.query.filter_by(parent_id=None).order_by(Category.sort_order).all()
     return {'main_categories': main_categories}
+
+
+@app.context_processor
+def inject_discount_pricing():
+    return {
+        'active_discount': g.get('active_discount'),
+        'customer_price': lambda product: product_price(product, g.get('active_discount')),
+    }
 
 # Customer Order View (Public)
 @app.route('/order/<secure_token>')

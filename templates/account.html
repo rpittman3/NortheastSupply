@@ -80,7 +80,10 @@
                                         <span class="badge bg-secondary">{{ order.status|title }}</span>
                                         {% endif %}
                                     </td>
-                                    <td><strong>${{ "%.2f"|format(order.total_amount) }}</strong></td>
+                                    <td>
+                                        <strong>${{ "%.2f"|format(order.total_amount) }}</strong>
+                                        {% if order.discount_code %}<span class="badge bg-success ms-1">{{ order.discount_code }}</span>{% endif %}
+                                    </td>
                                     <td>
                                         <button class="btn btn-outline-primary btn-sm" 
                                                 onclick="toggleOrderDetails({{ order.id }})">
@@ -98,6 +101,13 @@
                                                 <span>${{ "%.2f"|format(item.total_price) }}</span>
                                             </div>
                                             {% endfor %}
+                                            {% if order.discount_code %}
+                                            <hr>
+                                            <div class="d-flex justify-content-between text-success">
+                                                <span>Discount ({{ order.discount_code }}, {{ order.discount_percentage|float|round(2) }}%):</span>
+                                                <span>-${{ "%.2f"|format(order.discount_amount) }}</span>
+                                            </div>
+                                            {% endif %}
                                             <hr>
                                             <div class="d-flex justify-content-between">
                                                 <span><strong>Shipping Address:</strong></span>

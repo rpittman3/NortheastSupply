@@ -3,7 +3,8 @@ from pytz import timezone
 from app import db
 from flask_dance.consumer.storage.sqla import OAuthConsumerMixin
 from flask_login import UserMixin
-from sqlalchemy import UniqueConstraint
+from sqlalchemy import CheckConstraint, Index, UniqueConstraint, func
+from sqlalchemy.orm import validates
 
 # Define Eastern Timezone
 eastern_timezone = timezone('US/Eastern')
@@ -131,6 +132,33 @@ class Product(db.Model):
             return self.map_price
         return self.price
 
+
+class DiscountCode(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    code = db.Column(db.String(50), nullable=False, unique=True)
+    percentage = db.Column(db.Numeric(5, 2), nullable=False)
+    is_active = db.Column(db.Boolean, nullable=False, default=True)
+    created_at = db.Column(db.DateTime, default=eastern_now, nullable=False)
+    updated_at = db.Column(db.DateTime, default=eastern_now, onupdate=eastern_now, nullable=False)
+
+    __table_args__ = (
+        CheckConstraint("percentage >= 0 AND percentage <= 100", name="ck_discount_code_percentage"),
+        Index("uq_discount_code_upper_code", func.upper(code), unique=True),
+    )
+
+    @validates("code")
+    def normalize_code(self, key, value):
+        normalized = (value or "").strip().upper()
+        if not normalized:
+            raise ValueError("Discount code is required.")
+        return normalized
+
+    @validates("percentage")
+    def validate_percentage(self, key, value):
+        if value is None or value < 0 or value > 100:
+            raise ValueError("Discount percentage must be between 0 and 100.")
+        return value
+
 class CartItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.String, db.ForeignKey('users.id'), nullable=False)
@@ -175,6 +203,10 @@ class Order(db.Model):
     tax_amount = db.Column(db.Numeric(10, 2), default=0)
     shipping_amount = db.Column(db.Numeric(10, 2), default=0)
     total_amount = db.Column(db.Numeric(10, 2), nullable=False)
+    discount_code = db.Column(db.String(50))
+    discount_percentage = db.Column(db.Numeric(5, 2))
+    undiscounted_subtotal = db.Column(db.Numeric(10, 2))
+    discount_amount = db.Column(db.Numeric(10, 2), nullable=False, default=0)
     tax_after_shipping = db.Column(db.Boolean, default=False)  # True = tax calculated on subtotal + shipping, False = tax on subtotal only
 
     # Shipping Information

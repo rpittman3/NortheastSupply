@@ -32,10 +32,11 @@
                             <p class="card-text text-muted small flex-grow-1">{{ product.short_description }}</p>
                             <div class="mt-auto">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    {% if product.requires_quote or not product.display_price %}
+                                    {% set price = customer_price(product) %}
+                                    {% if product.requires_quote or price is none %}
                                     <span class="h6 text-primary mb-0">Call for Price</span>
                                     {% else %}
-                                    <span class="h6 text-primary mb-0">${{ "%.2f"|format(product.display_price) }}</span>
+                                    <span class="h6 text-primary mb-0">${{ "%.2f"|format(price) }}</span>
                                     {% endif %}
                                 </div>
                                 <div class="d-grid gap-2">

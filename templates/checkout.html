@@ -115,7 +115,7 @@
                             <small class="text-muted">Qty: {{ item.quantity }}</small>
                         </div>
                         <div class="text-end">
-                            <small>${{ "%.2f"|format(item.product.price * item.quantity) }}</small>
+                            <small>${{ "%.2f"|format(item_prices[item.id].total) }}</small>
                         </div>
                     </div>
                     {% endfor %}

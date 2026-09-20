@@ -70,3 +70,19 @@ with app.app_context():
                 conn.execute(text("ALTER TABLE category ADD COLUMN meta_description VARCHAR(320)"))
                 conn.commit()
             logging.info("Added meta_description column to category table")
+    if 'order' in inspector.get_table_names():
+        order_columns = [col['name'] for col in inspector.get_columns('order')]
+        order_column_migrations = {
+            'discount_code': 'VARCHAR(50)',
+            'discount_percentage': 'NUMERIC(5, 2)',
+            'undiscounted_subtotal': 'NUMERIC(10, 2)',
+            'discount_amount': 'NUMERIC(10, 2) DEFAULT 0 NOT NULL',
+        }
+        with db.engine.connect() as conn:
+            for column_name, column_type in order_column_migrations.items():
+                if column_name not in order_columns:
+                    conn.execute(text(
+                        f'ALTER TABLE "order" ADD COLUMN {column_name} {column_type}'
+                    ))
+                    logging.info("Added %s column to order table", column_name)
+            conn.commit()
